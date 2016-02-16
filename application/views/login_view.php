@@ -50,6 +50,7 @@
     <div class="">
         <a class="hiddenanchor" id="toregister"></a>
         <a class="hiddenanchor" id="tologin"></a>
+        <a class="hiddenanchor" id="toforgot"></a>
 
         <div id="wrapper">
             <!-- login -->
@@ -65,7 +66,7 @@
                         </div>
                         <div>
                             <a class="btn btn-default submit btn-login" href="#">Log in</a>
-                            <a class="reset_pass" href="#">Lost your password?</a>
+                            <a class="reset_pass to_forgot" href="#toforgot">Lost your password?</a>
                         </div>
                         <div class="clear"></div>
                         <div class="alert alert-danger alert-dismissible fade in alert-pesan-error" role="alert">
@@ -140,6 +141,42 @@
                             <div>
                                 <h1>Toppon</h1>
 
+                                <p>©2016 All Rights Reserved.</p>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- form -->
+                </section>
+                <!-- content -->
+            </div>
+
+            <div id="forgot" class="animate form">
+                <section class="login_content">
+                    <form id="forgot-form" action="<?php echo site_url("user/doLoginMember");?>" method="POST">
+                        <h1>Forgot Password Form</h1>
+                        <div class="item form-group kelompok-input">
+                            <input type="text" id="username-forgot" name="username-forgot" class="form-control forgot" placeholder="Username" required="required" data-validate-length-range="4,50" />
+                        </div>
+                        <div>
+                            <a class="btn btn-default submit btn-login" href="#">Forgot</a>
+                            <a href="#tologin" class="to_register"> Log in </a>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="alert alert-danger alert-dismissible fade in alert-pesan-error" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                            </button>
+                            <span id="alert-error-forgot">Insert error message here</span>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="separator">
+
+                            <p class="change_link">New to site?
+                                <a href="#toregister" class="to_register"> Create Account </a>
+                            </p>
+                            <div class="clearfix"></div>
+                            <br />
+                            <div>
+                                <h1>Toppon</h1>
                                 <p>©2016 All Rights Reserved.</p>
                             </div>
                         </div>

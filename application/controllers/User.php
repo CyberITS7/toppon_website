@@ -45,7 +45,8 @@
 				redirect($this->loginAndRegister());
 			}
 			else{
-				$this->load->view('includes/member_area_template_view');
+                $data['data_content']="member/dashboard_view";
+				$this->load->view('includes/member_area_template_view',$data);
 			}
 			
 		}

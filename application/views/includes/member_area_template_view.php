@@ -80,6 +80,10 @@
                                         </li>
                                     </ul>
                                 </li>
+
+                                <li><a href="<?php echo site_url('GamePurchase')?>"><i class="fa fa-home"></i> Game Purchase</a>
+                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -125,6 +129,7 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
+                <?php $this->load->view($data_content);?>
             </div>
             <!-- /page content -->
 
