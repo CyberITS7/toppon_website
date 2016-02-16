@@ -1,0 +1,171 @@
+#appointment .btn {
+    font-weight: 500;
+    font-size: 15px;
+    margin-top: -40px;
+    margin-bottom: 20px;
+    margin-right: 35px;
+    background-color: #ffbf00;
+    color: #fff;
+    text-shadow: 0 0 4px #bf9004;
+    border: 0;
+    float:right;
+    }
+
+#appointment .btn:hover, #appointment .btn:focus {
+	background-color: #e9af03;
+	outline: 0px;
+    }
+#scroll a img{
+    vertical-align:middle;
+    margin-top:270px;
+
+}
+#scrollnext a img{
+    vertical-align:middle;
+    margin-top:400px;
+
+}
+
+#teamwrap {
+	background: url(../img/header_bg9.jpg) no-repeat center top;
+
+	padding-top: 120px;
+	text-align: center;
+	background-attachment: relative;
+	background-position: center center;
+	min-height: 650px;
+	width: 100%;
+    height: 90%;
+	-webkit-background-size: 100%;
+	-moz-background-size: 100%;
+	-o-background-size: 100%;
+	background-size: 100%;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	padding-bottom: 100px;
+}
+
+
+
+/* Slider Our Services */
+.carousel-inner > .item {
+  height: 340px;
+  margin: auto;
+}
+.carousel-inner > .item > img {
+	width: 120px;
+  	height: 120px;
+	margin: auto;
+}
+.carousel-inner > .item > a  {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+
+/* Slider / swiper portofolio */
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.swiper-slide:nth-child(2n) {
+    width: 40%;
+}
+.swiper-slide:nth-child(3n) {
+    width: 20%;
+}
+
+.slider_portofolio {
+    height: 320px;
+}
+
+
+
+/* Pop up form */
+.popup_body {
+	background: #FFF;
+	margin: auto;
+	padding:20px;
+	width: 100%;
+	height: 100%;
+}
+
+.variable_form {
+	font-size: 14px;
+	color: #00001E;
+	width: 94%;
+	margin: auto;
+	margin-bottom: 1.2em;
+}
+
+
+/* Button appoinment */
+.button_mod {
+  color: #00001E;
+  background: white;
+}
+
+/*
+.button_mod {
+	font-size: 20px;
+	padding: 14px 24px 15px !important;
+	color: #00001E;
+	background: white;
+  	border: 1px solid white;
+  	border-color: #3D3D4C #3D3D4C #3D3D4C #3D3D4C;
+
+  	transition-property: background, border-radius, color;
+	transition-duration: 0.2s, 0.2s, 0.2s;
+	transition-timing-function: ease-in, linear, linear;
+	transition-delay: 0s, 0s, 0.1s;
+}
+.button_mod:hover{
+	color: white;
+	background-color: #e9af03;
+	font-size: 20px;
+
+	border-color: #3D3D4C #3D3D4C #3D3D4C #3D3D4C;
+}
+.button_mod:active {
+ 	box-shadow: 0 2px 0 #e9af03;
+  	transform: translateY(3px);
+}
+*/
+
+.close {
+	font-size: 40px;
+}
+
+.img-btn{
+    margin-bottom:-290px!important;
+    margin-left:-12px!important;
+}
+
+.headerwrap-article{
+  background-color: green;
+}

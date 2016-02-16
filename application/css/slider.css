@@ -1,0 +1,81 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+
+#slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  margin:auto!important;
+}
+
+#slider ul {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 200px;
+  list-style: none;
+}
+
+#slider ul li {
+  position: relative;
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 994px;
+  height: 350px;
+  background: #ccc;
+  text-align: center;
+  line-height: 300px;
+}
+
+a#prev-slide:hover,
+a#next-slide:hover {
+  opacity: 1;
+  -webkit-transition: all 0.2s ease;
+}
+
+  .control-wrapper{
+	width:940px;
+	margin: 0px auto!important;
+	position : relative;
+	z-index:1;
+	top:-300px;
+  }
+  
+  .control-wrapper a.slide-prev{
+	left:0;
+  }
+  
+  .control-wrapper a.slide-next{
+	right:0;
+	background-position: left top!important;
+  }
+  
+  .control-wrapper a.slide-prev, .control-wrapper a.slide-next {
+	background: url("../img/carousel_navigation_large1.png") no-repeat scroll right top transparent;
+	display:block;
+	height: 71px;
+	overflow:hidden;
+	position:absolute;
+	top:100px;
+	width:56px;
+	z-index:7;
+	cursor : pointer;
+  }
+  
+
+a.control_prev {
+  border-radius: 0 2px 2px 0;
+}
+
+a.control_next {
+  right: 0;
+  border-radius: 2px 0 0 2px;
+}
+
+.slider_option {
+  position: relative;
+  margin: 10px auto;
+  width: 160px;
+  font-size: 18px;
+}
