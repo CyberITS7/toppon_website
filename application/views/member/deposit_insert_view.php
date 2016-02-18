@@ -32,45 +32,55 @@
                                 </div>
                                 <div class="x_content">
                                     <br />
-                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo site_url('Deposit/topUpDeposit');?>" method="POST">
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nomor Rekening">Nomor Rekening <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nomor-Rekening">Nomor Rekening <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="Nomor Rekening" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="Nomor-Rekening" name="Nomor-Rekening" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nama Rekening">Nama Rekening <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nama-Rekening">Nama Rekening <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="Nama Rekening" name="Nama Rekening" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="Nama-Rekening" name="Nama-Rekening" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nama Bank">Nama Bank <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select class="select2_single form-control" tabindex="-1" id="Nama Bank" name="Nama Bank" required="required" class="form-control col-md-7 col-xs-12">
-                                                    <option value="BCA">BCA</option>
-                                                    <option value="BNI">BNI</option>
-                                                    <option value="MANDIRI">MANDIRI</option>
-                                                </select>
-                                            </div>
-                                        </div>
+
                                         
+                                                      <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nama-Bank">Nama Bank <span class="required">*</span>
+                                                        </label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <select class="select2_single form-control" tabindex="-1" id="Nama-Bank" name="Nama-Bank" required="required" class="form-control col-md-7 col-xs-12">
+                                                                <?php //Untuk tampilkan data dr db ke cmbBox
+                                                                 foreach ($bank_list as $row) {
+                                                                 ?>
+                                                                        <option value="<?php echo $row['bankID']; ?>"><?php echo $row['bankName']; ?></option>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                      
+                                                   
+                                      
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Toppon Coin">Toppon Coin <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Toppon-Coin">Toppon Coin <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select class="select2_single form-control" tabindex="-1" id="Toppon Coin" name="Toppon Coin" required="required" class="form-control col-md-7 col-xs-12">
-                                                    <option value="50.000">50 (Rp. 50 000,00)</option>
-                                                    <option value="100.000">100 (Rp. 100 000,00)</option>
-                                                    <option value="150.000">150 (Rp. 150 000,00)</option>
-                                                    <option value="200.000">200 (Rp. 200 000,00)</option>
-                                                    <option value="250.000">250 (Rp. 250 000,00)</option>
-                                                    <option value="300.000">300 (Rp. 300 000,00)</option>
+                                                <select class="select2_single form-control" tabindex="-1" id="Toppon-Coin" name="Toppon-Coin" required="required" class="form-control col-md-7 col-xs-12">
+                                                    <?php //Untuk tampilkan data dr db ke cmbBox
+                                                                 foreach ($coin_list as $row) {
+                                                                 ?>
+                                                                        <option value="<?php echo $row['coinID']; ?>"><?php echo $row['coin']; ?>&nbsp (Rp&nbsp<?php echo $row['coinConversion']; ?>)</option>
+                                                                <?php
+                                                                }
+                                                                ?>
                                                 </select>
                                             </div>
                                         </div>

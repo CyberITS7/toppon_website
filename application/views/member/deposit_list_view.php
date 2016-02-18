@@ -50,55 +50,42 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr class="even pointer">
-                                                <td class="a-center ">
-                                                    <input type="checkbox" class="tableflat">
-                                                </td>
-                                                <td class=" ">121000040</td>
-                                                <td class=" ">SATRIA W SANDI </td>
-                                                <td class=" ">BCA </td>
-                                                <td class=" ">100</td>
-                                                <td class=" ">Paid</td>
-                                                <td class="a-right a-right ">Rp 100.000</td>
-                                                <td class=" last">
-                                                    <a href="<?php echo site_url('Deposit/depositDetail');?>"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-search"></i></button></a>
-                                                    <a href="#"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
-                                                    <a href="#"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-check"></i></button></a>
-                                                </td>
-                                            </tr>   
-                                            <tr class="odd pointer">
-                                                <td class="a-center ">
-                                                    <input type="checkbox" class="tableflat">
-                                                </td>
-                                                <td class=" ">121000039</td>
-                                                <td class=" ">STEFANUS H HONTONG</td>
-                                                <td class=" ">BNI</td>
-                                                <td class=" ">50</td>
-                                                <td class=" ">Unpaid</td>
-                                                <td class="a-right a-right ">Rp 50.000</td>
-                                                <td class=" last">
-                                                    <a href="#"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-search"></i></button></a>
-                                                    <a href="#"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
-                                                    <a href="#"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-check"></i></button></a>
-                                                </td>
-                                            </tr>
-                                            <tr class="even pointer selected">
-                                                <td class="a-center ">
-                                                    <input type="checkbox" checked class="tableflat">
-                                                </td>
-                                                <td class=" ">121000038</td>
-                                                <td class=" ">VICKY</td>
-                                                <td class=" ">MANDIRI</td>
-                                                <td class=" ">300</td>
-                                                <td class=" ">Paid</td>
-                                                <td class="a-right a-right ">Rp 300.000</td>
-                                                <td class=" last">
-                                                    <a href="#"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-search"></i></button></a>
-                                                    <a href="#"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
-                                                    <a href="#"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-check"></i></button></a>
-                                                </td>
-                                            </tr>
-                                            
+                                            <?php //Untuk tampilkan data dari db
+                                            $i = 0;
+                                                foreach ($deposit_list as $row) {
+                                                     if($i %2 ==0)
+                                                     {
+                                                        ?>
+                                                        <tr class="even pointer">
+                                                        <?php
+                                                     }
+                                                     else 
+                                                     {
+                                                        ?>
+                                                        <tr class="odd pointer">
+                                                        <?php
+                                                     }
+                                                        $i++;
+                                                    ?>
+                                                    
+                                                        <td class="a-center ">
+                                                            <input type="checkbox" class="tableflat">
+                                                        </td>
+                                                        <td class=" "><?php echo $row['noRekening']; ?></td>
+                                                        <td class=" "><?php echo $row['nameRekening']; ?></td>
+                                                        <td class=" "><?php echo $row['bankName']; ?></td>
+                                                        <td class=" "><?php echo $row['coin']; ?></td>
+                                                        <td class=" "><?php echo $row['status']; ?></td>
+                                                        <td class="a-right a-right "><?php echo $row['coinConversion']; ?></td>
+                                                        <td class=" last">
+                                                            <a href="<?php echo site_url('Deposit/depositDetail');?>"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-search"></i></button></a>
+                                                            <a href="#"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
+                                                            <a href="#"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-check"></i></button></a>
+                                                        </td>   
+                                                    </tr> 
+                                                    <?php
+                                                }
+                                            ?>
                                         </tbody>
 
                                     </table>
