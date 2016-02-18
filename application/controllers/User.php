@@ -122,14 +122,14 @@
 	            $result = 1; 
 	           // echo "username ada dan password benar"; 
 	            $newdata = array(
-                   'username'  => $passVerifier->username,
+                   'username'  => $passVerifier->userName,
                    'user_id'  => $passVerifier->userID,
                    'level'     => $passVerifier->userLevel,
                    'logged_in' => TRUE
                );
 				$this->session->set_userdata($newdata);
 
-	            redirect($this->dashboard());
+	            $this->dashboard();
 	        }else{
 	            $result = 0; 
 	            //echo "username ada tapi password salah"; 
@@ -140,6 +140,25 @@
 		function doLogoutMember(){
 			$this->session->sess_destroy();
          	redirect($this->index());
+		}
+
+		function doForgotPassword(){
+			$datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+
+			$username = $this->input->post('username-forgot');
+			$userVerifier = $this->User_model->checkUsername($username);
+
+			if(!$userVerifier){
+	            $result = 0;
+	            //echo "username ga ada";
+	            $this->loginAndRegister("Username doesn't exists", "forgot"); 
+	        }
+	        else{
+	        	//kirim email disini
+
+	        	$this->loginAndRegister("Please Check Your Email", "forgot"); 
+	        }
+
 		}
 
 	}

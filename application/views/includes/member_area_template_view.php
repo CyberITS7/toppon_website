@@ -75,7 +75,7 @@
                         <div class="menu_section">
                             <h3>General</h3>
                             <ul class="nav side-menu">
-                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                                 <!--<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li><a href="index.html">Dashboard</a>
                                         </li>
@@ -84,10 +84,11 @@
                                         <li><a href="index3.html">Dashboard3</a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li>-->
 
                                 <li><a href="<?php echo site_url('GamePurchase')?>"><i class="fa fa-home"></i> Game Purchase</a>
                                 <li><a href="<?php echo site_url('Deposit')?>"><i class="fa fa-home"></i> Deposit</a>
+                                <li><a href="<?php echo site_url('Transfer')?>"><i class="fa fa-send-o"></i> Transfer</a>
                                 </li>
 
                             </ul>

@@ -21,7 +21,7 @@
     #register{
         margin-top: -50px;
     }
-    .regis, .login{
+    .regis, .login, .forgot{
         float:left;
     }
     .kelompok-input{
@@ -149,16 +149,16 @@
                 </section>
                 <!-- content -->
             </div>
-
+            <!-- Forgot Password -->
             <div id="forgot" class="animate form">
                 <section class="login_content">
-                    <form id="forgot-form" action="<?php echo site_url("user/doLoginMember");?>" method="POST">
+                    <form id="forgot-form" action="<?php echo site_url("user/doForgotPassword");?>" method="POST">
                         <h1>Forgot Password Form</h1>
                         <div class="item form-group kelompok-input">
                             <input type="text" id="username-forgot" name="username-forgot" class="form-control forgot" placeholder="Username" required="required" data-validate-length-range="4,50" />
                         </div>
                         <div>
-                            <a class="btn btn-default submit btn-login" href="#">Forgot</a>
+                            <a class="btn btn-default submit btn-forgot" href="#">Forgot</a>
                             <a href="#tologin" class="to_register"> Log in </a>
                         </div>
                         <div class="clear"></div>
@@ -206,6 +206,18 @@
                     $("#alert-error-regis").parent(".alert-pesan-error").show();
                     location.hash = "toregister";
                 }
+                else if(error_where == "forgot"){
+                    if(error_server == "Username doesn't exists"){
+                        $("#alert-error-forgot").html(error_server);
+                        $("#alert-error-forgot").parent(".alert-pesan-error").show();
+                        location.hash = "toforgot";
+                    }
+                    else if(error_server == "Please Check Your Email"){
+                        $("#alert-error-forgot").html(error_server);
+                        $("#alert-error-forgot").parent(".alert-pesan-error").removeClass("alert-danger").addClass("alert-success").show();
+                        location.hash = "toforgot";
+                    }
+                }
             }
             
             validator.message['empty'] = 'Harap isi kolom ini';
@@ -226,6 +238,12 @@
             //buat bikin button melakukan submit pada form register
             $(".btn-register").click(function(){
                 $("#register-form").submit();                
+                return false;
+            });
+
+            //buat bikin button melakukan submit pada form forgot password
+            $(".btn-forgot").click(function(){
+                $("#forgot-form").submit();                
                 return false;
             });
 
