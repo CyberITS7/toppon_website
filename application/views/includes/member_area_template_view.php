@@ -82,6 +82,7 @@
                                 </li>
 
                                 <li><a href="<?php echo site_url('GamePurchase')?>"><i class="fa fa-home"></i> Game Purchase</a>
+                                <li><a href="<?php echo site_url('Deposit')?>"><i class="fa fa-home"></i> Deposit</a>
                                 </li>
 
                             </ul>
