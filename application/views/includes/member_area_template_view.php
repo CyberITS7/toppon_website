@@ -22,7 +22,12 @@
     <link href="<?php echo base_url(); ?>css/icheck/flat/green.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>css/floatexamples.css" rel="stylesheet" type="text/css" />
 
-    <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>    
+    <!-- Alertify -->
+    <link href="<?php echo base_url(); ?>css/alertify.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>css/themes/default.min.css" rel="stylesheet">
+
+    <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>js/alertify.min.js"></script>
     
     <!--[if lt IE 9]>
         <script src="../assets/js/ie8-responsive-file-warning.js"></script>
