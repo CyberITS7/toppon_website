@@ -44,13 +44,12 @@ class GamePurchase extends CI_Controller{
         $msg = "";
         $datetime = date('Y-m-d H:i:s', time());
         $id=$this->input->post('id');
-        $author = $this->session->userdata('username')."-".$this->session->userdata('user_id');
         $data_game = $this->GamePurchase_model->getGameByID($id);
         $userID = $this->session->userdata('user_id');
         $account = $this->SAccount_model->getMyAccount($userID);
 
         //Check Data Publisher Game
-        if($data_game->sGamesID != null){
+        if($data_game != null){
             // Check coin for purchasing Game
             if($data_game->paymentValue > $account->coin){
                 $status = 'error';
@@ -64,9 +63,9 @@ class GamePurchase extends CI_Controller{
                     'coin'=>$account->coin,
                     'isActive'=>1,
                     "created" => $datetime,
-                    "createdBy" => $author,
+                    "createdBy" => $userID,
                     "lastUpdated"=>$datetime,
-                    "lastUpdatedBy"=>$author
+                    "lastUpdatedBy"=>$userID
                 );
                 $transaction_id = $this->TGamePurchase_model->createTransactionGamePurchase($data_transaction);
 

@@ -228,7 +228,7 @@
                                 }
                             });
                         }
-                    );
+                    ).setHeader('Confirm Purchase Game');
                 }
 
             }
