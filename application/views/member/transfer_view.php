@@ -27,12 +27,12 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <form class="form-horizontal form-label-left" method="post" action="<?php echo site_url("Transfer/doTransfer");?>" novalidate>
+                <form class="form-horizontal form-label-left" id="form-transfer" method="post" novalidate>
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Username Tujuan <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="name" class="form-control col-md-7 col-xs-12" name="username-tujuan" placeholder="Harap isi Username yang ingin di transfer" required="required" type="text">
+                            <input id="username-tujuan" class="form-control col-md-7 col-xs-12" name="username-tujuan" required="required" type="text">
                         </div>
                     </div>
                     <div class="form-group">
@@ -52,13 +52,13 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Password <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="name" class="form-control col-md-7 col-xs-12" name="password" placeholder="Harap isi kembali password anda" required="required" type="password">
+                            <input id="password" class="form-control col-md-7 col-xs-12" name="password" required="required" type="password">
                         </div>
                     </div>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                            <button type="submit" class="btn btn-primary">Cancel</button>
+                            <button type="reset" class="btn btn-primary">Clear</button>
                             <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
@@ -66,3 +66,72 @@
             </div>
         </div>
     </div>
+    <script>
+    $(document).ready(function(){
+        function validate(){
+            var error = 0;        
+            var username_tujuan = $("#username-tujuan").val();
+            var toppon_coin = $("#toppon-coin").val();
+            var password = $("#password").val();
+
+            if(username_tujuan == null || username_tujuan == ""){
+                alertify.error("Transfer fail, username empty !");
+                error++;
+            } else if(toppon_coin == null || toppon_coin == ""){
+                alertify.error("Transfer fail, toppon coin empty !");
+                error++;
+            } else if(password == null || password == ""){
+                alertify.error("Transfer fail, password empty !");
+                error++;
+            } else if(toppon_coin > 100 || toppon_coin < 10){
+                alertify.error("Transfer fail, coin not valid !");
+                error++;
+            }else if(username_tujuan == "<?php echo $this->session->userdata('username') ;?>"){
+                alertify.error("Transfer fail, cannot transfer to your own account !");
+                error++;
+            }
+
+            if(error > 0){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+
+        // fungsi saat form di submit
+        $("#form-transfer").submit(function(){
+            if(validate()){
+                alertify.confirm("Are you sure, you want to transfer "+$("#toppon-coin").val()+" coin to "+ $("#username-tujuan").val() +"?",
+                    function(){
+                        var data_post = {
+                            username_tujuan : $("#username-tujuan").val(),
+                            toppon_coin : $("#toppon-coin").val(),
+                            password : $("#password").val()
+                        };
+
+                        $.ajax({
+                            url: "<?php echo base_url(); ?>" + "index.php/Transfer/doTransfer",
+                            data: data_post,
+                            type: "POST",
+                            dataType: 'json',
+                            success:function(data){
+                                if(data.status != 'error') {
+                                    alertify.success(data.msg);
+                                    location.href = "<?php echo site_url("Transfer")?>";
+                                }else{
+                                    alertify.error(data.msg);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                //var err = eval("(" + xhr.responseText + ")");
+                                alertify.error(xhr.responseText);
+                            }
+                        });
+                    }
+                ).setHeader('Confirm Transfer Coin');
+            }
+            return false;
+        });
+    });    
+    </script>    

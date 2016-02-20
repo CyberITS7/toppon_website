@@ -111,7 +111,7 @@
 			$password = $this->input->post('password-login');
 
 			$userVerifier = $this->User_model->checkUsername($username);
-	        $passVerifier = $this->User_model->getUsernamePassword($username);
+	        $passVerifier = $this->User_model->getPasswordbyUsername($username);
 	        
 	        if(!$userVerifier){
 	            $result = 0;

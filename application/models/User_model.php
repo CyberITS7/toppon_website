@@ -6,7 +6,7 @@
 	        return $result;
 	    }
 
-	    function getUsernamePassword($username){
+	    function getPasswordbyUsername($username){
 		    $where=array(
 	            'username'=>$username,        
 	            'isActive'=>1

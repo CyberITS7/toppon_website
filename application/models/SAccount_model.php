@@ -18,6 +18,14 @@ class SAccount_model extends CI_Model{
         return $result;
     }
 
+    function additionCoin($userID, $nominal){
+        $this->db->set('coin', 'coin+'.$nominal, FALSE);
+        $this->db->where('userID',$userID);
+        $this->db->update('tbl_toppon_s_accounts');
+        $result=$this->db->affected_rows();
+        return $result;
+    }    
+
 
 }
 ?>
