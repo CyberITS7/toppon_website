@@ -15,9 +15,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
 
-
-
-
 </head>
 
 <body>
@@ -38,31 +35,20 @@
     </div>
     
     <div class="clearfix"> </div>
-
-    <div class="menu-navbar">
-    
-        <ul class="nav1">
-          <li><a href="#" data-toggle="modal" data-target="#myModal">Home</a></li>
-          <li><a href="#" data-toggle="modal" data-target="#myModal2">About Us</a></li>
-          <li><a href="#" data-toggle="modal" data-target="#myModal1">How To Use</a></li>
-          <li><a href="#" data-toggle="modal" data-target="#myModal3">Conversion Table</a></li>
-        </ul>
-            <!-- script-for-menu -->
-             <script>
-               $( "span.menu" ).click(function() {
-               $( "ul.nav1" ).slideToggle( 300, function() {
-               // Animation complete.
-                });
-               });
-            </script>
-            <!-- /script-for-menu -->
-    </div>
-
-
   </div>
 </div>
 <!--End Fixed Navbar-->
+<div class="menu-navbar">
+    <div class="container">
+        <ul class="nav1">
+            <li><a href="#" data-toggle="modal" data-target="#myModal">Home</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#myModal2">About Us</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#myModal1">How To Use</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#myModal3">Conversion Table</a></li>
+        </ul>
+    </div>
 
+</div>
 
 <!-- Full Page Image Background Carousel Header -->
     <div class = "container">
@@ -78,21 +64,21 @@
         <div class="carousel-inner">
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('../../img/img1.jpg');"></div>
+                <div class="fill" style="background-image:url('../img/img1.jpg');"></div>
                 <div class="carousel-caption">
                     <h2>Caption 1</h2>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('../../img/img2.png');"></div>
+                <div class="fill" style="background-image:url('../img/img2.png');"></div>
                 <div class="carousel-caption">
                     <h2>Caption 2</h2>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the third background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('../../img/img3.png');"></div>
+                <div class="fill" style="background-image:url('../img/img3.png');"></div>
                 <div class="carousel-caption">
                     <h2>Caption 3</h2>
                 </div>
@@ -147,12 +133,17 @@
 </section>
 <!--END Conversion Table-->
 
-
     <!-- Script to Activate the Carousel -->
     <script>
-    $('.carousel').carousel({
-        interval: 4500 //changes the speed
-    })
+        // Script for menu
+        $( "span.menu" ).click(function() {
+            $( "ul.nav1" ).slideToggle( 300, function() {
+                // Animation complete.
+            });
+        });
+        $('.carousel').carousel({
+            interval: 4500 //changes the speed
+        })
     </script>
 
 </body>
