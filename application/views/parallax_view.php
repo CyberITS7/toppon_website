@@ -6,7 +6,17 @@
     <link href="<?php echo base_url(); ?>fonts/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet">
 
-    <link href="<?=base_url()?>css/toppon.css" rel="stylesheet">
+    <!-- Custome CSS -->
+    <link href="<?php echo base_url(); ?>css/toppon.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
+
+
+
 
 </head>
 
@@ -53,16 +63,53 @@
 </div>
 <!--End Fixed Navbar-->
 
-<!--slider-->
-<section>
-<div class="slider-1" name="slider">
-  <div class="container">
-    SLIDER NOT READY
-  </div>
-</div>
 
-</section>
-<!--END slider-->
+<!-- Full Page Image Background Carousel Header -->
+    <div class = "container">
+    <header id="myCarousel" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for Slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <!-- Set the first background image using inline CSS below. -->
+                <div class="fill" style="background-image:url('../../img/img1.jpg');"></div>
+                <div class="carousel-caption">
+                    <h2>Caption 1</h2>
+                </div>
+            </div>
+            <div class="item">
+                <!-- Set the second background image using inline CSS below. -->
+                <div class="fill" style="background-image:url('../../img/img2.png');"></div>
+                <div class="carousel-caption">
+                    <h2>Caption 2</h2>
+                </div>
+            </div>
+            <div class="item">
+                <!-- Set the third background image using inline CSS below. -->
+                <div class="fill" style="background-image:url('../../img/img3.png');"></div>
+                <div class="carousel-caption">
+                    <h2>Caption 3</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+
+    </header>
+  </div>
+
 
 <!--About Us-->
 <div class="about" name="about">
@@ -99,6 +146,14 @@
 </div>
 </section>
 <!--END Conversion Table-->
+
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 4500 //changes the speed
+    })
+    </script>
 
 </body>
 
