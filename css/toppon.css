@@ -50,6 +50,9 @@ body {
 
 }
 
+.menu-navbar .container{
+    position: relative;
+}
 
 .menu-navbar ul li{
 	display:inline-block;
@@ -69,9 +72,23 @@ body {
 }
 .menu-navbar ul li a:hover,.menu-navbar ul li a.active{
 	background:none !important;
-	border-bottom: 5px solid #fff;
+	border-bottom: 5px solid #000;
     -webkit-appearance: none !important;
     padding-bottom: 12px;
+}
+
+.triangle{
+    top: -20px;
+    right: 15px;
+    position: absolute;
+    overflow: hidden;
+    }
+
+.demo-topright{
+    width: 0; 
+    height: 0; 
+    border-top: 40px solid #00CCFF; 
+    border-left: 40px solid transparent;
 }
 
 .slider-1{

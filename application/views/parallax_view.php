@@ -46,8 +46,9 @@
             <li><a href="#" data-toggle="modal" data-target="#myModal1">How To Use</a></li>
             <li><a href="#" data-toggle="modal" data-target="#myModal3">Conversion Table</a></li>
         </ul>
-    </div>
+    <div class="triangle demo-topright"></div>
 
+    </div>
 </div>
 
 <!-- Full Page Image Background Carousel Header -->
