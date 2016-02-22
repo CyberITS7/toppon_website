@@ -54,6 +54,7 @@ class Deposit extends CI_Controller{
             redirect($this->loginAndRegister());
         }
         else{
+            $data['deposit_list']=$this->Deposit_model->getListDeposit();
             $data['data_content']="member/deposit_detail_view";
             $this->load->view('includes/member_area_template_view',$data);
         }
@@ -70,6 +71,16 @@ class Deposit extends CI_Controller{
             //Ambil data Coin dan Bank yang Asli
             $data_bank = $this->Bank_model->getBankByID($namaBank);
             $data_coin = $this->Coin_model->getCoinByID($topponCoin);
+
+            if($noRekening == null || $noRekening == ""){
+                $status = 'error';
+                $msg = "Top Up fail, Nomor Rekening empty !";
+            }
+            else if($namaRekening == null || $namaRekening == ""){
+                $status = 'error';
+                $msg = "Top Up fail, Nama Rekening empty !";   
+            }
+            else{
 
                 $data = array(
                         'noRekening' => $noRekening,
@@ -88,23 +99,25 @@ class Deposit extends CI_Controller{
 
                     );
 
-                $this->db->trans_begin();
-                $query = $this->TDeposit_model->insertDeposit($data);
+                        $this->db->trans_begin();
+                        $query = $this->TDeposit_model->insertDeposit($data);
 
-                if ($this->db->trans_status() === FALSE) {
-                    // Failed to save Data to DB
-                    $this->db->trans_rollback();
-                    echo "ga bisa broo";
-                    //$this->loginAndRegister('Error while saved Tag data!','register');
-                }
-                else{
-                    $this->db->trans_commit();
-                    echo "bisa coy";
-                    /*$msg = "user has been created successfully";
+                        if ($this->db->trans_status() === FALSE) {
+                            // Failed to save Data to DB
+                            $this->db->trans_rollback();
+                            $status = 'error';
+                            $msg = "Top Up fail, something went wrong when adding transaction data. Please try again !";
+                        }
+                        else{
+                            $this->db->trans_commit();
+                            redirect(site_url('Deposit/depositDetail'));
+                            //$msg = "Top up successfully!";
+                            //$status = 'success';
 
-                    redirect($this->dashboard());*/
-                }
+                        }
             }
+            //echo json_encode(array('status' => $status, 'msg' => $msg)); -- Untuk Ajax
+        }
     }
 
 ?>

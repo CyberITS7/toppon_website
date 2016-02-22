@@ -32,20 +32,21 @@
                                 </div>
                                 <div class="x_content">
                                     <br />
-                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo site_url('Deposit/topUpDeposit');?>" method="POST">
+
+                                    <form id="deposit-form" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo site_url('Deposit/topUpDeposit');?>" method="POST">
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nomor-Rekening">Nomor Rekening <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="Nomor-Rekening" name="Nomor-Rekening" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="Nomor-Rekening" name="Nomor-Rekening" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nama-Rekening">Nama Rekening <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="Nama-Rekening" name="Nama-Rekening" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" id="Nama-Rekening" name="Nama-Rekening" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
 
@@ -54,7 +55,7 @@
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nama-Bank">Nama Bank <span class="required">*</span>
                                                         </label>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <select class="select2_single form-control" tabindex="-1" id="Nama-Bank" name="Nama-Bank" required="required" class="form-control col-md-7 col-xs-12">
+                                                            <select class="select2_single form-control" tabindex="-1" id="Nama-Bank" name="Nama-Bank"  class="form-control col-md-7 col-xs-12">
                                                                 <?php //Untuk tampilkan data dr db ke cmbBox
                                                                  foreach ($bank_list as $row) {
                                                                  ?>
@@ -87,19 +88,51 @@
                     
                                         <div class="form-group">
                                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                                <button type="submit" class="btn btn-warning">Top Up</button>
+                                                <button type="submit" class="btn btn-warning" id="btn-top-up">Top Up</button>
                                             </div>
                                         </div>
-
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
-
         </div>
     </div>
 </div>
+ <script>
+    $(document).ready(function(){
+        function validate(){
+            var error = 0;        
+            var noRekening = $("#Nomor-Rekening").val();
+            var namaRekening = $("#Nama-Rekening").val();
+
+            if(noRekening == null || noRekening == ""){
+                alertify.error("Top Up fail, Nomor Rekening empty !");
+                error++;
+            } else if(namaRekening == null || namaRekening == ""){
+                alertify.error("Top Up fail, Nama Rekening empty !");
+                error++;
+            } 
+
+            if(error > 0){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+
+            // fungsi saat form di submit
+            $("#deposit-form").submit(function(){
+               if (validate() == true)
+               {
+                    return true;
+               }
+               else
+               {
+                    return false;
+               }
+            });
+            
+        });  
+    </script>    
