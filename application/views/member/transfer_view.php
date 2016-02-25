@@ -3,17 +3,6 @@
     <div class="title_left">
         <h3>Transfer</h3>
     </div>
-
-    <div class="title_right">
-        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-            </div>
-        </div>
-    </div>
 </div>
 <div class="clearfix"></div>
 
@@ -22,7 +11,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Deposit Form<small>Form input deposits</small></h2>
+                <h2>Transfer Form<small>Form input transfer</small></h2>
                 
                 <div class="clearfix"></div>
             </div>

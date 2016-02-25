@@ -26,6 +26,15 @@
     <link href="<?php echo base_url(); ?>css/alertify.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>css/themes/default.min.css" rel="stylesheet">
 
+    <style>
+    .home-logo{
+        width: 44px;
+        border-radius: 100%;
+    }
+    .toppon-coins{
+        width: 22px;        
+    }
+    </style>
     <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>js/alertify.min.js"></script>
     
@@ -38,7 +47,6 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-
 </head>
 
 
@@ -53,44 +61,36 @@
                 <div class="left_col scroll-view">
 
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-money"></i><span>Toppon</span></a>
+                        <a href="<?php echo site_url("User");?>" class="site_title"><img src="<?php echo base_url(); ?>img/icon_toppon.jpg" class="home-logo"><span>&nbsp;Toppon</span></a>
                     </div>
-                    <div class="clearfix"></div>
-
-                    <!-- menu prile quick info -->
-                    <div class="profile">   
-                        <div class="profile_pic">
-                            <img src="<?php echo base_url(); ?>img/icon_toppon.jpg" alt="..." class="img-circle profile_img">
-                        </div>                     
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2><?php echo $this->session->userdata('username');?></h2>
-                        </div>
-                    </div>
-                    <!-- /menu prile quick info -->
+                    <div class="clearfix"></div>                    
                    
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-
                         <div class="menu_section">
-                            <h3>General</h3>
+                            <h3>Member Coins</h3>
                             <ul class="nav side-menu">
-                                 <!--<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li><a href="index.html">Dashboard</a>
-                                        </li>
-                                        <li><a href="index2.html">Dashboard2</a>
-                                        </li>
-                                        <li><a href="index3.html">Dashboard3</a>
-                                        </li>
-                                    </ul>
-                                </li>-->
-
-                                <li><a href="<?php echo site_url('GamePurchase')?>"><i class="fa fa-home"></i> Game Purchase</a>
-                                <li><a href="<?php echo site_url('Deposit')?>"><i class="fa fa-home"></i> Deposit</a>
-                                <li><a href="<?php echo site_url('Transfer')?>"><i class="fa fa-send-o"></i> Transfer</a>
-                                </li>
-
+                                <!--<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu" style="display: none">
+                                            <li><a href="index.html">Dashboard</a>
+                                            </li>
+                                            <li><a href="index2.html">Dashboard2</a>
+                                            </li>
+                                            <li><a href="index3.html">Dashboard3</a>
+                                            </li>
+                                        </ul>
+                                    </li>-->                                
+                                <li><a href="#"><img src="<?php echo base_url(); ?>img/TC.png" class="toppon-coins" > <span id="toppon-coin-content">0</span></a></li>
+                                <li><a href="#"><img src="<?php echo base_url(); ?>img/TP.png" class="toppon-coins" > <span id="toppon-poin-content">0</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="menu_section">
+                            <h3>Navigation</h3>
+                            <ul class="nav side-menu">
+                                <li><a href="<?php echo site_url('GamePurchase')?>"><i class="fa fa-gamepad"></i> Game Purchase</a></li>
+                                <li><a href="<?php echo site_url('Deposit')?>"><i class="fa fa-credit-card"></i> TopUp</a></li>
+                                <li><a href="<?php echo site_url('Transfer')?>"><i class="fa fa-send-o"></i> Transfer</a></li>
+                                <li><a href="<?php echo site_url('Gift')?>"><i class="fa fa-gift"></i>Gift</a></li>
                             </ul>
                         </div>
                     </div>
@@ -156,8 +156,26 @@
     <script src="<?php echo base_url(); ?>js/custom.js"></script>
    
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(window).load(function () {
+            $.ajax({
+                url: "<?php echo site_url('user/getUserCoins'); ?>",                
+                type: "GET",
+                dataType: 'json',
+                success:function(data){
+                    //alertify.success("coin = "+data.toppon_coin);
+                    //alertify.success("poin = "+data.toppon_poin);
+                    $("#toppon-coin-content").html(data.toppon_coin);
+                    $("#toppon-poin-content").html(data.toppon_poin);
+                },
+                error: function(xhr, status, error) {
+                    //var err = eval("(" + xhr.responseText + ")");
+                    alertify.error(xhr.responseText);
+                }
+            });
+        });
 
+        $(document).ready(function(){
+            $(".toppon-coins").parent(a).css("cursor","default");
         });
     </script>    
     <!-- /footer content -->

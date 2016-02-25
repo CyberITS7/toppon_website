@@ -11,6 +11,7 @@
 	    
 	    $this->load->library('Hash');
 	    $this->load->model('User_model');
+	    $this->load->model('SAccount_model');
 		}
 
 		function index(){
@@ -161,5 +162,12 @@
 
 		}
 
+		function getUserCoins(){
+			
+            $userID = $this->session->userdata("user_id");
+            $akunku = $this->SAccount_model->getMyAccount($userID);
+
+            echo json_encode(array('toppon_coin' => $akunku->coin, 'toppon_poin' => $akunku->poin));
+		}
 	}
 ?>
