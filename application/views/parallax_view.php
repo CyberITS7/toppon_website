@@ -38,7 +38,7 @@
   </div>
 </div>
 <!--End Fixed Navbar-->
-<div class="menu-navbar navbar-fixed-top">
+<div class="menu-navbar">
     <div class="container">
         <ul class="nav1">
             <li><a href="#myCarousel">Home</a></li>
@@ -150,10 +150,21 @@
             });
         });
         $('.carousel').carousel({
-            interval: 4500 //changes the speed
+            interval: 3500 //changes the speed
         })
     </script>
 
+    <script>
+        function fixDiv() {
+            var topmenu = $('.menu-navbar');
+            if ($(window).scrollTop() > 120)
+                topmenu.addClass("fix-top-menu");
+            else
+                topmenu.removeClass("fix-top-menu");
+        }
+        $(window).scroll(fixDiv);
+            fixDiv();
+    </script>
 </body>
 
 </html>
