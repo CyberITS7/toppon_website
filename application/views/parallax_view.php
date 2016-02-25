@@ -38,15 +38,22 @@
   </div>
 </div>
 <!--End Fixed Navbar-->
-<div class="menu-navbar">
+<div class="menu-navbar navbar-fixed-top">
     <div class="container">
         <ul class="nav1">
-            <li><a href="#" data-toggle="modal" data-target="#myModal">Home</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#myModal2">About Us</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#myModal1">How To Use</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#myModal3">Conversion Table</a></li>
+            <li><a href="#myCarousel">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#howtouse">How To Use</a></li>
+            <li><a href="#conv-table">Conversion Table</a></li>
         </ul>
-    <div class="triangle demo-topright"></div>
+
+    <!-- Segitiga kanan dan Help -->
+    <div class="triangle ">
+        <a href="#">
+            <span class="glyphicon glyphicon-question-sign"></span>
+        </a>
+        <div class="demo-topright"></div>
+    </div>
 
     </div>
 </div>
@@ -99,7 +106,7 @@
 
 
 <!--About Us-->
-<div class="about" name="about">
+<div id="about" name="about">
   <div class="container">
     ABOUT US
   </div>
@@ -108,7 +115,7 @@
 
 <!--Why Us?-->
 <section>
-<div class="whyus" name="whyus">
+<div id="whyus" name="whyus">
   <div class="container">
     WHY US?
   </div>
@@ -117,7 +124,7 @@
 <!--END Why Us?-->
 
 <!--How to Use-->
-<div class="howtouse" name="howtouse">
+<div id="howtouse" name="howtouse">
   <div class="container">
     HOW TO USE
   </div>
@@ -126,7 +133,7 @@
 
 <!--Conversion Table-->
 <section>
-<div class="conv-table" name="conv-table">
+<div id="conv-table" name="conv-table">
   <div class="container">
     CONVERSION TABLE
   </div>

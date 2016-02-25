@@ -101,7 +101,7 @@ body {
 	width: 100%;
 	padding-bottom: 100px;}
 
-.about{
+#about{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
     background-color: #3498db;
     background-repeat: no-repeat;
@@ -113,7 +113,7 @@ body {
 
 }
 
-.whyus{
+#whyus{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
     background-color: #7f8c8d;
     background-repeat: no-repeat;
@@ -125,7 +125,7 @@ body {
 
 }
 
-.howtouse{
+#howtouse{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
     background-color: #3498db;
     background-repeat: no-repeat;
@@ -136,7 +136,7 @@ body {
 	padding-bottom: 100px;
 }
 
-.conv-table{
+#conv-table{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
     background-color: #7f8c8d;
     background-repeat: no-repeat;
