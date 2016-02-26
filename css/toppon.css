@@ -81,9 +81,9 @@ body {
 .fix-top-menu{   
     position : fixed;
     top : -20px;
-    left : -1px;
     width : 100%;
     min-width : 1024px;
+    z-index: 5;
   }
 
 

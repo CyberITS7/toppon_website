@@ -18,7 +18,7 @@
 </head>
 
 <body>
-
+<section id="home">
 <!-- Fixed navbar -->
 <div class="navbar navbar-custom">
   <div class="container">
@@ -41,7 +41,7 @@
 <div class="menu-navbar">
     <div class="container">
         <ul class="nav1">
-            <li><a href="#myCarousel">Home</a></li>
+            <li><a href="#home">Home</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#howtouse">How To Use</a></li>
             <li><a href="#conv-table">Conversion Table</a></li>
@@ -103,7 +103,7 @@
 
     </header>
   </div>
-
+</section>
 
 <!--About Us-->
 <div id="about" name="about">
@@ -164,6 +164,19 @@
         }
         $(window).scroll(fixDiv);
             fixDiv();
+    </script>
+
+    <script>
+    //smooth scroll
+    $(function() {
+       $('.menu-navbar ul li a').click(function () {
+            var url = $(this).attr('href');
+            $('html,body').animate({
+                scrollTop: $(url).offset().top
+            }, 1500, 'linear');
+            return false;
+        });
+   });
     </script>
 </body>
 
