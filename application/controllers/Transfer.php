@@ -97,7 +97,7 @@
 			                // Failed to save Data to DB
 			                $this->db->trans_rollback();
 			                $status = 'error';
-							$msg = "Transfer fail, something went wrong when adding your friend coin. please try again !";
+							$msg = "Transfer fail, something went wrong when adding your friend coin. Please try again !";
 			            }else{
 			            	$this->db->trans_commit();
 		                	$status = 'success';

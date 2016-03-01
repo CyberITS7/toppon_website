@@ -94,7 +94,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-6 gift-items" id="<?php echo $row['giftID'];?>">
                     <div class="col-md-4 col-sm-4 col-xs-4 ribbon-container">
                         <img src="<?php echo base_url();?>img/gifts/<?php echo $row['image'];?>" />
-                        <span class="ribbon"><?php echo $row['poin'];?> poin</span>
+                        <span class="ribbon"><span><?php echo $row['poin'];?></span> poin</span>
                     </div>
                     <div class="col-md-8 col-sm-8 col-xs-8 gift-detail">
                         <span class="gift-title"><?php echo $row['giftName'];?></span>
@@ -113,6 +113,41 @@
     </div>
     <script>
     $(document).ready(function(){
+        $(".btn-claim").click(function (){
+            var giftID = $(this).parent(".gift-detail").parent(".gift-items").attr("id");
+            var giftName = $(this).siblings(".gift-title").html();
+            var poin = $(this).parents(".gift-detail").siblings(".ribbon-container").children(".ribbon").children("span").html();
+            if(poin <= $("#toppon-poin-content").html()){
+                alertify.confirm("Are you sure, you want to claim "+giftName+" ?",
+                    function(){
+                        var data_post = {
+                            giftID : giftID
+                        };
 
+                        $.ajax({
+                            url: "<?php echo base_url(); ?>" + "index.php/Gift/doClaimGift",
+                            data: data_post,
+                            type: "POST",
+                            dataType: 'json',
+                            success:function(data){
+                                if(data.status != 'error') {
+                                    alertify.success(data.msg);
+                                    location.href = "<?php echo site_url("Gift")?>";
+                                }else{
+                                    alertify.error(data.msg);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                //var err = eval("(" + xhr.responseText + ")");
+                                alertify.error(xhr.responseText);
+                            }
+                        });
+                    }
+                ).setHeader('Gift Claim fail, insufficient poin !');
+            }
+            else{
+                alertify.error("Sorry, insufficient Toppon Poin");
+            }
+        });        
     });    
     </script>    
