@@ -1,13 +1,15 @@
 html,
 body {
+    width: 100%;
     height: 100%;
-    
+    font-family: Verdana;
 }
 .content-text{
     font-family: Verdana;
     color: #ECF0F1;
     text-align: center;
-    letter-spacing: 3px; 
+    letter-spacing: 3px;
+    padding-top: 10px;
 
 }
 .content-text h1{
@@ -29,58 +31,66 @@ body {
     padding-bottom: 20px;   
 }
 
-.navbar-custom{
-	background-color: #FFFFF0!important;
-	padding-top: 5px;
+.content-text-b{
+    font-family: Verdana;
+    color: #1D70B7;
+    text-align: center;
+    letter-spacing: 3px; 
+
+}
+.content-text-b h1{
+    color: #1D70B7;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 3px;
+    font-size:50px;
+    padding-bottom: 30px;
+
 }
 
-.left-navbar img{
-    padding: 5px;
-	float: left;
+.content-text-b p{
+    color: #1D70B7;
+    font-weight: 300;
+    text-align: center;
+    letter-spacing: 3px; 
+    font-size: 18px;
+    padding-bottom: 20px;   
 }
 
-.right-navbar{
- 	float: right;
-    padding-top: 20px;
-    padding-right: 20px;
-    
+.col-right img{
+    float:right;
 }
 
-.right-navbar ul li{
-	display:inline-block;
-    margin: 0 18px;
-    -webkit-appearance: none !important;
+#logo{
+    width: 298px;
+    margin: auto;
+    padding-bottom: 30px;
 }
-.right-navbar ul li a{
-    color: #3366FF;
-    padding: 0 0 17px 0;
-    font-size: 16px;
-    font-family: 'Varela Round', sans-serif;
-    text-decoration: none;
-    text-transform: uppercase;
-    border-bottom: 5px solid transparent;
-    -webkit-appearance: none !important;
-	outline:none;
+
+#help-button{ 
+    position: absolute;
+    top: 0px;
+    right: 50px;
 }
-.right-navbar ul li a:hover,.menu-navbar ul li a.active{
-	background:none !important;
-	border-bottom: 5px solid #2c3e50;
-    -webkit-appearance: none !important;
+
+
+#help-button img{
+    position: relative;
+    top:11px;
+    width: 30px;
+    height: 30px;
 }
 
 .menu-navbar{
-	margin-top: 20px;
-	padding-top: 20px;
 	background-color: #1D70B7;
-	height: 60px;
-
-}
-
-.menu-navbar .container{
+	height: 70px;
+    text-align: center;
     position: relative;
+
 }
 
 .menu-navbar ul li{
+    padding-top: 20px;  
 	display:inline-block;
     margin: 0 18px;
     -webkit-appearance: none !important;
@@ -106,34 +116,52 @@ body {
 /* fixed navbar */
 .fix-top-menu{   
     position : fixed;
-    top : -20px;
+    top : 0px;
     width : 100%;
     min-width : 1024px;
     z-index: 5;
   }
 
-
-.triangle{
-    top: -20px;
-    right: 15px;
+/*segitiga sudut*/
+.triangle-r{
+    top: 0px;
+    right: 0px;
     position: absolute;
     overflow: hidden;
     }
 
+.triangle-l{
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    overflow: hidden;
+}
+
 .demo-topright{
     width: 0; 
     height: 0; 
-    border-top: 40px solid #58ACFA; 
-    border-left: 40px solid transparent;
+    border-top: 60px solid #58ACFA; 
+    border-left: 60px solid transparent;
 }
 
+.demo-topleft{
+    width: 0; 
+    height: 0;     
+    border-top: 60px solid #1D70B7; 
+    border-right: 60px solid transparent;
+
+}
+
+
+
+/*SLIDER*/
 .slider-1{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
     background-color: #7f8c8d;
     background-repeat: no-repeat;
-	padding-top: 120px;
+	padding-top: 110px;
 	text-align: center;
-	min-height: 700px;
+	min-height: 500px;
 	width: 100%;
 	padding-bottom: 100px;}
 
@@ -141,7 +169,7 @@ body {
 	/*background-image: url(../img/bg/home-bg.jpg);*/
     background-color: #1D70B7;
     background-repeat: no-repeat;
-	padding-top: 70px;
+	padding-top: 110px;
 	text-align: center;
 	min-height: 700px;
 	width: 100%;
@@ -153,7 +181,7 @@ body {
 	/*background-image: url(../img/bg/home-bg.jpg);*/
     background-color: #20a7df;
     background-repeat: no-repeat;
-	padding-top: 70px;
+	padding-top: 110px;
 	text-align: center;
 	min-height: 700px;
 	width: 100%;
@@ -167,20 +195,29 @@ body {
 
 #howtouse{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
-    background-color: #3498db;
+    background-color: #FFFFF8;
     background-repeat: no-repeat;
-	padding-top: 120px;
 	text-align: center;
 	min-height: 700px;
 	width: 100%;
-	padding-bottom: 100px;
+    color:#1D70B7;
+}
+
+#how-redeem{
+    background-color: #1D70B7;
+    background-repeat: no-repeat;
+    padding-top: 110px;
+    text-align: center;
+    min-height: 700px;
+    width: 100%;
+    padding-bottom: 100px;
 }
 
 #conv-table{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
     background-color: #7f8c8d;
     background-repeat: no-repeat;
-	padding-top: 120px;
+	padding-top: 110px;
 	text-align: center;
 	min-height: 700px;
 	width: 100%;
@@ -206,6 +243,53 @@ body {
     background-size: cover;
     -o-background-size: cover;
 }
+
+/* Background white text blue and bg blue text white */
+.bg-white-blue{
+    background-color: #FFFFF8;
+    color: #1D70B7;
+}
+
+.bg-blue-white{
+    background-color: #1D70B7;
+    color: #ECF0F1;
+}
+
+.bg-blue2-white{
+    background-color: #20a7df;
+    color: #ECF0F1;
+}
+
+/* Row How To Use */
+.custom-row-1{
+    position: relative;
+    height: 120px;
+}
+
+.custom-row-1 img{
+    position: absolute;
+    top: 15px;
+    right: 50px;
+}
+
+.custom-row-2   {
+    position: relative;
+    height: 120px;
+}
+
+.custom-row-2 img{
+    position: absolute;
+    top: 15px;
+    right: 200px;
+}
+
+.how-text{
+    padding-top: 15px;
+}
+.how-text p{
+    text-align: justify;
+}
+
 
 @media screen and (max-width:769px) {
     div.col-clear{
