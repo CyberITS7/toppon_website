@@ -1,5 +1,6 @@
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Welcome to Toppon</title>
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
@@ -59,7 +60,7 @@
 </div>
 
 <!-- Full Page Image Background Carousel Header -->
-    <div class = "container">
+    
     <header id="myCarousel" class="carousel slide">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -102,13 +103,22 @@
         </a>
 
     </header>
-  </div>
+    
 </section>
 
 <!--About Us-->
 <div id="about" name="about">
   <div class="container">
-    ABOUT US
+    <div class="content-text">
+        <h1>ABOUT US</h1>
+        <p>Toppon adalah platform untuk pembelian voucher games online yang memberikan kemudahan dan kelebihan bagi para Customer
+            kami dengan kelengkapan dan kemudahan dalam memperoleh voucher games online. Kami memberikan berbagai pilihan reward 
+            kepada Customer sebagai penghargaan kami terhadap Customer dengan memberikan point yang dapat ditukarkan di setiap 
+            pengisian top up koin Toppon</p>
+        <p>Kami memberikan perhatian kepada kemudahan dan kenyamanan dalam bertransaksi bagi para Customer kami dengan terus 
+            mengembangkan teknologi serta pelayanan bagi kemudahan dan kenyamanan Customer. Tim kami selalu memberikan pelayanan
+            terbaik dan professional demi kepuasan Customer dalam kemudahan untuk membeli voucher games online.</p>
+    </div>
   </div>
 </div>
 <!--END About Us-->
@@ -117,7 +127,32 @@
 <section>
 <div id="whyus" name="whyus">
   <div class="container">
-    WHY US?
+    <div class="content-text">
+        <h1>WHY US?</h1>
+        <p>Untuk setiap top up Toppon Koin dalam pembelian voucher games online, kami akan memberikan poin kepada Customer yang
+            dapat ditukarkan berbagai macam reward secara langsung yang akan dikirimkan oleh tim Toppon. Anda dapat dengan mudah
+            membeli voucher games online dengan menggunakan mobile dan web serta mendapatkan reward, reward yang kami tawarkan dan
+            berikan memiliki banyak macam yang dapat mendukung Anda dalam memenuhi keinginan terhadap suatu barang. Beli voucher games
+            online mudah dan untung hanya di Toppon.id</p> 
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <img src="<?php echo base_url();?>/img/whyus/why_us_1.png" class ="img-responsive"/>
+        </div>
+        
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
+            <img src="<?php echo base_url();?>/img/whyus/why_us_2.png" class ="img-responsive"/>
+        </div>
+        
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 col-clear">
+            <img src="<?php echo base_url();?>/img/whyus/why_us_3.png" class ="img-responsive"/>
+        </div>
+        
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <img src="<?php echo base_url();?>/img/whyus/why_us_4.png" class ="img-responsive"/>
+        </div>
+    </div>
   </div>
 </div>
 </section>
@@ -167,7 +202,7 @@
     </script>
 
     <script>
-    //smooth scroll
+    //scroll
     $(function() {
        $('.menu-navbar ul li a').click(function () {
             var url = $(this).attr('href');
