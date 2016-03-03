@@ -44,6 +44,7 @@ class Publisher_model extends CI_Model{
 
     function getCountPublisherList(){
         $this->db->from('tbl_toppon_m_publishers a');
+        $this->db->where('a.isActive', 1);
         return $this->db->count_all_results();
     }
 

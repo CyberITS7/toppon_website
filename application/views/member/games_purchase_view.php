@@ -224,7 +224,7 @@
                                 },
                                 error: function(xhr, status, error) {
                                     //var err = eval("(" + xhr.responseText + ")");
-                                    alertify.error(xhr.responseText);
+                                    alertify.error('Cannot response server !');
                                 }
                             });
                         }

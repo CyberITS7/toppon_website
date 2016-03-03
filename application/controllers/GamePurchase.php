@@ -121,142 +121,105 @@ class GamePurchase extends CI_Controller{
     function sendIndomog(){
         echo "Sending XMLRPC Request with result :<br />";
 
+        //SET DATA
         $vsRMID = '0910403545';
-        $vsQID= 'T108000001';
+        $vsQID= 'TOP1';
         $vsRC='5003';
-        $vsIPD='G001T001';
-        //$vsIPD= 'G001T001';
-        $vsEmailHP= '081388505363';
-        $vsProdID = 'lyto v10';
+        $vsIPD= '192.168.63.1';
+        $vsEmailHP= 'vzheng92@gmail.com';
+        $vsProdID = 'lyto v20';
         $vsQty='1';
         $vsSecret='123456';
-        $vsnow='20141201T17:10:05';
 
-        $dt = new DateTime();
-        $dt->setTimeZone(new DateTimeZone('UTC'));
-        $now = $dt->format('YYYYMMDDTHH:MM:SS');
-        //$datetime = date('', time());
+        $date = new DateTime();
+        $now = date_format($date,"Ymd\TH:i:s");
         $gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
 
-        $vsSignature=$vsRMID.$vsQID.$vsRC.$vsIPD.$vsEmailHP.$vsQty.$vsProdID.$vsnow.$vsSecret;
-        $vsSignature= '6b3d5f6912b1c63494f09302f826528377899de8';
+        // mid.qid.reqc.ipd.emailhp.prodid.qty.prodaccid.prodbillid.remark.now
+        $data= $vsRMID.$vsQID.$vsRC.$vsIPD.$vsEmailHP.$vsProdID.$vsQty.$now;
+        $vsSignature = sha1($data.$vsSecret);
+
+        //$vsSignature= '6b3d5f6912b1c63494f09302f826528377899de8';
     //Create xml request
         $req = '
-<methodCall>
-  <methodName>Shop</methodName>
-  <params>
-    <param>
-      <value>
-        <struct>
-          <member>
-            <name>RMID</name>
-            <value>
-              <string>'.$vsRMID.'</string>
-            </value>
-          </member>
-          <member>
-            <name>QID</name>
-            <value>
-              <string>'.$vsQID.'</string>
-            </value>
-          </member>
-          <member>
-            <name>RC</name>
-            <value>
-              <string>'.$vsRC.'</string>
-            </value>
-          </member>
-          <member>
-            <name>IPD</name>
-            <value>
-              <string>'.$vsIPD.'</string>
-            </value>
-          </member>
-          <member>
-            <name>EmailHP</name>
-            <value>
-              <string>'.$vsEmailHP.'</string>
-            </value>
-          </member>
-          <member>
-            <name>ProdID</name>
-            <value>
-              <string>'.$vsProdID.'</string>
-            </value>
-          </member>
-		  <member>
-            <name>Qty</name>
-            <value>
-              <string>1</string>
-            </value>
-          </member>
-		  <member>
-			<name>ProdAccID</name>
-			<value><string></string></value>
-			</member>
-		<member>
-		<name>ProdBillID</name>
-		<value><string></string></value>
-		</member>
-          <member>
-            <name>Remark</name>
-            <value>
-              <string></string>
-            </value>
-          </member>
-          <member>
-            <name>Now</name>
-            <value>
-              <datetime.iso8601>'.$vsnow.'</datetime.iso8601>
-            </value>
-          </member>
-          <member>
-            <name>Signature</name>
-            <value>
-              <string>'.$vsSignature.'</string>
-            </value>
-          </member>
-        </struct>
-      </value>
-    </param>
-  </params>
-</methodCall>';
-
-        $inquiry = '
-            <methodCall>
-            <methodName>Inquiry</methodName>
-            <params>
-                <param>
+        <methodCall>
+          <methodName>Shop</methodName>
+          <params>
+            <param>
+              <value>
+                <struct>
+                  <member>
+                    <name>RMID</name>
                     <value>
-                        <struct>
-                            <member>
-                              <name>RMID</name>
-                              <value><string>0910403545</string></value>
-                            </member>
-                            <member>
-                              <name>QID</name>
-                              <value><string>T108000001</string></value>
-                            </member>
-                            <member>
-                              <name>RC</name>
-                              <value><string>5006</string></value>
-                            </member>
-                            <member>
-                              <name>IPD</name>
-                              <value><string>G001T001</string></value>
-                            </member>
-                            <member>
-                              <name>Now</name>
-                              <value><datetime.iso8601>20141201T17:10:05</datetime.iso8601></value>
-                            </member>
-                            <member>
-                              <name>Signature</name>
-                              <value><string>6b3d5f6912b1c63494f09302f826528377899de8</string></value>
-                            </member>
-                        </struct>
+                      <string>'.$vsRMID.'</string>
                     </value>
-                </param>
-            </params>
+                  </member>
+                  <member>
+                    <name>QID</name>
+                    <value>
+                      <string>'.$vsQID.'</string>
+                    </value>
+                  </member>
+                  <member>
+                    <name>RC</name>
+                    <value>
+                      <string>'.$vsRC.'</string>
+                    </value>
+                  </member>
+                  <member>
+                    <name>IPD</name>
+                    <value>
+                      <string>'.$vsIPD.'</string>
+                    </value>
+                  </member>
+                  <member>
+                    <name>EmailHP</name>
+                    <value>
+                      <string>'.$vsEmailHP.'</string>
+                    </value>
+                  </member>
+                  <member>
+                    <name>ProdID</name>
+                    <value>
+                      <string>'.$vsProdID.'</string>
+                    </value>
+                  </member>
+                  <member>
+                    <name>Qty</name>
+                    <value>
+                      <string>1</string>
+                    </value>
+                  </member>
+                  <member>
+                    <name>ProdAccID</name>
+                    <value><string></string></value>
+                    </member>
+                <member>
+                <name>ProdBillID</name>
+                <value><string></string></value>
+                </member>
+                  <member>
+                    <name>Remark</name>
+                    <value>
+                      <string></string>
+                    </value>
+                  </member>
+                  <member>
+                    <name>Now</name>
+                    <value>
+                      <datetime.iso8601>'.$now.'</datetime.iso8601>
+                    </value>
+                  </member>
+                  <member>
+                    <name>Signature</name>
+                    <value>
+                      <string>'.$vsSignature.'</string>
+                    </value>
+                  </member>
+                </struct>
+              </value>
+            </param>
+          </params>
         </methodCall>';
 
         //Send XML request with curl
@@ -280,6 +243,59 @@ class GamePurchase extends CI_Controller{
             }
 
             echo htmlentities($result);
+
+        $xml = simplexml_load_string($result);
+        $json = json_encode($xml);
+        $array = json_decode($json,TRUE);
+        print_r($array);
+        echo $array['params']['param']['value']['struct']['member'][1]['name'];
+        foreach($array['params']['param']['value']['struct']['member'] as $row){
+//            if ($row['value'] == 'RspCode') {
+//                echo $row['value'];
+//            }
+            echo "</br>";
+            echo $row[]->value;
+        }
+    }
+
+    // Function to get the client ip address
+    function get_real_ip() {
+        $clientip      = isset( $_SERVER['HTTP_CLIENT_IP'] )       && $_SERVER['HTTP_CLIENT_IP']       ?
+            $_SERVER['HTTP_CLIENT_IP']         : false;
+        $xforwarderfor = isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) && $_SERVER['HTTP_X_FORWARDED_FOR'] ?
+            $_SERVER['HTTP_X_FORWARDED_FOR']   : false;
+        $xforwarded    = isset( $_SERVER['HTTP_X_FORWARDED'] )     && $_SERVER['HTTP_X_FORWARDED']     ?
+            $_SERVER['HTTP_X_FORWARDED']       : false;
+        $forwardedfor  = isset( $_SERVER['HTTP_FORWARDED_FOR'] )   && $_SERVER['HTTP_FORWARDED_FOR']   ?
+            $_SERVER['HTTP_FORWARDED_FOR']     : false;
+        $forwarded     = isset( $_SERVER['HTTP_FORWARDED'] )       && $_SERVER['HTTP_FORWARDED']       ?
+            $_SERVER['HTTP_FORWARDED']         : false;
+        $remoteadd     = isset( $_SERVER['REMOTE_ADDR'] )          && $_SERVER['REMOTE_ADDR']          ?
+            $_SERVER['REMOTE_ADDR']            : false;
+
+        // Function to get the client ip address
+        if ( $clientip          !== false ) {
+            $ipaddress = $clientip;
+        }
+        elseif( $xforwarderfor  !== false ) {
+            $ipaddress = $xforwarderfor;
+        }
+        elseif( $xforwarded     !== false ) {
+            $ipaddress = $xforwarded;
+        }
+        elseif( $forwardedfor   !== false ) {
+            $ipaddress = $forwardedfor;
+        }
+        elseif( $forwarded      !== false ) {
+            $ipaddress = $forwarded;
+        }
+        elseif( $remoteadd      !== false ) {
+            $ipaddress = $remoteadd;
+        }
+        else{
+            $ipaddress = false; # unknown
+        }
+        return $ipaddress;
     }
 }
 ?>
