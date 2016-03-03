@@ -15,21 +15,53 @@ class Publisher_model extends CI_Model{
         return $query->result_array();
     }
 
+    function checkPublisher($name){
+        $this->db->from('tbl_toppon_m_publishers a');
+        $this->db->where('a.isActive', 1);
+        $this->db->where('a.publisherName', $name);
+        $result = $this->db->count_all_results();
+
+        if($result == 0){
+            return true; // Publisher available
+        }else{
+            return false; // Publisher exist
+        }
+    }
+
+    function checkPublisherEdit($name, $id){
+        $this->db->from('tbl_toppon_m_publishers a');
+        $this->db->where('a.isActive', 1);
+        $this->db->where('a.publisherName', $name);
+        $this->db->where('a.publisherID !=', $id);
+        $result = $this->db->count_all_results();
+
+        if($result == 0){
+            return true; // Publisher available
+        }else{
+            return false; // Publisher exist
+        }
+    }
+
     function getCountPublisherList(){
         $this->db->from('tbl_toppon_m_publishers a');
         return $this->db->count_all_results();
     }
 
-    function getGameByID($id){
-        $this->db->select('sGamesID, a.publisherID, a.nominalID, nominalName, publisherName, paymentValue');
-        $this->db->from('tbl_toppon_s_games a');
-        $this->db->join('tbl_toppon_m_publishers b', 'a.publisherID = b.publisherID');
-        $this->db->join('tbl_toppon_m_nominals c', 'a.nominalID = c.nominalID');
-        $this->db->where('a.sGamesID', $id);
-        $this->db->where('a.isActive', 1);
-        $query = $this->db->get();
-        return $query->row();
+    function createPublisher($data){
+        $this->db->insert('tbl_toppon_m_publishers',$data);
+        return $this->db->insert_id();
     }
+
+    function updatePublisher($data, $id){
+        $this->db->where('publisherID',$id);
+        $this->db->update('tbl_toppon_m_publishers',$data);
+
+        if ($this->db->affected_rows() == 1)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
 
 
 }

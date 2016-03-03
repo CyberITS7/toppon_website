@@ -118,5 +118,168 @@ class GamePurchase extends CI_Controller{
         }
     }
 
+    function sendIndomog(){
+        echo "Sending XMLRPC Request with result :<br />";
+
+        $vsRMID = '0910403545';
+        $vsQID= 'T108000001';
+        $vsRC='5003';
+        $vsIPD='G001T001';
+        //$vsIPD= 'G001T001';
+        $vsEmailHP= '081388505363';
+        $vsProdID = 'lyto v10';
+        $vsQty='1';
+        $vsSecret='123456';
+        $vsnow='20141201T17:10:05';
+
+        $dt = new DateTime();
+        $dt->setTimeZone(new DateTimeZone('UTC'));
+        $now = $dt->format('YYYYMMDDTHH:MM:SS');
+        //$datetime = date('', time());
+        $gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
+
+        $vsSignature=$vsRMID.$vsQID.$vsRC.$vsIPD.$vsEmailHP.$vsQty.$vsProdID.$vsnow.$vsSecret;
+        $vsSignature= '6b3d5f6912b1c63494f09302f826528377899de8';
+    //Create xml request
+        $req = '
+<methodCall>
+  <methodName>Shop</methodName>
+  <params>
+    <param>
+      <value>
+        <struct>
+          <member>
+            <name>RMID</name>
+            <value>
+              <string>'.$vsRMID.'</string>
+            </value>
+          </member>
+          <member>
+            <name>QID</name>
+            <value>
+              <string>'.$vsQID.'</string>
+            </value>
+          </member>
+          <member>
+            <name>RC</name>
+            <value>
+              <string>'.$vsRC.'</string>
+            </value>
+          </member>
+          <member>
+            <name>IPD</name>
+            <value>
+              <string>'.$vsIPD.'</string>
+            </value>
+          </member>
+          <member>
+            <name>EmailHP</name>
+            <value>
+              <string>'.$vsEmailHP.'</string>
+            </value>
+          </member>
+          <member>
+            <name>ProdID</name>
+            <value>
+              <string>'.$vsProdID.'</string>
+            </value>
+          </member>
+		  <member>
+            <name>Qty</name>
+            <value>
+              <string>1</string>
+            </value>
+          </member>
+		  <member>
+			<name>ProdAccID</name>
+			<value><string></string></value>
+			</member>
+		<member>
+		<name>ProdBillID</name>
+		<value><string></string></value>
+		</member>
+          <member>
+            <name>Remark</name>
+            <value>
+              <string></string>
+            </value>
+          </member>
+          <member>
+            <name>Now</name>
+            <value>
+              <datetime.iso8601>'.$vsnow.'</datetime.iso8601>
+            </value>
+          </member>
+          <member>
+            <name>Signature</name>
+            <value>
+              <string>'.$vsSignature.'</string>
+            </value>
+          </member>
+        </struct>
+      </value>
+    </param>
+  </params>
+</methodCall>';
+
+        $inquiry = '
+            <methodCall>
+            <methodName>Inquiry</methodName>
+            <params>
+                <param>
+                    <value>
+                        <struct>
+                            <member>
+                              <name>RMID</name>
+                              <value><string>0910403545</string></value>
+                            </member>
+                            <member>
+                              <name>QID</name>
+                              <value><string>T108000001</string></value>
+                            </member>
+                            <member>
+                              <name>RC</name>
+                              <value><string>5006</string></value>
+                            </member>
+                            <member>
+                              <name>IPD</name>
+                              <value><string>G001T001</string></value>
+                            </member>
+                            <member>
+                              <name>Now</name>
+                              <value><datetime.iso8601>20141201T17:10:05</datetime.iso8601></value>
+                            </member>
+                            <member>
+                              <name>Signature</name>
+                              <value><string>6b3d5f6912b1c63494f09302f826528377899de8</string></value>
+                            </member>
+                        </struct>
+                    </value>
+                </param>
+            </params>
+        </methodCall>';
+
+        //Send XML request with curl
+            $ch = curl_init();
+
+            curl_setopt($ch,CURLOPT_URL,$gateway);
+            curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch,CURLOPT_POST,1);
+            curl_setopt($ch,CURLOPT_POSTFIELDS,$req);
+
+            curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,FALSE);
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+
+            $result = curl_exec($ch); //get the response
+
+            if(curl_errno($ch)) {
+                print "Error: " . curl_error($ch);
+            } else {
+                curl_close($ch);
+            }
+
+            echo htmlentities($result);
+    }
 }
 ?>
