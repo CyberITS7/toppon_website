@@ -1,6 +1,6 @@
 <div class="page-title">
     <div class="title_left">
-        <h3>Deposit <a href="<?php echo site_url('Deposit/depositInsertForm')?>"><button type="button" class="btn btn-primary"><i class="fa fa-plus-square"></i>&nbsp Baru</button></a></h3>
+        <h3>Top Up <a href="<?php echo site_url('Deposit/depositInsertForm')?>"><button type="button" class="btn btn-primary"><i class="fa fa-plus-square"></i>&nbsp Baru</button></a></h3>
     </div>
 
     <div class="title_right">
@@ -38,6 +38,7 @@
                                                 <th>
                                                     <input type="checkbox" class="tableflat">
                                                 </th>
+                                                <th>Tanggal Transaksi </th>
                                                 <th>No. Rekening </th>
                                                 <th>Nama Rekening </th>
                                                 <th>Nama Bank </th>
@@ -71,17 +72,18 @@
                                                         <td class="a-center ">
                                                             <input type="checkbox" class="tableflat">
                                                         </td>
-                                                        <td class=" "><?php echo $row['noRekening']; ?></td>
-                                                        <td class=" "><?php echo $row['nameRekening']; ?></td>
-                                                        <td class=" "><?php echo $row['bankName']; ?></td>
-                                                        <td class=" "><?php echo $row['coin']; ?></td>
-                                                        <td class=" "><?php echo $row['status']; ?></td>
+                                                        <td class="td-tanggal-transaksi"><?php echo $row['created']; ?></td>
+                                                        <td class="td-nomor-rekening"><?php echo $row['noRekening']; ?></td>
+                                                        <td class="td-nama-rekening"><?php echo $row['nameRekening']; ?></td>
+                                                        <td class="td-nama-bank"><?php echo $row['bankName']; ?></td>
+                                                        <td class="td-coin"><?php echo $row['coin']; ?></td>
+                                                        <td class="td-status"><?php echo $row['status']; ?></td>
                                                         <td class="a-right a-right "><?php echo $row['coinConversion']; ?></td>
                                                         <td class=" last">
-                                                            <a href="<?php echo site_url('Deposit/depositDetail');?>"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-search"></i></button></a>
-                                                            <a href="#"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
-                                                            <a href="#"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-check"></i></button></a>
-                                                        </td>   
+                                                            <a href="<?php echo site_url('Deposit/depositDetail').'/'.$row['tDepositID'];?>"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-search"></i></button></a>
+                                                            <a href="#"><button type="button" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash"></i></button></a>
+                                                        </td> 
+                                                        <input type="hidden" value="<?php echo $row['tDepositID'];?>" class="item-id"/>  
                                                     </tr> 
                                                     <?php
                                                 }
@@ -92,3 +94,28 @@
                                 </div>
                             </div>
                         </div>
+
+<script src="<?php echo base_url(); ?>js/validate_master.js"></script>
+<script>
+    $(document).ready( function($) {
+
+
+        $('.btn-delete').click(function(){
+            var row = $(this).closest("tr");
+            var col_title =  row.find(".td-tanggal-transaksi").text();
+            var col_id =  row.find("input.item-id").val();
+
+            var formData = new FormData();
+            formData.append("id", col_id);
+
+            $(this).deleteData({
+                alertMsg     : "Do you want to delete this transaction on <i><b>"+col_title+"</b></i>  ?",
+                alertTitle   : "Delete Confirmation",
+                url          : "<?php echo site_url('Deposit/deleteDeposit')?>",
+                data         : formData,
+                locationHref : "<?php echo site_url('Deposit/depositList')?>"
+            });
+        });
+    });
+
+</script>

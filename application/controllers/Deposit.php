@@ -14,6 +14,7 @@ class Deposit extends CI_Controller{
         $this->load->model('Bank_model');
         $this->load->model('Coin_model');
         $this->load->model('TDeposit_model');
+        $this->load->model('SAccount_model');
     }
 
     function index(){
@@ -30,7 +31,7 @@ class Deposit extends CI_Controller{
             redirect($this->loginAndRegister());
         }
         else{
-            $data['deposit_list']=$this->Deposit_model->getListDeposit();
+            $data['deposit_list']=$this->TDeposit_model->getListTDeposit();
             $data['data_content']="member/deposit_list_view";
             $this->load->view('includes/member_area_template_view',$data);
         }
@@ -49,12 +50,12 @@ class Deposit extends CI_Controller{
         }
     }
 
-    function depositDetail() {
+    function depositDetail($id) {
         if(!$this->session->userdata('logged_in')){
             redirect($this->loginAndRegister());
         }
         else{
-            $data['deposit_list']=$this->Deposit_model->getListDeposit();
+            $data['deposit_detail']=$this->TDeposit_model->getTDepositDetail($id);
             $data['data_content']="member/deposit_detail_view";
             $this->load->view('includes/member_area_template_view',$data);
         }
@@ -110,13 +111,73 @@ class Deposit extends CI_Controller{
                         }
                         else{
                             $this->db->trans_commit();
-                            redirect(site_url('Deposit/depositDetail'));
+                            redirect(site_url('Deposit/depositDetail/'.$query));
                             //$msg = "Top up successfully!";
                             //$status = 'success';
 
                         }
             }
             //echo json_encode(array('status' => $status, 'msg' => $msg)); -- Untuk Ajax
+        }
+
+        function deleteDeposit(){
+            $status = "";
+            $msg="";
+
+            $datetime = date('Y-m-d H:i:s', time());
+            $tDepositID = $this->input->post('id');
+            $userID = $this->session->userdata('user_id');
+
+            $data_post=array(
+                'isVisible'=>0,
+                "lastUpdated"=>$datetime,
+                "lastUpdatedBy"=>$userID
+            );
+
+            $this->db->trans_begin();
+            $update = $this->TDeposit_model->updateDeposit($data_post,$tDepositID);
+
+            if($update){
+                $this->db->trans_commit();
+                $status = 'success';
+                $msg = "Gift Category has been updated successfully!";
+            }else{
+                $this->db->trans_rollback();
+                $status = 'error';
+                $msg = "Something went wrong when updating Gift Category !";
+            }
+
+            echo json_encode(array('status' => $status, 'msg' => $msg));
+        }
+
+        function updateStatusPendingDeposit(){
+            $status = "";
+            $msg="";
+
+            $datetime = date('Y-m-d H:i:s', time());
+            $tDepositID = $this->input->post('id');
+            $userID = $this->session->userdata('user_id');
+
+            $data_post=array(
+                'status'=>'pending',
+                "lastUpdated"=>$datetime,
+                "lastUpdatedBy"=>$userID
+            );
+
+            $this->db->trans_begin();
+            $update = $this->TDeposit_model->updateDeposit($data_post,$tDepositID);
+
+            if($update){
+                $this->db->trans_commit();
+                $status = 'success';
+                $msg = "Status Updated successfully!";
+            }else{
+                $this->db->trans_rollback();
+                $status = 'error';
+                $msg = "Something went wrong when updating Status !";
+            }
+
+            echo json_encode(array('status' => $status, 'msg' => $msg));
         }
     }
 
