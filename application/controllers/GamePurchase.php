@@ -42,6 +42,7 @@ class GamePurchase extends CI_Controller{
 
         $status = '';
         $msg = "";
+        $prefixID = "TOP";
         $datetime = date('Y-m-d H:i:s', time());
         $id=$this->input->post('id');
         $data_game = $this->GamePurchase_model->getGameByID($id);
@@ -58,6 +59,7 @@ class GamePurchase extends CI_Controller{
                 $this->db->trans_begin();
                 $data_transaction=array(
                     'publisherName'=>$data_game->publisherName,
+                    'transactionCode'=>$datetime,
                     'nominalName'=>$data_game->nominalName,
                     'paymentValue'=>$data_game->paymentValue,
                     'coin'=>$account->coin,
@@ -67,11 +69,16 @@ class GamePurchase extends CI_Controller{
                     "lastUpdated"=>$datetime,
                     "lastUpdatedBy"=>$userID
                 );
+                //TEMP Save Trasaction Game Purchase
                 $transaction_id = $this->TGamePurchase_model->createTransactionGamePurchase($data_transaction);
 
                 //Check when save transaction
                 if($transaction_id != null || $transaction_id!=""){
-                    $coin_subtraction = $this->SAccount_model->subtractionCoin($userID, $data_game->paymentValue );
+
+                    $generateID = $prefixID.$transaction_id;
+                    $email = $account->email;
+                    $this->sendIndomog($generateID,$email);
+                    $coin_subtraction = $this->SAccount_model->subtractionCoin($userID, $data_game->paymentValue);
                     //Check when save coin subtraction
                     if($coin_subtraction != 1){
                         $status = 'error';
@@ -100,34 +107,14 @@ class GamePurchase extends CI_Controller{
 
     }
 
-    function loginAndRegister($errorParam = null, $whereAt = null){
-        if(!$this->session->userdata('logged_in')){
-            if($errorParam == null){
-                $data['error_param']="";
-                $data['where_at']="";
-                $this->load->view('login_view', $data);
-            }
-            else{
-                $data['error_param']=$errorParam;
-                $data['where_at']=$whereAt;
-                $this->load->view('login_view', $data);
-            }
-        }
-        else{
-            redirect($this->dashboard());
-        }
-    }
-
-    function sendIndomog(){
-        echo "Sending XMLRPC Request with result :<br />";
-
+    function sendIndomog($qid, $email, $proid){
         //SET DATA
         $vsRMID = '0910403545';
-        $vsQID= 'TOP1';
+        $vsQID= $qid;
         $vsRC='5003';
         $vsIPD= '192.168.63.1';
-        $vsEmailHP= 'vzheng92@gmail.com';
-        $vsProdID = 'lyto v20';
+        $vsEmailHP= $email;
+        $vsProdID = $proid;
         $vsQty='1';
         $vsSecret='123456';
 
@@ -247,15 +234,23 @@ class GamePurchase extends CI_Controller{
         $xml = simplexml_load_string($result);
         $json = json_encode($xml);
         $array = json_decode($json,TRUE);
-        print_r($array);
-        echo $array['params']['param']['value']['struct']['member'][1]['name'];
-        foreach($array['params']['param']['value']['struct']['member'] as $row){
-//            if ($row['value'] == 'RspCode') {
-//                echo $row['value'];
-//            }
-            echo "</br>";
-            echo $row[]->value;
+
+        //Save Transaction
+        return $this->checkGamePurchase($array);
+    }
+
+    function checkGamePurchase($result){
+        $return = false;
+        //echo $array['params']['param']['value']['struct']['member'][1]['name'];
+        foreach($result['params']['param']['value']['struct']['member'] as $row){
+            if($row['name'] == 'RspCode'){
+                $response = '000';
+                if($row['value']['string'] == $response ){
+                    $return = true;
+                }
+            }
         }
+        return $return;
     }
 
     // Function to get the client ip address
@@ -296,6 +291,24 @@ class GamePurchase extends CI_Controller{
             $ipaddress = false; # unknown
         }
         return $ipaddress;
+    }
+
+    function loginAndRegister($errorParam = null, $whereAt = null){
+        if(!$this->session->userdata('logged_in')){
+            if($errorParam == null){
+                $data['error_param']="";
+                $data['where_at']="";
+                $this->load->view('login_view', $data);
+            }
+            else{
+                $data['error_param']=$errorParam;
+                $data['where_at']=$whereAt;
+                $this->load->view('login_view', $data);
+            }
+        }
+        else{
+            redirect($this->dashboard());
+        }
     }
 }
 ?>
