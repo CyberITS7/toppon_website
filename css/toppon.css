@@ -6,28 +6,37 @@ body {
 }
 .content-text{
     font-family: Verdana;
-    color: #ECF0F1;
     text-align: center;
     letter-spacing: 3px;
     padding-top: 10px;
 
 }
+
 .content-text h1{
-    color: #ECF0F1;
-    font-weight: bold;
+    font-weight: 500;
     text-align: center;
     letter-spacing: 3px;
-    font-size:50px;
+    text-shadow:
+        1px 2px 1px #9ad2fe,
+        -1px -2px 1px #1895f7;
+}
+}
+
+.content-text h2{
+    font-weight: 300;
+    text-shadow:1px 2px;
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 3px;
     padding-bottom: 30px;
 
 }
 
 .content-text p{
-    color: #ECF0F1;
     font-weight: 300;
     text-align: center;
     letter-spacing: 3px; 
-    font-size: 18px;
+    font-size: 25px;
     padding-bottom: 20px;   
 }
 
@@ -62,11 +71,17 @@ body {
 }
 
 #logo{
-    width: 298px;
-    margin: auto;
-    padding-bottom: 30px;
+    padding-left: 15px;
+    padding-top: 10px;
 }
 
+#logo img{
+    width: 300px;
+    height: 120px;
+}
+
+
+/*
 #help-button{ 
     position: absolute;
     top: 0px;
@@ -80,9 +95,12 @@ body {
     width: 30px;
     height: 30px;
 }
+*/
+.menu-right{
+    float: right;
+}
 
-.menu-navbar{
-	background-color: #1D70B7;
+.menu-navbar{  
 	height: 70px;
     text-align: center;
     position: relative;
@@ -90,18 +108,18 @@ body {
 }
 
 .menu-navbar ul li{
-    padding-top: 20px;  
+ 
 	display:inline-block;
     margin: 0 18px;
     -webkit-appearance: none !important;
 }
 .menu-navbar ul li a{
-    color: #fff;
-    padding: 0 0 17px 0;
-    font-size: 16px;
+    color: #1D70B7;
+    font-weight: bold;
+    padding: 0 0 15px 0;
+    font-size: 24px;
     font-family: 'Varela Round', sans-serif;
     text-decoration: none;
-    text-transform: uppercase;
     border-bottom: 5px solid transparent;
     -webkit-appearance: none !important;
 	outline:none;
@@ -110,7 +128,7 @@ body {
 	background:none !important;
 	border-bottom: 5px solid #000;
     -webkit-appearance: none !important;
-    padding-bottom: 12px;
+    padding-bottom: 8px;
 }
 
 /* fixed navbar */
@@ -122,60 +140,39 @@ body {
     z-index: 5;
   }
 
-/*segitiga sudut*/
-.triangle-r{
-    top: 0px;
-    right: 0px;
-    position: absolute;
-    overflow: hidden;
-    }
-
-.triangle-l{
-    top: 0px;
-    left: 0px;
-    position: absolute;
-    overflow: hidden;
-}
-
-.demo-topright{
-    width: 0; 
-    height: 0; 
-    border-top: 60px solid #58ACFA; 
-    border-left: 60px solid transparent;
-}
-
-.demo-topleft{
-    width: 0; 
-    height: 0;     
-    border-top: 60px solid #1D70B7; 
-    border-right: 60px solid transparent;
-
-}
-
-
 
 /*SLIDER*/
 .slider-1{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
     background-color: #7f8c8d;
     background-repeat: no-repeat;
-	padding-top: 110px;
+	padding-top: 40px;
 	text-align: center;
 	min-height: 500px;
 	width: 100%;
-	padding-bottom: 100px;}
+	padding-bottom: 50px;}
 
+
+/*about*/
 #about{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
-    background-color: #1D70B7;
+    background-color: #fff;
     background-repeat: no-repeat;
-	padding-top: 110px;
+	padding-top: 50px;
 	text-align: center;
 	min-height: 700px;
 	width: 100%;
-	padding-bottom: 100px;
+	padding-bottom: 50px;
 
 }
+
+.connect-dot{
+    margin-top: 50px;
+}
+
+
+
+
 
 #whyus{
 	/*background-image: url(../img/bg/home-bg.jpg);*/

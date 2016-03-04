@@ -24,14 +24,25 @@
         <a href="#">
             <img src="<?=base_url()?>img/toppon.png"/>
         </a>
+     <div class="menu-right">
+        <a href="#">
+            <button type="button" class="btn btn-default">Sign Up</button>
+        </a>
+
+        <a href="#">
+            <button type="button" class="btn btn-primary">Login</button>
+        </a>
+    </div>   
     </div>
+
 <!-- Fixed navbar -->
     <div class="menu-navbar">
             <ul class="nav1">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#howtouse">How To Use</a></li>
-                <li><a href="#conv-table">Conversion Table</a></li>
+                <li><a href="#conv-table">Toppon Coin</a></li>
+                <!--
                 <li>
                     <div id="help-button">
                     <a href="#">
@@ -39,13 +50,8 @@
                     </a>
                     </div>
                 </li>
+                -->
             </ul>
-
-        <!-- Segitiga kanan dan Help -->
-    <div class="triangle-r ">
-        <div class="demo-topright"></div>
-    </div>
-    
     </div>
 <!--End Fixed Navbar-->
 
@@ -98,18 +104,26 @@
 
 <!--About Us-->
 <div id="about" name="about">
-  <div class="container">
-    <div class="content-text">
-        <h1>ABOUT US</h1>
-        <p>Toppon adalah platform untuk pembelian voucher games online yang memberikan kemudahan dan kelebihan bagi para Customer
-            kami dengan kelengkapan dan kemudahan dalam memperoleh voucher games online. Kami memberikan berbagai pilihan reward 
-            kepada Customer sebagai penghargaan kami terhadap Customer dengan memberikan point yang dapat ditukarkan di setiap 
-            pengisian top up koin Toppon</p>
-        <p>Kami memberikan perhatian kepada kemudahan dan kenyamanan dalam bertransaksi bagi para Customer kami dengan terus 
-            mengembangkan teknologi serta pelayanan bagi kemudahan dan kenyamanan Customer. Tim kami selalu memberikan pelayanan
-            terbaik dan professional demi kepuasan Customer dalam kemudahan untuk membeli voucher games online.</p>
+    <div class="container">
+        <div class="content-text">
+            <h1>We Provides All Voucher Games</h1>
+            <h2>Simple and Get Reward</h2>
+            <p>Toppon will help gamers simplify to get voucher games anytime and everywhere with no limits</p>
+        </div>
+        <div class="col-lg-4 desktop">
+            <img src="<?php echo base_url();?>/img/dekstop.png" class="img-responsive"/>
+        </div>
+        
+        <div class="col-lg-4 connect-dot">
+            <img src="<?php echo base_url();?>/img/connect_dot.png" class="img-responsive"/>    
+        </div>
+        
+        <div class="col-lg-4 mobile">
+            <img src="<?php echo base_url();?>/img/mobile.png" class="img-responsive"/>
+        </div>
+
+        <button type="button" class="btn btn-primary">Sign Up Now!</button>
     </div>
-  </div>
 </div>
 <!--END About Us-->
 
@@ -424,6 +438,7 @@
         })
     </script>
 
+<!--
     <script>
         function fixDiv() {
             var topmenu = $('.menu-navbar');
@@ -435,7 +450,7 @@
         $(window).scroll(fixDiv);
             fixDiv();
     </script>
-
+-->
     <script>
     //scroll
     $(function() {
