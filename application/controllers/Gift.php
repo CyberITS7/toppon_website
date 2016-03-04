@@ -11,7 +11,7 @@
 
 	    $this->load->model("SGift_model");
 	    $this->load->model("TGift_model");
-	    $this->load->model('SAccount_model');
+	    $this->load->model('SAccount_model');	    
 		}
 
 		function index(){
@@ -23,13 +23,7 @@
 	            $data['data_content']="member/gift_view";
             	$this->load->view('includes/member_area_template_view',$data);
 	        }
-		}
-
-		function test(){
-			$giftID = 1;
-			$verifyGift = $this->SGift_model->getGiftDetail($giftID);
-			$this->output->enable_profiler(TRUE);
-		}
+		}		
 
 		function doClaimGift(){
 			$datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
@@ -50,7 +44,7 @@
 				$data_gift = array(
 					'giftID' => $giftID,
 					'giftName' => $verifyGift->giftName,
-					'giftCategoryName' => $verifyGift->giftCategory,
+					'giftCategory' => $verifyGift->giftCategory,
 					'poin' => $verifyGift->poin,
 					'reward' => $verifyGift->reward,
 					'isActive' => '1',
@@ -104,5 +98,6 @@
 			}			
 			echo json_encode(array('status' => $status, 'msg' => $msg));
 		}
+
 	}
 ?>

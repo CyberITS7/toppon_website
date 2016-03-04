@@ -85,7 +85,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Gift List<small>List of availible gift</small></h2>                
+                <h2>Gift List<small>List of available gift</small></h2>                
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -117,7 +117,8 @@
             var giftID = $(this).parent(".gift-detail").parent(".gift-items").attr("id");
             var giftName = $(this).siblings(".gift-title").html();
             var poin = $(this).parents(".gift-detail").siblings(".ribbon-container").children(".ribbon").children("span").html();
-            if(poin <= $("#toppon-poin-content").html()){
+
+            if(poin <= $("#toppon-poin-content").html()*1){
                 alertify.confirm("Are you sure, you want to claim "+giftName+" ?",
                     function(){
                         var data_post = {
@@ -143,10 +144,10 @@
                             }
                         });
                     }
-                ).setHeader('Gift Claim fail, insufficient poin !');
+                ).setHeader('Confirm Gift Claim');
             }
             else{
-                alertify.error("Sorry, insufficient Toppon Poin");
+                alertify.error("Gift Claim fail, insufficient poin !");
             }
         });        
     });    

@@ -31,6 +31,17 @@
 	        return $query->row();
 	    }
 
+	    function getUserLevelbyUsername($username)
+	    {
+	        $this->db->select('userLevel');
+	        $this->db->from('tbl_toppon_m_users');
+	        $this->db->where('username',$username);	        
+	        $this->db->where('isActive', 1);
+	        $query = $this->db->get();
+	        
+	        return $query->row();
+	    }
+
 	    function checkUsername($username)
 	    {
 	        $this->db->select('*');
