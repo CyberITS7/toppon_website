@@ -26,11 +26,11 @@
         </a>
      <div class="menu-right">
         <a href="#">
-            <button type="button" class="btn btn-default">Sign Up</button>
+            <button type="button" class="btn btn-lg btn-default">Sign Up</button>
         </a>
-
+        
         <a href="#">
-            <button type="button" class="btn btn-primary">Login</button>
+            <button type="button" class="btn btn-lg btn-primary">Login</button>
         </a>
     </div>   
     </div>
@@ -111,7 +111,7 @@
             <p>Toppon will help gamers simplify to get voucher games anytime and everywhere with no limits</p>
         </div>
         <div class="col-lg-4 desktop">
-            <img src="<?php echo base_url();?>/img/dekstop.png" class="img-responsive"/>
+            <img src="<?php echo base_url();?>/img/desktop.png" class="img-responsive"/>
         </div>
         
         <div class="col-lg-4 connect-dot">
@@ -122,7 +122,7 @@
             <img src="<?php echo base_url();?>/img/mobile.png" class="img-responsive"/>
         </div>
 
-        <button type="button" class="btn btn-primary">Sign Up Now!</button>
+        <button type="button" class="btn btn-lg btn-info">Sign Up Now!</button>
     </div>
 </div>
 <!--END About Us-->
@@ -130,34 +130,25 @@
 <!--Why Us?-->
 <section>
 <div id="whyus" name="whyus">
-  <div class="container">
-    <div class="content-text">
-        <h1>WHY US?</h1>
-        <p>Untuk setiap top up Toppon Koin dalam pembelian voucher games online, kami akan memberikan poin kepada Customer yang
-            dapat ditukarkan berbagai macam reward secara langsung yang akan dikirimkan oleh tim Toppon. Anda dapat dengan mudah
-            membeli voucher games online dengan menggunakan mobile dan web serta mendapatkan reward, reward yang kami tawarkan dan
-            berikan memiliki banyak macam yang dapat mendukung Anda dalam memenuhi keinginan terhadap suatu barang. Beli voucher games
-            online mudah dan untung hanya di Toppon.id</p> 
-    </div>
+    <div class="container">
+        <div class="content-text-w">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6">
+                <h1>Now get Voucher games</h1>
+                <h1>Very Easy</h1>
+            </div>
+            <div class="whyus-content">
+                <p>easy and secure for payment voucher games is our priority!</p>
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <img src="<?php echo base_url();?>/img/whyus/why_us_1.png" class ="img-responsive"/>
-        </div>
-        
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
-            <img src="<?php echo base_url();?>/img/whyus/why_us_2.png" class ="img-responsive"/>
-        </div>
-        
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 col-clear">
-            <img src="<?php echo base_url();?>/img/whyus/why_us_3.png" class ="img-responsive"/>
-        </div>
-        
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <img src="<?php echo base_url();?>/img/whyus/why_us_4.png" class ="img-responsive"/>
+        <div class="get-voucher">
+            <a href="#">
+                <h1>Get Your Voucher Games Now!</h1>
+            </a>
         </div>
     </div>
-  </div>
 </div>
 </section>
 <!--END Why Us?-->
@@ -165,266 +156,103 @@
 <!--How to Use-->
 <div id="howtouse" name="howtouse">
     <div class="container">
-        <div class="content-text-b">
-        
-            <div class="col-lg-3 col-md-3 col-right">
-                <img src="<?php echo base_url();?>/img/how_use.png" class ="img-responsive"/>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <h1>HOW TO USE</h1>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <img src="<?php echo base_url();?>/img/how_use.png" class ="img-responsive"/>
-            </div>
+        <div class="content-text">
+            <h1>HOW TO USE</h1>
         </div>
-    </div>    
 
-
-    <!-- Langkah 1-->
-    <div class="row bg-blue-white">
-        <div class="col-lg-3 custom-row-1">
-            <img src="<?php echo base_url();?>/img/howtouse/how_01.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-2">
-            <img src="<?php echo base_url();?>/img/howtouse/how_to_01.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-5 content-text how-text">
-            <p>Anda mendaftarkan user id kepada Toppon dengan mengisi formulir pada website maupun mobile pada tombol sign up</p>
-        </div>
-        <div class="col-lg-1">
-            <div class="triangle-r ">
-                <div class="demo-topright"></div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <img src="<?php echo base_url();?>/img/howtouse/howtouse01.png" class ="img-responsive"/>
+                <p>1. Register Your Account</p>
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <img src="<?php echo base_url();?>/img/howtouse/howtouse02.png" class ="img-responsive"/>
+                <p>2. Fill Your Profile Correctly</p>
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <img src="<?php echo base_url();?>/img/howtouse/howtouse03.png" class ="img-responsive"/>
+                <p>3. Top up Your Toppon Coin to purchase voucher game</p>
             </div>
         </div>
-    </div>
 
-
-<!-- Langkah 2 -->
-    <div class="row bg-blue2-white">
-        <div class="col-lg-1">
-            <div class="triangle-l">
-                <div class="demo-topleft"></div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <img src="<?php echo base_url();?>/img/howtouse/howtouse04.png" class ="img-responsive"/>
+                <p>4. Confirm Your Payment</p>
+            </div>
+            
+            <div class="col-lg-4 col-md-4">
+                <img src="<?php echo base_url();?>/img/howtouse/howtouse05.png" class ="img-responsive"/>
+                <p>5. Choose Your Games and nominal</p>
+            </div>
+            
+            <div class="col-lg-4 col-md-4">
+                <img src="<?php echo base_url();?>/img/howtouse/howtouse06.png" class ="img-responsive"/>
+                <p>6. Transaction sucess, and Enjoy Your Game</p>
             </div>
         </div>
-        <div class="col-lg-5 content-text how-text">
-            <p>Anda mendaftarkan user id kepada Toppon dengan mengisi formulir pada website maupun mobile pada tombol sign up</p>
-        </div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-2">
-            <img src="<?php echo base_url();?>/img/howtouse/how_to_02.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-3 custom-row-2">
-            <img src="<?php echo base_url();?>/img/howtouse/how_02.png" class ="img-responsive"/>
-        </div>
-    </div>
 
-
-<!-- Langkah 3 -->    
-    <div class="row bg-white-blue">
-        <div class="col-lg-3 custom-row-1">
-            <img src="<?php echo base_url();?>/img/howtouse/how_03.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-2">
-            <img src="<?php echo base_url();?>/img/howtouse/how_to_03.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-5 content-text-b how-text">
-            <p>Melakukan Top Up Toppon Coin untuk pembelian voucher games pada kolom Top Up mobile maupun website Toppon</p>
-        </div>
-        <div class="col-lg-1">
-            <div class="triangle-r ">
-                <div class="demo-topright"></div>
-            </div>
-        </div>
-    </div>
-    
-
-<!-- Langkah 4 -->    
-    <div class="row bg-blue2-white">
-        <div class="col-lg-1">
-            <div class="triangle-l">
-                <div class="demo-topleft"></div>
-            </div>
-        </div>
-        <div class="col-lg-5 content-text how-text">
-            <p>Melakukan konfirmasi Top Up kepada pihak Toppon dengan mengisi beberapa data pada kolom konfirmasi pembayaran
-                di website maupun mobile Toppon</p>
-        </div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-2">
-            <img src="<?php echo base_url();?>/img/howtouse/how_to_04.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-3 custom-row-2">
-            <img src="<?php echo base_url();?>/img/howtouse/how_04.png" class ="img-responsive"/>
-        </div>
-    </div>
-    
-
-<!-- Langkah 5 -->    
-    <div class="row bg-blue-white">
-        <div class="col-lg-3 custom-row-1">
-            <img src="<?php echo base_url();?>/img/howtouse/how_05.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-2">
-            <img src="<?php echo base_url();?>/img/howtouse/how_to_05.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-5 content-text how-text">
-            <p>Pilih voucher dan nominal yang Anda inginkan</p>
-        </div>
-        <div class="col-lg-1">
-            <div class="triangle-r ">
-                <div class="demo-topright"></div>
-            </div>
-        </div>
-    </div>
-    
-
-<!-- Langkah 6 -->        
-    <div class="row bg-white-blue">
-        <div class="col-lg-1">
-            <div class="triangle-l">
-                <div class="demo-topleft"></div>
-            </div>
-        </div>
-        <div class="col-lg-5 content-text-b how-text">
-            <p>Transaksi akan selesai dan kode voucher games online akan dikirimkan ke e-mail Anda dan tercatat pada history transaksi Anda</p>
-        </div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-2">
-            <img src="<?php echo base_url();?>/img/howtouse/how_to_06.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-3 custom-row-2">
-            <img src="<?php echo base_url();?>/img/howtouse/how_06.png" class ="img-responsive"/>
-        </div>
     </div>    
 </div>
 <!--END How to Use-->
 
 
-<!-- How To Redeem -->
+<!--Layer 5 -->
 <section>
-<div id ="how-redeem" name="how-redeem">
+<div id="access-games" name="access-game">
     <div class="container">
-        <div class="content-text">
-            <h1>HOW TO REDEEM REWARD</h1>
-        </div>
-    </div>
-    
-
-<!-- Langkah 1-->
-    <div class="row bg-white-blue">
-        <div class="col-lg-3 custom-row-1">
-            <img src="<?php echo base_url();?>/img/howtoredeem/redeem_01.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-2">
-            <img src="<?php echo base_url();?>/img/howtoredeem/howredeem_01.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-5 content-text-b how-text">
-            <p>Pastikan point yang Anda miliki cukup untuk memenuhi persyaratan point barang yang Anda pilih</p>
-        </div>
-        <div class="col-lg-1">
-            <div class="triangle-r ">
-                <div class="demo-topright"></div>
+        <div class="content-text-w">
+            <div class="col-lg-3">
             </div>
-        </div>
-    </div>
+            <div class="col-lg-9">
+                <h1>Access Your</h1>
+                <h2>voucher games everywhere and everytime you need</h2>
 
-<!-- Langkah 2 -->
-    <div class="row bg-blue2-white">
-        <div class="col-lg-1">
-            <div class="triangle-l">
-                <div class="demo-topleft"></div>
             </div>
-        </div>
-        <div class="col-lg-5 content-text how-text">
-            <p>Pilih menu Gift</p>
-        </div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-2">
-            <img src="<?php echo base_url();?>/img/howtoredeem/redeem_02.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-3 custom-row-2">
-            <img src="<?php echo base_url();?>/img/howtoredeem/howredeem_02.png" class ="img-responsive"/>
-        </div>
-    </div>
-
-<!-- Langkah 3 -->    
-    <div class="row bg-blue-white">
-        <div class="col-lg-3 custom-row-1">
-            <img src="<?php echo base_url();?>/img/howtoredeem/redeem_03.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-2">
-            <img src="<?php echo base_url();?>/img/howtoredeem/howredeem_03.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-5 content-text how-text">
-            <p>Pilih Reward yang Anda inginkan sesuai dengan point yang Anda miliki</p>
-        </div>
-        <div class="col-lg-1">
-            <div class="triangle-r ">
-                <div class="demo-topright"></div>
+            <div class="access-2">
+                <p>Games Payment Solution!</p>
             </div>
-        </div>
+        </div>    
     </div>
-
-<!-- Langkah 4 -->        
-    <div class="row bg-white-blue">
-        <div class="col-lg-1">
-            <div class="triangle-l">
-                <div class="demo-topleft"></div>
-            </div>
-        </div>
-        <div class="col-lg-5 content-text-b how-text">
-            <p>Reward yang Anda pilih akan tersimpan dan jika ingin melakukan pengambilan hadiah maka
-                pilihlah Claim pada menu Gift</p>
-        </div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-2">
-            <img src="<?php echo base_url();?>/img/howtoredeem/redeem_04.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-3 custom-row-2">
-            <img src="<?php echo base_url();?>/img/howtoredeem/howredeem_04.png" class ="img-responsive"/>
-        </div>
-    </div> 
-
-<!-- Langkah 5 -->    
-    <div class="row bg-blue-white">
-        <div class="col-lg-3 custom-row-1">
-            <img src="<?php echo base_url();?>/img/howtoredeem/redeem_05.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-2">
-            <img src="<?php echo base_url();?>/img/howtoredeem/howredeem_05.png" class ="img-responsive"/>
-        </div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-5 content-text how-text">
-            <p>Tim Toppon akan menghubungi Anda dan mengirimkan Reward kepada alamat yang didaftarkan kepada Toppon
-                saat melakukan registrasi</p>
-        </div>
-        <div class="col-lg-1">
-            <div class="triangle-r ">
-                <div class="demo-topright"></div>
-            </div>
-        </div>
-    </div>
-
 </div>
 </section>
+<!--END Layer 5-->
 
 
-
-<!--Conversion Table-->
-<section>
-<div id="conv-table" name="conv-table">
-  <div class="container">
-    CONVERSION TABLE
-  </div>
+<div id="contact-us" name="contact-us">
+    <div class="container">
+        <div class="content-text-w">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6">
+                <h1>Now get Voucher games</h1>
+                <h1>Very Easy</h1>
+            </div>
+            <div class="whyus-content">
+                <p>easy and secure for payment voucher games is our priority!</p>
+            </div>
+        </div>    
+    </div>
 </div>
-</section>
-<!--END Conversion Table-->
 
+
+<div id="footer" name="footer">
+    <div class="container">
+        <div class="content-text-w">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6">
+                <h1>Now get Voucher games</h1>
+                <h1>Very Easy</h1>
+            </div>
+            <div class="whyus-content">
+                <p>easy and secure for payment voucher games is our priority!</p>
+            </div>
+        </div>    
+    </div>
+</div>
     <!-- Script to Activate the Carousel -->
     <script>
         // Script for menu
