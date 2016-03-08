@@ -29,6 +29,7 @@
     }
 
 </style>
+<?php $this->load->view('loading_screen_view');?>
 <div class="page-title">
     <div class="title_left">
         <h3>Voucher Games</h3>
@@ -138,6 +139,7 @@
 
 <script>
     $(document).ready(function(){
+        $("#load_screen").hide();
         // Get Game Data
         $('.panel').click(function(){
             var status = $(this).attr("data-status");
@@ -245,6 +247,8 @@
                         function(){
                             // Confirm Action
                             // ajax mulai disini
+                            //Loading screen
+                            $("#load_screen").show();
                             var base_url = "<?php echo base_url();?>";
                             var data_post = {
                                 id : id
@@ -257,9 +261,11 @@
                                 success:function(data){
                                     if(data.status != 'error') {
                                         alertify.success(data.msg);
+                                        $("#load_screen").hide();
                                         location.href = "<?php echo site_url("GamePurchase/index/".$categoryId)?>";
                                     }else{
                                         alertify.error(data.msg);
+                                        $("#load_screen").hide();
                                     }
                                 },
                                 error: function(xhr, status, error) {
