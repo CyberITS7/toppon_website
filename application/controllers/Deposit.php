@@ -30,7 +30,7 @@ class Deposit extends CI_Controller{
             redirect($this->loginAndRegister());
         }
         else{
-            $data['deposit_list']=$this->TDeposit_model->getListTDeposit();
+            $data['deposit_list']=$this->TDeposit_model->getListTDeposit($this->session->userdata('user_id'));
             $data['data_content']="member/deposit_list_view";
             $this->load->view('includes/member_area_template_view',$data);
         }
