@@ -32,13 +32,13 @@
                                                 <div class="col-xs-6">
                                                 <p>Silahkan transfer sejumlah nominal ke salah satu rekening di bawah ini : </p>
                                                 <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                                                    <img src="<?php echo base_url(); ?>img/visa.png" alt="Visa"> 527 113 7835 a.n. PT. Toppon Indonesia
+                                                    <img src="<?php echo base_url(); ?>img/bca-card.png" alt="BCA"> 527 113 7835 a.n. PT. Toppon Indonesia
                                                     </p>
                                                 <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                                                    <img src="<?php echo base_url(); ?>img/mastercard.png" alt="Mastercard"> 029 712 9537 a.n. PT. Toppon Indonesia
+                                                    <img src="<?php echo base_url(); ?>img/mandiri-card.png" alt="MANDIRI"> 029 712 9537 a.n. PT. Toppon Indonesia
                                                     </p>
                                                 <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                                                    <img src="<?php echo base_url(); ?>img/american-express.png" alt="american-express"> 029 712 9537 a.n. PT. Toppon Indonesia
+                                                    <img src="<?php echo base_url(); ?>img/bni-card.png" alt="BNI"> 029 712 9537 a.n. PT. Toppon Indonesia
                                                     </p>
 
                                                 
