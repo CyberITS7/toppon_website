@@ -67,7 +67,7 @@
 
 <!-- Full Page Image Background Carousel Header -->
     
-    <header id="myCarousel" class="carousel slide">
+    <header id="myCarousel" class="carousel slide slide-img">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -332,24 +332,49 @@
     </div>    
 </div>
 
-<!-- Footer
+<!-- Footer -->
 <div id="footer" name="footer">
     <div class="container">
-        <div class="content-text-w">
+        <div class="row">
             <div class="col-lg-6">
+                <div class="social-media">
+                    <h3>Find Us On</h3>
+                    <div class="row social-wrapper">
+                        <div class ="social-item">
+                            <a href ="www.facebook.com">
+                                <img src="<?php echo base_url();?>/img/sosmed/fb.png" class="img-responsive"/>
+                            </a>
+                        </div>
+
+                        <div class ="social-item">
+                            <a href ="www.twitter.com">
+                                <img src="<?php echo base_url();?>/img/sosmed/twitter.png" class="img-responsive"/>
+                            </a>
+                        </div>
+                        <div class ="social-item">
+                            <a href ="www.instagram.com">
+                                <img src="<?php echo base_url();?>/img/sosmed/ig.png" class="img-responsive"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="col-lg-6">
-                <h1>Now get Voucher games</h1>
-                <h1>Very Easy</h1>
-            </div>
-            <div class="whyus-content">
-                <p>easy and secure for payment voucher games is our priority!</p>
-            </div>
-        </div>    
+                <div class="bank-transfer">
+                <h4>Bank Transfer</h4>
+                <img src="<?php echo base_url();?>/img/bca.png" class="img-responsive"/>
+                </div>
+            </div> 
+        </div>
+
+        <div class="footer-text">
+            ©Toppon 2015 | Partnership   Terms & Condition   Mobile Apps   Blog
+        </div>  
     </div>
 </div>
 
-End footer -->
+<!--End footer -->
 
 <!-- BUTTON BACK TO TOP HOME -->
 <div style = "visibility:visible;" id="back_to_top">
