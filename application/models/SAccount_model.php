@@ -4,6 +4,7 @@ class SAccount_model extends CI_Model{
     function getMyAccount($userID){
         $this->db->select('*');
         $this->db->from('tbl_toppon_s_accounts a');
+        $this->db->join('tbl_toppon_m_users b', 'a.userID = b.userID');
         $this->db->where('a.userID', $userID);
         $this->db->where('a.isActive', 1);
         $query = $this->db->get();

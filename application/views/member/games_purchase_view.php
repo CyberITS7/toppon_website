@@ -22,6 +22,11 @@
         padding: 0px;
         color : #5A738E;
     }
+    #nominal-tbody tr:hover{
+        background: #2A3F54;
+        color:#FFF;
+        cursor: pointer;
+    }
 
 </style>
 <div class="page-title">
@@ -49,10 +54,31 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-
             <!-- start accordion -->
             <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-
+                <?php foreach($publisher_list as $row) { ?>
+                    <div class="panel" data-status="false">
+                        <a role="tab" class="panel-heading" data-toggle="collapse" data-publisher="<?php echo $row['publisherID'];?>"
+                           data-parent="#accordion" href="#collapse<?php echo $row['publisherID'];?>"
+                           aria-expanded="true" aria-controls="collapse<?php echo $row['publisherID'];?>">
+                            <div class="panel-title-container">
+                                <h4 class="panel-title">
+                                    <i><img src="<?php echo base_url()?>img/publisher/<?php echo $row['publisherImage']; ?>" width="20" height="20"></i>
+                                    <?php echo $row['publisherName'];?>
+                                </h4>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><i class="fa fa-chevron-down"></i></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                        <div id="collapse<?php echo $row['publisherID'];?>"
+                             class="panel-collapse collapse" role="tabpanel"
+                             aria-labelledby="heading<?php echo $row['publisherID'];?>">
+                            <div class="panel-body" data-publisher="<?php echo $row['publisherName'];?>"></div>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
             <!-- end of accordion -->
         </div>
@@ -60,111 +86,143 @@
 </div>
 
 <div class="col-md-6 col-sm-6 col-xs-12">
-    <p class="lead" id="detail-publisher">VOUCHER</p>
+    <p class="lead">VOUCHER</p>
     <div class="table-responsive">
         <table class="table">
-            <tbody>
-            <tr>
-                <th style="width:50%">Nominal :</th>
-                <td id="detail-nominal">0</td>
-            </tr>
-            <tr>
-                <th>Topon Coin : </th>
-                <td id="detail-coin" data-value="">0 TC</td>
-            </tr>
-            <tr>
-                <th>My Coin:</th>
-                <td id="my-coin" data-value="<?php echo $account->coin; ?>"><?php echo $account->coin; ?> TC</td>
-            </tr>
-            <tr>
-                <th></th>
-                <td>
-                    <button type="button" class="btn btn-info btn-lg" id="buy-game-btn"
-                            data-id="" data-publisher="" data-nominal="" data-coin="" >BUY GAME</button>
-                </td>
-            </tr>
+            <tbody id="nominal-tbody">
+
             </tbody>
         </table>
     </div>
 </div>
 
+<!-- MODAL -->
+<div class="modal fade purchase-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="modal-title">Buy Voucher</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Publisher :</th>
+                            <td id="detail-publisher"></td>
+                        </tr>
+                        <tr>
+                            <th>Game : </th>
+                            <td id="detail-game"></td>
+                        </tr>
+                        <tr>
+                            <th>Voucher : </th>
+                            <td id="detail-nominal"></td>
+                        </tr>
+                        <tr>
+                            <th>Coin : </th>
+                            <td id="detail-coin" data-value=""></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btn-buy" data-id="">Buy Voucher</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function(){
-        // Data Game List
-        var data = <?=json_encode($game_list);?>;
-        var temp = "";
-        var id = "";
-        jQuery.each( data, function( i, val ) {
-            // Publisher
-            if(temp != val.publisherName){
+        // Get Game Data
+        $('.panel').click(function(){
+            var status = $(this).attr("data-status");
+            if(status == "false") {
+                var panel = $(this).children('a').attr("href");
+                var id = $(this).children('a').attr("data-publisher");
+                var panel_body = $(panel).children('.panel-body');
+                $(this).attr("data-status","true");
 
-                var divH = $("<div>", {class:"panel"});
-                var panel_heading = $("<a>", {"role":"tab", class:"panel-heading",
-                    "data-toggle":"collapse", "data-parent":"#accordion", "href":"#collapse"+val.publisherID,
-                    "aria-expanded":"true", "aria-controls":"collapse"+val.publisherID
+                var data_post = {
+                    id : id
+                };
+                // Get Game List
+                var base_url = "<?php echo base_url();?>";
+                $.ajax({
+                    url: base_url+"index.php/Game/getGameList",
+                    data: data_post,
+                    type: "POST",
+                    dataType: 'json',
+                    success:function(data){
+                        $.each( data, function( i, val ) {
+                            var h4 = $("<h4>",
+                                {class: "col-lg-12 game-dt", "data-id":val.gameID,"data-game":val.gameName}).text(val.gameName);
+                            h4.appendTo(panel_body);
+                            //alert('a');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        //var err = eval("(" + xhr.responseText + ")");
+                    }
                 });
-
-                // Title Container (Publisher Name -------- down arrow)
-                var title_container = $("<div>", {class:"panel-title-container"});
-                var panel_title=$("<h4>", {class:"panel-title"}).html('<i class="fa fa-ticket"></i> '+val.publisherName);
-                var down_arrow =$("<ul>", {class:"nav navbar-right panel_toolbox"});
-                var li_arrow = $("<li>").html('<a class="collapse-link"><i class="fa fa-chevron-down"></i></a>');
-                var clear_arrow =  $("<div>", {class:"clearfix"});
-                panel_title.appendTo(title_container);
-                li_arrow.appendTo(down_arrow);
-                down_arrow.appendTo(title_container);
-                clear_arrow.appendTo(title_container);
-
-                // Detail Nominal Container
-                var divD = $("<div>", {class:"panel-collapse collapse", id:"collapse"+val.publisherID,
-                    "role":"tabpanel"
-                });
-
-                title_container.appendTo(panel_heading);
-                panel_heading.appendTo(divH);
-                divD.appendTo(divH);
-                divH.appendTo('#accordion');
-
-                // Publisher to temp
-                temp = val.publisherName;
-                id = val.publisherID;
-
-                // Collapsible Data (Nominal each publisher)
-                var panel_body = $("<div>", {class:"panel-body", "data-coin":val.paymentValue,
-                    "data-publisher-name":val.publisherName, "data-nominal-name":numberWithCommas(val.nominalName),
-                    "data-publisher":val.publisherID, "data-nominal":val.nominalID,
-                    "data-id":val.sGamesID
-                });
-                var h4 = $("<h4>",{class:"col-lg-6"});
-                var value = $("<strong>").text(numberWithCommas(val.nominalName));
-                var h4Coin = $("<h4>",{class:"coin-value col-lg-6"});
-                var valueCoin = $("<strong>").text(numberWithCommas(val.paymentValue)+" TC");
-
-                value.appendTo(h4);
-                valueCoin.appendTo(h4Coin);
-                h4.appendTo(panel_body);
-                h4Coin.appendTo(panel_body);
-                panel_body.appendTo(divD);
-
-            }else{
-                // Collapsible Data (Nominal each publisher)
-                var panel_body = $("<div>", {class:"panel-body", "data-coin":val.paymentValue,
-                    "data-publisher-name":val.publisherName, "data-nominal-name":numberWithCommas(val.nominalName),
-                    "data-publisher":val.publisherID, "data-nominal":val.nominalID,
-                    "data-id":val.sGamesID
-                });
-                var h4 = $("<h4>",{class:"col-lg-6"});
-                var value = $("<strong>").text(numberWithCommas(val.nominalName));
-                var h4Coin = $("<h4>",{class:"coin-value col-lg-6"});
-                var valueCoin = $("<strong>").text(numberWithCommas(val.paymentValue)+" TC");
-
-                value.appendTo(h4);
-                valueCoin.appendTo(h4Coin);
-                h4.appendTo(panel_body);
-                h4Coin.appendTo(panel_body);
-                panel_body.appendTo("#collapse"+val.publisherID);
             }
+        });
 
+        // Get Nominal Data
+        $( ".panel-body" ).on( "click", "h4.game-dt", function() {
+            var id = $( this ).attr("data-id");
+            var data_publisher =  $( this ).closest(".panel-body").attr("data-publisher");
+            var data_game =  $( this ).attr("data-game");
+            $("#nominal-tbody").html("");
+            var data_post = {
+                id : id
+            };
+            // Get Game List
+            var base_url = "<?php echo base_url();?>";
+            $.ajax({
+                url: base_url+"index.php/Game/getNominalGameList",
+                data: data_post,
+                type: "POST",
+                dataType: 'json',
+                success:function(data){
+                    $.each( data, function( i, val ) {
+                        var tr = $("<tr>",{"data-id":val.sGameID,"data-publisher":data_publisher,
+                            "data-game":data_game,"data-nominal":val.nominalName,"data-payment":val.paymentValue});
+                        var td1 = $("<td>").text(numberWithCommas(val.nominalName));
+                        var td2 = $("<td>").text(numberWithCommas(val.paymentValue)+" TC");
+                        td1.appendTo(tr);
+                        td2.appendTo(tr);
+                        tr.appendTo("#nominal-tbody");
+                        //alert('a');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    //var err = eval("(" + xhr.responseText + ")");
+                }
+            });
+        });
+
+        //Show Payment Modal
+        $( "#nominal-tbody" ).on( "click", "tr", function() {
+            var id =  $( this ).attr("data-id");
+            var publisher =  $( this ).attr("data-publisher");
+            var game =  $( this ).attr("data-game");
+            var nominal =  $( this ).attr("data-nominal");
+            var payment =  $( this ).attr("data-payment");
+
+            // Set Detail Purchasing
+            $("#detail-publisher").text(publisher);
+            $("#detail-game").text(game);
+            $("#detail-nominal").text(numberWithCommas(nominal));
+            $("#detail-coin").text(numberWithCommas(payment)+" TC");
+            $("#detail-coin").attr("data-value",payment);
+            $("#btn-buy").attr("data-id",id);
+
+            $('.purchase-modal').modal('show');
         });
 
         // Format Number to Currency
@@ -172,34 +230,16 @@
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
 
-        $('.panel-body').click(function(){
-            var id = $(this).attr("data-id");
-            var publisher = $(this).attr("data-publisher");
-            var publisher_name = $(this).attr("data-publisher-name");
-            var nominal = $(this).attr("data-nominal");
-            var nominal_name = $(this).attr("data-nominal-name");
-            var coin = $(this).attr("data-coin");
-
-            $("#buy-game-btn").attr("data-id",id);
-            $("#buy-game-btn").attr("data-publisher",publisher);
-            $("#buy-game-btn").attr("data-nominal",nominal);
-            $("#buy-game-btn").attr("data-coin",coin);
-
-            $("#detail-publisher").text(publisher_name);
-            $("#detail-nominal").text(nominal_name);
-            $("#detail-coin").text(coin);
-        });
-
-        $('#buy-game-btn').click(function(){
+        $('#btn-buy').click(function(){
             var id = $(this).attr("data-id");
             var coin = $("#detail-coin").attr("data-value");
-            var myCoin = $("#my-coin").attr("data-value");
+            var myCoin = <?php echo $account->coin;?>;
 
             if(id==0 || id==""){
                 alertify.error('No voucher games selected !');
             }else{
                 if(coin > myCoin){
-                    alertify.error('Notenough TC Coin!');
+                    alertify.error('Not Enough TC Coin!');
                 }else{
                     alertify.confirm("Do you want to buy this voucher ?",
                         function(){
@@ -217,7 +257,7 @@
                                 success:function(data){
                                     if(data.status != 'error') {
                                         alertify.success(data.msg);
-                                        location.href = "<?php echo site_url("GamePurchase")?>";
+                                        location.href = "<?php echo site_url("GamePurchase/index/".$categoryId)?>";
                                     }else{
                                         alertify.error(data.msg);
                                     }

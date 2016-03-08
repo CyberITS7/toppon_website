@@ -87,10 +87,14 @@
                         <div class="menu_section">
                             <h3>Navigation</h3>
                             <ul class="nav side-menu">
-                                <li><a href="<?php echo site_url('GamePurchase')?>"><i class="fa fa-gamepad"></i> Game Purchase</a></li>
+                                <li><a><i class="fa fa-gamepad"></i> Game Purchase <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" id="category-game" style="display: none">
+
+                                    </ul>
+                                </li>
                                 <li><a href="<?php echo site_url('Deposit')?>"><i class="fa fa-credit-card"></i> TopUp</a></li>
                                 <li><a href="<?php echo site_url('Transfer')?>"><i class="fa fa-send-o"></i> Transfer</a></li>
-                                <li><a href="<?php echo site_url('Gift')?>"><i class="fa fa-gift"></i>Gift</a></li>
+                                <li><a href="<?php echo site_url('Gift')?>"><i class="fa fa-gift"></i> Gift</a></li>
                             </ul>
                         </div>
                     </div>
@@ -157,6 +161,7 @@
    
     <script type="text/javascript">
         $(window).load(function () {
+            //GET Coin and Poin
             $.ajax({
                 url: "<?php echo site_url('user/getUserCoins'); ?>",                
                 type: "GET",
@@ -169,9 +174,31 @@
                 },
                 error: function(xhr, status, error) {
                     //var err = eval("(" + xhr.responseText + ")");
-                    alertify.error(xhr.responseText);
+                    //alertify.error(xhr.responseText);
                 }
             });
+
+            //Get Category Game
+            $.ajax({
+                url: "<?php echo site_url('GameCategory/getGameCategory'); ?>",
+                type: "GET",
+                dataType: 'json',
+                success:function(data){
+                    $.each( data, function( i, val ) {
+                        var li = $("<li>");
+                        var a = $("<a>", {"href":"<?php echo site_url('GamePurchase/index')?>/"+val.gameCategoryID}).text(val.gameCategoryName);
+                        a.appendTo(li);
+                        li.appendTo("#category-game");
+                        //alert('a');
+                    });
+
+                },
+                error: function(xhr, status, error) {
+                    //var err = eval("(" + xhr.responseText + ")");
+                    //alertify.error(xhr.responseText);
+                }
+            });
+
         });
 
         $(document).ready(function(){

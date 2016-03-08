@@ -9,23 +9,16 @@ class Publisher extends CI_Controller{
         $this->load->library("pagination");
         $this->load->library('form_validation');
         $this->load->library('upload');
+        $this->load->library("Authentication");
 
         $this->load->model('User_model');
         $this->load->model('Publisher_model');
     }
 
-    function index(){
-        if(!$this->session->userdata('logged_in')){
-            $this->loginAndRegister();
-        }
-        else{
-            $this->dashboard();
-        }
-    }
-
-    function dashboard($start=1){
-        if(!$this->session->userdata('logged_in')){
-            redirect($this->loginAndRegister());
+    function index($start=1){
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
         }
         else{
             //get Publisher List data
@@ -36,8 +29,7 @@ class Publisher extends CI_Controller{
             $publisher_page = $this->Publisher_model->getPublisherList($start, $limit);
             $count_publisher = $this->Publisher_model ->getCountPublisherList();
 
-            $config['base_url']= site_url('Publisher/dashboard');
-
+            $config['base_url']= site_url('Publisher/index');
             $config ['total_rows'] = $count_publisher;
             $config ['per_page']=$num_per_page;
             $config['use_page_numbers']=TRUE;
@@ -66,7 +58,7 @@ class Publisher extends CI_Controller{
         $userID = $this->session->userdata('user_id');
         $check_name = $this->Publisher_model->checkPublisher($name);
 
-        if($check_name){
+        if(!$check_name){
             $data_post=array(
                 'publisherName'=>$name,
                 'publisherImage'=>$img['name'],
@@ -86,23 +78,30 @@ class Publisher extends CI_Controller{
             $this->upload->initialize($config);
 
             $this->db->trans_begin();
-            $this->Publisher_model->createPublisher($data_post);
+            $id = $this->Publisher_model->createPublisher($data_post);
 
-            //Upload Image
-            if (!$this->upload->do_upload('img'))
-            {
-                // Upload Failed
+            if($id != null || $id != ""){
+                //Upload Image
+                if (!$this->upload->do_upload('img'))
+                {
+                    // Upload Failed
+                    $this->db->trans_rollback();
+                    $status = 'error';
+                    $msg = $this->upload->display_errors('', '');
+                }
+                else {
+                    // Upload Success
+                    $data = $this->upload->data();
+                    $this->db->trans_commit();
+                    $status = 'success';
+                    $msg = "Publisher has been create successfully!";
+                }
+            }else{
                 $this->db->trans_rollback();
                 $status = 'error';
-                $msg = $this->upload->display_errors('', '');
+                $msg = "Cannot Save to Database";
             }
-            else {
-                // Upload Success
-                $data = $this->upload->data();
-                $this->db->trans_commit();
-                $status = 'success';
-                $msg = "Publisher has been create successfully!";
-            }
+
 
         }else{
             $status = 'error';
@@ -123,7 +122,7 @@ class Publisher extends CI_Controller{
         $publisherID = $this->input->post('id');
         $check_name = $this->Publisher_model->checkPublisherEdit($name,$publisherID);
 
-        if($check_name){
+        if(!$check_name){
             $data_post=array(
                 'publisherName'=>$name,
                 'isActive'=>1,
@@ -143,22 +142,26 @@ class Publisher extends CI_Controller{
                 $this->upload->initialize($config);
 
                 $this->db->trans_begin();
-                $this->Publisher_model->updatePublisher($data_post,$publisherID);
+                $update = $this->Publisher_model->updatePublisher($data_post,$publisherID);
 
-                //Upload Image
-                if (!$this->upload->do_upload('img'))
-                {
-                    // Upload Failed
+                if($update) {
+                    //Upload Image
+                    if (!$this->upload->do_upload('img')) {
+                        // Upload Failed
+                        $this->db->trans_rollback();
+                        $status = 'error';
+                        $msg = $this->upload->display_errors('', '');
+                    } else {
+                        // Upload Success
+                        $data = $this->upload->data();
+                        $this->db->trans_commit();
+                        $status = 'success';
+                        $msg = "Publisher has been updated successfully!";
+                    }
+                }else{
                     $this->db->trans_rollback();
                     $status = 'error';
-                    $msg = $this->upload->display_errors('', '');
-                }
-                else {
-                    // Upload Success
-                    $data = $this->upload->data();
-                    $this->db->trans_commit();
-                    $status = 'success';
-                    $msg = "Publisher has been updated successfully!";
+                    $msg = "Cannot Save to Database";
                 }
             }else{
                 $this->db->trans_begin();
@@ -213,24 +216,5 @@ class Publisher extends CI_Controller{
 
         echo json_encode(array('status' => $status, 'msg' => $msg));
     }
-
-    function loginAndRegister($errorParam = null, $whereAt = null){
-        if(!$this->session->userdata('logged_in')){
-            if($errorParam == null){
-                $data['error_param']="";
-                $data['where_at']="";
-                $this->load->view('login_view', $data);
-            }
-            else{
-                $data['error_param']=$errorParam;
-                $data['where_at']=$whereAt;
-                $this->load->view('login_view', $data);
-            }
-        }
-        else{
-            redirect($this->dashboard());
-        }
-    }
-
 }
 ?>

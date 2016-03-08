@@ -8,31 +8,26 @@ class GamePurchase extends CI_Controller{
         $this->load->helper('html');
         $this->load->library("pagination");
         $this->load->library('form_validation');
+        $this->load->library("Authentication");
 
         $this->load->model('User_model');
+        $this->load->model('SGameCategory_model');
+        $this->load->model('SGame_model');
         $this->load->model('GamePurchase_model');
         $this->load->model('TGamePurchase_model');
         $this->load->model('SAccount_model');
     }
 
-    function index(){
+    function index($id){
         if(!$this->session->userdata('logged_in')){
-            $this->loginAndRegister();
-        }
-        else{
-            $this->dashboard();
-        }
-    }
-
-    function dashboard(){
-        if(!$this->session->userdata('logged_in')){
-            redirect($this->loginAndRegister());
+            redirect(site_url("user/loginAndRegister"));
         }
         else{
             //get Games List data
             $userID = $this->session->userdata('user_id');
+            $data['categoryId']=$id;
             $data['account'] = $this->SAccount_model->getMyAccount($userID);
-            $data['game_list'] = $this->GamePurchase_model->getGameList();
+            $data['publisher_list'] = $this->SGameCategory_model->getPublisherListByCategory($id);
             $data['data_content']="member/games_purchase_view";
             $this->load->view('includes/member_area_template_view',$data);
         }
@@ -42,10 +37,10 @@ class GamePurchase extends CI_Controller{
 
         $status = '';
         $msg = "";
-        $prefixID = "TOP";
+        $prefixID = "TOPPON";
         $datetime = date('Y-m-d H:i:s', time());
         $id=$this->input->post('id');
-        $data_game = $this->GamePurchase_model->getGameByID($id);
+        $data_game = $this->SGame_model->getGameDetail($id);
         $userID = $this->session->userdata('user_id');
         $account = $this->SAccount_model->getMyAccount($userID);
 
@@ -59,8 +54,10 @@ class GamePurchase extends CI_Controller{
                 $this->db->trans_begin();
                 $data_transaction=array(
                     'publisherName'=>$data_game->publisherName,
-                    'transactionCode'=>$datetime,
+                    'prefixCode'=>$prefixID,
+                    'gameName'=>$data_game->gameName,
                     'nominalName'=>$data_game->nominalName,
+                    'productCode'=>$data_game->productCode,
                     'paymentValue'=>$data_game->paymentValue,
                     'coin'=>$account->coin,
                     'isActive'=>1,
@@ -75,9 +72,6 @@ class GamePurchase extends CI_Controller{
                 //Check when save transaction
                 if($transaction_id != null || $transaction_id!=""){
 
-                    $generateID = $prefixID.$transaction_id;
-                    $email = $account->email;
-                    $this->sendIndomog($generateID,$email);
                     $coin_subtraction = $this->SAccount_model->subtractionCoin($userID, $data_game->paymentValue);
                     //Check when save coin subtraction
                     if($coin_subtraction != 1){
@@ -85,9 +79,20 @@ class GamePurchase extends CI_Controller{
                         $msg = "Purchasing fail, please try again!";
                         $this->db->trans_rollback();
                     }else{
-                        $status = 'success';
-                        $msg = "Purchasing success!";
-                        $this->db->trans_commit();
+                        //SENDING TO INDOMOG API
+                        $generateID = $prefixID.$transaction_id;
+                        $email = $account->email;
+                        $prodId = $data_game->productCode;
+                        $return_code = $this->sendIndomog($generateID,$email,$prodId);
+                        if($return_code == '000'){
+                            $status = 'success';
+                            $msg = "Purchasing success! ".$return_code;
+                            $this->db->trans_commit();
+                        }else{
+                            $status = 'error';
+                            $msg = "Purchasing fail, please try again! ".$return_code;
+                            $this->db->trans_rollback();
+                        }
                     }
 
                 }else{
@@ -107,14 +112,14 @@ class GamePurchase extends CI_Controller{
 
     }
 
-    function sendIndomog($qid, $email, $proid){
+    function sendIndomog($qid, $email, $proId){
         //SET DATA
         $vsRMID = '0910403545';
         $vsQID= $qid;
         $vsRC='5003';
-        $vsIPD= '192.168.63.1';
+        $vsIPD= '192.168.63.2';
         $vsEmailHP= $email;
-        $vsProdID = $proid;
+        $vsProdID = $proId;
         $vsQty='1';
         $vsSecret='123456';
 
@@ -229,25 +234,22 @@ class GamePurchase extends CI_Controller{
                 curl_close($ch);
             }
 
-            echo htmlentities($result);
+            //echo htmlentities($result);
 
         $xml = simplexml_load_string($result);
         $json = json_encode($xml);
         $array = json_decode($json,TRUE);
 
-        //Save Transaction
+        //Return Message From IndoMog API
         return $this->checkGamePurchase($array);
     }
 
     function checkGamePurchase($result){
-        $return = false;
+        $return = "empty";
         //echo $array['params']['param']['value']['struct']['member'][1]['name'];
         foreach($result['params']['param']['value']['struct']['member'] as $row){
             if($row['name'] == 'RspCode'){
-                $response = '000';
-                if($row['value']['string'] == $response ){
-                    $return = true;
-                }
+                $return = $row['value']['string'] ;
             }
         }
         return $return;
@@ -291,24 +293,6 @@ class GamePurchase extends CI_Controller{
             $ipaddress = false; # unknown
         }
         return $ipaddress;
-    }
-
-    function loginAndRegister($errorParam = null, $whereAt = null){
-        if(!$this->session->userdata('logged_in')){
-            if($errorParam == null){
-                $data['error_param']="";
-                $data['where_at']="";
-                $this->load->view('login_view', $data);
-            }
-            else{
-                $data['error_param']=$errorParam;
-                $data['where_at']=$whereAt;
-                $this->load->view('login_view', $data);
-            }
-        }
-        else{
-            redirect($this->dashboard());
-        }
     }
 }
 ?>

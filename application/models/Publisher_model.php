@@ -22,9 +22,9 @@ class Publisher_model extends CI_Model{
         $result = $this->db->count_all_results();
 
         if($result == 0){
-            return true; // Publisher available
+            return false; // Publisher doesn't exist
         }else{
-            return false; // Publisher exist
+            return true; // Publisher exist
         }
     }
 
@@ -36,9 +36,9 @@ class Publisher_model extends CI_Model{
         $result = $this->db->count_all_results();
 
         if($result == 0){
-            return true; // Publisher available
+            return false; // Publisher doesn't exist
         }else{
-            return false; // Publisher exist
+            return true; // Publisher exist
         }
     }
 
