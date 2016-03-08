@@ -22,7 +22,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Deposit Form <small>Form input deposit</small></h2>
+                                    <h2>Top Up Form <small>Form Top Up Coin</small></h2>
                                     <ul class="nav navbar-right panel_toolbox">
                              
                                         <li><a class="close-link"><i class="fa fa-close"></i></a>

@@ -13,8 +13,6 @@ class Deposit extends CI_Controller{
         $this->load->model('Deposit_model');
         $this->load->model('Bank_model');
         $this->load->model('Coin_model');
-        $this->load->model('TDeposit_model');
-        $this->load->model('SAccount_model');
     }
 
     function index(){
