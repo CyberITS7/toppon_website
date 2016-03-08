@@ -49,7 +49,16 @@
                 $data['data_content']="member/dashboard_view";
 				$this->load->view('includes/member_area_template_view',$data);
 			}
-			
+		}
+
+		function editProfile(){
+			if(!$this->session->userdata('logged_in')){
+				redirect($this->loginAndRegister());
+			}
+			else{
+                $data['data_content']="admin/edit_profile_view";
+				$this->load->view('includes/member_area_template_view',$data);
+			}
 		}
 
 		function doRegisMember(){
@@ -86,14 +95,35 @@
 				if ($this->db->trans_status() === FALSE) {
 	                // Failed to save Data to DB
 	                $this->db->trans_rollback();
-	                $this->loginAndRegister('Error while saved Tag data!','register');
+	                $this->loginAndRegister('Error while save data!','register');
 	            }
 	            else{
-	            	$this->db->trans_commit();
-	                $status = 'success';
-	                $msg = "user has been created successfully";
 
-	                redirect($this->dashboard());
+	            	$data_account= array(
+	            		'userID' => $query,
+	            		'poin' => 0,
+	            		'coin' => 0,
+	            		'isActive' => '1',
+						'created' => $datetime,
+						'createdBy' => $username,
+						'lastUpdated' => $datetime,
+						'lastUpdatedBy' => $username
+	            	);
+
+	            	$query2 = $this->SAccount_model->addSAccount($data_account);
+
+	            	if ($this->db->trans_status() === FALSE) {
+		                // Failed to save Data to DB
+		                $this->db->trans_rollback();
+		                $this->loginAndRegister('Error while save data!','register');
+		            }
+		            else{
+		            	$this->db->trans_commit();
+		                $status = 'success';
+		                $msg = "user has been created successfully";
+
+		                redirect($this->dashboard());
+		            }
 	            }
         	}
         	else if($userVerify == 1){

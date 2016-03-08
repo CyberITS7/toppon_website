@@ -88,7 +88,9 @@
                 <h2>Gift List<small>List of available gift</small></h2>                
                 <div class="clearfix"></div>
             </div>
+            <?php echo $pages;?>
             <div class="x_content">
+                
                 <?php foreach ($gifts as $row) {
                 ?>
                 <div class="col-md-6 col-sm-6 col-xs-6 gift-items" id="<?php echo $row['giftID'];?>">
@@ -107,7 +109,8 @@
                 </div>                
                 <?php 
                 } ?> 
-                <div class="clear"></div>               
+                <div class="clear"></div>
+                <?php echo $pages;?>
             </div>
         </div>
     </div>
