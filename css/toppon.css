@@ -1,6 +1,6 @@
 html,
 body {
-    font-family: Verdana;
+    overflow-x:hidden;font-family:"Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif
 }
 .content-text{
     font-family: Verdana;
@@ -153,6 +153,7 @@ body {
 	padding-bottom: 50px;}
 
 
+
 /*about*/
 #about{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
@@ -198,19 +199,21 @@ body {
     margin-top: 300px;
     font-weight: 600;
     border:5px solid white;
+    color: #fff;
 }
 
 .get-voucher a{
     text-decoration: none;
 
 }
-.get-voucher a:visited{
+.get-voucher a:visited, a:hover, a:active{
     color:#fff;
     text-decoration: none;
 
 }
 .get-voucher h1{
     font-weight: bold;
+    color: #fff;
 }
 
 
@@ -262,52 +265,103 @@ body {
     -o-background-size: cover;
 }
 
-/* Background white text blue and bg blue text white */
-.bg-white-blue{
-    background-color: #FFFFF8;
-    color: #1D70B7;
-}
-
-.bg-blue-white{
-    background-color: #1D70B7;
-    color: #ECF0F1;
-}
-
-.bg-blue2-white{
-    background-color: #20a7df;
-    color: #ECF0F1;
-}
-
-/* Row How To Use */
-.custom-row-1{
+#how-redeem{
     position: relative;
-    height: 120px;
 }
 
-.custom-row-1 img{
+.redeem-item{
     position: absolute;
-    top: 15px;
-    right: 50px;
+    width: 15%;
+    height: 20%;
+}
+.titik-redeem{
+    width: 60%;
+    margin: auto;
+    margin-top: 50px;
 }
 
-.custom-row-2   {
-    position: relative;
-    height: 120px;
+#redeem-item-1{
+    top: 16%;
+    left: 19%;
+}
+#redeem-item-2{
+    top: 24%;
+    left: 40%;
+}
+#redeem-item-3{
+    top: 42%;
+    right: 22%;
+}
+#redeem-item-4{
+    bottom: 10%;
+    right: 39%;
+}
+#redeem-item-5{
+    bottom: 15%;
+    left: 22%;
 }
 
-.custom-row-2 img{
-    position: absolute;
-    top: 15px;
-    right: 200px;
+#contact-us{
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+.contact-form-container {
+    padding-left: 100px;
+    padding-top: 40px;
 }
 
-.how-text{
-    padding-top: 15px;
+.contact-detailed{
+    padding-left: 100px;
+    padding-top: 90px;
+    margin: auto;
 }
-.how-text p{
-    text-align: justify;
+.telepon{
+    padding-bottom: 20px;
+}
+.telepon img{
+    width: 30%;
+}
+.no-tlp{
+    right: 15%;
 }
 
+.mail{
+    padding-bottom: 20px;
+}
+.mail img{
+    width: 30%;
+}
+.dest-mail{
+    right: 15%;
+}
+
+.alamat{
+    width: 60%;
+}
+#back_to_top {
+    padding: 25px;
+    right: 0;
+    bottom: 0;
+    background: none;
+    position: fixed;
+    z-index: 9;
+    text-decoration: none;
+    color: #FFF;
+    /*background-color: #2b2b2b;*/
+    display: none;
+    font-size: 28px;
+    /*
+    margin: 0;
+    width: 70px;
+    height: 70px;
+    */
+}
+#back_to_top a{
+    color: #FFF;
+}
+#back_to_top a:hover{
+    color: #ffbf00;
+}
 
 @media screen and (max-width:769px) {
     div.col-clear{
