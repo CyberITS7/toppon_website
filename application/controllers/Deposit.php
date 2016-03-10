@@ -30,7 +30,7 @@ class Deposit extends CI_Controller{
             redirect($this->loginAndRegister());
         }
         else{
-            $data['deposit_list']=$this->TDeposit_model->getListTDeposit();
+            $data['deposit_list']=$this->TDeposit_model->getListTDeposit($this->session->userdata('user_id'));
             $data['data_content']="member/deposit_list_view";
             $this->load->view('includes/member_area_template_view',$data);
         }
@@ -88,10 +88,11 @@ class Deposit extends CI_Controller{
                         'bankName' => $data_bank->bankName,
                         'coin' => $data_coin->coin,
                         'coinConversion' => $data_coin->coinConversion,
+                        'isVisible' => 1,
                         'isActive' => 1,
                         'poin' => $data_coin->poin,
                         'kodeUnik' => '111',
-                        'status' => 0,
+                        'status' => 'unpaid',
                         'created' => $datetime,
                         'createdBy' => $this->session->userdata('user_id'),
                         'lastUpdated' => $datetime,

@@ -16,10 +16,11 @@ class TDeposit_model extends CI_Model{
 	            return FALSE;
 	    }
 
-    function getListTDeposit() {
+    function getListTDeposit($userID) {
         $where=array(      
                 'isActive'=>1,
-                'isVisible'=>1
+                'isVisible'=>1,
+                'createdBy'=>$userID
             );
             
             $this->db->select('*');

@@ -27,6 +27,8 @@
             	$giftCategory_page = $this->GiftCategory_model->getGiftCategoryList($start, $limit);
             	$count_giftCategory = $this->GiftCategory_model->getCountGiftCategoryList();
 
+            	$config['base_url']= site_url('GiftCategory/index');
+
             	$config['total_rows'] = $count_giftCategory;
 		        $config['per_page']=$num_per_page;
 		        $config['use_page_numbers']=TRUE;
@@ -132,7 +134,6 @@
 
 	        $data_post=array(
 	            'isActive'=>0,
-	            "created" => $datetime,
 	            "lastUpdated"=>$datetime,
 	            "lastUpdatedBy"=>$userID
 	        );

@@ -14,14 +14,35 @@
 	    $this->load->model('SAccount_model');	    
 		}
 
-		function index(){
+		/*Transaction Purposes*/
+		function index($start=1){
 			if(!$this->session->userdata('logged_in')){
             	redirect(site_url("User/loginAndRegister"));
 	        }
 	        else{
-	        	$data['gifts']=$this->SGift_model->getGiftList();
-	            $data['data_content']="member/gift_view";
-            	$this->load->view('includes/member_area_template_view',$data);
+	        	$num_per_page = 10;
+            	$start = ($start - 1)* $num_per_page;
+            	$limit = $num_per_page;
+
+            	$gift_page = $this->SGift_model->getGiftList($start, $limit);
+            	$count_gift = $this->SGift_model->getCountGiftList();
+
+            	$config['base_url']= site_url('Gift/index');
+
+            	$config['total_rows'] = $count_gift;
+		        $config['per_page']=$num_per_page;
+		        $config['use_page_numbers']=TRUE;
+		        $config['uri_segment']=3;
+		        $this->pagination->initialize($config);
+		        $data['pages'] = $this->pagination->create_links();
+				
+				$data['gifts']= $gift_page;
+				if ($this->input->post('ajax')){
+	                $this->load->view('member/gift_view', $data);
+	            }else{
+	            	$data['data_content']="member/gift_view";
+	                $this->load->view('includes/member_area_template_view',$data);
+	            }	            
 	        }
 		}		
 
@@ -97,6 +118,38 @@
 				
 			}			
 			echo json_encode(array('status' => $status, 'msg' => $msg));
+		}
+		/*Transaction Purposes end here*/
+
+		/*Setting Purposes to Gift Category*/
+		function settingGiftList($start=1){
+			$user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+			if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+				redirect(site_url("User/loginAndRegister"));	
+			}
+			else{
+				$num_per_page = 10;
+            	$start = ($start - 1)* $num_per_page;
+            	$limit = $num_per_page;
+
+            	$giftCategory_page = $this->GiftCategory_model->getGiftCategoryList($start, $limit);
+            	$count_giftCategory = $this->GiftCategory_model->getCountGiftCategoryList();
+
+            	$config['total_rows'] = $count_giftCategory;
+		        $config['per_page']=$num_per_page;
+		        $config['use_page_numbers']=TRUE;
+		        $config['uri_segment']=3;
+		        $this->pagination->initialize($config);
+		        $data['pages'] = $this->pagination->create_links();
+				
+				$data['giftCategory']= $giftCategory_page;
+				if ($this->input->post('ajax')){
+	                $this->load->view('admin/gift_category_list_view', $data);
+	            }else{
+	            	$data['data_content']="admin/gift_category_list_view";
+	                $this->load->view('includes/member_area_template_view',$data);
+	            }
+			}
 		}
 
 	}

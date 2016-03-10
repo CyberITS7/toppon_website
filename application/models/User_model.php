@@ -2,7 +2,7 @@
 	class User_model extends CI_Model{
 		function createUser($data){        
 	        $this->db->insert('tbl_toppon_m_users',$data);
-	        $result=$this->db->affected_rows();
+	        $result=$this->db->insert_id();
 	        return $result;
 	    }
 
