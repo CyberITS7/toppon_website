@@ -77,6 +77,29 @@ class Nominal_model extends CI_Model{
         return $query->row();
     }
 
+    //SETTING
+    function getComboNominalSettingList($start, $limit){
+        //Create where clause
+        $this->db->select('nominalID');
+        $this->db->from('tbl_toppon_s_games');
+        $this->db->where('isActive', 1);
+        $where_clause = $this->db->get_compiled_select();
+
+        //Create main query
+        $this->db->select('nominalID, nominalName');
+        $this->db->from('tbl_toppon_m_nominals a');
+        $this->db->where("`nominalID` NOT IN ($where_clause)", NULL, FALSE);
+        $this->db->where('a.isActive', 1);
+        $this->db->order_by('a.nominalName','asc');
+
+        if($limit != null || $start!= null){
+            $this->db->limit($limit,$start);
+        }
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 
 
 

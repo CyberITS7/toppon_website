@@ -62,5 +62,36 @@ class GameCategory_model extends CI_Model{
         else
             return FALSE;
     }
+
+    //SETTING
+    function getGameCategorySettingList($start, $limit){
+        //Create where clause
+        $this->db->select('gameCategoryID');
+        $this->db->from('tbl_toppon_s_game_categories');
+        $this->db->where('isActive', 1);
+        $where_clause = $this->db->get_compiled_select();
+
+        //Create main query
+        $this->db->select('gameCategoryID, gameCategoryName');
+        $this->db->from('tbl_toppon_m_game_categories a');
+        $this->db->where("`gameCategoryID` NOT IN ($where_clause)", NULL, FALSE);
+        $this->db->where('a.isActive', 1);
+        $this->db->order_by('a.gameCategoryName','asc');
+
+        if($limit != null || $start!= null){
+            $this->db->limit($limit,$start);
+        }
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    function getGameCategoryById($id){
+        $this->db->select('gameCategoryID,gameCategoryName');
+        $this->db->from('tbl_toppon_m_game_categories a');
+        $this->db->where('a.isActive', 1);
+        $this->db->where('a.gameCategoryID', $id);
+        $query = $this->db->get();
+        return $query->row();
+    }
 }
 ?>

@@ -63,6 +63,59 @@ class Publisher_model extends CI_Model{
             return FALSE;
     }
 
+    //SETTING
+    function getPublisherSettingList($start, $limit){
+        //Create where clause
+        $this->db->select('publisherID');
+        $this->db->from('tbl_toppon_s_publishers');
+        $this->db->where('isActive', 1);
+        $where_clause = $this->db->get_compiled_select();
+
+        //Create main query
+        $this->db->select('publisherID, publisherName');
+        $this->db->from('tbl_toppon_m_publishers a');
+        $this->db->where("`publisherID` NOT IN ($where_clause)", NULL, FALSE);
+        $this->db->where('a.isActive', 1);
+        $this->db->order_by('a.publisherName','asc');
+
+        if($limit != null || $start!= null){
+            $this->db->limit($limit,$start);
+        }
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    function getPublisherById($id){
+        $this->db->select('publisherID,publisherName');
+        $this->db->from('tbl_toppon_m_publishers a');
+        $this->db->where('a.isActive', 1);
+        $this->db->where('a.publisherID', $id);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
+    function getComboPublisherSettingList($start, $limit){
+        //Create where clause
+        $this->db->select('publisherID');
+        $this->db->from('tbl_toppon_s_game_categories');
+        $this->db->where('isActive', 1);
+        $where_clause = $this->db->get_compiled_select();
+
+        //Create main query
+        $this->db->select('publisherID, publisherName');
+        $this->db->from('tbl_toppon_m_publishers a');
+        $this->db->where("`publisherID` NOT IN ($where_clause)", NULL, FALSE);
+        $this->db->where('a.isActive', 1);
+        $this->db->order_by('a.publisherName','asc');
+
+        if($limit != null || $start!= null){
+            $this->db->limit($limit,$start);
+        }
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
 
 }

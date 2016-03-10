@@ -20,13 +20,33 @@ class SGameCategory_model extends CI_Model{
     function getSGameCategoryList($start, $limit){
         $this->db->select('*');
         $this->db->from('tbl_toppon_s_game_categories a');
-        $this->db->join('tbl_toppon_m_publishers b', 'a.publisherID = b.publisherID');
+        $this->db->join('tbl_toppon_m_game_categories c', 'c.gameCategoryID = a.gameCategoryID');
         $this->db->where('a.isActive', 1);
-        $this->db->order_by('a.gameName','asc');
+        $this->db->group_by('a.gameCategoryID');
+        $this->db->order_by('c.gameCategoryName','asc');
 
         if($limit != null || $start!= null){
             $this->db->limit($limit,$start);
         }
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    function getCountSGameCategoryList(){
+        $this->db->select('*');
+        $this->db->from('tbl_toppon_s_game_categories a');
+        $this->db->where('a.isActive', 1);
+        $this->db->group_by('a.gameCategoryID');
+        return $this->db->count_all_results();
+    }
+    function getSGameCategoryDetail(){
+        $this->db->select('*');
+        $this->db->from('tbl_toppon_s_game_categories a');
+        $this->db->join('tbl_toppon_m_publishers b', 'a.publisherID = b.publisherID');
+        $this->db->join('tbl_toppon_m_game_categories c', 'c.publisherID = a.publisherID');
+
+        $this->db->where('a.isActive', 1);
+        $this->db->order_by('b.publisherName','asc');
 
         $query = $this->db->get();
         return $query->result_array();
@@ -59,10 +79,17 @@ class SGameCategory_model extends CI_Model{
         }
     }
 
-    function getCountSGameCategoryList(){
+    //SETTING
+    function getPublisherSettingListByCategory($gameCategoryID){
+        $this->db->select('a.publisherID, b.publisherName,a.sGameCategoryID');
         $this->db->from('tbl_toppon_s_game_categories a');
+        $this->db->join('tbl_toppon_m_publishers b', 'a.publisherID = b.publisherID');
+        $this->db->where('a.gameCategoryID', $gameCategoryID);
         $this->db->where('a.isActive', 1);
-        return $this->db->count_all_results();
+        $this->db->where('b.isActive', 1);
+        $this->db->group_by('a.publisherID');
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     function createSGameCategory($data){
@@ -70,8 +97,14 @@ class SGameCategory_model extends CI_Model{
         return $this->db->insert_id();
     }
 
-    function updateSGameCategory($data, $id){
-        $this->db->where('gameID',$id);
+    function updateSGameCategory($data, $gameCategoryID, $publisherID){
+        if($gameCategoryID!=null){
+            $this->db->where('gameCategoryID',$gameCategoryID);
+        }
+        if($publisherID!=null){
+            $this->db->where('publisherID',$publisherID);
+        }
+        $this->db->where('isActive', 1);
         $this->db->update('tbl_toppon_s_game_categories',$data);
 
         if ($this->db->affected_rows() == 1)

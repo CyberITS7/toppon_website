@@ -86,11 +86,11 @@ class GamePurchase extends CI_Controller{
                         $return_code = $this->sendIndomog($generateID,$email,$prodId);
                         if($return_code == '000'){
                             $status = 'success';
-                            $msg = "Purchasing success! ".$return_code;
+                            $msg = "Purchasing success! ";
                             $this->db->trans_commit();
                         }else{
                             $status = 'error';
-                            $msg = "Purchasing fail, please try again! ".$return_code;
+                            $msg = "Purchasing fail, please try again! ";
                             $this->db->trans_rollback();
                         }
                     }
