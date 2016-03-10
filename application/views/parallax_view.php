@@ -377,7 +377,7 @@
 <!--End footer -->
 
 <!-- BUTTON BACK TO TOP HOME -->
-<div style = "visibility:visible;" id="back_to_top">
+<div style = "visibility:show;" id="back_to_top">
     <a href="#home"> 
         <img class="img img-circle" src="<?php echo base_url();?>/img/back-to-top.png" height="50px" width="50px" alt="back-to-top">
     </a>
@@ -402,9 +402,9 @@
             });
             $("#back_to_top").click(function(event) {
                 event.preventDefault();
-                $("html, body").animate({scrollTop: 0}, 1000, 'easeInOutExpo');
+                $("html,body").animate({scrollTop: 0}, 1000, 'easeInOutExpo');
                 return false;
-            })
+            });
         });
     </script>
     <!-- Script to Activate the Carousel -->
