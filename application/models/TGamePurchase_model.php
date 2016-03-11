@@ -27,6 +27,7 @@ class TGamePurchase_model extends CI_Model{
         $this->db->select('*');
         $this->db->from('tbl_toppon_t_game_purchases a');
         $this->db->where('a.isActive', 1);
+        $this->db->where('created between "'.$startDate.'" and "'.$endDate.'"');
         $this->db->where('a.createdBy', $userId);
         $this->db->order_by('a.created','desc');
 

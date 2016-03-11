@@ -47,9 +47,11 @@
                 </div>
                 <div class="x_content">
                     <div class="well well-sm">
-                        <button type="submit" class="btn btn-default btn-sm">
-                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>All
-                        </button>
+                        <a href="<?php echo site_url('GamePurchase/gamePurchaseReport')?>">
+                            <button type="submit" class="btn btn-default btn-sm">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>All
+                            </button>
+                        </a>
                         <button type="submit" class="btn btn-default btn-sm" id="btn-search-date">
                             <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> Date
                         </button>
@@ -243,7 +245,6 @@
             $('#btn-search').attr("data-search","periode");
         });
         $('#btn-search-date').click(function(){
-            alert("d");
             $('#by-date').show();
             $('#by-periode').hide();
             $('.search-date-modal').modal('show');
@@ -257,15 +258,11 @@
             if(search == "periode"){
                 var start_date = $('#search-periode').data('daterangepicker').startDate;
                 var end_date = $('#search-periode').data('daterangepicker').endDate;
-                alert(asd.format('YYYY-MM-DD'));
-                $.post("<?php echo site_url('GamePurchase/gamePurchaseReportSearchByDate');?>",
-                    { username:username, password:password }, function(data){
-                });
+                location.href = "<?php echo site_url('GamePurchase/gamePurchaseReportSearchByPeriode')?>/"
+                +start_date.format('YYYY-MM-DD')+"/"+end_date.format('YYYY-MM-DD');
             }else if(search == "date"){
                 var date = $('#search-date').data('daterangepicker').endDate;
-                $.post("<?php echo site_url('GamePurchase/gamePurchaseReportSearchByDate');?>",
-                    { date:date.format('YYYY-MM-DD')},function(data){
-                });
+                location.href = "<?php echo site_url('GamePurchase/gamePurchaseReportSearchByDate')?>/"+date.format('YYYY-MM-DD');
             }
         });
 
