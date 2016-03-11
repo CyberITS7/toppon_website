@@ -46,5 +46,28 @@ class TDeposit_model extends CI_Model{
     
     }
 
+     function getListTDepositConfirm($userID) {
+      
+            $this->db->select('*');
+            $this->db->from('tbl_toppon_t_deposits');
+            $this->db->where("isActive", 1);
+            $this->db->where("status !=", 'unpaid');
+            $this->db->order_by('created', 'DESC');               
+            $query = $this->db->get();
+            
+            return $query->result_array();
+    }
+
+    function confirmDeposit($data, $id) {
+        $this->db->where('tDepositID',$id);
+            $this->db->update('tbl_toppon_t_deposits',$data);
+
+            if ($this->db->affected_rows() == 1)
+                return TRUE;
+            else
+                return FALSE;
+    
+    }
+
 }
 ?>

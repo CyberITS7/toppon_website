@@ -8,12 +8,15 @@ class Deposit extends CI_Controller{
         $this->load->helper('html');
         $this->load->library("pagination");
         $this->load->library('form_validation');
+        $this->load->library("Authentication");
 
         $this->load->library('Hash');
         $this->load->model('Deposit_model');
         $this->load->model('Bank_model');
         $this->load->model('Coin_model');
         $this->load->model('TDeposit_model');
+        $this->load->model('User_model');
+
     }
 
     function index(){
@@ -27,7 +30,7 @@ class Deposit extends CI_Controller{
 
     function depositList(){
         if(!$this->session->userdata('logged_in')){
-            redirect($this->loginAndRegister());
+            redirect(site_url("User/loginAndRegister"));
         }
         else{
             $data['deposit_list']=$this->TDeposit_model->getListTDeposit($this->session->userdata('user_id'));
@@ -39,7 +42,7 @@ class Deposit extends CI_Controller{
 
     function depositInsertForm() {
         if(!$this->session->userdata('logged_in')){
-            redirect($this->loginAndRegister());
+            redirect(site_url("User/loginAndRegister"));
         }
         else{
             $data['bank_list']=$this->Bank_model->getBankName();
@@ -51,7 +54,7 @@ class Deposit extends CI_Controller{
 
     function depositDetail($id) {
         if(!$this->session->userdata('logged_in')){
-            redirect($this->loginAndRegister());
+            redirect(site_url("User/loginAndRegister"));
         }
         else{
             $data['deposit_detail']=$this->TDeposit_model->getTDepositDetail($id);
@@ -135,7 +138,7 @@ class Deposit extends CI_Controller{
             );
 
             $this->db->trans_begin();
-            $update = $this->TDeposit_model->updateDeposit($data_post,$tDepositID);
+            $update = $this->TDeposit_model->updateDeposit($da4ta_post,$tDepositID);
 
             if($update){
                 $this->db->trans_commit();
@@ -179,6 +182,58 @@ class Deposit extends CI_Controller{
 
             echo json_encode(array('status' => $status, 'msg' => $msg));
         }
+
+        function depositConfirmList(){
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
+        }
+        else{
+            $data['deposit_list']=$this->TDeposit_model->getListTDepositConfirm($this->session->userdata('user_id'));
+            $data['data_content']="admin/deposit_list_view";
+            $this->load->view('includes/member_area_template_view',$data);
+            }
+
+        }
+
+        function depositConfirm(){
+         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+            if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+                redirect(site_url("User/loginAndRegister"));
+            }
+            else{
+                $status = "";
+                $msg="";
+
+                $datetime = date('Y-m-d H:i:s', time());
+                $tDepositID = $this->input->post('id');
+                $userID = $this->session->userdata('user_id');
+
+                $data_post=array(
+                    'status'=>'paid',
+                    "lastUpdated"=>$datetime,
+                    "lastUpdatedBy"=>$userID
+                );
+
+                $this->db->trans_begin();
+                $update = $this->TDeposit_model->confirmDeposit($data_post,$tDepositID);
+
+                if($update){
+                    $this->db->trans_commit();
+                    $status = 'success';
+                    $msg = "Status Updated successfully!";
+                }else{
+                    $this->db->trans_rollback();
+                    $status = 'error';
+                    $msg = "Something went wrong when updating Status !";
+                }
+
+                echo json_encode(array('status' => $status, 'msg' => $msg));
+
+            }
+               
+        }
+
     }
 
 ?>
