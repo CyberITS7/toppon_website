@@ -294,5 +294,28 @@ class GamePurchase extends CI_Controller{
         }
         return $ipaddress;
     }
+
+    function gamePurchaseReport(){
+        //get Games List data
+        $userID = $this->session->userdata('user_id');
+        $data['game_purchase_list'] = $this->TGamePurchase_model->getTransGamePurchaseList(null,null,$userID);
+        $data['data_content']="report/game_purchase_report_view";
+        $this->load->view('includes/member_area_template_view',$data);
+    }
+    function gamePurchaseReportSearchByPeriode(){
+        //get Games List data
+        $userID = $this->session->userdata('user_id');
+        $data['game_purchase_list'] = $this->TGamePurchase_model->getTransGamePurchaseList(null,null,$userID);
+        $data['data_content']="report/game_purchase_report_view";
+        $this->load->view('includes/member_area_template_view',$data);
+    }
+    function gamePurchaseReportSearchByDate(){
+        //get Games List data
+        $userID = $this->session->userdata('user_id');
+        $date = $this->input->post('date');
+        $data['game_purchase_list'] = $this->TGamePurchase_model->getTransGamePurchaseByDate(null,null,$userID,$date);
+        $data['data_content']="report/game_purchase_report_view";
+        $this->load->view('includes/member_area_template_view',$data);
+    }
 }
 ?>

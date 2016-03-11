@@ -65,7 +65,7 @@
                             <input type="password" id="password-login" name="password-login" class="form-control login" placeholder="Password" required="required" data-validate-length-range="4,50"/>
                         </div>
                         <div>
-                            <a class="btn btn-default submit btn-login" href="#">Log in</a>
+                            <a href="#"><button type="submit" class="btn btn-default submit btn-login">Log in</button></a>
                             <a class="reset_pass to_forgot" href="#toforgot">Lost your password?</a>
                         </div>
                         <div class="clear"></div>

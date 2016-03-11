@@ -87,16 +87,12 @@
                         <div class="menu_section">
                             <h3>Navigation</h3>
                             <ul class="nav side-menu">
-                                <li><a><i class="fa fa-gamepad"></i> Game Purchase <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" id="category-game" style="display: none">
-
-                                    </ul>
-                                </li>
-                                <li><a href="<?php echo site_url('Deposit')?>"><i class="fa fa-credit-card"></i> TopUp</a></li>
-                                <li><a href="<?php echo site_url('Transfer')?>"><i class="fa fa-send-o"></i> Transfer</a></li>
-                                <li><a href="<?php echo site_url('Gift')?>"><i class="fa fa-gift"></i> Gift</a></li>
                                 <li><a><i class="fa fa-table"></i> Master <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
+                                        <li><a href="<?php echo site_url('Bank')?>">Bank</a></li>
+                                        <li><a href="<?php echo site_url('Payment')?>">Payment Method</a></li>
+                                        <li><a href="<?php echo site_url('Coin')?>">Coin</a></li>
+                                        <li><a href="<?php echo site_url('GiftCategory')?>">Gift Category </a></li>
                                         <li><a href="<?php echo site_url('GameCategory')?>">Game Category</a></li>
                                         <li><a href="<?php echo site_url('Publisher')?>">Publisher</a></li>
                                         <li><a href="<?php echo site_url('Game')?>">Game</a></li>
@@ -117,6 +113,14 @@
                                         <li><a href="<?php echo site_url('SGame')?>">Transfer</a></li>
                                     </ul>
                                 </li>
+                                <li><a><i class="fa fa-gamepad"></i> Game Purchase <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" id="category-game" style="display: none">
+
+                                    </ul>
+                                </li>
+                                <li><a href="<?php echo site_url('Deposit')?>"><i class="fa fa-credit-card"></i> Top Up</a></li>
+                                <li><a href="<?php echo site_url('Transfer')?>"><i class="fa fa-send-o"></i> Transfer</a></li>
+                                <li><a href="<?php echo site_url('Gift')?>"><i class="fa fa-gift"></i> Gift</a></li>
                             </ul>
                         </div>
                     </div>
