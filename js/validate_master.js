@@ -165,6 +165,59 @@
         });
     };
 
+    $.fn.validateConfirmPassword = function( options ) {
+
+        // Establish our default settings
+        var bool=false;
+        var settings = $.extend({
+            text         : '',
+            errMsg       : 'This password doesn\'t match !',
+            compareValue : ''
+        }, options);
+
+        this.each( function() {
+            var input = $(this).val();
+            var label_err = $(this).attr("data-label");
+            $(label_err).html("");
+
+            if(settings.compareValue != input){
+                $(label_err).css( 'font-size', '12px').html(settings.errMsg);
+            }else{
+                bool=true;
+            }
+
+        });
+        return bool;
+    };
+
+    $.fn.validateLengthRange = function( options ) {
+
+        // Establish our default settings
+        var bool=false;
+        var settings = $.extend({
+            text         : '',
+            errMsg       : '',
+            minLength    : '',
+            maxLength    : ''
+        }, options);
+
+        var message = "The field must be between " + settings.minLength +"and "+ settings.maxLength;
+
+        this.each( function() {
+            var input = $(this).val().length;
+            var label_err = $(this).attr("data-label");
+            $(label_err).html("");
+
+            if(input > settings.minLength && input < settings.maxLength){
+                bool=true;
+            }else{
+                $(label_err).css( 'font-size', '12px').html(message);
+            }
+
+        });
+        return bool;
+    };
+
     function validateEmpty(input){
         if(input == "" || input == null){
             return false;
