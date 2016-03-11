@@ -52,7 +52,7 @@ class SGame extends CI_Controller{
 
     function goToAddDetailSGame(){
         $game_list = $this->Game_model->getGameSettingList(null, null);
-        $nominal_list = $this->Nominal_model->getComboNominalSettingList(null, null);
+        $nominal_list = $this->Nominal_model->getNominalList(null, null);
 
         $data['setting_id'] = null;
         $data['nominal_list_edit'] = null;
@@ -64,7 +64,7 @@ class SGame extends CI_Controller{
     function goToEditDetailSGame($id){
         $game_list = $this->Game_model->getGameSettingList(null, null);
         $game_edit = $this->Game_model->getGameById($id);
-        $nominal_list = $this->Nominal_model->getComboNominalSettingList(null, null);
+        $nominal_list = $this->Nominal_model->getNominalList(null, null);
         $nominal_setting_list = $this->SGame_model->getNominalSettingListByGame($id);
 
         $data['setting_id'] = $id;

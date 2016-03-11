@@ -19,7 +19,7 @@
             </button>
         </h3>
         <h3>
-            <a href="<?php echo site_url('SGameCategory')?>">
+            <a href="<?php echo site_url('SGame')?>">
                 <button type="button" class="btn btn-default">
                     <i class="fa fa-arrow-circle-o-left"></i>&nbsp Back
                 </button>
@@ -42,22 +42,22 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Setting Category Game<small>List of category game setting detail</small></h2>
+                <h2>Setting Game<small>List of game setting detail</small></h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
                 <div class="row">
                     <p class="col-md-6 col-sm-10 col-xs-12">
-                        <label for="heard">Kategori Game : <span class="label label-danger" id="err-category"></span></label>
-                        <select id="game-category-select" class="form-control" data-label="#err-category">
+                        <label for="heard">Game : <span class="label label-danger" id="err-game"></span></label>
+                        <select id="game-select" class="form-control" data-label="#err-game">
                             <option value="">Choose..</option>
-                            <?php if($game_category_edit != null){?>
-                                <option value="<?php echo $game_category_edit->gameCategoryID;?>" selected="selected">
-                                    <?php echo $game_category_edit->gameCategoryName;?>
+                            <?php if($game_edit != null){?>
+                                <option value="<?php echo $game_edit->gameID;?>" selected="selected">
+                                    <?php echo $game_edit->gameName;?>
                                 </option>
                             <?php }?>
-                            <?php foreach($game_category as $row){?>
-                                <option value="<?php echo $row['gameCategoryID'];?>"><?php echo $row['gameCategoryName'];?></option>
+                            <?php foreach($game as $row){?>
+                                <option value="<?php echo $row['gameID'];?>"><?php echo $row['gameName'];?></option>
                             <?php }?>
                         </select>
                     </p>
@@ -72,23 +72,36 @@
                 <table id="example" class="table table-striped responsive-utilities jambo_table">
                     <thead>
                     <tr class="headings">
-                        <th>Publisher</th>
+                        <th>Nominal</th>
+                        <th>Product Code</th>
+                        <th>Coin Value</th>
                         <th class=" no-link last"><span class="nobr">Action</span></th>
                     </tr>
                     </thead>
 
-                    <tbody id="publisher-tbody">
-                        <?php if($publisher_list_edit != null) {
-                            foreach($publisher_list_edit as $row){ ?>
-                                <tr data-status="OLD" data-id="<?php echo $row['publisherID'];?>"
-                                    data-setting = "<?php echo $row['sGameCategoryID'];?>">
-                                    <td><?php echo $row['publisherName']; ?></td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm btn-del-detail">
-                                            <i class="fa fa-remove"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                    <tbody id="nominal-tbody">
+                    <?php if($nominal_list_edit != null) {
+                        foreach($nominal_list_edit as $row){ ?>
+                            <tr data-status="OLD" data-id="<?php echo $row['nominalID'];?>"
+                                data-setting = "<?php echo $row['sGameID'];?>">
+                                <td class="nominal-td">
+                                    <?php echo $row['currency']." ".number_format($row['nominalName'],0,",","."); ?>
+                                </td>
+                                <td class="product-code-td">
+                                    <?php echo $row['productCode']; ?>
+                                </td>
+                                <td class="coin-value-td">
+                                    <?php echo number_format($row['paymentValue'],0,",","."); ?>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm btn-edit-detail">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm btn-del-detail">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </td>
+                            </tr>
                         <?php }/*for*/ }//if?>
                     </tbody>
                 </table>
@@ -104,19 +117,29 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title" id="modal-title">Add Publisher</h4>
+                <h4 class="modal-title" id="modal-title">Add Nominal</h4>
             </div>
             <div class="modal-body">
                 <form id="setting-form">
                     <p>
-                        <label for="publisher-select">Publisher : <span class="label label-danger" id="err-publisher"></span></label>
-                        <select id="publisher-select" data-label="#err-publisher">
+                        <label for="nominal-select">Nominal : <span class="label label-danger" id="err-nominal"></span></label>
+                        <select id="nominal-select" data-label="#err-nominal">
                             <option value="">Choose..</option>
-                            <?php foreach($publisher as $row){?>
-                                <option value="<?php echo $row['publisherID']?>"><?php echo $row['publisherName']?></option>
+                            <?php foreach($nominal as $row){?>
+                                <option value="<?php echo $row['nominalID']?>">
+                                    <?php echo $row['currency']." ".number_format($row['nominalName'],0,",","."); ?>
+                                </option>
                             <?php }?>
                         </select>
                     </p>
+                    <div class="form-group">
+                        <label for="product-code" class="control-label">Product Code : <span class="label label-danger" id="err-product-code"></span></label>
+                        <input type="text" class="form-control" id="product-code" name="product-code" data-label="#err-product-code">
+                    </div>
+                    <div class="form-group">
+                        <label for="coin-value" class="control-label">Coin Value : <span class="label label-danger" id="err-coin-value"></span></label>
+                        <input type="text" class="form-control" id="coin-value" name="coin-value" data-label="#err-coin-value">
+                    </div>
                 </form>
             </div>
 
@@ -139,10 +162,10 @@
         // Adding from modal to Detail
         $('#btn-add-detail').click(function(){
             if(validateAddDetail()){
-                var publisher = $("#publisher-select").val();
-                var publisher_name = $("#publisher-select option:selected").text();
+                var publisher = $("#nominal-select").val();
+                var publisher_name = $("#nominal-select option:selected").text();
 
-                //Adding to #publisher-tbody
+                //Adding to #nominal-tbody
                 var tr = $("<tr>",{"data-status":"NEW","data-id":publisher});
                 var td1 = $("<td>").text(publisher_name);
                 var td2 = $("<td>");
@@ -150,20 +173,42 @@
                 td1.appendTo(tr);
                 td2.append(btn_del);
                 td2.appendTo(tr);
-                tr.appendTo("#publisher-tbody");
+                tr.appendTo("#nominal-tbody");
                 //Push to Array publisher_detail
                 var detailData = {
                     id : publisher
                 };
                 publisher_detail.push(detailData);
 
-                $('#publisher-select').val('').change();
+                $('#nominal-select').val('').change();
                 $('.setting-modal').modal('hide');
             }
         });
 
+        // Edit Detail
+        $("#nominal-tbody" ).on( "click", ".btn-edit-detail", function() {
+            var row = $(this).closest("tr");
+            var status = row.attr("data-status");
+            var id = row.attr("data-id");
+            if(status == "NEW"){
+                row.remove();
+                publisher_detail.splice( $.inArray(id,publisher_detail) ,1 );
+            }else if(status == "OLD"){
+                row.addClass('tr-del');
+                row.attr("data-status","DEL");
+                var detailData = {
+                    id : id
+                };
+                publisher_delete.push(detailData);
+            }else if(status == "DEL"){
+                row.removeClass('tr-del');
+                row.attr("data-status","OLD");
+                publisher_delete.splice( $.inArray(id,publisher_delete) ,1 );
+            }
+        });
+
         // Delete Detail
-        $("#publisher-tbody" ).on( "click", ".btn-del-detail", function() {
+        $("#nominal-tbody" ).on( "click", ".btn-del-detail", function() {
             var row = $(this).closest("tr");
             var status = row.attr("data-status");
             var id = row.attr("data-id");
@@ -187,16 +232,16 @@
         $('#btn-save').click(function(){
             if(validateSave()){
                 var id = $('#setting-id').val();
-                var update_category = $('#game-category-select').val();
+                var update_category = $('#game-select').val();
                 var formData = new FormData();
                 formData.append("publisher_list", JSON.stringify(publisher_detail));
                 if(id == '00') {
                     // ADD NEW SETTING
                     formData.append("game_category", update_category);
                     $(this).saveData({
-                        url: "<?php echo site_url('SGameCategory/createSGameCategory')?>",
+                        url: "<?php echo site_url('SGame/createSGame')?>",
                         data: formData,
-                        locationHref: "<?php echo site_url('SGameCategory')?>"
+                        locationHref: "<?php echo site_url('SGame')?>"
                     });
                 }else{
                     // UPDATE SETTING
@@ -212,9 +257,9 @@
                     formData.append("game_category",id);
                     formData.append("publisher_delete", JSON.stringify(publisher_delete));
                     $(this).saveData({
-                        url: "<?php echo site_url('SGameCategory/updateSGameCategory')?>",
+                        url: "<?php echo site_url('SGame/updateSGame')?>",
                         data: formData,
-                        locationHref: "<?php echo site_url('SGameCategory')?>"
+                        locationHref: "<?php echo site_url('SGame')?>"
                     });
                 }
             }
@@ -223,10 +268,10 @@
         function validateAddDetail(){
             var err=0;
 
-            if(!$("#publisher-select").validateRequired()){
+            if(!$("#nominal-select").validateRequired()){
                 err++;
             }else{
-                var publisher = $("#publisher-select").val();
+                var publisher = $("#nominal-select").val();
                 //var check = jQuery.inArray(publisher, publisher_detail);
                 var filtered = $(publisher_detail).filter(function(){
                     return this.id == publisher;
@@ -248,7 +293,7 @@
             var array_size = publisher_detail.length;
             var setting_id = $("#setting-id").val();
 
-            if(!$('#game-category-select').validateRequired()){
+            if(!$('#game-select').validateRequired()){
                 err++;
             }
 

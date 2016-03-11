@@ -67,7 +67,7 @@ class Nominal_model extends CI_Model{
 
     // Get List Game yang sudah di setting
     function getGameByID($id){
-        $this->db->select('sGamesID, a.publisherID, a.nominalID, nominalName, publisherName, paymentValue');
+        $this->db->select('sGamesID, a.publisherID, a.nominalID, nominalName, currency, publisherName, paymentValue');
         $this->db->from('tbl_toppon_s_games a');
         $this->db->join('tbl_toppon_m_publishers b', 'a.publisherID = b.publisherID');
         $this->db->join('tbl_toppon_m_nominals c', 'a.nominalID = c.nominalID');
@@ -78,30 +78,6 @@ class Nominal_model extends CI_Model{
     }
 
     //SETTING
-    function getComboNominalSettingList($start, $limit){
-        //Create where clause
-        $this->db->select('nominalID');
-        $this->db->from('tbl_toppon_s_games');
-        $this->db->where('isActive', 1);
-        $where_clause = $this->db->get_compiled_select();
-
-        //Create main query
-        $this->db->select('nominalID, nominalName');
-        $this->db->from('tbl_toppon_m_nominals a');
-        $this->db->where("`nominalID` NOT IN ($where_clause)", NULL, FALSE);
-        $this->db->where('a.isActive', 1);
-        $this->db->order_by('a.nominalName','asc');
-
-        if($limit != null || $start!= null){
-            $this->db->limit($limit,$start);
-        }
-
-        $query = $this->db->get();
-        return $query->result_array();
-    }
-
-
-
 
 }
 ?>

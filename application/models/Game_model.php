@@ -64,6 +64,37 @@ class Game_model extends CI_Model{
     }
 
     //SETTING
+    function getGameSettingList($start, $limit){
+        //Create where clause
+        $this->db->select('gameID');
+        $this->db->from('tbl_toppon_s_games');
+        $this->db->where('isActive', 1);
+        $where_clause = $this->db->get_compiled_select();
+
+        //Create main query
+        $this->db->select('gameID, gameName');
+        $this->db->from('tbl_toppon_m_games a');
+        $this->db->where("`gameID` NOT IN ($where_clause)", NULL, FALSE);
+        $this->db->where('a.isActive', 1);
+        $this->db->order_by('a.gameName','asc');
+
+        if($limit != null || $start!= null){
+            $this->db->limit($limit,$start);
+        }
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    function getGameById($id){
+        $this->db->select('gameID, gameName');
+        $this->db->from('tbl_toppon_m_games a');
+        $this->db->where('a.isActive', 1);
+        $this->db->where('a.gameID', $id);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
     function getComboGameSettingList($start, $limit){
         //Create where clause
         $this->db->select('gameID');

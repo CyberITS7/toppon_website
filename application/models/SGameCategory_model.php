@@ -22,6 +22,7 @@ class SGameCategory_model extends CI_Model{
         $this->db->from('tbl_toppon_s_game_categories a');
         $this->db->join('tbl_toppon_m_game_categories c', 'c.gameCategoryID = a.gameCategoryID');
         $this->db->where('a.isActive', 1);
+        $this->db->where('c.isActive', 1);
         $this->db->group_by('a.gameCategoryID');
         $this->db->order_by('c.gameCategoryName','asc');
 

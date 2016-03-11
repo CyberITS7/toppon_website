@@ -20,6 +20,7 @@ class SPublisher_model extends CI_Model{
         $this->db->from('tbl_toppon_s_publishers a');
         $this->db->join('tbl_toppon_m_publishers c', 'c.publisherID = a.publisherID');
         $this->db->where('a.isActive', 1);
+        $this->db->where('c.isActive', 1);
         $this->db->group_by('a.publisherID');
         $this->db->order_by('c.publisherName','asc');
 
