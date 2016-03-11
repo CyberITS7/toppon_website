@@ -204,7 +204,7 @@
         var message = "The field must be between " + settings.minLength +"and "+ settings.maxLength;
 
         this.each( function() {
-            var input = $(this).val().length;
+            var input = $(this).val().trim().length;
             var label_err = $(this).attr("data-label");
             $(label_err).html("");
 
@@ -218,12 +218,108 @@
         return bool;
     };
 
+    $.fn.validateEmailForm = function( options ) {
+
+        // Establish our default settings
+        var bool=false;
+        var settings = $.extend({
+            text         : '',
+            errMsg       : 'This field isn\'t Email !'
+        }, options);
+
+        this.each( function() {
+            var input = $(this).val();
+            var label_err = $(this).attr("data-label");
+            $(label_err).html("");
+
+            if(!validateEmail(input)){
+                $(label_err).css( 'font-size', '12px').html(settings.errMsg);
+            }else{
+                bool=true;
+            }
+
+        });
+        return bool;
+    };
+
+    $.fn.validatePhoneForm = function( options ) {
+
+        // Establish our default settings
+        var bool=false;
+        var settings = $.extend({
+            text         : '',
+            errMsg       : 'This field isn\'t Phone !'
+        }, options);
+
+        this.each( function() {
+            var input = $(this).val();
+            var label_err = $(this).attr("data-label");
+            $(label_err).html("");
+
+            if(!validatePhoneNumber(input)){
+                $(label_err).css( 'font-size', '12px').html(settings.errMsg);
+            }else{
+                bool=true;
+            }
+
+        });
+        return bool;
+    };
+
+    $.fn.validateNumberForm = function( options ) {
+
+        // Establish our default settings
+        var bool=false;
+        var settings = $.extend({
+            text         : '',
+            errMsg       : 'This field isn\'t Number !'
+        }, options);
+
+        this.each( function() {
+            var input = $(this).val();
+            var label_err = $(this).attr("data-label");
+            $(label_err).html("");
+
+            if(!validateNumber(input)){
+                $(label_err).css( 'font-size', '12px').html(settings.errMsg);
+            }else{
+                bool=true;
+            }
+
+        });
+        return bool;
+    };
+
     function validateEmpty(input){
-        if(input == "" || input == null){
+        if(input.trim() == "" || input.trim() == null){
             return false;
         }else{
             return true;
         }
+    }
+
+    function validateEmail(email)
+    {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+    }
+
+    function validatePhoneNumber(phone)
+    {
+        var regex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+        return regex.test(phone);
+    }
+
+    function validateNotNumber(notnumber)
+    {
+        var regex = /^([^0-9]*)$/;
+        return regex.test(notnumber);
+    }
+
+    function validateNumber(number)
+    {
+        var regex = /^[0-9]*$/;
+        return regex.test(notnumber);
     }
 
     function checkAll(){
