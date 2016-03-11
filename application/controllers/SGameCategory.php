@@ -51,154 +51,177 @@ class SGameCategory extends CI_Controller{
     }
 
     function goToAddDetailSGameCategory(){
-        $game_category_list = $this->GameCategory_model->getGameCategorySettingList(null, null);
-        $publisher_list = $this->Publisher_model->getComboPublisherSettingList(null, null);
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
+        }else {
+            $game_category_list = $this->GameCategory_model->getGameCategorySettingList(null, null);
+            $publisher_list = $this->Publisher_model->getComboPublisherSettingList(null, null);
 
-        $data['setting_id'] = null;
-        $data['publisher_list_edit'] = null;
-        $data['game_category'] = $game_category_list;
-        $data['publisher'] = $publisher_list;
-        $data['data_content'] = 'admin/setting/setting_category_game_detail_view';
-        $this->load->view('includes/member_area_template_view',$data);
+            $data['setting_id'] = null;
+            $data['publisher_list_edit'] = null;
+            $data['game_category'] = $game_category_list;
+            $data['publisher'] = $publisher_list;
+            $data['data_content'] = 'admin/setting/setting_category_game_detail_view';
+            $this->load->view('includes/member_area_template_view', $data);
+        }
     }
     function goToEditDetailSGameCategory($id){
-        $game_category_list = $this->GameCategory_model->getGameCategorySettingList(null, null);
-        $game_category_edit = $this->GameCategory_model->getGameCategoryById($id);
-        $publisher_list = $this->Publisher_model->getComboPublisherSettingList(null, null);
-        $publisher_setting_list = $this->SGameCategory_model->getPublisherSettingListByCategory($id);
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
+        }else {
+            $game_category_list = $this->GameCategory_model->getGameCategorySettingList(null, null);
+            $game_category_edit = $this->GameCategory_model->getGameCategoryById($id);
+            $publisher_list = $this->Publisher_model->getComboPublisherSettingList(null, null);
+            $publisher_setting_list = $this->SGameCategory_model->getPublisherSettingListByCategory($id);
 
-        $data['setting_id'] = $id;
-        //For Combobox
-        $data['game_category'] = $game_category_list;
-        $data['publisher'] = $publisher_list;
-        //From Setting
-        $data['publisher_list_edit'] = $publisher_setting_list;
-        $data['game_category_edit'] = $game_category_edit;
+            $data['setting_id'] = $id;
+            //For Combobox
+            $data['game_category'] = $game_category_list;
+            $data['publisher'] = $publisher_list;
+            //From Setting
+            $data['publisher_list_edit'] = $publisher_setting_list;
+            $data['game_category_edit'] = $game_category_edit;
 
-        $data['data_content'] = 'admin/setting/setting_category_game_detail_view';
-        $this->load->view('includes/member_area_template_view',$data);
+            $data['data_content'] = 'admin/setting/setting_category_game_detail_view';
+            $this->load->view('includes/member_area_template_view', $data);
+        }
     }
 
     function createSGameCategory(){
         $status = "";
         $msg="";
-        $datetime = date('Y-m-d H:i:s', time());
-        $userID = $this->session->userdata('user_id');
-        $game_category = $this->input->post('game_category');
-        $publisher_list = json_decode($this->input->post('publisher_list'),true);
-        //$publisher_list = explode(",",$this->input->post('publisher_list'));
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
+        }else {
+            $datetime = date('Y-m-d H:i:s', time());
+            $userID = $this->session->userdata('user_id');
+            $game_category = $this->input->post('game_category');
+            $publisher_list = json_decode($this->input->post('publisher_list'), true);
+            //$publisher_list = explode(",",$this->input->post('publisher_list'));
 
-        //INSERT to DB
-        $this->db->trans_begin();
-        foreach($publisher_list as $row){
-            $data_post=array(
-                'gameCategoryID'=>$game_category,
-                'publisherID'=>$row['id'],
-                'isActive'=>1,
-                "created" => $datetime,
-                "createdBy" => $userID,
-                "lastUpdated"=>$datetime,
-                "lastUpdatedBy"=>$userID
-            );
-            $id = $this->SGameCategory_model->createSGameCategory($data_post);
+            //INSERT to DB
+            $this->db->trans_begin();
+            foreach ($publisher_list as $row) {
+                $data_post = array(
+                    'gameCategoryID' => $game_category,
+                    'publisherID' => $row['id'],
+                    'isActive' => 1,
+                    "created" => $datetime,
+                    "createdBy" => $userID,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
+                $id = $this->SGameCategory_model->createSGameCategory($data_post);
+            }
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                $status = "error";
+                $msg = "Error while saved data!";
+            } else {
+                $this->db->trans_commit();
+                $status = "success";
+                $msg = "Setting has been saved successfully!";
+            }
         }
-        if($this->db->trans_status() === FALSE){
-            $this->db->trans_rollback();
-            $status="error";
-            $msg="Error while saved data!";
-        } else {
-            $this->db->trans_commit();
-            $status="success";
-            $msg="Setting has been saved successfully!";
-        }
-
         echo json_encode(array('status' => $status, 'msg' => $msg));
     }
 
     function updateSGameCategory(){
         $status = "";
         $msg="";
-        $datetime = date('Y-m-d H:i:s', time());
-        $userID = $this->session->userdata('user_id');
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
+        }else {
+            $datetime = date('Y-m-d H:i:s', time());
+            $userID = $this->session->userdata('user_id');
 
-        $game_category = $this->input->post('game_category');
-        $update_header = $this->input->post('update_header');
-        $update_category = $this->input->post('update_category');
-        $publisher_list = json_decode($this->input->post('publisher_list'),true);
-        $publisher_delete = json_decode($this->input->post('publisher_delete'),true);
+            $game_category = $this->input->post('game_category');
+            $update_header = $this->input->post('update_header');
+            $update_category = $this->input->post('update_category');
+            $publisher_list = json_decode($this->input->post('publisher_list'), true);
+            $publisher_delete = json_decode($this->input->post('publisher_delete'), true);
 
-        $this->db->trans_begin();
-        //Delete Detail
-        foreach($publisher_delete as $row){
-            $data_post=array(
-                'isActive'=>0,
-                "createdBy" => $userID,
-                "lastUpdated"=>$datetime,
-                "lastUpdatedBy"=>$userID
-            );
-            $delete = $this->SGameCategory_model->updateSGameCategory($data_post,$game_category,$row['id']);
+            $this->db->trans_begin();
+            //Delete Detail
+            foreach ($publisher_delete as $row) {
+                $data_post = array(
+                    'isActive' => 0,
+                    "createdBy" => $userID,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
+                $delete = $this->SGameCategory_model->updateSGameCategory($data_post, $game_category, $row['id']);
+            }
+
+            //INSERT New Publisher
+            foreach ($publisher_list as $row) {
+                $data_post = array(
+                    'gameCategoryID' => $game_category,
+                    'publisherID' => $row['id'],
+                    'isActive' => 1,
+                    "createdBy" => $userID,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
+                $insert = $this->SGameCategory_model->createSGameCategory($data_post);
+            }
+
+            //Update Header
+            if ($update_header == 1) {
+                $data_post = array(
+                    'gameCategoryID' => $update_category,
+                    "createdBy" => $userID,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
+                $update = $this->SGameCategory_model->updateSGameCategory($data_post, $game_category, null);
+            }
+
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                $status = "error";
+                $msg = "Error while saved data!";
+            } else {
+                $this->db->trans_commit();
+                $status = "success";
+                $msg = "Setting has been saved successfully!";
+            }
         }
-
-        //INSERT New Publisher
-        foreach($publisher_list as $row){
-            $data_post=array(
-                'gameCategoryID'=>$game_category,
-                'publisherID'=>$row['id'],
-                'isActive'=>1,
-                "createdBy" => $userID,
-                "lastUpdated"=>$datetime,
-                "lastUpdatedBy"=>$userID
-            );
-            $insert = $this->SGameCategory_model->createSGameCategory($data_post);
-        }
-
-        //Update Header
-        if($update_header == 1){
-            $data_post=array(
-                'gameCategoryID'=>$update_category,
-                "createdBy" => $userID,
-                "lastUpdated"=>$datetime,
-                "lastUpdatedBy"=>$userID
-            );
-            $update = $this->SGameCategory_model->updateSGameCategory($data_post,$game_category,null);
-        }
-
-        if($this->db->trans_status() === FALSE){
-            $this->db->trans_rollback();
-            $status="error";
-            $msg="Error while saved data!";
-        } else {
-            $this->db->trans_commit();
-            $status="success";
-            $msg="Setting has been saved successfully!";
-        }
-
         echo json_encode(array('status' => $status, 'msg' => $msg));
     }
 
     function deleteSGameCategory(){
         $status = "";
         $msg="";
-        $datetime = date('Y-m-d H:i:s', time());
-        $userID = $this->session->userdata('user_id');
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
+        }else {
+            $datetime = date('Y-m-d H:i:s', time());
+            $userID = $this->session->userdata('user_id');
 
-        $game_category = $this->input->post('id');
-        $data_post=array(
-            'isActive'=>0,
-            "createdBy" => $userID,
-            "lastUpdated"=>$datetime,
-            "lastUpdatedBy"=>$userID
-        );
-        $delete = $this->SGameCategory_model->updateSGameCategory($data_post,$game_category,null);
+            $game_category = $this->input->post('id');
+            $data_post = array(
+                'isActive' => 0,
+                "createdBy" => $userID,
+                "lastUpdated" => $datetime,
+                "lastUpdatedBy" => $userID
+            );
+            $delete = $this->SGameCategory_model->updateSGameCategory($data_post, $game_category, null);
 
-        if($this->db->trans_status() === FALSE){
-            $this->db->trans_rollback();
-            $status="error";
-            $msg="Error while saved data!";
-        } else {
-            $this->db->trans_commit();
-            $status="success";
-            $msg="Setting has been deleted successfully!";
+            if ($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                $status = "error";
+                $msg = "Error while saved data!";
+            } else {
+                $this->db->trans_commit();
+                $status = "success";
+                $msg = "Setting has been deleted successfully!";
+            }
         }
         echo json_encode(array('status' => $status, 'msg' => $msg));
     }

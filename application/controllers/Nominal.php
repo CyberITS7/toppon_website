@@ -52,43 +52,47 @@ class Nominal extends CI_Controller{
         $status = "";
         $msg="";
 
-        $datetime = date('Y-m-d H:i:s', time());
-        $name = $this->input->post('name');
-        $currency = $this->input->post('currency');
-        $userID = $this->session->userdata('user_id');
-        $check_name = $this->Nominal_model->checkNominal($name,$currency);
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
+        }else {
+            $datetime = date('Y-m-d H:i:s', time());
+            $name = $this->input->post('name');
+            $currency = $this->input->post('currency');
+            $userID = $this->session->userdata('user_id');
+            $check_name = $this->Nominal_model->checkNominal($name, $currency);
 
-        if(!$check_name){
-            $data_post=array(
-                'nominalName'=>$name,
-                'currency'=>$currency,
-                'isActive'=>1,
-                "created" => $datetime,
-                "createdBy" => $userID,
-                "lastUpdated"=>$datetime,
-                "lastUpdatedBy"=>$userID
-            );
+            if (!$check_name) {
+                $data_post = array(
+                    'nominalName' => $name,
+                    'currency' => $currency,
+                    'isActive' => 1,
+                    "created" => $datetime,
+                    "createdBy" => $userID,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
 
-            $this->db->trans_begin();
-            $id = $this->Nominal_model->createNominal($data_post);
+                $this->db->trans_begin();
+                $id = $this->Nominal_model->createNominal($data_post);
 
-            if($id != null || $id != ""){
-                $this->db->trans_commit();
-                $status = 'success';
-                $msg = "Nominal has been create successfully!";
+                if ($id != null || $id != "") {
+                    $this->db->trans_commit();
+                    $status = 'success';
+                    $msg = "Nominal has been create successfully!";
 
-            }else{
-                $this->db->trans_rollback();
+                } else {
+                    $this->db->trans_rollback();
+                    $status = 'error';
+                    $msg = "Cannot Save to Database";
+                }
+
+
+            } else {
                 $status = 'error';
-                $msg = "Cannot Save to Database";
+                $msg = $currency . " " . $name . " already exist";
             }
-
-
-        }else{
-            $status = 'error';
-            $msg = $currency." ".$name." already exist";
         }
-
         echo json_encode(array('status' => $status, 'msg' => $msg));
     }
 
@@ -96,40 +100,44 @@ class Nominal extends CI_Controller{
         $status = "";
         $msg="";
 
-        $datetime = date('Y-m-d H:i:s', time());
-        $name = $this->input->post('name');
-        $currency = $this->input->post('currency');
-        $userID = $this->session->userdata('user_id');
-        $nominalID = $this->input->post('id');
-        $check_name = $this->Nominal_model->checkNominalEdit($name,$currency,$nominalID);
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
+        }else {
+            $datetime = date('Y-m-d H:i:s', time());
+            $name = $this->input->post('name');
+            $currency = $this->input->post('currency');
+            $userID = $this->session->userdata('user_id');
+            $nominalID = $this->input->post('id');
+            $check_name = $this->Nominal_model->checkNominalEdit($name, $currency, $nominalID);
 
-        if(!$check_name){
-            $data_post=array(
-                'nominalName'=>$name,
-                'currency'=>$currency,
-                'isActive'=>1,
-                "created" => $datetime,
-                "lastUpdated"=>$datetime,
-                "lastUpdatedBy"=>$userID
-            );
+            if (!$check_name) {
+                $data_post = array(
+                    'nominalName' => $name,
+                    'currency' => $currency,
+                    'isActive' => 1,
+                    "created" => $datetime,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
 
-            $this->db->trans_begin();
-            $update = $this->Nominal_model->updateNominal($data_post,$nominalID);
+                $this->db->trans_begin();
+                $update = $this->Nominal_model->updateNominal($data_post, $nominalID);
 
-            if($update){
-                $this->db->trans_commit();
-                $status = 'success';
-                $msg = "Nominal has been updated successfully!";
-            }else{
-                $this->db->trans_rollback();
+                if ($update) {
+                    $this->db->trans_commit();
+                    $status = 'success';
+                    $msg = "Nominal has been updated successfully!";
+                } else {
+                    $this->db->trans_rollback();
+                    $status = 'error';
+                    $msg = "Nominal can't be updated!";
+                }
+            } else {
                 $status = 'error';
-                $msg = "Nominal can't be updated!";
+                $msg = $currency . " " . $name . " already exist";
             }
-        }else{
-            $status = 'error';
-            $msg = $currency." ".$name." already exist";
         }
-
         echo json_encode(array('status' => $status, 'msg' => $msg));
     }
 
@@ -137,28 +145,33 @@ class Nominal extends CI_Controller{
         $status = "";
         $msg="";
 
-        $datetime = date('Y-m-d H:i:s', time());
-        $nominalID = $this->input->post('id');
-        $userID = $this->session->userdata('user_id');
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
+        }else {
+            $datetime = date('Y-m-d H:i:s', time());
+            $nominalID = $this->input->post('id');
+            $userID = $this->session->userdata('user_id');
 
-        $data_post=array(
-            'isActive'=>0,
-            "created" => $datetime,
-            "lastUpdated"=>$datetime,
-            "lastUpdatedBy"=>$userID
-        );
+            $data_post = array(
+                'isActive' => 0,
+                "created" => $datetime,
+                "lastUpdated" => $datetime,
+                "lastUpdatedBy" => $userID
+            );
 
-        $this->db->trans_begin();
-        $update = $this->Nominal_model->updateNominal($data_post,$nominalID);
+            $this->db->trans_begin();
+            $update = $this->Nominal_model->updateNominal($data_post, $nominalID);
 
-        if($update){
-            $this->db->trans_commit();
-            $status = 'success';
-            $msg = "Nominal has been delete successfully!";
-        }else{
-            $this->db->trans_rollback();
-            $status = 'error';
-            $msg = "Nominal can't be delete!";
+            if ($update) {
+                $this->db->trans_commit();
+                $status = 'success';
+                $msg = "Nominal has been delete successfully!";
+            } else {
+                $this->db->trans_rollback();
+                $status = 'error';
+                $msg = "Nominal can't be delete!";
+            }
         }
 
         echo json_encode(array('status' => $status, 'msg' => $msg));

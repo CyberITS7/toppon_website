@@ -138,7 +138,7 @@ class Deposit extends CI_Controller{
             );
 
             $this->db->trans_begin();
-            $update = $this->TDeposit_model->updateDeposit($da4ta_post,$tDepositID);
+            $update = $this->TDeposit_model->updateDeposit($data_post,$tDepositID);
 
             if($update){
                 $this->db->trans_commit();

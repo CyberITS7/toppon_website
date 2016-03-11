@@ -87,6 +87,7 @@
                         <div class="menu_section">
                             <h3>Navigation</h3>
                             <ul class="nav side-menu">
+                                <li><a href="<?php echo site_url('Deposit/depositConfirmList')?>"><i class="fa fa-credit-card"></i>Confirm Deposit</a></li>
                                 <li><a><i class="fa fa-table"></i> Master <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li><a href="<?php echo site_url('Bank')?>">Bank</a></li>

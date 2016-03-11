@@ -54,41 +54,45 @@ class Game extends CI_Controller{
         $status = "";
         $msg="";
 
-        $datetime = date('Y-m-d H:i:s', time());
-        $name = $this->input->post('name');
-        $userID = $this->session->userdata('user_id');
-        $check_name = $this->Game_model->checkGame($name);
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
+        }else {
+            $datetime = date('Y-m-d H:i:s', time());
+            $name = $this->input->post('name');
+            $userID = $this->session->userdata('user_id');
+            $check_name = $this->Game_model->checkGame($name);
 
-        if(!$check_name){
-            $data_post=array(
-                'gameName'=>$name,
-                'isActive'=>1,
-                "created" => $datetime,
-                "createdBy" => $userID,
-                "lastUpdated"=>$datetime,
-                "lastUpdatedBy"=>$userID
-            );
+            if (!$check_name) {
+                $data_post = array(
+                    'gameName' => $name,
+                    'isActive' => 1,
+                    "created" => $datetime,
+                    "createdBy" => $userID,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
 
-            $this->db->trans_begin();
-            $id = $this->Game_model->createGame($data_post);
+                $this->db->trans_begin();
+                $id = $this->Game_model->createGame($data_post);
 
-            if($id != null || $id != ""){
-                $this->db->trans_commit();
-                $status = 'success';
-                $msg = "Game has been create successfully!";
+                if ($id != null || $id != "") {
+                    $this->db->trans_commit();
+                    $status = 'success';
+                    $msg = "Game has been create successfully!";
 
-            }else{
-                $this->db->trans_rollback();
+                } else {
+                    $this->db->trans_rollback();
+                    $status = 'error';
+                    $msg = "Cannot Save to Database";
+                }
+
+
+            } else {
                 $status = 'error';
-                $msg = "Cannot Save to Database";
+                $msg = $name . " already exist";
             }
-
-
-        }else{
-            $status = 'error';
-            $msg = $name." already exist";
         }
-
         echo json_encode(array('status' => $status, 'msg' => $msg));
     }
 
@@ -96,38 +100,42 @@ class Game extends CI_Controller{
         $status = "";
         $msg="";
 
-        $datetime = date('Y-m-d H:i:s', time());
-        $name = $this->input->post('name');
-        $userID = $this->session->userdata('user_id');
-        $gameID = $this->input->post('id');
-        $check_name = $this->Game_model->checkGameEdit($name,$gameID);
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
+        }else {
+            $datetime = date('Y-m-d H:i:s', time());
+            $name = $this->input->post('name');
+            $userID = $this->session->userdata('user_id');
+            $gameID = $this->input->post('id');
+            $check_name = $this->Game_model->checkGameEdit($name, $gameID);
 
-        if(!$check_name){
-            $data_post=array(
-                'gameName'=>$name,
-                'isActive'=>1,
-                "created" => $datetime,
-                "lastUpdated"=>$datetime,
-                "lastUpdatedBy"=>$userID
-            );
+            if (!$check_name) {
+                $data_post = array(
+                    'gameName' => $name,
+                    'isActive' => 1,
+                    "created" => $datetime,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
 
-            $this->db->trans_begin();
-            $update = $this->Game_model->updateGame($data_post,$gameID);
+                $this->db->trans_begin();
+                $update = $this->Game_model->updateGame($data_post, $gameID);
 
-            if($update){
-                $this->db->trans_commit();
-                $status = 'success';
-                $msg = "Game has been updated successfully!";
-            }else{
-                $this->db->trans_rollback();
+                if ($update) {
+                    $this->db->trans_commit();
+                    $status = 'success';
+                    $msg = "Game has been updated successfully!";
+                } else {
+                    $this->db->trans_rollback();
+                    $status = 'error';
+                    $msg = "Game can't be updated!";
+                }
+            } else {
                 $status = 'error';
-                $msg = "Game can't be updated!";
+                $msg = $name . " already exist";
             }
-        }else{
-            $status = 'error';
-            $msg = $name." already exist";
         }
-
         echo json_encode(array('status' => $status, 'msg' => $msg));
     }
 
@@ -135,30 +143,34 @@ class Game extends CI_Controller{
         $status = "";
         $msg="";
 
-        $datetime = date('Y-m-d H:i:s', time());
-        $gameID = $this->input->post('id');
-        $userID = $this->session->userdata('user_id');
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/loginAndRegister"));
+        }else {
+            $datetime = date('Y-m-d H:i:s', time());
+            $gameID = $this->input->post('id');
+            $userID = $this->session->userdata('user_id');
 
-        $data_post=array(
-            'isActive'=>0,
-            "created" => $datetime,
-            "lastUpdated"=>$datetime,
-            "lastUpdatedBy"=>$userID
-        );
+            $data_post = array(
+                'isActive' => 0,
+                "created" => $datetime,
+                "lastUpdated" => $datetime,
+                "lastUpdatedBy" => $userID
+            );
 
-        $this->db->trans_begin();
-        $update = $this->Game_model->updateGame($data_post,$gameID);
+            $this->db->trans_begin();
+            $update = $this->Game_model->updateGame($data_post, $gameID);
 
-        if($update){
-            $this->db->trans_commit();
-            $status = 'success';
-            $msg = "Game has been delete successfully!";
-        }else{
-            $this->db->trans_rollback();
-            $status = 'error';
-            $msg = "Game can't be delete!";
+            if ($update) {
+                $this->db->trans_commit();
+                $status = 'success';
+                $msg = "Game has been delete successfully!";
+            } else {
+                $this->db->trans_rollback();
+                $status = 'error';
+                $msg = "Game can't be delete!";
+            }
         }
-
         echo json_encode(array('status' => $status, 'msg' => $msg));
     }
 
