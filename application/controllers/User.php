@@ -56,6 +56,7 @@
 				redirect($this->loginAndRegister());
 			}
 			else{
+				$data['data_detail']=$this->User_model->getUserDetailByUsername($this->session->userdata("username"));
                 $data['data_content']="admin/edit_profile_view";
 				$this->load->view('includes/member_area_template_view',$data);
 			}
@@ -190,6 +191,94 @@
 	        	$this->loginAndRegister("Please Check Your Email", "forgot"); 
 	        }
 
+		}
+
+		function doUpdateUserProfile(){
+			$status = "";
+	        $msg="";
+
+	        $datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+
+			$username = $this->input->post('username');
+			$name = $this->input->post("name");
+			$email = $this->input->post("email");
+			$phone = $this->input->post("phone");
+			$isUpdatePassword = $this->input->post("is_update_pass");
+			$oldPassword = $this->input->post("old_pass");
+			$newPassword = $this->input->post("new_pass");
+
+			$userVerify = $this->User_model->checkUsernameExceptSelf($username, $this->session->userdata("user_id"));
+			$emailVerify = $this->User_model->checkEmailExceptSelf($email, $this->session->userdata("user_id"));
+			$phoneVerify = $this->User_model->checkPhoneExceptSelf($phone, $this->session->userdata("user_id"));
+			$passVerifier = $this->User_model->getPasswordbyUsername($this->session->userdata("username"));
+
+			if($userVerify == 1){
+				$status = 'error';
+                $msg = "Username already exists";
+        	}else if($emailVerify == 1){
+        		$status = 'error';
+                $msg = "Email already exists";
+        	}else if($phoneVerify == 1){
+        		$status = 'error';
+                $msg = "Phone already exists";
+        	}else if($isUpdatePassword == "TRUE"){
+        		if(!$this->hash->verifyPass($oldPassword, $passVerifier->password)){
+        			$status = 'error';
+                	$msg = "Old Password doesn't match";
+        		}else{
+        			$data_user = array(
+						'username' => $username,
+						'name' => $name,
+						'email' => $email,
+						'phoneNumber' => $phone,
+						'password' => $this->hash->hashPass($newPassword),
+						'lastUpdated' => $datetime,
+						'lastUpdatedBy' => $this->session->userdata("user_id")
+					);
+
+					$this->db->trans_begin();
+					$query = $this->User_model->updateUser($data_user, $this->session->userdata('user_id'));
+
+					if ($this->db->trans_status() === FALSE) {
+		                // Failed to save Data to DB
+		                $this->db->trans_rollback();
+		                $status = 'error';
+                		$msg = "Something went wrong when updating profile";
+		            }
+		            else{
+		            	$this->db->trans_commit();
+		            	$status = 'success';
+                		$msg = "Successfully update your profile";
+		            }
+        		}
+        	}
+        	else{
+        		$data_user = array(
+						'username' => $username,
+						'name' => $name,
+						'email' => $email,
+						'phoneNumber' => $phone,						
+						'lastUpdated' => $datetime,
+						'lastUpdatedBy' => $this->session->userdata("user_id")
+					);
+
+					$this->db->trans_begin();
+					$query = $this->User_model->updateUser($data_user, $this->session->userdata('user_id'));
+
+					if ($this->db->trans_status() === FALSE) {
+		                // Failed to save Data to DB
+		                $this->db->trans_rollback();
+		                $status = 'error';
+                		$msg = "Something went wrong when updating profile";
+		            }
+		            else{
+		            	$this->db->trans_commit();
+		            	$status = 'success';
+                		$msg = "Successfully update your profile";
+		            }
+        	}
+
+        	echo json_encode(array('status' => $status, 'msg' => $msg, 'acak' => $isUpdatePassword));
 		}
 
 		function getUserCoins(){
