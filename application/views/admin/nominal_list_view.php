@@ -130,6 +130,7 @@
         }
 
         $('#btn-add').click(function(){
+            $('.label-danger').html('');
             // Set Title modal
             $('.modal-title').html('Add Nominal');
             // Show hide button
@@ -140,6 +141,7 @@
         });
 
         $('.btn-edit').click(function(){
+            $('.label-danger').html('');
             // Set Title modal
             $('.modal-title').html('Edit Nominal');
             // Show hide button

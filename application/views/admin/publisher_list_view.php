@@ -155,6 +155,7 @@
         });
 
         $('#btn-add').click(function(){
+            $('.label-danger').html('');
             // Set Title modal
             $('.modal-title').html('Add Publisher');
             // Show hide button
@@ -165,6 +166,7 @@
         });
 
         $('.btn-edit').click(function(){
+            $('.label-danger').html('');
             // Set Title modal
             $('.modal-title').html('Edit Publisher');
             // Show hide button
