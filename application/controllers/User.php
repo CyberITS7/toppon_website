@@ -12,6 +12,7 @@
 	    $this->load->library('Hash');
 	    $this->load->model('User_model');
 	    $this->load->model('SAccount_model');
+	    $this->load->library("Authentication");
 		}
 
 		function index(){
@@ -278,7 +279,7 @@
 		            }
         	}
 
-        	echo json_encode(array('status' => $status, 'msg' => $msg, 'acak' => $isUpdatePassword));
+        	echo json_encode(array('status' => $status, 'msg' => $msg));
 		}
 
 		function getUserCoins(){
@@ -288,5 +289,127 @@
 
             echo json_encode(array('toppon_coin' => $akunku->coin, 'toppon_poin' => $akunku->poin));
 		}
+
+		/*Super Admin Section*/
+		function memberList($start=1){
+			$user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+			if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+				redirect(site_url("User/loginAndRegister"));	
+			}
+			else{
+				//get Member List data
+		        $num_per_page = 10;
+		        $start = ($start - 1) * $num_per_page;
+		        $limit = $num_per_page;
+
+		        $member_page = $this->User_model->getMemberList($start, $limit);
+		        $count_member = $this->User_model ->getCountMemberList();
+
+		        $config['base_url']= site_url('User/memberList');
+		        $config ['total_rows'] = $count_member;
+		        $config ['per_page']=$num_per_page;
+		        $config['use_page_numbers']=TRUE;
+		        $config['uri_segment']=3;
+
+		        $this->pagination->initialize($config);
+		        $data['pages'] = $this->pagination->create_links();
+		        $data['members']= $member_page;
+
+		        if ($this->input->post('ajax')){
+		            $this->load->view('admin/member_list_view', $data);
+		        }else{
+		            $data['data_content'] = 'admin/member_list_view';
+		            $this->load->view('includes/member_area_template_view',$data);
+		        }
+			}
+		}
+
+		function doUpdateMember(){
+			$status = "";
+	        $msg="";
+
+	        $datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+
+	        $userID = $this->input->post("id");
+			$username = $this->input->post('username');
+			$name = $this->input->post("name");
+			$email = $this->input->post("email");
+			$phone = $this->input->post("phone_number");			
+
+			$userVerify = $this->User_model->checkUsernameExceptSelf($username, $userID);
+			$emailVerify = $this->User_model->checkEmailExceptSelf($email, $userID);
+			$phoneVerify = $this->User_model->checkPhoneExceptSelf($phone, $userID);
+
+			if($userVerify == 1){
+				$status = 'error';
+                $msg = "Username already exists";
+        	}else if($emailVerify == 1){
+        		$status = 'error';
+                $msg = "Email already exists";
+        	}else if($phoneVerify == 1){
+        		$status = 'error';
+                $msg = "Phone already exists";
+        	}
+        	else{
+        		$data_user = array(
+						'username' => $username,
+						'name' => $name,
+						'email' => $email,
+						'phoneNumber' => $phone,						
+						'lastUpdated' => $datetime,
+						'lastUpdatedBy' => $this->session->userdata("user_id")
+					);
+
+					$this->db->trans_begin();
+					$query = $this->User_model->updateUser($data_user, $userID);
+
+					if ($this->db->trans_status() === FALSE) {
+		                // Failed to save Data to DB
+		                $this->db->trans_rollback();
+		                $status = 'error';
+                		$msg = "Something went wrong when updating member info";
+		            }
+		            else{
+		            	$this->db->trans_commit();
+		            	$status = 'success';
+                		$msg = "Successfully update member info";
+		            }
+        	}
+
+        	echo json_encode(array('status' => $status, 'msg' => $msg));
+		}
+
+		function doDeleteMember(){
+			$status = "";
+	        $msg="";
+
+	        $datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+
+	        $userID = $this->input->post("id");
+
+	        $data_user = array(
+				'isActive' => 0,						
+				'lastUpdated' => $datetime,
+				'lastUpdatedBy' => $this->session->userdata("user_id")
+			);
+
+			$this->db->trans_begin();
+			$query = $this->User_model->updateUser($data_user, $userID);
+
+			if ($this->db->trans_status() === FALSE) {
+                // Failed to save Data to DB
+                $this->db->trans_rollback();
+                $status = 'error';
+        		$msg = "Something went wrong when deleting member";
+            }
+            else{
+            	$this->db->trans_commit();
+            	$status = 'success';
+        		$msg = "Successfully delete member";
+            }
+
+            echo json_encode(array('status' => $status, 'msg' => $msg));
+		}
+		/*Super Admin Section*/
 	}
 ?>

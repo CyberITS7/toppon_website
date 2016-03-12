@@ -91,26 +91,27 @@
                                 <li><a><i class="fa fa-table"></i> Master <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li><a href="<?php echo site_url('Bank')?>">Bank</a></li>
-                                        <li><a href="<?php echo site_url('Payment')?>">Payment Method</a></li>
                                         <li><a href="<?php echo site_url('Coin')?>">Coin</a></li>
-                                        <li><a href="<?php echo site_url('GiftCategory')?>">Gift Category </a></li>
-                                        <li><a href="<?php echo site_url('GameCategory')?>">Game Category</a></li>
-                                        <li><a href="<?php echo site_url('Publisher')?>">Publisher</a></li>
                                         <li><a href="<?php echo site_url('Game')?>">Game</a></li>
+                                        <li><a href="<?php echo site_url('GameCategory')?>">Game Category</a></li>
+                                        <li><a href="<?php echo site_url('GiftCategory')?>">Gift Category </a></li>
                                         <li><a href="<?php echo site_url('Nominal')?>">Nominal</a></li>
+                                        <li><a href="<?php echo site_url('Payment')?>">Payment Method</a></li>
+                                        <li><a href="<?php echo site_url('Publisher')?>">Publisher</a></li>
+                                        <li><a href="<?php echo site_url('User/memberList')?>">Member</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-cog"></i> Setting <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
+                                        <li><a href="<?php echo site_url('SGame')?>">Game</a></li>
                                         <li><a href="<?php echo site_url('SGameCategory')?>">Game Category</a></li>
                                         <li><a href="<?php echo site_url('SPublisher')?>">Publisher</a></li>
-                                        <li><a href="<?php echo site_url('SGame')?>">Game</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-file-text"></i> Report <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="<?php echo site_url('Report/gamePurchaseReport')?>">Game Purchase</a></li>
                                         <li><a href="<?php echo site_url('Report/depositReport')?>">Deposit</a></li>
+                                        <li><a href="<?php echo site_url('Report/gamePurchaseReport')?>">Game Purchase</a></li>
                                         <li><a href="<?php echo site_url('Report/giftReport')?>">Gift</a></li>
                                         <li><a href="<?php echo site_url('Report/transferReport')?>">Transfer</a></li>
                                     </ul>

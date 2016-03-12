@@ -17,6 +17,7 @@
 
             if($userId != null){
                 $this->db->where('a.userPengirim', $userId);
+                $this->db->or_where('a.userPenerima', $userId);
             }
             if($limit != null || $start!= null){
                 $this->db->limit($limit,$start);

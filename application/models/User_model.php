@@ -146,5 +146,27 @@
 	            return 0; //blom ada
 	        }
 	    }
+
+	    function getMemberList($start, $limit){
+	        $this->db->select('*');
+	        $this->db->from('tbl_toppon_m_users');
+	        $this->db->where('isActive', 1);
+	        $this->db->where('userLevel', "member");
+	        $this->db->order_by('created','asc');
+
+	        if($limit != null || $start!= null){
+	            $this->db->limit($limit,$start);
+	        }
+
+	        $query = $this->db->get();
+	        return $query->result_array();
+	    }
+
+	    function getCountMemberList(){
+	    	$this->db->from('tbl_toppon_m_users');
+	        $this->db->where('isActive', 1);
+	        $this->db->where('userLevel', "member");
+			return $this->db->count_all_results();
+	    }
 	}
 ?>
