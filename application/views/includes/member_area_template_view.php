@@ -109,9 +109,10 @@
                                 </li>
                                 <li><a><i class="fa fa-file-text"></i> Report <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="<?php echo site_url('SGameCategory')?>">Game Purchase</a></li>
-                                        <li><a href="<?php echo site_url('SPublisher')?>">Deposit</a></li>
-                                        <li><a href="<?php echo site_url('SGame')?>">Transfer</a></li>
+                                        <li><a href="<?php echo site_url('Report/gamePurchaseReport')?>">Game Purchase</a></li>
+                                        <li><a href="<?php echo site_url('Report/depositReport')?>">Deposit</a></li>
+                                        <li><a href="<?php echo site_url('Report/giftReport')?>">Gift</a></li>
+                                        <li><a href="<?php echo site_url('Report/transferReport')?>">Transfer</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-gamepad"></i> Game Purchase <span class="fa fa-chevron-down"></span></a>

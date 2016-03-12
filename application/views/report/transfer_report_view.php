@@ -17,9 +17,9 @@
     <div class="page-title">
         <div class="title_left">
             <h3>
-                Invoice
+                Transfer History
                 <small>
-                    Some examples to get you started
+                    List of Transfer History
                 </small>
             </h3>
         </div>
@@ -42,12 +42,12 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Game Purchase Report <small>Report Data</small></h2>
+                    <h2>Transfer Report <small>Report Data</small></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <div class="well well-sm">
-                        <a href="<?php echo site_url('Report/gamePurchaseReport')?>">
+                        <a href="<?php echo site_url('Report/transferReport')?>">
                             <button type="submit" class="btn btn-default btn-sm">
                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>All
                             </button>
@@ -61,38 +61,30 @@
                     </div>
                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                         <thead>
-                            <tr class="headings">
-                                <th>
-                                    <input type="checkbox" class="tableflat">
-                                </th>
-                                <th>TransactionID</th>
-                                <th>Publisher </th>
-                                <th>Game </th>
-                                <th>Voucher </th>
-                                <th>Coin </th>
-                                <th>Date </th>
-                                <th class=" no-link last"><span class="nobr">Action</span>
-                                </th>
-                            </tr>
+                        <tr class="headings">
+                            <th>
+                                <input type="checkbox" class="tableflat">
+                            </th>
+                            <th>User Sender</th>
+                            <th>User Reciever </th>
+                            <th>Coin </th>
+                            <th>Date</th>
+                        </tr>
                         </thead>
 
                         <tbody>
-                        <?php $x=1; foreach($game_purchase_list as $row) { ?>
+                        <?php $x=1; foreach($transfer_list as $row) { ?>
                             <?php if($x%2==1) {?>
                                 <tr class="even pointer">
                                     <td class="a-center ">
                                         <input type="checkbox" class="tableflat">
                                     </td>
-                                    <td class=" "><?php echo $row['prefixCode'].$row['tGamePurchaseID']; ?></td>
-                                    <td class=" "><?php echo $row['publisherName']; ?></td>
-                                    <td class=" "><?php echo $row['gameName'] ?></td>
-                                    <td class="a-right a-right "><?php echo $row['currency']." ".number_format($row['nominalName'],0,",","."); ?></td>
-                                    <td class="a-right a-right "><?php echo number_format($row['paymentValue'],0,",","."); ?></td>
+                                    <td class=" "><?php echo $row['pengirim']; ?></td>
+                                    <td class=" "><?php echo $row['penerima']; ?></td>
+                                    <td class="a-right a-right "><?php echo number_format($row['coin'],0,",","."); ?></td>
                                     <td class=" ">
                                         <?php $date = date_create($row['created']);
                                         echo date_format($date, 'F d, Y \a\t g:ia' ); ?>
-                                    </td>
-                                    <td class=" last"><a href="#">View</a>
                                     </td>
                                 </tr>
                             <?php }else{ ?>
@@ -100,19 +92,15 @@
                                     <td class="a-center ">
                                         <input type="checkbox" class="tableflat">
                                     </td>
-                                    <td class=" "><?php echo $row['prefixCode'].$row['tGamePurchaseID']; ?></td>
-                                    <td class=" "><?php echo $row['publisherName']; ?></td>
-                                    <td class=" "><?php echo $row['gameName'] ?></td>
-                                    <td class="a-right a-right "><?php echo $row['currency']." ".number_format($row['nominalName'],0,",","."); ?></td>
-                                    <td class="a-right a-right "><?php echo number_format($row['paymentValue'],0,",","."); ?></td>
+                                    <td class=" "><?php echo $row['pengirim']; ?></td>
+                                    <td class=" "><?php echo $row['penerima']; ?></td>
+                                    <td class="a-right a-right "><?php echo number_format($row['coin'],0,",","."); ?></td>
                                     <td class=" ">
                                         <?php $date = date_create($row['created']);
                                         echo date_format($date, 'F d, Y \a\t g:ia' ); ?>
                                     </td>
-                                    <td class=" last"><a href="#">View</a>
-                                    </td>
                                 </tr>
-                        <?php } $x++; } ?>
+                            <?php } $x++; } ?>
                         </tbody>
 
                     </table>

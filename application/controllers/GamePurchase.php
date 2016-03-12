@@ -295,49 +295,5 @@ class GamePurchase extends CI_Controller{
         }
         return $ipaddress;
     }
-
-    function gamePurchaseReport(){
-        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
-        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
-        }
-        else {
-            //get Games List data
-            $userID = $this->session->userdata('user_id');
-            $data['game_purchase_list'] = $this->TGamePurchase_model->getTransGamePurchaseList(null, null, $userID);
-            $data['data_content'] = "report/game_purchase_report_view";
-            $this->load->view('includes/member_area_template_view', $data);
-        }
-    }
-    function gamePurchaseReportSearchByPeriode($startDate, $endDate){
-        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
-        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
-        }
-        else {
-            //get Games List data
-            $userID = $this->session->userdata('user_id');
-            //END DATE + 1
-            $endDate = strtotime ( '1 day' , strtotime ( $endDate ) ) ;
-            $endDate = date ( 'Y-m-d' , $endDate );
-            $data['game_purchase_list'] = $this->TGamePurchase_model->getTransGamePurchaseByPeriode(null, null,$userID,$startDate, $endDate);
-            $data['data_content'] = "report/game_purchase_report_view";
-            $this->load->view('includes/member_area_template_view', $data);
-
-        }
-    }
-    function gamePurchaseReportSearchByDate($date){
-        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
-        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
-        }
-        else {
-            //get Games List data
-            $userID = $this->session->userdata('user_id');
-            $data['game_purchase_list'] = $this->TGamePurchase_model->getTransGamePurchaseByDate(null, null, $userID, $date);
-            $data['data_content'] = "report/game_purchase_report_view";
-            $this->load->view('includes/member_area_template_view', $data);
-        }
-    }
 }
 ?>
