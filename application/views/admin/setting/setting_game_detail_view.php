@@ -64,7 +64,7 @@
                 </div>
                 <h3>
                     <a href="#">
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target=".setting-modal">
+                        <button type="button" class="btn btn-default" id="add-detail-btn" data-toggle="modal" data-target=".setting-modal">
                             <i class="fa fa-plus-square"></i>&nbsp Add Detail
                         </button>
                     </a>
@@ -73,28 +73,26 @@
                     <thead>
                     <tr class="headings">
                         <th>Nominal</th>
-                        <th>Product Code</th>
                         <th>Coin Value</th>
+                        <th>Product Code</th>
                         <th class=" no-link last"><span class="nobr">Action</span></th>
                     </tr>
                     </thead>
 
                     <tbody id="nominal-tbody">
-                    <?php if($nominal_list_edit != null) {
+                    <?php if($nominal_list_edit != "" && $nominal_list_edit != null) {
                         foreach($nominal_list_edit as $row){ ?>
-                            <tr data-status="OLD" data-id="<?php echo $row['nominalID'];?>"
-                                data-setting = "<?php echo $row['sGameID'];?>">
+                            <tr data-status="OLD" class="setting-detail" id="old-<?php echo $row['sGameID'];?>"
+                                data-id="<?php echo $row['nominalID'];?>" data-setting = "<?php echo $row['sGameID'];?>">
                                 <td class="nominal-td">
                                     <?php echo $row['currency']." ".number_format($row['nominalName'],0,",","."); ?>
                                 </td>
-                                <td class="product-code-td">
-                                    <?php echo $row['productCode']; ?>
-                                </td>
-                                <td class="coin-value-td">
+                                <td class="coin-value-td" data-value="<?php echo $row['paymentValue']; ?> ">
                                     <?php echo number_format($row['paymentValue'],0,",","."); ?>
                                 </td>
+                                <td class="product-code-td"><?php echo $row['productCode']; ?></td>
                                 <td>
-                                    <button class="btn btn-primary btn-sm btn-edit-detail">
+                                    <button type="button" class="btn btn-primary btn-sm btn-edit-detail">
                                         <i class="fa fa-pencil"></i>
                                     </button>
                                     <button class="btn btn-danger btn-sm btn-del-detail">
@@ -140,12 +138,13 @@
                         <label for="coin-value" class="control-label">Coin Value : <span class="label label-danger" id="err-coin-value"></span></label>
                         <input type="text" class="form-control" id="coin-value" name="coin-value" data-label="#err-coin-value">
                     </div>
+                    <input type="hidden" id="old-nominal" data-status="" value=""/>
                 </form>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="btn-add-detail">Add Detail</button>
+                <button type="button" class="btn btn-primary" id="btn-add-detail" data-status = "" data-row="">Add Detail</button>
             </div>
         </div>
     </div>
@@ -156,31 +155,83 @@
     $(document).ready( function($) {
         // Initialize Publisher List Select
         $('select').select2();
-        var publisher_detail = new Array();
-        var publisher_delete = new Array();
+        var nominal_detail = <?php echo json_encode($nominal_list_edit);?>;
+        var nominal_detail_add = new Array();
+        var nominal_detail_edit = new Array();
+        var nominal_delete = new Array();
+        var id_detail = 0;
 
-        // Adding from modal to Detail
+        // ACTION Button ADD
+        $('#add-detail-btn').click(function(){
+            // SET status modal to ADD mode
+            $('#btn-add-detail').attr("data-status","ADD");
+            // RESET modal form
+            $('#old-nominal').val('');
+            $('#old-nominal').attr("data-status","NEW");
+            $('#nominal-select').val('').change();
+            $('#setting-form')[0].reset();
+        });
+
+        //ACTION when MODAL is CLOSED
+        $('.setting-modal').on('hidden.bs.modal', function () {
+            // Set selected row to empty
+            $('#btn-add-detail').attr("data-row","");
+        })
+
+        // ADD or EDIT from modal to Detail
         $('#btn-add-detail').click(function(){
-            if(validateAddDetail()){
-                var publisher = $("#nominal-select").val();
-                var publisher_name = $("#nominal-select option:selected").text();
 
-                //Adding to #nominal-tbody
-                var tr = $("<tr>",{"data-status":"NEW","data-id":publisher});
-                var td1 = $("<td>").text(publisher_name);
-                var td2 = $("<td>");
-                var btn_del = $("<button>",{class:"btn btn-danger btn-sm btn-del-detail"}).html('<i class="fa fa-remove"></i>');
-                td1.appendTo(tr);
-                td2.append(btn_del);
-                td2.appendTo(tr);
-                tr.appendTo("#nominal-tbody");
-                //Push to Array publisher_detail
-                var detailData = {
-                    id : publisher
-                };
-                publisher_detail.push(detailData);
+            // ROW is id for selected tr for update, empty for NEW Detail
+            var row = $(this).attr("data-row");
+            var status = $(this).attr("data-status"); // Status for ADD OR EDIT
+            var status_data =  $('#old-nominal').attr("data-status"); // Status for OLD OR NEW data
+            var old_nominal =  $('#old-nominal').val();
 
+            if(validateAddDetail(status)){
+                var nominal_id = $("#nominal-select").val();
+                var nominal_name = $("#nominal-select option:selected").text();
+                var product_code = $("#product-code").val();
+                var coin_val = $("#coin-value").val();
+
+                if(status == "ADD") {
+                    //ADD
+                    //Adding to #nominal-tbody
+                    addNewDetail(nominal_id, nominal_name, product_code, coin_val);
+                }else if(status == "EDIT"){
+                    //EDIT
+                    var setting_id = $(row).attr("data-setting");
+                    $(row).attr("data-id",nominal_id);
+                    $(row).find(".nominal-td").text(nominal_name);
+                    $(row).find(".coin-value-td").text(coin_val);
+                    $(row).find(".coin-value-td").attr("data-value",coin_val);
+                    $(row).find(".product-code-td").text(product_code);
+
+                    var detail_data = {
+                        settingID : setting_id,
+                        nominalID : nominal_id,
+                        coinVal : coin_val,
+                        productCode : product_code
+                    }
+
+                    if(status_data == "OLD"){
+                        nominal_detail = deleteObject(nominal_detail, old_nominal);
+                        nominal_detail_edit = deleteObject(nominal_detail_edit, old_nominal);
+                        nominal_detail_edit.push(detail_data);
+                    }else if(status_data == "NEW"){
+                        nominal_detail_add = deleteObject(nominal_detail_add, old_nominal);
+                        nominal_detail_add.push(detail_data);
+                    }
+                }
+
+                alert("EDIT = "+nominal_detail_edit.length);
+                alert("NEW = "+nominal_detail_add.length);
+                alert("DEL = "+nominal_delete.length);
+                alert("NEW = "+JSON.stringify(nominal_detail_add));
+                alert("EDIT = "+JSON.stringify(nominal_detail_edit));
+                alert("DEL = "+JSON.stringify(nominal_delete));
+                alert("OLD = "+JSON.stringify(nominal_detail));
                 $('#nominal-select').val('').change();
+                $('#setting-form')[0].reset();
                 $('.setting-modal').modal('hide');
             }
         });
@@ -188,56 +239,66 @@
         // Edit Detail
         $("#nominal-tbody" ).on( "click", ".btn-edit-detail", function() {
             var row = $(this).closest("tr");
+            var id = row.attr("id");
+            var nominal_id = row.attr("data-id");
+            var coin_val = row.find(".coin-value-td").attr("data-value");
+            var product_code = row.find(".product-code-td").html();
             var status = row.attr("data-status");
-            var id = row.attr("data-id");
-            if(status == "NEW"){
-                row.remove();
-                publisher_detail.splice( $.inArray(id,publisher_detail) ,1 );
-            }else if(status == "OLD"){
-                row.addClass('tr-del');
-                row.attr("data-status","DEL");
-                var detailData = {
-                    id : id
-                };
-                publisher_delete.push(detailData);
-            }else if(status == "DEL"){
-                row.removeClass('tr-del');
-                row.attr("data-status","OLD");
-                publisher_delete.splice( $.inArray(id,publisher_delete) ,1 );
-            }
+            var setting_id  = row.attr("data-setting");
+
+            //SET DATA TO MODAL
+            $('#nominal-select').val(nominal_id).change();
+            $("#product-code").val(product_code);
+            $("#coin-value").val(parseInt(coin_val));
+
+            // SET ID for selected row
+            $('#btn-add-detail').attr("data-row","#"+id);
+            // SET STATUS MODAL to Editing mode
+            $('#btn-add-detail').attr("data-status","EDIT");
+            $('#old-nominal').val(nominal_id);
+            $('#old-nominal').attr("data-status",status);
+            // SHOW Modal
+            $('.setting-modal').modal('show');
         });
 
         // Delete Detail
         $("#nominal-tbody" ).on( "click", ".btn-del-detail", function() {
             var row = $(this).closest("tr");
             var status = row.attr("data-status");
-            var id = row.attr("data-id");
+            var nominal = row.attr("data-id");
+            var setting = row.attr("data-setting");
+            var btn_edit = row.find(".btn-edit-detail");
+
             if(status == "NEW"){
                 row.remove();
-                publisher_detail.splice( $.inArray(id,publisher_detail) ,1 );
+                nominal_detail_add = deleteObject(nominal_detail_add, nominal);
             }else if(status == "OLD"){
+                btn_edit.attr("disabled","disabled");
                 row.addClass('tr-del');
                 row.attr("data-status","DEL");
                 var detailData = {
-                    id : id
+                    nominalID : nominal,
+                    settingID : setting
                 };
-                publisher_delete.push(detailData);
+                nominal_delete.push(detailData);
             }else if(status == "DEL"){
+                btn_edit.removeAttr("disabled");
                 row.removeClass('tr-del');
                 row.attr("data-status","OLD");
-                publisher_delete.splice( $.inArray(id,publisher_delete) ,1 );
+                nominal_delete = deleteObject(nominal_delete, nominal);
             }
+            alert("DEL = "+JSON.stringify(nominal_delete));
         });
 
         $('#btn-save').click(function(){
             if(validateSave()){
-                var id = $('#setting-id').val();
-                var update_category = $('#game-select').val();
+                var game_id = $('#setting-id').val();
+                var update_game = $('#game-select').val();
                 var formData = new FormData();
-                formData.append("publisher_list", JSON.stringify(publisher_detail));
-                if(id == '00') {
+                formData.append("nominal_add", JSON.stringify(nominal_detail_add));
+                if(game_id == '00') {
                     // ADD NEW SETTING
-                    formData.append("game_category", update_category);
+                    formData.append("game_id", update_game);
                     $(this).saveData({
                         url: "<?php echo site_url('SGame/createSGame')?>",
                         data: formData,
@@ -245,41 +306,122 @@
                     });
                 }else{
                     // UPDATE SETTING
-                    if(id != update_category) {
+                    if(game_id != update_game) {
                         //Update header if Setting Header is edited
                         formData.append("update_header", "1");
-                        formData.append("update_category", update_category);
+                        formData.append("update_game", update_game);
                     }else{
                         //Header is not edited
                         formData.append("update_header", "0");
-                        formData.append("update_category", id);
+                        formData.append("update_game", game_id);
                     }
-                    formData.append("game_category",id);
-                    formData.append("publisher_delete", JSON.stringify(publisher_delete));
+                    formData.append("game_id",game_id);
+                    formData.append("nominal_add", JSON.stringify(nominal_detail_add));
+                    formData.append("nominal_edit", JSON.stringify(nominal_detail_edit));
+                    formData.append("nominal_delete", JSON.stringify(nominal_delete));
+
                     $(this).saveData({
                         url: "<?php echo site_url('SGame/updateSGame')?>",
                         data: formData,
                         locationHref: "<?php echo site_url('SGame')?>"
                     });
+
                 }
             }
         });
 
-        function validateAddDetail(){
+        function addNewDetail(nominal_id, nominal_name, product_code, coin_val){
+            var tr = $("<tr>", {id: "new-" + id_detail, "data-status": "NEW", "data-id": nominal_id,"data-setting" : ""});
+            var td1 = $("<td>",{class:"nominal-td"}).text(nominal_name);
+            var td2 = $("<td>",{class:"coin-value-td","data-value":coin_val}).text(coin_val);
+            var td3 = $("<td>",{class:"product-code-td"}).text(product_code);
+            var td4 = $("<td>");
+            var btn_edit = $("<button>", {class: "btn btn-primary btn-sm btn-edit-detail"}).html('<i class="fa fa-pencil"></i>');
+            var btn_del = $("<button>", {class: "btn btn-danger btn-sm btn-del-detail"}).html('<i class="fa fa-remove"></i>');
+            td1.appendTo(tr);
+            td2.appendTo(tr);
+            td3.appendTo(tr);
+            td4.append(btn_edit);
+            td4.append(btn_del);
+            td4.appendTo(tr);
+            tr.appendTo("#nominal-tbody");
+            //Push to Array publisher_detail
+            var detail_data = {
+                nominalID: nominal_id,
+                coinVal : coin_val,
+                productCode : product_code
+            };
+            nominal_detail_add.push(detail_data);
+            id_detail++;
+        }
+
+        function validateAddDetail(status){
             var err=0;
 
             if(!$("#nominal-select").validateRequired()){
                 err++;
             }else{
-                var publisher = $("#nominal-select").val();
-                //var check = jQuery.inArray(publisher, publisher_detail);
-                var filtered = $(publisher_detail).filter(function(){
-                    return this.id == publisher;
-                });
-                if(filtered.length > 0){
-                    err++;
-                    alertify.error("This publisher is allready on detail");
+                // if row is not empty , means UPDATE else is ADD NEW
+                var nominal = parseInt($("#nominal-select").val());
+                if(status == "ADD") {
+                    //var check = jQuery.inArray(publisher, publisher_detail);
+                    var filtered = $(nominal_detail).filter(function () {
+                        return this.nominalID == nominal;
+                    });
+                    var filtered_add = $(nominal_detail_add).filter(function () {
+                        return this.nominalID == nominal;
+                    });
+                    var filtered_edit = $(nominal_detail_edit).filter(function () {
+                        return this.nominalID == nominal;
+                    });
+
+                    if (filtered.length > 0) {
+                        err++;
+                        alertify.error("This nominal is allready on detail");
+                    }else if(filtered_add.length > 0){
+                        err++;
+                        alertify.error("This nominal is allready on detail");
+                    }else if(filtered_edit.length > 0){
+                        err++;
+                        alertify.error("This nominal is allready on detail");
+                    }
+                }else if(status == "EDIT"){
+                    //var check = jQuery.inArray(publisher, publisher_detail);
+                    var old_nominal = $('#old-nominal').val();
+
+                    var filtered = $(nominal_detail).filter(function () {
+                        if(old_nominal != this.nominalID)
+                        return this.nominalID == nominal;
+                    });
+                    var filtered_add = $(nominal_detail_add).filter(function () {
+                        if(old_nominal != this.nominalID)
+                        return this.nominalID == nominal;
+                    });
+                    var filtered_edit = $(nominal_detail_edit).filter(function () {
+                        if(old_nominal != this.nominalID)
+                        return this.nominalID == nominal;
+                    });
+
+                    if (filtered.length > 0) {
+                        err++;
+                        alertify.error("This nominal is allready on detail");
+                    }else if(filtered_add.length > 0){
+                        err++;
+                        alertify.error("This nominal is allready on detail");
+                    }else if(filtered_edit.length > 0){
+                        err++;
+                        alertify.error("This nominal is allready on detail");
+                    }
                 }
+            }
+
+            if(!$("#product-code").validateRequired()){
+                err++;
+            }
+            if(!$("#coin-value").validateRequired()){
+                err++;
+            }else if(!$("#coin-value").validateNumberForm()){
+                err++;
             }
 
             if(err!=0){
@@ -288,9 +430,10 @@
                 return true;
             }
         }
+
         function validateSave(){
             var err=0;
-            var array_size = publisher_detail.length;
+            var array_size = nominal_detail_add.length;
             var setting_id = $("#setting-id").val();
 
             if(!$('#game-select').validateRequired()){
@@ -300,7 +443,7 @@
             if(setting_id == '00'){
                 if(array_size == 0){
                     err++;
-                    alertify.error("Detail Publisher can't be empty !");
+                    alertify.error("Detail Nominal can't be empty !");
                 }
             }
 
@@ -310,7 +453,16 @@
                 return true;
             }
         }
-        //fix modal force focus
+
+        function deleteObject(some_array, del_param){
+            remove_arr = some_array
+                .filter(function (el) {
+                    return el.nominalID != del_param;
+                }
+            );
+
+            return remove_arr;
+        }
     });
 
 </script>

@@ -59,7 +59,7 @@ class SGame extends CI_Controller{
             $nominal_list = $this->Nominal_model->getNominalList(null, null);
 
             $data['setting_id'] = null;
-            $data['nominal_list_edit'] = null;
+            $data['nominal_list_edit'] = [];
             $data['game'] = $game_list;
             $data['nominal'] = $nominal_list;
             $data['data_content'] = 'admin/setting/setting_game_detail_view';
@@ -98,16 +98,18 @@ class SGame extends CI_Controller{
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $userID = $this->session->userdata('user_id');
-            $game = $this->input->post('game');
-            $nominal_list = json_decode($this->input->post('nominal_list'), true);
+            $game_id = $this->input->post('game_id');
+            $nominal_list = json_decode($this->input->post('nominal_add'), true);
             //$nominal_list = explode(",",$this->input->post('nominal_list'));
 
             //INSERT to DB
             $this->db->trans_begin();
             foreach ($nominal_list as $row) {
                 $data_post = array(
-                    'gameID' => $game,
-                    'nominalID' => $row['id'],
+                    'gameID' => $game_id,
+                    'nominalID' => $row['nominalID'],
+                    'productCode' => $row['productCode'],
+                    'paymentValue' => $row['coinVal'],
                     'isActive' => 1,
                     "created" => $datetime,
                     "createdBy" => $userID,
@@ -140,29 +142,43 @@ class SGame extends CI_Controller{
             $datetime = date('Y-m-d H:i:s', time());
             $userID = $this->session->userdata('user_id');
 
-            $game = $this->input->post('game');
+            $game_id = $this->input->post('game_id');
             $update_header = $this->input->post('update_header');
             $update_game = $this->input->post('update_game');
-            $nominal_list = json_decode($this->input->post('nominal_list'), true);
+            $nominal_add = json_decode($this->input->post('nominal_add'), true);
+            $nominal_update = json_decode($this->input->post('nominal_edit'), true);
             $nominal_delete = json_decode($this->input->post('nominal_delete'), true);
 
             $this->db->trans_begin();
-            //Delete Detail
+            //Delete Nominal Detail
             foreach ($nominal_delete as $row) {
                 $data_post = array(
                     'isActive' => 0,
-                    "createdBy" => $userID,
                     "lastUpdated" => $datetime,
                     "lastUpdatedBy" => $userID
                 );
-                $delete = $this->SGame_model->updateSGame($data_post, $game, $row['id']);
+                $delete = $this->SGame_model->updateSGame($data_post, $game_id, $row['settingID']);
+            }
+
+            //Update Nominal Detail
+            foreach ($nominal_update as $row) {
+                $data_post = array(
+                    'nominalID' => $row['nominalID'],
+                    'productCode' => $row['productCode'],
+                    'paymentValue' => $row['coinVal'],
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
+                $update = $this->SGame_model->updateSGame($data_post, $game_id, $row['settingID']);
             }
 
             //INSERT New Nominal
-            foreach ($nominal_list as $row) {
+            foreach ($nominal_add as $row) {
                 $data_post = array(
-                    'gameID' => $game,
-                    'nominalID' => $row['id'],
+                    'gameID' => $game_id,
+                    'nominalID' => $row['nominalID'],
+                    'productCode' => $row['productCode'],
+                    'paymentValue' => $row['coinVal'],
                     'isActive' => 1,
                     "createdBy" => $userID,
                     "lastUpdated" => $datetime,
@@ -179,7 +195,7 @@ class SGame extends CI_Controller{
                     "lastUpdated" => $datetime,
                     "lastUpdatedBy" => $userID
                 );
-                $update = $this->SGame_model->updateSGame($data_post, $game, null);
+                $update = $this->SGame_model->updateSGame($data_post, $game_id, null);
             }
 
             if ($this->db->trans_status() === FALSE) {

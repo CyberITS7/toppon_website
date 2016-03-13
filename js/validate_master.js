@@ -108,7 +108,9 @@
                 success:function(data){
                     if(data.status != 'error') {
                         alertify.success(data.msg);
-                        location.href = settings.locationHref;
+                        window.setTimeout( function(){
+                            location.href = settings.locationHref;
+                        }, 2300 );
                     }else{
                         alertify.error(data.msg);
                     }
@@ -149,7 +151,9 @@
                         success:function(data){
                             if(data.status != 'error') {
                                 alertify.success(data.msg);
-                                location.href = settings.locationHref;
+                                window.setTimeout( function(){
+                                    location.href = settings.locationHref;
+                                }, 2300 );
                             }else{
                                 alertify.error(data.msg);
                             }
@@ -319,7 +323,7 @@
     function validateNumber(number)
     {
         var regex = /^[0-9]*$/;
-        return regex.test(notnumber);
+        return regex.test(number);
     }
 
     function checkAll(){
