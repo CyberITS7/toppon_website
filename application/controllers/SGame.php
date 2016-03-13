@@ -59,7 +59,7 @@ class SGame extends CI_Controller{
             $nominal_list = $this->Nominal_model->getNominalList(null, null);
 
             $data['setting_id'] = null;
-            $data['nominal_list_edit'] = [];
+            $data['nominal_list_edit'] = "";
             $data['game'] = $game_list;
             $data['nominal'] = $nominal_list;
             $data['data_content'] = 'admin/setting/setting_game_detail_view';
