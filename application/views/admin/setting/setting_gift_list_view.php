@@ -92,6 +92,17 @@
                         <input type="text" class="form-control" id="gift-name" name="gift-name" data-label="#err-gift-name">
                     </div>
                     <div class="form-group">
+                        <label for="gift-category" class="control-label">Nama Gift : <span class="label label-danger" id="err-gift-category"></span></label>
+                        <select class="form-control" id="gift-category" name="gift-category" data-label="#err-gift-category">
+                            <option value="">-=Choose=-</option>
+                            <?php foreach ($gift_categories as $row) {
+                                ?>
+                                <option value="<?php echo $row['giftCategoryID']; ?>"><?php echo $row['giftCategory']; ?></option>
+                                <?php
+                            } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="gift-desc" class="control-label">Deskripsi Gift : <span class="label label-danger" id="err-gift-desc"></span></label>
                         <textarea class="form-control" id="gift-desc" name="gift-desc" data-label="#err-gift-desc"></textarea>
                     </div>
@@ -106,7 +117,7 @@
                         <img src="" width="100" height="100" id="preview-img"/>
                     </div>
                     <div class="form-group">
-                        <label for="gift-reward" class="control-label">Nama Gift : <span class="label label-danger" id="err-gift-reward"></span></label>
+                        <label for="gift-reward" class="control-label">Reward : <span class="label label-danger" id="err-gift-reward"></span></label>
                         <input type="text" class="form-control" id="gift-reward" name="gift-reward" data-label="#err-gift-reward">
                     </div>
                 </form>
@@ -127,15 +138,35 @@
         function validate(){
             var err=0;
 
-            if(!$('#publisher-name').validateRequired()){
+            if(!$('#gift-name').validateRequired()){
                 err++;
             }
 
-            if(!$('#publisher-img').validateRequired()){
+            if(!$('#gift-category').validateRequired()){
                 err++;
-            }else if(!$('#publisher-img').validateImgType()){
+            }
+
+            if(!$('#gift-desc').validateRequired()){
                 err++;
-            }else if(!$('#publisher-img').validateMaxSize()){
+            }
+
+            if(!$('#gift-poin').validateRequired()){
+                err++;
+            }else if(!$('#gift-poin').validateNumberForm()){
+                err++;
+            }
+
+            if(!$('#gift-reward').validateRequired()){
+                err++;
+            }else if(!$('#gift-reward').validateNumberForm()){
+                err++;
+            }
+
+            if(!$('#gift-img').validateRequired()){
+                err++;
+            }else if(!$('#gift-img').validateImgType()){
+                err++;
+            }else if(!$('#gift-img').validateMaxSize()){
                 err++;
             }
 
@@ -149,17 +180,38 @@
         function validateEdit(){
             var err=0;
 
-            if(!$('#publisher-name').validateRequired()){
+            if(!$('#gift-name').validateRequired()){
                 err++;
             }
 
-            if($('#publisher-img').val()!= ""){
-                if(!$('#publisher-img').validateImgType()){
+            if(!$('#gift-category').validateRequired()){
+                err++;
+            }
+
+            if(!$('#gift-desc').validateRequired()){
+                err++;
+            }
+
+            if(!$('#gift-poin').validateRequired()){
+                err++;
+            }else if(!$('#gift-poin').validateNumberForm()){
+                err++;
+            }
+
+            if(!$('#gift-reward').validateRequired()){
+                err++;
+            }else if(!$('#gift-reward').validateNumberForm()){
+                err++;
+            }
+
+            if($('#gift-img').val()!= ""){
+                if(!$('#gift-img').validateImgType()){
                     err++;
-                }else if(!$('#publisher-img').validateMaxSize()){
+                }else if(!$('#gift-img').validateMaxSize()){
                     err++;
                 }
             }
+
             if(err!=0){
                 return false;
             }else{
@@ -198,10 +250,11 @@
             $('#btn-save').hide();
             $('#btn-update').show();
             //reset form
-            $('#publisher-form')[0].reset();
+            $('#gift-setting-form')[0].reset();
 
             var row = $(this).closest("tr");
             var col_title =  row.find(".td-gift-name").text();
+            var col_category =  row.find(".td-gift-category-name").children("span").html();
             var col_desc =  row.find(".td-gift-description").text();
             var col_poin =  row.find(".td-gift-poin").text();            
             var col_img =  row.find(".td-gift-img").children("img").prop('src');
@@ -211,6 +264,7 @@
             //set data to Modal
             $("#gift-setting-id").val(col_id);
             $("#gift-name").val(col_title);
+            $("#gift-category").val(col_category);
             $("#gift-desc").val(col_desc);
             $("#gift-poin").val(col_poin);            
             $('#preview-img').attr('src', col_img);
@@ -220,13 +274,18 @@
         $('#btn-save').click(function(){
             if(validate()){
                 var formData = new FormData();
-                formData.append("img", $("#publisher-img")[0].files[0]);
-                formData.append("name", $("#publisher-name").val());
+                
+                formData.append("gift_name", $("#gift-name").val());
+                formData.append("gift_category", $("#gift-category").val());
+                formData.append("gift_desc", $("#gift-desc").val());
+                formData.append("gift_poin", $("#gift-poin").val());            
+                formData.append("img", $("#gift-img")[0].files[0]);
+                formData.append("gift_reward", $("#gift-reward").val());
 
                 $(this).saveData({
-                    url		     : "<?php echo site_url('Publisher/createPublisher')?>",
+                    url		     : "<?php echo site_url('Gift/createGift')?>",
                     data		 : formData,
-                    locationHref : "<?php echo site_url('Publisher')?>"
+                    locationHref : "<?php echo site_url('Gift/settingGiftList')?>"
                 });
             }
         });
@@ -235,37 +294,42 @@
             if(validateEdit()){
 
                 var formData = new FormData();
-                formData.append("id", $("#publisher-id").val());
-                formData.append("name", $("#publisher-name").val());
-                if($('#publisher-img').val()!= ""){
-                    formData.append("img", $("#publisher-img")[0].files[0]);
+
+                formData.append("id", $("#gift-setting-id").val());
+                formData.append("gift_name", $("#gift-name").val());
+                formData.append("gift_category", $("#gift-category").val());
+                formData.append("gift_desc", $("#gift-desc").val());
+                formData.append("gift_poin", $("#gift-poin").val()); 
+                if($('#gift-img').val()!= ""){
+                    formData.append("img", $("#gift-img")[0].files[0]);
                     formData.append("isUpdateImg", 1);
                 }else{
                     formData.append("isUpdateImg", 0);
                 }
+                formData.append("gift_reward", $("#gift-reward").val());
 
                 $(this).saveData({
-                    url		     : "<?php echo site_url('Publisher/updatePublisher')?>",
+                    url		     : "<?php echo site_url('Gift/updateGift')?>",
                     data		 : formData,
-                    locationHref : "<?php echo site_url('Publisher')?>"
+                    locationHref : "<?php echo site_url('Gift/settingGiftList')?>"
                 });
             }
         });
 
         $('.btn-delete').click(function(){
             var row = $(this).closest("tr");
-            var col_title =  row.find(".td-publisher-name").text();
+            var col_title =  row.find(".td-gift-name").text();
             var col_id =  row.find("input.item-id").val();
 
             var formData = new FormData();
             formData.append("id", col_id);
 
             $(this).deleteData({
-                alertMsg     : "Do you want to delete this <i><b>"+col_title+"</b></i> publisher ?",
+                alertMsg     : "Do you want to delete this <i><b>"+col_title+"</b></i> Gift ?",
                 alertTitle   : "Delete Confirmation",
-                url		     : "<?php echo site_url('Publisher/deletePublisher')?>",
+                url		     : "<?php echo site_url('Gift/deleteGift')?>",
                 data		 : formData,
-                locationHref : "<?php echo site_url('Publisher')?>"
+                locationHref : "<?php echo site_url('Gift/settingGiftList')?>"
             });
         });
     });

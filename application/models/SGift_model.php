@@ -65,5 +65,20 @@
             $query = $this->db->get();
             return $query->row();
         }
+
+        function createGift($data){
+            $this->db->insert('tbl_toppon_s_gifts',$data);
+            return $this->db->insert_id();
+        }
+
+        function updateGift($data, $id){
+            $this->db->where('giftID',$id);
+            $this->db->update('tbl_toppon_s_gifts',$data);
+
+            if ($this->db->affected_rows() == 1)
+                return TRUE;
+            else
+                return FALSE;
+        }
 	}
 ?>
