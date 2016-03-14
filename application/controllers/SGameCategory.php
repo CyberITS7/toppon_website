@@ -20,7 +20,7 @@ class SGameCategory extends CI_Controller{
     function index($start=1){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
         else{
             //get Publisher List data
@@ -53,7 +53,7 @@ class SGameCategory extends CI_Controller{
     function goToAddDetailSGameCategory(){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $game_category_list = $this->GameCategory_model->getGameCategorySettingList(null, null);
             $publisher_list = $this->Publisher_model->getComboPublisherSettingList(null, null);
@@ -69,7 +69,7 @@ class SGameCategory extends CI_Controller{
     function goToEditDetailSGameCategory($id){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $game_category_list = $this->GameCategory_model->getGameCategorySettingList(null, null);
             $game_category_edit = $this->GameCategory_model->getGameCategoryById($id);
@@ -94,7 +94,7 @@ class SGameCategory extends CI_Controller{
         $msg="";
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $userID = $this->session->userdata('user_id');
@@ -134,7 +134,7 @@ class SGameCategory extends CI_Controller{
         $msg="";
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $userID = $this->session->userdata('user_id');
@@ -197,7 +197,7 @@ class SGameCategory extends CI_Controller{
         $msg="";
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $userID = $this->session->userdata('user_id');

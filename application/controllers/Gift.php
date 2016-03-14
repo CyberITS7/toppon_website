@@ -21,7 +21,7 @@
 		/*Transaction Purposes*/
 		function index($start=1){
 			if(!$this->session->userdata('logged_in')){
-            	redirect(site_url("User/loginAndRegister"));
+            	redirect(site_url("User/dashboard"));
 	        }
 	        else{
 	        	$num_per_page = 10;
@@ -129,7 +129,7 @@
 		function settingGiftList($start=1){
 			$user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
 			if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-				redirect(site_url("User/loginAndRegister"));	
+				redirect(site_url("User/dashboard"));	
 			}
 			else{
 				//get Setting gift data
@@ -168,7 +168,7 @@
 
 	        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
 	        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-	            redirect(site_url("User/loginAndRegister"));
+	            redirect(site_url("User/dashboard"));
 	        }else {
 	            $datetime = date('Y-m-d H:i:s', time());
 	            $gift_category = $this->input->post('gift_category');
@@ -235,7 +235,7 @@
 
 	        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
 	        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-	            redirect(site_url("User/loginAndRegister"));
+	            redirect(site_url("User/dashboard"));
 	        }else {
 	            $datetime = date('Y-m-d H:i:s', time());
 	            $gift_category = $this->input->post('gift_category');
@@ -313,7 +313,7 @@
 
 	        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
 	        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-	            redirect(site_url("User/loginAndRegister"));
+	            redirect(site_url("User/dashboard"));
 	        }else {
 	            $datetime = date('Y-m-d H:i:s', time());
 	            $giftID = $this->input->post('id');

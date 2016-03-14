@@ -20,7 +20,7 @@ class SGame extends CI_Controller{
     function index($start=1){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
         else{
             //get Nominal List data
@@ -53,7 +53,7 @@ class SGame extends CI_Controller{
     function goToAddDetailSGame(){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $game_list = $this->Game_model->getGameSettingList(null, null);
             $nominal_list = $this->Nominal_model->getNominalList(null, null);
@@ -69,7 +69,7 @@ class SGame extends CI_Controller{
     function goToEditDetailSGame($id){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $game_list = $this->Game_model->getGameSettingList(null, null);
             $game_edit = $this->Game_model->getGameById($id);
@@ -94,7 +94,7 @@ class SGame extends CI_Controller{
         $msg="";
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $userID = $this->session->userdata('user_id');
@@ -137,7 +137,7 @@ class SGame extends CI_Controller{
         $msg="";
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $userID = $this->session->userdata('user_id');
@@ -217,7 +217,7 @@ class SGame extends CI_Controller{
         $msg="";
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $userID = $this->session->userdata('user_id');

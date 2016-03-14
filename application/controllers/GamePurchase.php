@@ -20,8 +20,8 @@ class GamePurchase extends CI_Controller{
 
     function index($id){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
-        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+        if(!$this->authentication->isAuthorizeMember($user->userLevel)){
+            redirect(site_url("User/dashboard"));
         }
         else{
             //get Games List data
@@ -114,6 +114,11 @@ class GamePurchase extends CI_Controller{
     }
 
     function sendIndomog($qid, $email, $proId){
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeMember($user->userLevel)){
+            redirect(site_url("User/dashboard"));
+        }
+        else{
         //SET DATA
         $vsRMID = '0910403545';
         $vsQID= $qid;
@@ -243,6 +248,7 @@ class GamePurchase extends CI_Controller{
 
         //Return Message From IndoMog API
         return $this->checkGamePurchase($array);
+        }
     }
 
     function checkGamePurchase($result){

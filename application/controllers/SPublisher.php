@@ -20,7 +20,7 @@ class SPublisher extends CI_Controller{
     function index($start=1){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
         else{
             //get Game List data
@@ -53,7 +53,7 @@ class SPublisher extends CI_Controller{
     function goToAddDetailSPublisher(){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $publisher_list = $this->Publisher_model->getPublisherSettingList(null, null);
             $game_list = $this->Game_model->getComboGameSettingList(null, null);
@@ -69,7 +69,7 @@ class SPublisher extends CI_Controller{
     function goToEditDetailSPublisher($id){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $publisher_list = $this->Publisher_model->getPublisherSettingList(null, null);
             $publisher_edit = $this->Publisher_model->getPublisherById($id);
@@ -95,7 +95,7 @@ class SPublisher extends CI_Controller{
 
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $userID = $this->session->userdata('user_id');
@@ -135,7 +135,7 @@ class SPublisher extends CI_Controller{
         $msg="";
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $userID = $this->session->userdata('user_id');
@@ -198,7 +198,7 @@ class SPublisher extends CI_Controller{
         $msg="";
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $userID = $this->session->userdata('user_id');

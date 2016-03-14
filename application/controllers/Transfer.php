@@ -17,7 +17,7 @@
 
 		function index(){
 			if(!$this->session->userdata('logged_in')){
-            	redirect(site_url("user/loginAndRegister"));
+            	redirect(site_url("user/dashboard"));
 	        }
 	        else{
 	            $data['data_content']="member/transfer_view";

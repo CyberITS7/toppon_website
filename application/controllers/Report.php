@@ -35,7 +35,7 @@ class Report extends CI_Controller{
             $this->load->view('includes/member_area_template_view', $data);
         }
         else {
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
     }
     function gamePurchaseReportSearchByPeriode($startDate, $endDate){
@@ -61,7 +61,7 @@ class Report extends CI_Controller{
             $this->load->view('includes/member_area_template_view', $data);
         }
         else {
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
     }
     function gamePurchaseReportSearchByDate($date){
@@ -81,7 +81,7 @@ class Report extends CI_Controller{
             $this->load->view('includes/member_area_template_view', $data);
         }
         else {
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
     }
 
@@ -103,7 +103,7 @@ class Report extends CI_Controller{
             $this->load->view('includes/member_area_template_view', $data);
         }
         else {
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
     }
     function depositReportSearchByPeriode($startDate, $endDate){
@@ -129,7 +129,7 @@ class Report extends CI_Controller{
             $this->load->view('includes/member_area_template_view', $data);
         }
         else {
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
     }
     function depositReportSearchByDate($date){
@@ -149,7 +149,7 @@ class Report extends CI_Controller{
             $this->load->view('includes/member_area_template_view', $data);
         }
         else {
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
     }
 
@@ -171,7 +171,7 @@ class Report extends CI_Controller{
             $this->load->view('includes/member_area_template_view', $data);
         }
         else {
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
     }
     function giftReportSearchByPeriode($startDate, $endDate){
@@ -197,7 +197,7 @@ class Report extends CI_Controller{
             $this->load->view('includes/member_area_template_view', $data);
         }
         else {
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
     }
     function giftReportSearchByDate($date){
@@ -217,7 +217,7 @@ class Report extends CI_Controller{
             $this->load->view('includes/member_area_template_view', $data);
         }
         else {
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
     }
 
@@ -239,7 +239,7 @@ class Report extends CI_Controller{
             $this->load->view('includes/member_area_template_view', $data);
         }
         else {
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
     }
     function transferReportSearchByPeriode($startDate, $endDate){
@@ -265,7 +265,7 @@ class Report extends CI_Controller{
             $this->load->view('includes/member_area_template_view', $data);
         }
         else {
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
     }
     function transferReportSearchByDate($date){
@@ -285,7 +285,7 @@ class Report extends CI_Controller{
             $this->load->view('includes/member_area_template_view', $data);
         }
         else {
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
     }
 }

@@ -18,7 +18,7 @@ class Nominal extends CI_Controller{
     function index($start=1){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
         else{
             //get Publisher List data
@@ -54,7 +54,7 @@ class Nominal extends CI_Controller{
 
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $name = $this->input->post('name');
@@ -102,7 +102,7 @@ class Nominal extends CI_Controller{
 
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $name = $this->input->post('name');
@@ -147,7 +147,7 @@ class Nominal extends CI_Controller{
 
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
             $nominalID = $this->input->post('id');
