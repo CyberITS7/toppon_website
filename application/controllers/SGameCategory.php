@@ -150,7 +150,6 @@ class SGameCategory extends CI_Controller{
             foreach ($publisher_delete as $row) {
                 $data_post = array(
                     'isActive' => 0,
-                    "createdBy" => $userID,
                     "lastUpdated" => $datetime,
                     "lastUpdatedBy" => $userID
                 );
@@ -174,7 +173,6 @@ class SGameCategory extends CI_Controller{
             if ($update_header == 1) {
                 $data_post = array(
                     'gameCategoryID' => $update_category,
-                    "createdBy" => $userID,
                     "lastUpdated" => $datetime,
                     "lastUpdatedBy" => $userID
                 );
@@ -207,7 +205,6 @@ class SGameCategory extends CI_Controller{
             $game_category = $this->input->post('id');
             $data_post = array(
                 'isActive' => 0,
-                "createdBy" => $userID,
                 "lastUpdated" => $datetime,
                 "lastUpdatedBy" => $userID
             );

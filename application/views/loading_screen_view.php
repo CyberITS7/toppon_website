@@ -3,6 +3,7 @@
         background: rgba(0,0,0,0.4);
         position: fixed;
         z-index:999999;
+        display:none;
         top: 0px;
         left:0;
         width: 100%;

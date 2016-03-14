@@ -29,6 +29,27 @@ class SGame_model extends CI_Model{
         return $query->row();
     }
 
+    function createSGame($data){
+        $this->db->insert('tbl_toppon_s_games',$data);
+        return $this->db->insert_id();
+    }
+
+    function updateSGame($data, $gameID, $settingID){
+        if($gameID!=null){
+            $this->db->where('gameID',$gameID);
+        }
+        if($settingID!=null){
+            $this->db->where('sGameID',$settingID);
+        }
+        $this->db->where('isActive', 1);
+        $this->db->update('tbl_toppon_s_games',$data);
+
+        if ($this->db->affected_rows() == 1)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
     //SETTING
     function getSGameList($start, $limit){
         $this->db->select('*');
