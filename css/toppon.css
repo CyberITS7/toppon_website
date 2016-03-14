@@ -25,8 +25,8 @@ body {
     text-align: center;
     letter-spacing: 3px;
     text-shadow:
-        1px 2px 1px #9ad2fe,
-        -1px -2px 1px #1895f7;
+        1px 1px 1px #000,
+        -1px -1px 1px #000;
 }
 
 

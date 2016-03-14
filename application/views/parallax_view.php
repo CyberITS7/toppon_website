@@ -10,8 +10,9 @@
     <link href="<?php echo base_url(); ?>fonts/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet">
 
-    <!-- Custome CSS -->
+    <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>css/toppon.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>css/convtable.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
@@ -262,6 +263,55 @@
 <!--End How To Redeem-->
 
 
+
+<!-- Conversion Table -->
+<section>
+<div id="conv-table" name="conv-table">
+    <table class="responstable">
+
+        <tr>
+            <th>No.</th>
+            <th>Surname</th>
+            <th>Date of birth</th>
+            <th>Relationship</th>
+        </tr>
+
+        <tr>
+            <td>Steve</td>
+            <td>Foo</td>
+            <td>01/01/1978</td>
+            <td>Policyholder</td>
+        </tr>
+
+        <tr>
+            <td>Steffie</td>
+            <td>Foo</td>
+            <td>01/01/1978</td>
+            <td>Spouse</td>
+        </tr>
+
+        <tr>
+            <td>Stan</td>
+            <td>Foo</td>
+            <td>01/01/1994</td>
+            <td>Son</td>
+        </tr>
+
+        <tr>
+            <td>Stella</td>
+            <td>Foo</td>
+            <td>01/01/1992</td>
+            <td>Daughter</td>
+        </tr>
+        
+    </table>
+
+</div>
+</section>
+
+
+
+
 <!--Contact US-->
 <div id="contact-us" name="contact-us">
     <div class="content-text">
@@ -309,7 +359,7 @@
                         <div class="col-lg-3">
                             <img src="<?php echo base_url();?>/img/phone.png" class="img-responsive">
                         </div>
-                        <div class="col-lg-9 no-tlp">
+                        <div class="col-lg-9 no-tlp wow lightSpeedIn" data-wow-duration="1.5s">
                             <p>+62-812-9025-5465</p>
                         </div>
                     </div>
@@ -319,12 +369,12 @@
                         <div class="col-lg-3">
                             <img src="<?php echo base_url();?>/img/mail.png" class="img-responsive">
                         </div>
-                        <div class="col-lg-9 dest-mail">
+                        <div class="col-lg-9 dest-mail wow lightSpeedIn" data-wow-duration="1.5s">
                             <p>cs@toppon.co.id</p>
                         </div>
-                    </div>
+                        </div>
                 </div>
-                <div class="alamat">
+                <div class="alamat wow lightSpeedIn" data-wow-duration="1.5s">
                     <p>Jl. Kebon Jeruk No.27 Kemanggisan, Jakarta Barat</p>
                 </div>
             </div>
