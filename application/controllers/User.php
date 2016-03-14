@@ -324,6 +324,40 @@
 			}
 		}
 
+		function sAccountList($start=1){
+			$user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+			if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+				redirect(site_url("User/loginAndRegister"));	
+			}
+			else{
+				//get S Account List data
+				//$this->output->enable_profiler(TRUE);
+		        $num_per_page = 10;
+		        $start = ($start - 1) * $num_per_page;
+		        $limit = $num_per_page;
+
+		        $account_page = $this->SAccount_model->getSAccountList($start, $limit);
+		        $count_account = $this->SAccount_model ->getCountSAccountList();
+
+		        $config['base_url']= site_url('User/sAccountList');
+		        $config ['total_rows'] = $count_account;
+		        $config ['per_page']=$num_per_page;
+		        $config['use_page_numbers']=TRUE;
+		        $config['uri_segment']=3;
+
+		        $this->pagination->initialize($config);
+		        $data['pages'] = $this->pagination->create_links();
+		        $data['accounts']= $account_page;
+
+		        if ($this->input->post('ajax')){
+		            $this->load->view('admin/setting/setting_account_list_view', $data);
+		        }else{
+		            $data['data_content'] = 'admin/setting/setting_account_list_view';
+		            $this->load->view('includes/member_area_template_view',$data);
+		        }
+			}
+		}
+
 		function doUpdateMember(){
 			$status = "";
 	        $msg="";

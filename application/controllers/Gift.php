@@ -11,7 +11,9 @@
 
 	    $this->load->model("SGift_model");
 	    $this->load->model("TGift_model");
-	    $this->load->model('SAccount_model');	    
+	    $this->load->model('SAccount_model');
+	    $this->load->model('User_model');
+	    $this->load->library("Authentication");
 		}
 
 		/*Transaction Purposes*/
@@ -128,25 +130,28 @@
 				redirect(site_url("User/loginAndRegister"));	
 			}
 			else{
-				$num_per_page = 10;
-            	$start = ($start - 1)* $num_per_page;
-            	$limit = $num_per_page;
+				//get Setting gift data
+	            $num_per_page = 10;
+	            $start = ($start - 1)* $num_per_page;
+	            $limit = $num_per_page;
 
-            	$giftCategory_page = $this->GiftCategory_model->getGiftCategoryList($start, $limit);
-            	$count_giftCategory = $this->GiftCategory_model->getCountGiftCategoryList();
+	            $gift_page = $this->SGift_model->getAdminGiftList($start, $limit);
+            	$count_gift = $this->SGift_model->getCountAdminGiftList();
 
-            	$config['total_rows'] = $count_giftCategory;
-		        $config['per_page']=$num_per_page;
-		        $config['use_page_numbers']=TRUE;
-		        $config['uri_segment']=3;
-		        $this->pagination->initialize($config);
-		        $data['pages'] = $this->pagination->create_links();
-				
-				$data['giftCategory']= $giftCategory_page;
-				if ($this->input->post('ajax')){
-	                $this->load->view('admin/gift_category_list_view', $data);
+	            $config['base_url']= site_url('Gift/settingGiftList');
+	            $config ['total_rows'] = $count_gift;
+	            $config ['per_page']=$num_per_page;
+	            $config['use_page_numbers']=TRUE;
+	            $config['uri_segment']=3;
+
+	            $this->pagination->initialize($config);
+	            $data['pages'] = $this->pagination->create_links();
+	            $data['gifts']= $gift_page;
+
+	            if ($this->input->post('ajax')){
+	                $this->load->view('admin/setting/setting_gift_list_view', $data);
 	            }else{
-	            	$data['data_content']="admin/gift_category_list_view";
+	                $data['data_content'] = 'admin/setting/setting_gift_list_view';
 	                $this->load->view('includes/member_area_template_view',$data);
 	            }
 			}

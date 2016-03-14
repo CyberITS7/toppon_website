@@ -41,5 +41,32 @@ class SAccount_model extends CI_Model{
         return $result;
     }
 
+    function getSAccountList($start, $limit){
+        $where=array(      
+            's.isActive'=>1,
+            'm.isActive'=>1
+        );
+
+        $this->db->select('*');
+        $this->db->from('tbl_toppon_s_accounts s');
+        $this->db->join('tbl_toppon_m_users m','m.userID=s.userID');
+        $this->db->where($where);
+
+        if($limit != null || $start!= null){
+            $this->db->limit($limit,$start);
+        }
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    function getCountSAccountList(){
+        $this->db->from('tbl_toppon_s_accounts s');
+        $this->db->join('tbl_toppon_m_users m','m.userID=s.userID');
+        $this->db->where('s.isActive', 1);
+        $this->db->where('m.isActive', 1);
+        return $this->db->count_all_results();
+    }
+
 }
 ?>
