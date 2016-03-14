@@ -437,6 +437,116 @@
 </div>
 <!-- END BUTTON BACK TO TOP HOME -->
  
+
+
+ <!-- Script Ajax Conctact Me  -->
+<script>
+  $(function() {
+      var div_loading = $("<div>", {id: "fountainG"});
+      var div_loading_item1 = $("<div>", {id: "fountainG_1", class: "fountainG"});
+      var div_loading_item2 = $("<div>", {id: "fountainG_2", class: "fountainG"});
+      var div_loading_item3 = $("<div>", {id: "fountainG_3", class: "fountainG"});
+      var div_loading_item4 = $("<div>", {id: "fountainG_4", class: "fountainG"});
+      var div_loading_item5 = $("<div>", {id: "fountainG_5", class: "fountainG"});
+      var div_loading_item6 = $("<div>", {id: "fountainG_6", class: "fountainG"});
+      var div_loading_item7 = $("<div>", {id: "fountainG_7", class: "fountainG"});
+      var div_loading_item8 = $("<div>", {id: "fountainG_8", class: "fountainG"});
+      div_loading.append(div_loading_item1,div_loading_item2,div_loading_item3,div_loading_item4,div_loading_item5,div_loading_item6,div_loading_item7,div_loading_item8);
+
+    // Get the form.
+    var form = $('#contactForm');
+    // Set up an event listener for the appointment form.
+    $(form).submit(function(e) {
+      // Stop the browser from submitting the form.
+      e.preventDefault();
+      // user data
+      var contactName     = $("#contactName").val().trim();
+      var contactEmail    = $("#contactEmail").val().trim();
+      var contactSubject    = $("#contactSubject").val().trim();
+      var contactMessage  = $("#contactMessage").val().trim();
+
+      if (key_ajax_contactName == true && key_ajax_contactEmail == true && key_ajax_contactSubject == true && key_ajax_contactMessage == true) {
+        $.ajax({
+          type : "POST",
+          url : "<?php echo site_url('Home/Send_email_contactus'); ?>",
+          dataType : "json",
+          data : {    contactName : contactName,
+                      contactEmail : contactEmail,
+                      contactSubject : contactSubject,
+                      contactMessage : contactMessage
+                  },
+           beforeSend: function() {
+               $("#success_ajax").addClass("alert alert-info");
+               $("#success_ajax").append(div_loading);
+           },
+          success : function(result, status, xhr){
+            $("#success_ajax").html("");
+            $("#success_ajax").removeClass("alert alert-info");
+            $("#success_ajax").removeClass("alert alert-danger");
+            $("#success_ajax").addClass("alert alert-success");
+            $("#success_ajax").html(result.msg);
+            $('#success_ajax').fadeIn().delay(4000).fadeOut();
+
+            $('#contactForm')[0].reset();
+            key_ajax_contactName = false;
+            key_ajax_contactEmail = false;
+            key_ajax_contactSubject = false;
+            key_ajax_contactMessage = false;
+
+          },
+          error : function(result, status, xhr){
+            console.log('error mau keserver');
+            //console.log(result.msg);
+            $("#success_ajax").html("");
+            $("#success_ajax").removeClass("alert alert-info");
+            $("#success_ajax").removeClass("alert alert-success");
+            $("#success_ajax").addClass("alert alert-danger");
+            $("#success_ajax").html('Thankyou for your message, but we are sorry your message wont reach us any time soon. We will fix it as soon as posible');
+            $('#success_ajax').fadeIn().delay(8000).fadeOut();
+
+            $('#contactForm')[0].reset();
+            key_ajax_contactName = false;
+            key_ajax_contactEmail = false;
+            key_ajax_contactSubject = false;
+            key_ajax_contactMessage = false;
+          }
+        });// End Ajax
+      } else {
+        console.log('tidak masuk ajax');
+
+        $('#show_error_name').remove(); // remove the error text first
+        $('#show_error_email_address').remove(); // remove the error text first
+        $('#show_error_subject').remove(); // remove the error text first
+        $('#show_error_message').remove(); // remove the error text first
+
+        // show error if submit button is press
+        if (contactName == '' && contactName.length <= 3) {
+          $('#contactName-group').addClass('has-error');
+          $('#contactName-group').append('<div id = "show_error_name" class="help-block">' + 'Please Input Your Name' + '</div>');
+        }
+        else if (contactName.length <= 3) {
+          $('#contactName-group').addClass('has-error');
+          $('#contactName-group').append('<div id = "show_error_name" class="help-block">' + 'Kurang Panjang' + '</div>');
+        }
+        if (contactEmail == '') {
+          $('#contactEmail-group').addClass('has-error');
+          $('#contactEmail-group').append('<div id = "show_error_email_address" class="help-block">' + 'Please Input Your Email Address' + '</div>');
+        }
+        if (contactSubject == '') {
+          $('#contactSubject-group').addClass('has-error');
+          $('#contactSubject-group').append('<div id = "show_error_subject" class="help-block">' + 'Please Input Your Subject' + '</div>');
+        }
+        if (contactMessage == '') {
+          $('#contactMessage-group').addClass('has-error');
+          $('#contactMessage-group').append('<div id = "show_error_message" class="help-block">' + 'Please Input Your Message' + '</div>');
+        }
+      } // End if else statement
+    }); // End Form Submit
+  }); // End Function
+</script>
+
+
+
 <!-- WowJS -->
  <script src="<?=base_url()?>js/wow.min.js"></script>
 
