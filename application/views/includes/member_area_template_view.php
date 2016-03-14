@@ -179,6 +179,8 @@
         <div id="notif-group" class="tabbed_notifications"></div>
     </div>
 
+    <?php $this->load->view('loading_screen_view');?>
+
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>js/jquery.nicescroll.min.js"></script>
     <script src="<?php echo base_url(); ?>js/custom.js"></script>

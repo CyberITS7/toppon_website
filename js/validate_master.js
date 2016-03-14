@@ -105,19 +105,25 @@
                 cache:false,
                 contentType: false,
                 processData: false,
+                beforeSend:function(){
+                    $("#load_screen").show();
+                },
                 success:function(data){
                     if(data.status != 'error') {
                         alertify.success(data.msg);
                         window.setTimeout( function(){
+                            $("#load_screen").hide();
                             location.href = settings.locationHref;
                         }, 2300 );
                     }else{
+                        $("#load_screen").hide();
                         alertify.error(data.msg);
                     }
                 },
                 error: function(xhr, status, error) {
                     //var err = eval("(" + xhr.responseText + ")");
                     //alertify.error(xhr.responseText);
+                    $("#load_screen").hide();
                     alertify.error('Cannot response server !');
                 }
             });
@@ -148,19 +154,25 @@
                         cache:false,
                         contentType: false,
                         processData: false,
+                        beforeSend:function(){
+                            $("#load_screen").show();
+                        },
                         success:function(data){
                             if(data.status != 'error') {
                                 alertify.success(data.msg);
                                 window.setTimeout( function(){
+                                    $("#load_screen").hide();
                                     location.href = settings.locationHref;
                                 }, 2300 );
                             }else{
+                                $("#load_screen").hide();
                                 alertify.error(data.msg);
                             }
                         },
                         error: function(xhr, status, error) {
                             //var err = eval("(" + xhr.responseText + ")");
                             //alertify.error(xhr.responseText);
+                            $("#load_screen").hide();
                             alertify.error('Cannot response server !');
                         }
                     });

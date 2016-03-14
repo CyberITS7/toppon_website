@@ -29,7 +29,7 @@
     }
 
 </style>
-<?php $this->load->view('loading_screen_view');?>
+
 <div class="page-title">
     <div class="title_left">
         <h3>Voucher Games</h3>
