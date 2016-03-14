@@ -2,6 +2,16 @@ html,
 body {
    font-family:"Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif
 }
+.parallax{
+    background-position: 50% 50%;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+   
+}
+
 .content-text{
     font-family: Verdana;
     text-align: center;
@@ -18,7 +28,7 @@ body {
         1px 2px 1px #9ad2fe,
         -1px -2px 1px #1895f7;
 }
-}
+
 
 .content-text h2{
     font-weight: 300;
@@ -179,24 +189,23 @@ body {
 
 #whyus{
 	background-image: url(../img/bg/bg-03.jpg);
-    background-size: cover;
     background-repeat: no-repeat;
-	padding-top: 110px;
+	padding-top: 50px;
 	text-align: center;
-	min-height: 750px;
-	padding-bottom: 100px;
-
+	min-height: 600px;
+	padding-bottom: 70px;
+    background-position: center center;
 }
 
 
 .whyus-content p{
     font-size: 35px;
-    padding-top: 350px;
+    padding-top: 220px;
 }
 
 .get-voucher{
 
-    margin-top: 300px;
+    margin-top: 80px;
     font-weight: 600;
     border:5px solid white;
     color: #fff;
@@ -384,6 +393,9 @@ body {
 #back_to_top a:hover{
     color: #ffbf00;
 }
+
+/*SECTION PARALLAX */
+
 
 @media screen and (max-width:769px) {
     div.col-clear{
