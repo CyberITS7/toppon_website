@@ -116,7 +116,6 @@ class Nominal extends CI_Controller{
                     'nominalName' => $name,
                     'currency' => $currency,
                     'isActive' => 1,
-                    "created" => $datetime,
                     "lastUpdated" => $datetime,
                     "lastUpdatedBy" => $userID
                 );
@@ -155,7 +154,6 @@ class Nominal extends CI_Controller{
 
             $data_post = array(
                 'isActive' => 0,
-                "created" => $datetime,
                 "lastUpdated" => $datetime,
                 "lastUpdatedBy" => $userID
             );

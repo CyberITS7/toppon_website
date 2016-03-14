@@ -112,7 +112,6 @@ class Coin extends CI_Controller{
                 'coinConversion'=>$coinConversion,
                 'poin'=>$poin,
                 'isActive'=>1,
-                "created" => $datetime,
                 "createdBy" => $userID,
                 "lastUpdated"=>$datetime,
                 "lastUpdatedBy"=>$userID
@@ -149,7 +148,6 @@ class Coin extends CI_Controller{
 
         $data_post=array(
             'isActive'=>0,
-            "created" => $datetime,
             "lastUpdated"=>$datetime,
             "lastUpdatedBy"=>$userID
         );

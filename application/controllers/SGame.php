@@ -191,7 +191,6 @@ class SGame extends CI_Controller{
             if ($update_header == 1) {
                 $data_post = array(
                     'gameID' => $update_game,
-                    "createdBy" => $userID,
                     "lastUpdated" => $datetime,
                     "lastUpdatedBy" => $userID
                 );
@@ -225,7 +224,6 @@ class SGame extends CI_Controller{
             $game = $this->input->post('id');
             $data_post = array(
                 'isActive' => 0,
-                "createdBy" => $userID,
                 "lastUpdated" => $datetime,
                 "lastUpdatedBy" => $userID
             );

@@ -35,13 +35,13 @@
             <img src="<?=base_url()?>img/toppon.png"/>
         </a>
      <div class="menu-right">
-        <a href="#">
-            <button type="button" class="btn btn-lg btn-default">Sign Up</button>
-        </a>
-        
-        <a href="#">
-            <button type="button" class="btn btn-lg btn-primary">Login</button>
-        </a>
+         <a href="<?php echo site_url('User');?>#toregister">
+             <button type="button" class="btn btn-lg btn-default">Sign Up</button>
+         </a>
+
+         <a href="<?php echo site_url('User');?>#tologin">
+             <button type="button" class="btn btn-lg btn-primary">Login</button>
+         </a>
     </div>   
     </div>
 

@@ -104,7 +104,6 @@ class Payment extends CI_Controller{
             $data_post=array(
                 'paymentMethodName'=>$name,
                 'isActive'=>1,
-                "created" => $datetime,
                 "lastUpdated"=>$datetime,
                 "lastUpdatedBy"=>$userID
             );
@@ -139,7 +138,6 @@ class Payment extends CI_Controller{
 
         $data_post=array(
             'isActive'=>0,
-            "created" => $datetime,
             "lastUpdated"=>$datetime,
             "lastUpdatedBy"=>$userID
         );

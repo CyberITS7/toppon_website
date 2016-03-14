@@ -114,7 +114,6 @@ class Game extends CI_Controller{
                 $data_post = array(
                     'gameName' => $name,
                     'isActive' => 1,
-                    "created" => $datetime,
                     "lastUpdated" => $datetime,
                     "lastUpdatedBy" => $userID
                 );
@@ -153,7 +152,6 @@ class Game extends CI_Controller{
 
             $data_post = array(
                 'isActive' => 0,
-                "created" => $datetime,
                 "lastUpdated" => $datetime,
                 "lastUpdatedBy" => $userID
             );

@@ -133,7 +133,6 @@ class Publisher extends CI_Controller{
                 $data_post = array(
                     'publisherName' => $name,
                     'isActive' => 1,
-                    "created" => $datetime,
                     "lastUpdated" => $datetime,
                     "lastUpdatedBy" => $userID
                 );
@@ -207,7 +206,6 @@ class Publisher extends CI_Controller{
 
             $data_post = array(
                 'isActive' => 0,
-                "created" => $datetime,
                 "lastUpdated" => $datetime,
                 "lastUpdatedBy" => $userID
             );
