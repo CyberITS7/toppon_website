@@ -68,5 +68,35 @@ class SAccount_model extends CI_Model{
         return $this->db->count_all_results();
     }
 
+    function checkUsernameBySACoountID($id, $username){
+        $where=array(      
+            's.isActive'=>1,
+            'm.isActive'=>1,
+            's.sAccountID'=>$id,
+            'm.userName'=>$username
+        );
+
+        $this->db->select('*');
+        $this->db->from('tbl_toppon_s_accounts s');
+        $this->db->join('tbl_toppon_m_users m','m.userID=s.userID');
+        $this->db->where($where);
+        $query = $this->db->get();
+        if($query->num_rows()>0){
+            return 1; // allready exist
+        }else{
+            return 0; //blom ada
+        }
+    }
+
+    function updateAccount($data, $id){
+        $this->db->where('sAccountID',$id);
+        $this->db->update('tbl_toppon_s_accounts',$data);
+
+        if ($this->db->affected_rows() == 1)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
 }
 ?>

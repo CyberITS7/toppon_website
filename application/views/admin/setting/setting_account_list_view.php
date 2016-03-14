@@ -26,7 +26,6 @@
                             <td class="td-coin"><?php echo $row['coin'];?></td>                            
                             <td>
                                 <a href="#" class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target=".member-modal"><i class="fa fa-pencil"></i> Edit </a>
-                                <a href="#" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i> Delete </a>
                             </td>
                             <input type="hidden" value="<?php echo $row['sAccountID'];?>" class="item-id"/>
                         </tr>
@@ -55,20 +54,16 @@
                     <input type="hidden" class="form-control" id="member-id">
                     <div class="form-group">
                         <label for="username" class="control-label">Username: <span class="label label-danger" id="err-username"></span></label>
-                        <input type="text" class="form-control" id="username" name="username" data-label="#err-username">
+                        <input type="text" class="form-control" id="username" name="username" data-label="#err-username" disabled="disabled">
                     </div>
                     <div class="form-group">
-                        <label for="name" class="control-label">Name: <span class="label label-danger" id="err-name"></span></label>
-                        <input type="text" class="form-control" id="name" name="name" data-label="#err-name">
+                        <label for="poin" class="control-label">Poin: <span class="label label-danger" id="err-poin"></span></label>
+                        <input type="text" class="form-control" id="poin" name="poin" data-label="#err-poin">
                     </div>
                     <div class="form-group">
-                        <label for="email" class="control-label">Email: <span class="label label-danger" id="err-email"></span></label>
-                        <input type="text" class="form-control" id="email" name="email" data-label="#err-email">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone-number" class="control-label">Phone Number: <span class="label label-danger" id="err-phone-number"></span></label>
-                        <input type="text" class="form-control" id="phone-number" name="phone-number" data-label="#err-phone-number">
-                    </div>
+                        <label for="coin" class="control-label">Coin: <span class="label label-danger" id="err-coin"></span></label>
+                        <input type="text" class="form-control" id="coin" name="coin" data-label="#err-coin">
+                    </div>                    
                 </form>
             </div>
             <div class="modal-footer">
@@ -85,31 +80,15 @@
         function validate(){
             var err=0;
 
-            if(!$('#username').validateRequired()){
+            if(!$('#poin').validateRequired()){
                 err++;
-            }else if(!$('#username').validateLengthRange({minLength : 4, maxLength:50})){
-                err++;
-            }
-
-            if(!$('#name').validateRequired()){
-                err++;
-            }else if(!$('#name').validateLengthRange({minLength : 4, maxLength:50})){
+            }else if(!$('#poin').validateNumberForm()){
                 err++;
             }
 
-            if(!$('#email').validateRequired()){
+            if(!$('#coin').validateRequired()){
                 err++;
-            }else if(!$('#email').validateLengthRange({minLength : 4, maxLength:50})){
-                err++;
-            }else if(!$('#email').validateEmailForm()){
-                err++;
-            }
-
-            if(!$('#phone-number').validateRequired()){
-                err++;
-            }else if(!$('#phone-number').validateLengthRange({minLength : 4, maxLength:50})){
-                err++;
-            }else if(!$('#phone-number').validatePhoneForm()){
+            }else if(!$('#coin').validateNumberForm()){
                 err++;
             }
 
@@ -128,17 +107,15 @@
 
             var row = $(this).closest("tr");
             var col_username =  row.find(".td-username").text();
-            var col_name =  row.find(".td-name").text();
-            var col_email =  row.find(".td-email").text();
-            var col_phone_number =  row.find(".td-phone-number").text();
+            var col_poin =  row.find(".td-poin").text();
+            var col_coin =  row.find(".td-coin").text();
             var col_id =  row.find("input.item-id").val();
 
             //set data to Modal
             $("#member-id").val(col_id);
             $("#username").val(col_username);
-            $("#name").val(col_name);
-            $("#email").val(col_email);
-            $("#phone-number").val(col_phone_number);
+            $("#poin").val(col_poin);
+            $("#coin").val(col_coin);
         });
 
         $('#btn-update').click(function(){
@@ -146,34 +123,16 @@
                 var formData = new FormData();
                 formData.append("id", $("#member-id").val());
                 formData.append("username", $("#username").val());
-                formData.append("name", $("#name").val());
-                formData.append("email", $("#email").val());
-                formData.append("phone_number", $("#phone-number").val());
+                formData.append("poin", $("#poin").val());
+                formData.append("coin", $("#coin").val());
 
                 $(this).saveData({
-                    url		     : "<?php echo site_url('User/doUpdateMember')?>",
+                    url		     : "<?php echo site_url('User/doUpdateSAccount')?>",
                     data		 : formData,
-                    locationHref : "<?php echo site_url('User/memberList')?>"
+                    locationHref : "<?php echo site_url('User/sAccountList')?>"
                 });
             }
-        });
-
-        $('.btn-delete').click(function(){
-            var row = $(this).closest("tr");
-            var col_username =  row.find(".td-username").text();
-            var col_id =  row.find("input.item-id").val();
-
-            var formData = new FormData();
-            formData.append("id", col_id);
-
-            $(this).deleteData({
-                alertMsg     : "Do you want to delete this <i><b>"+col_username+"</b></i> member ?",
-                alertTitle   : "Delete Confirmation",
-                url		     : "<?php echo site_url('User/doDeleteMember')?>",
-                data		 : formData,
-                locationHref : "<?php echo site_url('User/memberList')?>"
-            });
-        });
+        });        
     });
 
 </script>

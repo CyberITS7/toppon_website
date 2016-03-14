@@ -413,6 +413,50 @@
         	echo json_encode(array('status' => $status, 'msg' => $msg));
 		}
 
+		function doUpdateSAccount(){
+			$status = "";
+	        $msg="";
+
+	        $datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+
+	        $accountID = $this->input->post("id");
+			$username = $this->input->post('username');
+			$poin = $this->input->post("poin");
+			$coin = $this->input->post("coin");
+
+			$userVerify = $this->SAccount_model->checkUsernameBySACoountID($accountID, $username);			
+
+			if($userVerify != 1){
+				$status = 'error';
+                $msg = "Username dosen't match account id";
+        	}
+        	else{
+        		$data_user = array(						
+						'coin' => $coin,
+						'poin' => $poin,
+						'lastUpdated' => $datetime,
+						'lastUpdatedBy' => $this->session->userdata("user_id")
+					);
+
+					$this->db->trans_begin();
+					$query = $this->SAccount_model->updateAccount($data_user, $accountID);
+
+					if ($this->db->trans_status() === FALSE) {
+		                // Failed to save Data to DB
+		                $this->db->trans_rollback();
+		                $status = 'error';
+                		$msg = "Something went wrong when updating account info";
+		            }
+		            else{
+		            	$this->db->trans_commit();
+		            	$status = 'success';
+                		$msg = "Successfully update account info";
+		            }
+        	}
+
+        	echo json_encode(array('status' => $status, 'msg' => $msg));
+		}
+
 		function doDeleteMember(){
 			$status = "";
 	        $msg="";
