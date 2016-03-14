@@ -18,7 +18,7 @@ class Coin extends CI_Controller{
     function index($start=1){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
         else{
             //get Publisher List data

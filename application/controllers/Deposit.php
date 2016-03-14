@@ -21,7 +21,7 @@ class Deposit extends CI_Controller{
 
     function index(){
         if(!$this->session->userdata('logged_in')){
-            $this->loginAndRegister();
+            redirect(site_url("User/dashboard"));
         }
         else{
             $this->depositList();
@@ -30,7 +30,7 @@ class Deposit extends CI_Controller{
 
     function depositList(){
         if(!$this->session->userdata('logged_in')){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
         else{
             $data['deposit_list']=$this->TDeposit_model->getListTDeposit($this->session->userdata('user_id'));
@@ -42,7 +42,7 @@ class Deposit extends CI_Controller{
 
     function depositInsertForm() {
         if(!$this->session->userdata('logged_in')){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
         else{
             $data['bank_list']=$this->Bank_model->getBankName();
@@ -54,7 +54,7 @@ class Deposit extends CI_Controller{
 
     function depositDetail($id) {
         if(!$this->session->userdata('logged_in')){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
         else{
             $data['deposit_detail']=$this->TDeposit_model->getTDepositDetail($id);
@@ -186,7 +186,7 @@ class Deposit extends CI_Controller{
         function depositConfirmList(){
         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/loginAndRegister"));
+            redirect(site_url("User/dashboard"));
         }
         else{
             $data['deposit_list']=$this->TDeposit_model->getListTDepositConfirm($this->session->userdata('user_id'));
@@ -199,7 +199,7 @@ class Deposit extends CI_Controller{
         function depositConfirm(){
          $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
             if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-                redirect(site_url("User/loginAndRegister"));
+                redirect(site_url("User/dashboard"));
             }
             else{
                 $status = "";
