@@ -61,7 +61,7 @@
                 <div class="left_col scroll-view">
 
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="<?php echo site_url("User");?>" class="site_title"><img src="<?php echo base_url(); ?>img/icon_toppon.jpg" class="home-logo"><span>&nbsp;Toppon</span></a>
+                        <a href="<?php echo site_url("Home");?>" class="site_title"><img src="<?php echo base_url(); ?>img/icon_toppon.jpg" class="home-logo"><span>&nbsp;Toppon</span></a>
                     </div>
                     <div class="clearfix"></div>                    
                    
