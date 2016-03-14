@@ -81,9 +81,8 @@
                                 <a href="#toregister" class="to_register"> Create Account </a>
                             </p>
                             <div class="clearfix"></div>
-                            <br />
                             <div>
-                                <h1>Toppon</h1>
+                                <a href="<?php echo site_url("Home");?>"><img src="<?php echo base_url(); ?>img/toppon.png" class="home-logo" width="250px" height="125x"></a>
 
                                 <p>©2016 All Rights Reserved.</p>
                             </div>
@@ -137,9 +136,8 @@
                                 <a href="#tologin" class="to_register"> Log in </a>
                             </p>
                             <div class="clearfix"></div>
-                            <br />
                             <div>
-                                <h1>Toppon</h1>
+                                <a href="<?php echo site_url("Home");?>"><img src="<?php echo base_url(); ?>img/toppon.png" class="home-logo" width="250px" height="125x"></a>
 
                                 <p>©2016 All Rights Reserved.</p>
                             </div>
@@ -174,9 +172,8 @@
                                 <a href="#toregister" class="to_register"> Create Account </a>
                             </p>
                             <div class="clearfix"></div>
-                            <br />
                             <div>
-                                <h1>Toppon</h1>
+                                <a href="<?php echo site_url("Home");?>"><img src="<?php echo base_url(); ?>img/toppon.png" class="home-logo" width="250px" height="125x"></a>
                                 <p>©2016 All Rights Reserved.</p>
                             </div>
                         </div>
