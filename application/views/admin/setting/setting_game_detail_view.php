@@ -223,13 +223,6 @@
                     }
                 }
 
-                alert("EDIT = "+nominal_detail_edit.length);
-                alert("NEW = "+nominal_detail_add.length);
-                alert("DEL = "+nominal_delete.length);
-                alert("NEW = "+JSON.stringify(nominal_detail_add));
-                alert("EDIT = "+JSON.stringify(nominal_detail_edit));
-                alert("DEL = "+JSON.stringify(nominal_delete));
-                alert("OLD = "+JSON.stringify(nominal_detail));
                 $('#nominal-select').val('').change();
                 $('#setting-form')[0].reset();
                 $('.setting-modal').modal('hide');
@@ -287,7 +280,6 @@
                 row.attr("data-status","OLD");
                 nominal_delete = deleteObject(nominal_delete, nominal);
             }
-            alert("DEL = "+JSON.stringify(nominal_delete));
         });
 
         $('#btn-save').click(function(){
