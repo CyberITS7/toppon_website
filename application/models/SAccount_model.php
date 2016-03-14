@@ -35,6 +35,15 @@ class SAccount_model extends CI_Model{
         return $result;
     }
 
+    function additionPoinCoin($userID, $poin, $coin){
+        $this->db->set('poin', 'poin+'.$poin, FALSE);
+        $this->db->set('coin', 'coin+'.$coin, FALSE); 
+        $this->db->where('userID',$userID);
+        $this->db->update('tbl_toppon_s_accounts');
+        $result=$this->db->affected_rows();
+        return $result;
+    }
+
     function addSAccount($data){
         $this->db->insert('tbl_toppon_S_accounts',$data);
         $result=$this->db->insert_id();

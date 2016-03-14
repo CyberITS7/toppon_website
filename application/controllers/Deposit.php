@@ -16,6 +16,7 @@ class Deposit extends CI_Controller{
         $this->load->model('Coin_model');
         $this->load->model('TDeposit_model');
         $this->load->model('User_model');
+        $this->load->model('SAccount_model');
 
     }
 
@@ -219,9 +220,20 @@ class Deposit extends CI_Controller{
                 $update = $this->TDeposit_model->confirmDeposit($data_post,$tDepositID);
 
                 if($update){
-                    $this->db->trans_commit();
-                    $status = 'success';
-                    $msg = "Status Updated successfully!";
+
+                    $detail = $this->TDeposit_model->getTDepositDetail($tDepositID);
+
+                    $trans = $this->SAccount_model->additionPoinCoin($detail->createdBy, $detail->poin, $detail->coin);
+
+                    if($trans==1){
+                        $this->db->trans_commit();
+                        $status = 'success';
+                        $msg = "Status Updated successfully!";
+                    }else{
+                        $this->db->trans_rollback();
+                        $status = 'error';
+                        $msg = "Something went wrong when adding coin and poin !";    
+                    }
                 }else{
                     $this->db->trans_rollback();
                     $status = 'error';
