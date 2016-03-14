@@ -79,8 +79,10 @@
                                                         <td class="td-coin"><?php echo $row['coin']; ?></td>
                                                         <td class="td-status"><?php echo $row['status']; ?></td>
                                                         <td class="a-right a-right "><?php echo $row['coinConversion']; ?></td>
-                                                        <td class=" last">
+                                                        <td class="last">
+                                                            <?php if($row['status']!= "paid"){ ?>
                                                             <button type="button" class="btn btn-warning btn-sm btn-update"><i class="fa fa-check"></i></button>
+                                                            <?php } ?>
                                                             <a href="#"><button type="button" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash"></i></button></a>
                                                         </td> 
                                                         <input type="hidden" value="<?php echo $row['tDepositID'];?>" class="item-id"/>  
