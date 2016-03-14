@@ -267,13 +267,16 @@
 <!-- Conversion Table -->
 <section>
 <div id="conv-table" name="conv-table">
+    <div class="content-text">
+        <h1>Conversion Table</h1>
+    </div>
     <table class="responstable">
 
         <tr>
             <th>No.</th>
-            <th>Surname</th>
-            <th>Date of birth</th>
-            <th>Relationship</th>
+            <th>Toppon Credit</th>
+            <th>Nominal</th>
+            <th>Poin yang didapat</th>
         </tr>
 
         <tr>
@@ -390,18 +393,18 @@
                 <div class="social-media">
                     <h3>Find Us On</h3>
                     <div class="row social-wrapper">
-                        <div class ="social-item">
+                        <div class ="social-item wow pulse" data-wow-iteration="5" data-wow-duration="0.25s">
                             <a href ="www.facebook.com">
                                 <img src="<?php echo base_url();?>/img/sosmed/fb.png" class="img-responsive"/>
                             </a>
                         </div>
 
-                        <div class ="social-item">
+                        <div class ="social-item wow pulse" data-wow-iteration="5" data-wow-duration="0.25s">
                             <a href ="www.twitter.com">
                                 <img src="<?php echo base_url();?>/img/sosmed/twitter.png" class="img-responsive"/>
                             </a>
                         </div>
-                        <div class ="social-item">
+                        <div class ="social-item wow pulse" data-wow-iteration="5" data-wow-duration="0.25s">
                             <a href ="www.instagram.com">
                                 <img src="<?php echo base_url();?>/img/sosmed/ig.png" class="img-responsive"/>
                             </a>

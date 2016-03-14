@@ -312,6 +312,16 @@ body {
     left: 22%;
 }
 
+#conv-table{
+    background-color: #58ACFA;
+    padding-top: 20px;
+    padding-bottom: 100px;
+}
+#conv-table h1{
+    padding: 20px;
+}
+
+
 #contact-us{
     padding-top: 50px;
     padding-bottom: 100px;
