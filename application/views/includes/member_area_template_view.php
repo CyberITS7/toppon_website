@@ -70,16 +70,6 @@
                         <div class="menu_section">
                             <h3>Member Coins</h3>
                             <ul class="nav side-menu">
-                                <!--<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu" style="display: none">
-                                            <li><a href="index.html">Dashboard</a>
-                                            </li>
-                                            <li><a href="index2.html">Dashboard2</a>
-                                            </li>
-                                            <li><a href="index3.html">Dashboard3</a>
-                                            </li>
-                                        </ul>
-                                    </li>-->                                
                                 <li><a href="#"><img src="<?php echo base_url(); ?>img/TC.png" class="toppon-coins" > <span id="toppon-coin-content">0</span></a></li>
                                 <li><a href="#"><img src="<?php echo base_url(); ?>img/TP.png" class="toppon-coins" > <span id="toppon-poin-content">0</span></a></li>
                             </ul>
@@ -87,6 +77,7 @@
                         <div class="menu_section">
                             <h3>Navigation</h3>
                             <ul class="nav side-menu">
+                                <?php if($this->session->level == 'super_admin'){ ?>
                                 <li><a href="<?php echo site_url('Deposit/depositConfirmList')?>"><i class="fa fa-credit-card"></i>Confirm Deposit</a></li>
                                 <li><a><i class="fa fa-table"></i> Master <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
@@ -121,6 +112,7 @@
 
                                     </ul>
                                 </li>
+                                <?php } ?>
                                 <li><a href="<?php echo site_url('Deposit')?>"><i class="fa fa-credit-card"></i> Top Up</a></li>
                                 <li><a href="<?php echo site_url('Transfer')?>"><i class="fa fa-send-o"></i> Transfer</a></li>
                                 <li><a href="<?php echo site_url('Gift')?>"><i class="fa fa-gift"></i> Gift</a></li>
