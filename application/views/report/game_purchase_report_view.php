@@ -71,8 +71,6 @@
                                 <th>Voucher </th>
                                 <th>Coin </th>
                                 <th>Date </th>
-                                <th class=" no-link last"><span class="nobr">Action</span>
-                                </th>
                             </tr>
                         </thead>
 
@@ -92,8 +90,6 @@
                                         <?php $date = date_create($row['created']);
                                         echo date_format($date, 'F d, Y \a\t g:ia' ); ?>
                                     </td>
-                                    <td class=" last"><a href="#">View</a>
-                                    </td>
                                 </tr>
                             <?php }else{ ?>
                                 <tr class="odd pointer">
@@ -108,8 +104,6 @@
                                     <td class=" ">
                                         <?php $date = date_create($row['created']);
                                         echo date_format($date, 'F d, Y \a\t g:ia' ); ?>
-                                    </td>
-                                    <td class=" last"><a href="#">View</a>
                                     </td>
                                 </tr>
                         <?php } $x++; } ?>
