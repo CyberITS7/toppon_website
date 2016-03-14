@@ -17,9 +17,9 @@
     <div class="page-title">
         <div class="title_left">
             <h3>
-                Invoice
+                Game Purchased
                 <small>
-                    Some examples to get you started
+                    List of Game Purchased History
                 </small>
             </h3>
         </div>
