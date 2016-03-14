@@ -1,6 +1,15 @@
 <?php  
 	class GiftCategory_model extends CI_model{
 
+		function getAllGiftCategory(){
+			$this->db->select('giftCategoryID,giftCategory');
+	        $this->db->from('tbl_toppon_m_gift_categories');
+	        $this->db->where('isActive', 1);
+
+	        $query = $this->db->get();
+	        return $query->result_array();
+		}
+
 		function getGiftCategoryList($start, $limit){
 	        $this->db->select('*');
 	        $this->db->from('tbl_toppon_m_gift_categories');

@@ -324,6 +324,40 @@
 			}
 		}
 
+		function sAccountList($start=1){
+			$user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+			if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+				redirect(site_url("User/loginAndRegister"));	
+			}
+			else{
+				//get S Account List data
+				//$this->output->enable_profiler(TRUE);
+		        $num_per_page = 10;
+		        $start = ($start - 1) * $num_per_page;
+		        $limit = $num_per_page;
+
+		        $account_page = $this->SAccount_model->getSAccountList($start, $limit);
+		        $count_account = $this->SAccount_model ->getCountSAccountList();
+
+		        $config['base_url']= site_url('User/sAccountList');
+		        $config ['total_rows'] = $count_account;
+		        $config ['per_page']=$num_per_page;
+		        $config['use_page_numbers']=TRUE;
+		        $config['uri_segment']=3;
+
+		        $this->pagination->initialize($config);
+		        $data['pages'] = $this->pagination->create_links();
+		        $data['accounts']= $account_page;
+
+		        if ($this->input->post('ajax')){
+		            $this->load->view('admin/setting/setting_account_list_view', $data);
+		        }else{
+		            $data['data_content'] = 'admin/setting/setting_account_list_view';
+		            $this->load->view('includes/member_area_template_view',$data);
+		        }
+			}
+		}
+
 		function doUpdateMember(){
 			$status = "";
 	        $msg="";
@@ -373,6 +407,50 @@
 		            	$this->db->trans_commit();
 		            	$status = 'success';
                 		$msg = "Successfully update member info";
+		            }
+        	}
+
+        	echo json_encode(array('status' => $status, 'msg' => $msg));
+		}
+
+		function doUpdateSAccount(){
+			$status = "";
+	        $msg="";
+
+	        $datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+
+	        $accountID = $this->input->post("id");
+			$username = $this->input->post('username');
+			$poin = $this->input->post("poin");
+			$coin = $this->input->post("coin");
+
+			$userVerify = $this->SAccount_model->checkUsernameBySACoountID($accountID, $username);			
+
+			if($userVerify != 1){
+				$status = 'error';
+                $msg = "Username dosen't match account id";
+        	}
+        	else{
+        		$data_user = array(						
+						'coin' => $coin,
+						'poin' => $poin,
+						'lastUpdated' => $datetime,
+						'lastUpdatedBy' => $this->session->userdata("user_id")
+					);
+
+					$this->db->trans_begin();
+					$query = $this->SAccount_model->updateAccount($data_user, $accountID);
+
+					if ($this->db->trans_status() === FALSE) {
+		                // Failed to save Data to DB
+		                $this->db->trans_rollback();
+		                $status = 'error';
+                		$msg = "Something went wrong when updating account info";
+		            }
+		            else{
+		            	$this->db->trans_commit();
+		            	$status = 'success';
+                		$msg = "Successfully update account info";
 		            }
         	}
 
