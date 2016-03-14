@@ -136,8 +136,8 @@
 <!--END About Us-->
 
 <!--Why Us?-->
-<section>
-<div id="whyus" name="whyus">
+<section >
+<div id="whyus" class="parallax" name="whyus">
     <div class="container">
         <div class="content-text-w">
             <div class="col-lg-6">
@@ -169,34 +169,34 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-12 wow bounceInDown" data-wow-duration="1.0s">
                 <img src="<?php echo base_url();?>/img/howtouse/howtouse01.png" class ="img-responsive"/>
                 <p>1. Register Your Account</p>
             </div>
             
-            <div class="col-lg-4 col-md-4 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-12 wow bounceInDown" data-wow-duration="1.0s">
                 <img src="<?php echo base_url();?>/img/howtouse/howtouse02.png" class ="img-responsive"/>
                 <p>2. Fill Your Profile Correctly</p>
             </div>
             
-            <div class="col-lg-4 col-md-4 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-12 wow bounceInDown" data-wow-duration="1.0s">
                 <img src="<?php echo base_url();?>/img/howtouse/howtouse03.png" class ="img-responsive"/>
                 <p>3. Top up Your Toppon Coin to purchase voucher game</p>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-4 col-md-4 wow bounceInUp" data-wow-duration="1.0s">
                 <img src="<?php echo base_url();?>/img/howtouse/howtouse04.png" class ="img-responsive"/>
                 <p>4. Confirm Your Payment</p>
             </div>
             
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-4 col-md-4 wow bounceInUp" data-wow-duration="1.0s">
                 <img src="<?php echo base_url();?>/img/howtouse/howtouse05.png" class ="img-responsive"/>
                 <p>5. Choose Your Games and nominal</p>
             </div>
             
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-4 col-md-4 wow bounceInUp" data-wow-duration="1.0s">
                 <img src="<?php echo base_url();?>/img/howtouse/howtouse06.png" class ="img-responsive"/>
                 <p>6. Transaction sucess, and Enjoy Your Game</p>
             </div>
@@ -208,8 +208,8 @@
 
 
 <!--Layer 5 -->
-<section>
-<div id="access-games" name="access-game">
+<section >
+<div id="access-games" class="parallax" name="access-game">
     <div class="container">
         <div class="content-text-w">
             <div class="col-lg-3">
@@ -240,19 +240,19 @@
                <img src="<?php echo base_url();?>/img/howtoredeem/titik.png" class="img-responsive"/>
             </div>
 
-            <div class="redeem-item" id="redeem-item-1">
+            <div class="redeem-item wow rollIn" data-wow-duration="1.0s" id="redeem-item-1">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem1.png" class="img-responsive"/>
             </div>
-            <div class="redeem-item" id="redeem-item-2">
+            <div class="redeem-item wow bounceInUp" data-wow-duration="1.0s" id="redeem-item-2">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem2.png" class="img-responsive"/>
             </div>
-            <div class="redeem-item" id="redeem-item-3">
+            <div class="redeem-item wow lightSpeedIn" data-wow-duration="1.0s" id="redeem-item-3">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem3.png" class="img-responsive"/>
             </div>
-            <div class="redeem-item" id="redeem-item-4">
+            <div class="redeem-item wow bounceInRight" data-wow-duration="1.0s" id="redeem-item-4">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem4.png" class="img-responsive"/>
             </div>
-            <div class="redeem-item" id="redeem-item-5">
+            <div class="redeem-item wow rollIn" data-wow-duration="1.0s" id="redeem-item-5">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem5.png" class="img-responsive"/>
             </div>
         </div>
@@ -383,7 +383,13 @@
     </a>
 </div>
 <!-- END BUTTON BACK TO TOP HOME -->
-    
+ 
+<!-- WowJS -->
+ <script src="<?=base_url()?>js/wow.min.js"></script>
+
+ <script>
+        new WOW().init();
+</script>   
 
  <!-- SCRIPT BACK TO TOP -->
     <script src="<?php echo base_url();?>js/jquery.easing.js"></script>
