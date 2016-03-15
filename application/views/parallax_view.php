@@ -21,7 +21,7 @@
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
     
     <!-- CUSTOM FONTS -->
-    <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url();?>fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -119,18 +119,22 @@
             <h2>Simple and Get Reward</h2>
             <p>Toppon will help gamers simplify to get voucher games anytime and everywhere with no limits</p>
         </div>
-        <div class="col-lg-4 desktop">
-            <img src="<?php echo base_url();?>/img/desktop.png" class="img-responsive"/>
-        </div>
         
-        <div class="col-lg-4 connect-dot">
-            <img src="<?php echo base_url();?>/img/connect_dot.png" class="img-responsive"/>    
+        <div class="row">
+            <div class="about-row-wrapper">
+                <div class="about-items wow bounceInRight" data-wow-duration="1.0s">
+                    <img src="<?php echo base_url();?>/img/desktop.png" class="img-responsive"/>
+                </div>
+                
+                <div class="connect-dot wow bounceInUp" data-wow-delay="1.5s" data-wow-duration="1.7s">
+                    <img src="<?php echo base_url();?>/img/connect_dot.png" class="img-responsive"/>    
+                </div>
+                
+                <div class="about-items wow bounceInLeft" data-wow-delay="1s" data-wow-duration="1.0s">
+                    <img src="<?php echo base_url();?>/img/mobile.png" class="img-responsive"/>
+                </div>
+            </div>
         </div>
-        
-        <div class="col-lg-4 mobile">
-            <img src="<?php echo base_url();?>/img/mobile.png" class="img-responsive"/>
-        </div>
-
         <button type="button" class="btn btn-lg btn-info">Sign Up Now!</button>
     </div>
 </div>
@@ -332,25 +336,25 @@
                 </div>
                 <div class="row">
                     <div id="contactName-group" class="col-xs-12 col-sm-6 col-md-6 form-group">
-                        <input type="text" id="contactName" class="form-control" placeholder="Name" required="required">
+                        <input type="text" id="contactName" class="form-control form-custom" placeholder="Name" required="required">
                         <div id = "show_error_name" class="help-block"></div>
                     </div>
                     <div id="contactEmail-group" class="col-xs-12 col-sm-6 col-md-6 form-group">
-                        <input type="email" id="contactEmail" class="form-control" placeholder="Email" required="required">
+                        <input type="email" id="contactEmail" class="form-control form-custom" placeholder="Email" required="required">
                         <div id = "show_error_email_address" class="help-block"></div>
                     </div>
                     <div id="contactSubject-group" class="col-xs-12 col-md-12 form-group">
-                        <input type="text" id="contactSubject" class="form-control" placeholder="Subject" required="required">
+                        <input type="text" id="contactSubject" class="form-control form-custom" placeholder="Subject" required="required">
                         <div id = "show_error_subject" class="help-block"></div>
                     </div>
                     <div id="contactMessage-group" class="col-xs-12 col-md-12 form-group">
-                        <textarea name="contactMessage" id="contactMessage" class="form-control" rows="5" placeholder="Message" required=""></textarea>
+                        <textarea name="contactMessage" id="contactMessage" class="form-control form-custom" rows="5" placeholder="Message" required=""></textarea>
                         <div id = "show_error_contact_message" class="help-block"></div>
                     </div>
                 </div>
 
                 <div id="success"></div>
-                    <button class="btn btn-lg btn-default" type="submit">Kirim Pesan</button>
+                    <button class="btn btn-lg btn-default" type="submit">Send</button>
             </form>
             <!-- form -->
             </div>
@@ -393,18 +397,18 @@
                 <div class="social-media">
                     <h3>Find Us On</h3>
                     <div class="row social-wrapper">
-                        <div class ="social-item wow pulse" data-wow-iteration="5" data-wow-duration="0.25s">
+                        <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
                             <a href ="www.facebook.com">
                                 <img src="<?php echo base_url();?>/img/sosmed/fb.png" class="img-responsive"/>
                             </a>
                         </div>
 
-                        <div class ="social-item wow pulse" data-wow-iteration="5" data-wow-duration="0.25s">
+                        <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
                             <a href ="www.twitter.com">
                                 <img src="<?php echo base_url();?>/img/sosmed/twitter.png" class="img-responsive"/>
                             </a>
                         </div>
-                        <div class ="social-item wow pulse" data-wow-iteration="5" data-wow-duration="0.25s">
+                        <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
                             <a href ="www.instagram.com">
                                 <img src="<?php echo base_url();?>/img/sosmed/ig.png" class="img-responsive"/>
                             </a>
@@ -430,7 +434,7 @@
 <!--End footer -->
 
 <!-- BUTTON BACK TO TOP HOME -->
-<div style = "visibility:show;" id="back_to_top">
+<div style = "visibility:show;" id="back_to_top" class="wow pulse animated" data-wow-duration="2s" data-wow-iteration="infinite">
     <a href="#home"> 
         <img class="img img-circle" src="<?php echo base_url();?>/img/back-to-top.png" height="50px" width="50px" alt="back-to-top">
     </a>
@@ -500,7 +504,7 @@
             $("#success_ajax").removeClass("alert alert-info");
             $("#success_ajax").removeClass("alert alert-success");
             $("#success_ajax").addClass("alert alert-danger");
-            $("#success_ajax").html('Thankyou for your message, but we are sorry your message wont reach us any time soon. We will fix it as soon as posible');
+            $("#success_ajax").html('Thank you for your message, but we are sorry your message wont reach us any time soon. We will fix it as soon as posible');
             $('#success_ajax').fadeIn().delay(8000).fadeOut();
 
             $('#contactForm')[0].reset();
