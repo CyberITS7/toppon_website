@@ -322,39 +322,39 @@
     </div>
 
     <div class="row">
-    <div class="col-lg-6">
-        <div class="contact-form-container">
-        <!--ContactForm-->
-        <h3>Have any question for us?</h3>
-            <form id="contactForm" name="sentMessage" class="form" novalidate="">
-            <div class="row">
-                <div id="success_ajax" class="text-center"> </div>
-            </div>
-            <div class="row">
-                <div id="contactName-group" class="col-xs-12 col-sm-6 col-md-6 form-group">
-                    <input type="text" id="contactName" class="form-control" placeholder="Name" required="required">
-                    <p class="help-block text-danger"></p>
+        <div class="col-lg-6">
+            <div class="contact-form-container">
+            <!--ContactForm-->
+            <h3>Have any question for us?</h3>
+                <form id="contactForm" name="sentMessage" class="form" novalidate="">
+                <div class="row">
+                    <div id="success_ajax" class="text-center"> </div>
                 </div>
-                <div id="contactEmail-group" class="col-xs-12 col-sm-6 col-md-6 form-group">
-                    <input type="email" id="contactEmail" class="form-control" placeholder="Email" required="required">
-                    <p class="help-block text-danger"></p>
+                <div class="row">
+                    <div id="contactName-group" class="col-xs-12 col-sm-6 col-md-6 form-group">
+                        <input type="text" id="contactName" class="form-control" placeholder="Name" required="required">
+                        <div id = "show_error_name" class="help-block"></div>
+                    </div>
+                    <div id="contactEmail-group" class="col-xs-12 col-sm-6 col-md-6 form-group">
+                        <input type="email" id="contactEmail" class="form-control" placeholder="Email" required="required">
+                        <div id = "show_error_email_address" class="help-block"></div>
+                    </div>
+                    <div id="contactSubject-group" class="col-xs-12 col-md-12 form-group">
+                        <input type="text" id="contactSubject" class="form-control" placeholder="Subject" required="required">
+                        <div id = "show_error_subject" class="help-block"></div>
+                    </div>
+                    <div id="contactMessage-group" class="col-xs-12 col-md-12 form-group">
+                        <textarea name="contactMessage" id="contactMessage" class="form-control" rows="5" placeholder="Message" required=""></textarea>
+                        <div id = "show_error_contact_message" class="help-block"></div>
+                    </div>
                 </div>
-                <div id="contactSubject-group" class="col-xs-12 col-md-12 form-group">
-                    <input type="text" id="contactSubject" class="form-control" placeholder="Subject" required="required">
-                    <p class="help-block text-danger"></p>
-                </div>
-                <div id="contactMessage-group" class="col-xs-12 col-md-12 form-group">
-                    <textarea name="contactMessage" id="contactMessage" class="form-control" rows="5" placeholder="Message" required=""></textarea>
-                    <p class="help-block text-danger"></p>
-                </div>
-            </div>
 
-            <div id="success"></div>
-                <button class="btn btn-lg btn-default" type="submit">Kirim Pesan</button>
-        </form>
-        <!-- form -->
+                <div id="success"></div>
+                    <button class="btn btn-lg btn-default" type="submit">Kirim Pesan</button>
+            </form>
+            <!-- form -->
+            </div>
         </div>
-    </div>
         <div class="col-lg-6">
             <div class="contact-detailed">
                 <div class="telepon">
@@ -440,6 +440,7 @@
 
 
  <!-- Script Ajax Conctact Me  -->
+
 <script>
   $(function() {
       var div_loading = $("<div>", {id: "fountainG"});
@@ -465,7 +466,8 @@
       var contactSubject    = $("#contactSubject").val().trim();
       var contactMessage  = $("#contactMessage").val().trim();
 
-      if (key_ajax_contactName == true && key_ajax_contactEmail == true && key_ajax_contactSubject == true && key_ajax_contactMessage == true) {
+
+      if (validateContactForm()) {
         $.ajax({
           type : "POST",
           url : "<?php echo site_url('Home/Send_email_contactus'); ?>",
@@ -488,10 +490,7 @@
             $('#success_ajax').fadeIn().delay(4000).fadeOut();
 
             $('#contactForm')[0].reset();
-            key_ajax_contactName = false;
-            key_ajax_contactEmail = false;
-            key_ajax_contactSubject = false;
-            key_ajax_contactMessage = false;
+           
 
           },
           error : function(result, status, xhr){
@@ -505,43 +504,75 @@
             $('#success_ajax').fadeIn().delay(8000).fadeOut();
 
             $('#contactForm')[0].reset();
-            key_ajax_contactName = false;
-            key_ajax_contactEmail = false;
-            key_ajax_contactSubject = false;
-            key_ajax_contactMessage = false;
+           
           }
         });// End Ajax
-      } else {
-        console.log('tidak masuk ajax');
+      } 
+       // End if else statement
+    }); // End Form Submit
 
-        $('#show_error_name').remove(); // remove the error text first
-        $('#show_error_email_address').remove(); // remove the error text first
-        $('#show_error_subject').remove(); // remove the error text first
-        $('#show_error_message').remove(); // remove the error text first
+    function validateContactForm(){
+        var err = 0;
+        var contactName     = $("#contactName").val().trim();
+        var contactEmail    = $("#contactEmail").val().trim();
+        var contactSubject    = $("#contactSubject").val().trim();
+        var contactMessage  = $("#contactMessage").val().trim();
 
+        $('#show_error_name').html(''); // remove the error text first
+        $('#show_error_email_address').html(''); // remove the error text first
+        $('#show_error_subject').html(''); // remove the error text first
+        $('#show_error_contact_message').html(''); // remove the error text first
+
+        $('#contactName-group').removeClass('has-error');
+        $('#contactEmail-group').removeClass('has-error');
+        $('#contactSubject-group').removeClass('has-error');
+        $('#contactMessage-group').removeClass('has-error');
         // show error if submit button is press
         if (contactName == '' && contactName.length <= 3) {
           $('#contactName-group').addClass('has-error');
-          $('#contactName-group').append('<div id = "show_error_name" class="help-block">' + 'Please Input Your Name' + '</div>');
+          $('#show_error_name').html('Please Input Your Name');
+          err++;
         }
         else if (contactName.length <= 3) {
           $('#contactName-group').addClass('has-error');
-          $('#contactName-group').append('<div id = "show_error_name" class="help-block">' + 'Kurang Panjang' + '</div>');
+          $('#show_error_name').html('Your Name is too short, atleast min. 4 letters');
+          err++;
         }
         if (contactEmail == '') {
           $('#contactEmail-group').addClass('has-error');
-          $('#contactEmail-group').append('<div id = "show_error_email_address" class="help-block">' + 'Please Input Your Email Address' + '</div>');
+          $('#show_error_email_address').html('Please Input Your Email Address' );
+          err++;
+        }else if(!validateEmail(contactEmail)){
+            $('#contactEmail-group').addClass('has-error');
+            $('#show_error_email_address').html('Invalid Format Email' );
+            err++;
+
         }
         if (contactSubject == '') {
           $('#contactSubject-group').addClass('has-error');
-          $('#contactSubject-group').append('<div id = "show_error_subject" class="help-block">' + 'Please Input Your Subject' + '</div>');
+          $('#show_error_subject').html('Please Input Your Subject');
+          err++;
         }
         if (contactMessage == '') {
           $('#contactMessage-group').addClass('has-error');
-          $('#contactMessage-group').append('<div id = "show_error_message" class="help-block">' + 'Please Input Your Message' + '</div>');
+          $('#show_error_contact_message').html('Please Input Your Message');
+          err++;
         }
-      } // End if else statement
-    }); // End Form Submit
+
+        if(err==0){
+            return true;
+        }
+        else{
+            return false;
+        }
+            
+    }
+    function validateEmail(email)
+    {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+    }
+
   }); // End Function
 </script>
 
