@@ -107,6 +107,10 @@ body {
     padding-top: 40px;
 }
 
+.menu-right a{
+    text-decoration: none;  
+}
+
 .menu-navbar{  
 	height: 70px;
     text-align: center;
