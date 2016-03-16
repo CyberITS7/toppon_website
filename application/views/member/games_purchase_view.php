@@ -1,9 +1,10 @@
 <style>
     .panel-collapse:hover{
-        background: #FFF;
+        background: #1FA7DF;;
     }
     .panel-body:hover{
-        background: #F2F5F7;
+        background: #1FA7DF;
+        color : #FFF;
         cursor: pointer;
     }
     .panel-collapse .panel-body{
@@ -15,15 +16,26 @@
         padding-left: 20px;
     }
 
+    .icon-pub{
+        float: left;
+        width: 100px;
+        height: auto;
+    }
+    .icon-pub img{
+        margin: auto;
+    }
     .panel-title-container h4{
         float: left;
+    }
+    .panel_toolbox{
+        margin-top:8px;
     }
     .panel-title-container >ul>li> a.collapse-link{
         padding: 0px;
         color : #5A738E;
     }
     #nominal-tbody tr:hover{
-        background: #2A3F54;
+        background: #1FA7DF;
         color:#FFF;
         cursor: pointer;
     }
@@ -63,10 +75,10 @@
                            data-parent="#accordion" href="#collapse<?php echo $row['publisherID'];?>"
                            aria-expanded="true" aria-controls="collapse<?php echo $row['publisherID'];?>">
                             <div class="panel-title-container">
-                                <h4 class="panel-title">
-                                    <i><img src="<?php echo base_url()?>img/publisher/<?php echo $row['publisherImage']; ?>" width="20" height="20"></i>
-                                    <?php echo $row['publisherName'];?>
-                                </h4>
+                                <div class="panel-title">
+                                    <div class="icon-pub"><img src="<?php echo base_url()?>img/publisher/<?php echo $row['publisherImage']; ?>" class="img-responsive"></div>
+                                    <h4><?php echo $row['publisherName'];?></h4>
+                                </div>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li><i class="fa fa-chevron-down"></i></li>
                                 </ul>
