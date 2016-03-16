@@ -242,22 +242,25 @@
         </div>
         <div class="redeem-content">
             <div class="titik-redeem">
-               <img src="<?php echo base_url();?>/img/howtoredeem/titik.png" class="img-responsive"/>
+               <img src="<?php echo base_url();?>/img/howtoredeem/line.png" class="img-responsive"/>
             </div>
 
-            <div class="redeem-item wow rollIn" data-wow-duration="1.0s" id="redeem-item-1">
+            <div class="redeem-item wow rollIn" data-wow-duration="1.0s" id="redeem-pusat">
+                <img src="<?php echo base_url();?>/img/howtoredeem/pusat.png" class="img-responsive"/>
+            </div>
+            <div class="redeem-item wow rollIn" data-wow-duration="1.0s" data-wow-delay="1.2s" id="redeem-item-1">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem1.png" class="img-responsive"/>
             </div>
-            <div class="redeem-item wow bounceInUp" data-wow-duration="1.0s" id="redeem-item-2">
-                <img src="<?php echo base_url();?>/img/howtoredeem/redeem2.png" class="img-responsive"/>
+            <div class="redeem-item wow bounceInUp" data-wow-duration="1.0s" data-wow-delay="1.5s" id="redeem-item-2">
+                <img src="<?php echo base_url();?>/img/howtoredeem/redeem2.png" data-wow-delay="1s" class="img-responsive"/>
             </div>
-            <div class="redeem-item wow lightSpeedIn" data-wow-duration="1.0s" id="redeem-item-3">
+            <div class="redeem-item wow lightSpeedIn" data-wow-duration="1.0s" data-wow-delay="1.8s" id="redeem-item-3">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem3.png" class="img-responsive"/>
             </div>
-            <div class="redeem-item wow bounceInRight" data-wow-duration="1.0s" id="redeem-item-4">
+            <div class="redeem-item wow bounceInRight" data-wow-duration="1.0s" data-wow-delay="2s" id="redeem-item-4">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem4.png" class="img-responsive"/>
             </div>
-            <div class="redeem-item wow rollIn" data-wow-duration="1.0s" id="redeem-item-5">
+            <div class="redeem-item wow rollIn" data-wow-duration="1.0s" data-wow-delay="2.2s" id="redeem-item-5">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem5.png" class="img-responsive"/>
             </div>
         </div>
