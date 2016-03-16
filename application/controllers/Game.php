@@ -150,23 +150,30 @@ class Game extends CI_Controller{
             $gameID = $this->input->post('id');
             $userID = $this->session->userdata('user_id');
 
-            $data_post = array(
-                'isActive' => 0,
-                "lastUpdated" => $datetime,
-                "lastUpdatedBy" => $userID
-            );
+            $used_setting = $this->Game_model->checkUsedBySetting($gameID);
 
-            $this->db->trans_begin();
-            $update = $this->Game_model->updateGame($data_post, $gameID);
+            if(!$used_setting){
+                $data_post = array(
+                    'isActive' => 0,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
 
-            if ($update) {
-                $this->db->trans_commit();
-                $status = 'success';
-                $msg = "Game has been delete successfully!";
-            } else {
-                $this->db->trans_rollback();
+                $this->db->trans_begin();
+                $update = $this->Game_model->updateGame($data_post, $gameID);
+
+                if ($update) {
+                    $this->db->trans_commit();
+                    $status = 'success';
+                    $msg = "Game has been delete successfully!";
+                } else {
+                    $this->db->trans_rollback();
+                    $status = 'error';
+                    $msg = "Game can't be delete!";
+                }
+            }else{
                 $status = 'error';
-                $msg = "Game can't be delete!";
+                $msg = "This Publisher still used in Setting Publisher OR Setting Game!";
             }
         }
         echo json_encode(array('status' => $status, 'msg' => $msg));

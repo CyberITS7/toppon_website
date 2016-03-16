@@ -36,7 +36,8 @@ class SPublisher_model extends CI_Model{
         $this->db->from('tbl_toppon_s_publishers a');
         $this->db->where('a.isActive', 1);
         $this->db->group_by('a.publisherID');
-        return $this->db->count_all_results();
+        $query = $this->db->get();
+        return $query->num_rows();
     }
     function getSPublisherDetail(){
         $this->db->select('*');
@@ -52,7 +53,7 @@ class SPublisher_model extends CI_Model{
     }
 
     //SETTING
-    function getGameSettingListByPublisher($publisherID){
+    function getGameSettingListByPublisher($publisherID                              ){
         $this->db->select('a.gameID, b.gameName,a.sPublisherID');
         $this->db->from('tbl_toppon_s_publishers a');
         $this->db->join('tbl_toppon_m_games b', 'a.gameID = b.gameID');
@@ -79,10 +80,7 @@ class SPublisher_model extends CI_Model{
         $this->db->where('isActive', 1);
         $this->db->update('tbl_toppon_s_publishers',$data);
 
-        if ($this->db->affected_rows() == 1)
-            return TRUE;
-        else
-            return FALSE;
+        return $this->db->affected_rows();
     }
     
 }

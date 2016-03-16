@@ -42,6 +42,20 @@ class GameCategory_model extends CI_Model{
         }
     }
 
+    function checkUsedBySetting($id){
+        $this->db->select('gameCategoryID');
+        $this->db->from('tbl_toppon_s_game_categories');
+        $this->db->where('a.gameCategoryID', $id);
+        $this->db->where('isActive', 1);
+        $result = $this->db->count_all_results();
+
+        if($result == 0){
+            return false; // This master is not used by any setting
+        }else{
+            return true; // This Master is used by setting
+        }
+    }
+
     function getCountGameCategoryList(){
         $this->db->from('tbl_toppon_m_game_categories a');
         $this->db->where('a.isActive', 1);

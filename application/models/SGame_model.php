@@ -2,7 +2,7 @@
 class SGame_model extends CI_Model{
 
     function getGameListByPublisher($gameID){
-        $this->db->select('a.sGameID,a.gameID,a.nominalID, b.nominalName, a.paymentValue');
+        $this->db->select('a.sGameID,a.gameID,a.nominalID, b.currency,b.nominalName, a.paymentValue');
         $this->db->from('tbl_toppon_s_games a');
         $this->db->join('tbl_toppon_m_nominals b', 'a.nominalID = b.nominalID');
         $this->db->where('a.gameID', $gameID);
@@ -44,10 +44,7 @@ class SGame_model extends CI_Model{
         $this->db->where('isActive', 1);
         $this->db->update('tbl_toppon_s_games',$data);
 
-        if ($this->db->affected_rows() == 1)
-            return TRUE;
-        else
-            return FALSE;
+        return $this->db->affected_rows();
     }
 
     //SETTING
@@ -72,7 +69,8 @@ class SGame_model extends CI_Model{
         $this->db->from('tbl_toppon_s_games a');
         $this->db->where('a.isActive', 1);
         $this->db->group_by('a.gameID');
-        return $this->db->count_all_results();
+        $query = $this->db->get();
+        return $query->num_rows();
     }
 
     function getNominalSettingListByGame($gameID){

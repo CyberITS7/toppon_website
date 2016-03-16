@@ -38,7 +38,9 @@ class SGameCategory_model extends CI_Model{
         $this->db->from('tbl_toppon_s_game_categories a');
         $this->db->where('a.isActive', 1);
         $this->db->group_by('a.gameCategoryID');
-        return $this->db->count_all_results();
+
+        $query = $this->db->get();
+        return $query->num_rows();
     }
     function getSGameCategoryDetail(){
         $this->db->select('*');
@@ -108,10 +110,7 @@ class SGameCategory_model extends CI_Model{
         $this->db->where('isActive', 1);
         $this->db->update('tbl_toppon_s_game_categories',$data);
 
-        if ($this->db->affected_rows() == 1)
-            return TRUE;
-        else
-            return FALSE;
+        return $this->db->affected_rows();
     }
 }
 ?>

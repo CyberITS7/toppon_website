@@ -78,7 +78,7 @@
                             <h3>Navigation</h3>
                             <ul class="nav side-menu">
                                 <?php if($this->session->level == 'super_admin'){ ?>
-                                <li><a href="<?php echo site_url('Deposit/depositConfirmList')?>"><i class="fa fa-credit-card"></i>Top Up Confirm</a></li>
+                                <li><a href="<?php echo site_url('Deposit/depositConfirmList')?>"><i class="fa fa-credit-card"></i> Top Up Confirm</a></li>
                                 <li><a><i class="fa fa-table"></i> Master <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li><a href="<?php echo site_url('Bank')?>">Bank</a></li>
@@ -164,12 +164,7 @@
 
     </div>
 
-    <div id="custom_notifications" class="custom-notifications dsp_none">
-        <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
-        </ul>
-        <div class="clearfix"></div>
-        <div id="notif-group" class="tabbed_notifications"></div>
-    </div>
+
 
     <?php $this->load->view('loading_screen_view');?>
 

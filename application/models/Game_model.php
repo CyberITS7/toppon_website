@@ -63,6 +63,27 @@ class Game_model extends CI_Model{
             return FALSE;
     }
 
+    function checkUsedBySetting($id){
+        $this->db->select('gameID');
+        $this->db->from('tbl_toppon_s_publishers');
+        $this->db->where('a.gameID', $id);
+        $this->db->where('isActive', 1);
+        $result = $this->db->count_all_results();
+
+        $this->db->select('gameID');
+        $this->db->from('tbl_toppon_s_games');
+        $this->db->where('a.gameID', $id);
+        $this->db->where('isActive', 1);
+        $result2 = $this->db->count_all_results();
+
+
+        if($result == 0 && $result2 == 0){
+            return false; // This master is not used by any setting
+        }else{
+            return true; // This Master is used by setting
+        }
+    }
+
     //SETTING
     function getGameSettingList($start, $limit){
         //Create where clause

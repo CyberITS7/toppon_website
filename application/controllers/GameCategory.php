@@ -147,23 +147,30 @@ class GameCategory extends CI_Controller{
             $gameCategoryID = $this->input->post('id');
             $userID = $this->session->userdata('user_id');
 
-            $data_post = array(
-                'isActive' => 0,
-                "lastUpdated" => $datetime,
-                "lastUpdatedBy" => $userID
-            );
+            $used_setting = $this->GameCategory_model->checkUsedBySetting($gameCategoryID);
 
-            $this->db->trans_begin();
-            $update = $this->GameCategory_model->updateGameCategory($data_post, $gameCategoryID);
+            if(!$used_setting){
+                $data_post = array(
+                    'isActive' => 0,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
 
-            if ($update) {
-                $this->db->trans_commit();
-                $status = 'success';
-                $msg = "Game Category has been delete successfully!";
-            } else {
-                $this->db->trans_rollback();
+                $this->db->trans_begin();
+                $update = $this->GameCategory_model->updateGameCategory($data_post, $gameCategoryID);
+
+                if ($update) {
+                    $this->db->trans_commit();
+                    $status = 'success';
+                    $msg = "Game Category has been delete successfully!";
+                } else {
+                    $this->db->trans_rollback();
+                    $status = 'error';
+                    $msg = "Game category can't be delete!";
+                }
+            }else{
                 $status = 'error';
-                $msg = "Game can't be delete!";
+                $msg = "This Game Category still used in Setting Game Category!";
             }
         }
         echo json_encode(array('status' => $status, 'msg' => $msg));

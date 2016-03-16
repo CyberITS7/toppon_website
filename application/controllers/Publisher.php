@@ -204,24 +204,32 @@ class Publisher extends CI_Controller{
             $publisherID = $this->input->post('id');
             $userID = $this->session->userdata('user_id');
 
-            $data_post = array(
-                'isActive' => 0,
-                "lastUpdated" => $datetime,
-                "lastUpdatedBy" => $userID
-            );
+            $used_setting = $this->Publisher_model->checkUsedBySetting($publisherID);
 
-            $this->db->trans_begin();
-            $update = $this->Publisher_model->updatePublisher($data_post, $publisherID);
+            if(!$used_setting){
+                $data_post = array(
+                    'isActive' => 0,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
 
-            if ($update) {
-                $this->db->trans_commit();
-                $status = 'success';
-                $msg = "Publisher has been delete successfully!";
-            } else {
-                $this->db->trans_rollback();
+                $this->db->trans_begin();
+                $update = $this->Publisher_model->updatePublisher($data_post, $publisherID);
+
+                if ($update) {
+                    $this->db->trans_commit();
+                    $status = 'success';
+                    $msg = "Publisher has been delete successfully!";
+                } else {
+                    $this->db->trans_rollback();
+                    $status = 'error';
+                    $msg = "Publisher can't be delete!";
+                }
+            }else{
                 $status = 'error';
-                $msg = "Publisher can't be delete!";
+                $msg = "This Publisher still used in Setting Game Category OR Setting Publisher!";
             }
+
         }
         echo json_encode(array('status' => $status, 'msg' => $msg));
     }

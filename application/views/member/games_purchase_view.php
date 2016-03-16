@@ -11,7 +11,7 @@
         padding-bottom: 5px;
     }
     .panel-body h4{
-        width: 50%;
+        width: 100%;
         padding-left: 20px;
     }
 
@@ -51,7 +51,7 @@
 <div class="col-md-6 col-sm-6 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2><i class="fa fa-align-left"></i> Pilih Voucher Game </h2>
+            <h2><i class="fa fa-align-left"></i> Pilih Game </h2>
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
@@ -87,7 +87,7 @@
 </div>
 
 <div class="col-md-6 col-sm-6 col-xs-12">
-    <p class="lead">VOUCHER</p>
+    <p class="lead" id="choose-voucher-title"></p>
     <div class="table-responsive">
         <table class="table">
             <tbody id="nominal-tbody">
@@ -179,6 +179,7 @@
             var id = $( this ).attr("data-id");
             var data_publisher =  $( this ).closest(".panel-body").attr("data-publisher");
             var data_game =  $( this ).attr("data-game");
+            $("#choose-voucher-title").html("Pilih Voucher Game");
             $("#nominal-tbody").html("");
             var data_post = {
                 id : id
@@ -194,7 +195,7 @@
                     $.each( data, function( i, val ) {
                         var tr = $("<tr>",{"data-id":val.sGameID,"data-publisher":data_publisher,
                             "data-game":data_game,"data-nominal":val.nominalName,"data-payment":val.paymentValue});
-                        var td1 = $("<td>").text(numberWithCommas(val.nominalName));
+                        var td1 = $("<td>").text(val.currency+" "+numberWithCommas(val.nominalName));
                         var td2 = $("<td>").text(numberWithCommas(val.paymentValue)+" TC");
                         td1.appendTo(tr);
                         td2.appendTo(tr);

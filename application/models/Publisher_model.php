@@ -63,6 +63,27 @@ class Publisher_model extends CI_Model{
             return FALSE;
     }
 
+    function checkUsedBySetting($id){
+        $this->db->select('publisherID');
+        $this->db->from('tbl_toppon_s_publishers');
+        $this->db->where('a.publisherID', $id);
+        $this->db->where('isActive', 1);
+        $result = $this->db->count_all_results();
+
+        $this->db->select('publisherID');
+        $this->db->from('tbl_toppon_s_game_categories');
+        $this->db->where('a.publisherID', $id);
+        $this->db->where('isActive', 1);
+        $result2 = $this->db->count_all_results();
+
+
+        if($result == 0 && $result2 == 0){
+            return false; // This master is not used by any setting
+        }else{
+            return true; // This Master is used by setting
+        }
+    }
+
     //SETTING
     function getPublisherSettingList($start, $limit){
         //Create where clause

@@ -74,6 +74,7 @@
                     <tr class="headings">
                         <th>Nominal</th>
                         <th>Coin Value</th>
+                        <th>Agent Value</th>
                         <th>Product Code</th>
                         <th class=" no-link last"><span class="nobr">Action</span></th>
                     </tr>
@@ -89,6 +90,9 @@
                                 </td>
                                 <td class="coin-value-td" data-value="<?php echo $row['paymentValue']; ?> ">
                                     <?php echo number_format($row['paymentValue'],0,",","."); ?>
+                                </td>
+                                <td class="agent-value-td" data-value="<?php echo $row['agentValue']; ?> ">
+                                    <?php echo number_format($row['agentValue'],0,",","."); ?>
                                 </td>
                                 <td class="product-code-td"><?php echo $row['productCode']; ?></td>
                                 <td>
@@ -137,6 +141,10 @@
                     <div class="form-group">
                         <label for="coin-value" class="control-label">Coin Value : <span class="label label-danger" id="err-coin-value"></span></label>
                         <input type="text" class="form-control" id="coin-value" name="coin-value" data-label="#err-coin-value">
+                    </div>
+                    <div class="form-group">
+                        <label for="coin-value" class="control-label">Agent Value : <span class="label label-danger" id="err-agent-value"></span></label>
+                        <input type="text" class="form-control" id="agent-value" name="agent-value" data-label="#err-agent-value">
                     </div>
                     <input type="hidden" id="old-nominal" data-status="" value=""/>
                 </form>
@@ -192,11 +200,12 @@
                 var nominal_name = $("#nominal-select option:selected").text();
                 var product_code = $("#product-code").val();
                 var coin_val = $("#coin-value").val();
+                var agent_val = $("#agent-value").val();
 
                 if(status == "ADD") {
                     //ADD
                     //Adding to #nominal-tbody
-                    addNewDetail(nominal_id, nominal_name, product_code, coin_val);
+                    addNewDetail(nominal_id, nominal_name, product_code, coin_val, agent_val);
                 }else if(status == "EDIT"){
                     //EDIT
                     var setting_id = $(row).attr("data-setting");
@@ -204,12 +213,15 @@
                     $(row).find(".nominal-td").text(nominal_name);
                     $(row).find(".coin-value-td").text(coin_val);
                     $(row).find(".coin-value-td").attr("data-value",coin_val);
+                    $(row).find(".agent-value-td").text(agent_val);
+                    $(row).find(".agent-value-td").attr("data-value",agent_val);
                     $(row).find(".product-code-td").text(product_code);
 
                     var detail_data = {
                         settingID : setting_id,
                         nominalID : nominal_id,
                         coinVal : coin_val,
+                        agentVal : agent_val ,
                         productCode : product_code
                     }
 
@@ -235,6 +247,7 @@
             var id = row.attr("id");
             var nominal_id = row.attr("data-id");
             var coin_val = row.find(".coin-value-td").attr("data-value");
+            var agent_val = row.find(".agent-value-td").attr("data-value");
             var product_code = row.find(".product-code-td").html();
             var status = row.attr("data-status");
             var setting_id  = row.attr("data-setting");
@@ -243,6 +256,7 @@
             $('#nominal-select').val(nominal_id).change();
             $("#product-code").val(product_code);
             $("#coin-value").val(parseInt(coin_val));
+            $("#agent-value").val(parseInt(agent_val));
 
             // SET ID for selected row
             $('#btn-add-detail').attr("data-row","#"+id);
@@ -322,25 +336,28 @@
             }
         });
 
-        function addNewDetail(nominal_id, nominal_name, product_code, coin_val){
+        function addNewDetail(nominal_id, nominal_name, product_code, coin_val,agent_val){
             var tr = $("<tr>", {id: "new-" + id_detail, "data-status": "NEW", "data-id": nominal_id,"data-setting" : ""});
             var td1 = $("<td>",{class:"nominal-td"}).text(nominal_name);
             var td2 = $("<td>",{class:"coin-value-td","data-value":coin_val}).text(coin_val);
-            var td3 = $("<td>",{class:"product-code-td"}).text(product_code);
-            var td4 = $("<td>");
+            var td3 = $("<td>",{class:"agent-value-td","data-value":agent_val}).text(agent_val);
+            var td4 = $("<td>",{class:"product-code-td"}).text(product_code);
+            var td5 = $("<td>");
             var btn_edit = $("<button>", {class: "btn btn-primary btn-sm btn-edit-detail"}).html('<i class="fa fa-pencil"></i>');
             var btn_del = $("<button>", {class: "btn btn-danger btn-sm btn-del-detail"}).html('<i class="fa fa-remove"></i>');
             td1.appendTo(tr);
             td2.appendTo(tr);
             td3.appendTo(tr);
-            td4.append(btn_edit);
-            td4.append(btn_del);
             td4.appendTo(tr);
+            td5.append(btn_edit);
+            td5.append(btn_del);
+            td5.appendTo(tr);
             tr.appendTo("#nominal-tbody");
             //Push to Array publisher_detail
             var detail_data = {
                 nominalID: nominal_id,
                 coinVal : coin_val,
+                agentVal : agent_val,
                 productCode : product_code
             };
             nominal_detail_add.push(detail_data);
@@ -413,6 +430,12 @@
             if(!$("#coin-value").validateRequired()){
                 err++;
             }else if(!$("#coin-value").validateNumberForm()){
+                err++;
+            }
+
+            if(!$("#agent-value").validateRequired()){
+                err++;
+            }else if(!$("#agent-value").validateNumberForm()){
                 err++;
             }
 

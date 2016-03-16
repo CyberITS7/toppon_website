@@ -110,13 +110,16 @@
                 },
                 success:function(data){
                     if(data.status != 'error') {
+                        $("#load_screen").hide();
+                        $(".modal").hide();
+                        alertify.set('notifier','position', 'top-right');
                         alertify.success(data.msg);
                         window.setTimeout( function(){
-                            $("#load_screen").hide();
                             location.href = settings.locationHref;
-                        }, 2300 );
+                        }, 3000 );
                     }else{
                         $("#load_screen").hide();
+                        alertify.set('notifier','position', 'top-right');
                         alertify.error(data.msg);
                     }
                 },
@@ -124,6 +127,7 @@
                     //var err = eval("(" + xhr.responseText + ")");
                     //alertify.error(xhr.responseText);
                     $("#load_screen").hide();
+                    alertify.set('notifier','position', 'top-right');
                     alertify.error('Cannot response server !');
                 }
             });
@@ -151,21 +155,20 @@
                         data: settings.data,
                         type: "POST",
                         dataType: 'json',
-                        cache:false,
-                        contentType: false,
-                        processData: false,
                         beforeSend:function(){
                             $("#load_screen").show();
                         },
                         success:function(data){
                             if(data.status != 'error') {
+                                $("#load_screen").hide();
+                                alertify.set('notifier','position', 'top-right');
                                 alertify.success(data.msg);
                                 window.setTimeout( function(){
-                                    $("#load_screen").hide();
                                     location.href = settings.locationHref;
-                                }, 2300 );
+                                }, 3000 );
                             }else{
                                 $("#load_screen").hide();
+                                alertify.set('notifier','position', 'top-right');
                                 alertify.error(data.msg);
                             }
                         },
@@ -173,6 +176,7 @@
                             //var err = eval("(" + xhr.responseText + ")");
                             //alertify.error(xhr.responseText);
                             $("#load_screen").hide();
+                            alertify.set('notifier','position', 'top-right');
                             alertify.error('Cannot response server !');
                         }
                     });
