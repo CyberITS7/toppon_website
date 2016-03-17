@@ -1,6 +1,6 @@
 <div class="page-title">
     <div class="title_left">
-        <h3>Top Up <a href="<?php echo site_url('Deposit/depositInsertForm')?>"><button type="button" class="btn btn-primary"><i class="fa fa-plus-square"></i>&nbsp Baru</button></a></h3>
+        <h3>Top Up <a href="<?php echo site_url('Deposit/depositInsertForm')?>"><button type="button" class="btn btn-primary"><i class="fa fa-plus-square"></i>&nbsp Add New</button></a></h3>
     </div>
 
     <div class="title_right">

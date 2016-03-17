@@ -67,10 +67,10 @@ class Deposit extends CI_Controller{
     function topUpDeposit() {
             $datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
 
-            $noRekening = $this->input->post('Nomor-Rekening');
-            $namaRekening = $this->input->post("Nama-Rekening");
-            $namaBank = $this->input->post("Nama-Bank");
-            $topponCoin = $this->input->post("Toppon-Coin");
+            $noRekening = $this->input->post("postNoRekening");
+            $namaRekening = $this->input->post("postNamaRekening");
+            $namaBank = $this->input->post("postNamaBank");
+            $topponCoin = $this->input->post("postTopponCoin");
 
             //Ambil data Coin dan Bank yang Asli
             $data_bank = $this->Bank_model->getBankByID($namaBank);
@@ -115,13 +115,12 @@ class Deposit extends CI_Controller{
                         }
                         else{
                             $this->db->trans_commit();
-                            redirect(site_url('Deposit/depositDetail/'.$query));
-                            //$msg = "Top up successfully!";
-                            //$status = 'success';
+                            $msg = "Top up successfully!";
+                            $status = 'success';
 
                         }
             }
-            //echo json_encode(array('status' => $status, 'msg' => $msg)); -- Untuk Ajax
+            echo json_encode(array('status' => $status, 'msg' => $msg));
         }
 
         function deleteDeposit(){

@@ -1,6 +1,6 @@
 <div class="page-title">
     <div class="title_left">
-        <h3>Deposit <a href="<?php echo site_url('Deposit');?>"><button type="button" class="btn btn-dark"><i class="fa fa-chevron-left"></i>&nbsp Kembali</button></a></h3>
+        <h3>Top Up <a href="<?php echo site_url('Deposit');?>"><button type="button" class="btn btn-dark"><i class="fa fa-chevron-left"></i>&nbsp Back to List</button></a></h3>
     </div>
 
     <div class="title_right">
@@ -33,7 +33,7 @@
                                 <div class="x_content">
                                     <br />
 
-                                    <form id="deposit-form" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo site_url('Deposit/topUpDeposit');?>" method="POST">
+                                    <form id="deposit-form" data-parsley-validate class="form-horizontal form-label-left">
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nomor-Rekening">Nomor Rekening <span class="required">*</span>
@@ -88,7 +88,7 @@
                     
                                         <div class="form-group">
                                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                                <button type="submit" class="btn btn-warning" id="btn-top-up">Top Up</button>
+                                                <button type="button" class="btn btn-warning" id="btn-top-up">Top Up</button>
                                             </div>
                                         </div>
                                     </form>
@@ -123,15 +123,57 @@
         }
 
             // fungsi saat form di submit
-            $("#deposit-form").submit(function(){
+            $("#btn-top-up").click(function(){
                if (validate() == true)
                {
-                    return true;
-               }
-               else
-               {
-                    return false;
-               }
+                
+                    // ajax mulai disini
+                    //Loading screen
+                    $("#load_screen").show();
+                    var base_url = "<?php echo site_url('Deposit/topUpDeposit');?>";
+
+                    var noRekening = $("#Nomor-Rekening").val();
+                    var namaRekening = $("#Nama-Rekening").val();
+                    var namaBank = $("#Nama-Bank").val();
+                    var topponCoin = $("#Toppon-Coin").val();
+                    
+                    var data_post = {
+                        postNoRekening : noRekening,
+                        postNamaRekening : namaRekening,
+                        postNamaBank : namaBank,
+                        postTopponCoin : topponCoin
+                    };
+                    $.ajax({
+                        url: base_url,
+                        data: data_post,
+                        type: "POST",
+                        dataType: 'json',
+                        success:function(data){
+                            if(data.status != 'error') {
+                                //Setting Success MODAL
+                                $('.success-modal').modal({
+                                    backdrop: 'static',
+                                    keyboard: false,
+                                    show : true
+                                });
+                                $('.success-modal').modal("show");
+                                $("#load_screen").hide();
+                                window.setTimeout( function(){
+                                    location.href = "<?php echo site_url('Deposit/index');?>";
+                                }, 3000 );
+                            }else{
+                                alertify.error(data.msg);
+                                $("#load_screen").hide();
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            //var err = eval("(" + xhr.responseText + ")");
+                            alertify.error('Cannot response server !');
+                        }
+                    });
+                   
+               } return false;
+        
             });
             
         });  
