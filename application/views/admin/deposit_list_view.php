@@ -122,7 +122,7 @@
         $('.btn-update').click(function(){
             var row = $(this).closest("tr");
             var col_id =  row.find("input.item-id").val();
-
+            
                 var formData = new FormData();
                 formData.append("id", col_id);
                 $(this).deleteData({ //fungsi ini sengaja dipakai untuk munculkan alert saja abaikan namanya

@@ -243,7 +243,7 @@ class Deposit extends CI_Controller{
                 }else{
                     $this->db->trans_rollback();
                     $status = 'error';
-                    $msg = "Something went wrong when updating Status !";
+                    $msg = "Something went wrong when updating Status !".$tDepositID;
                 }
 
                 echo json_encode(array('status' => $status, 'msg' => $msg));
@@ -264,15 +264,23 @@ class Deposit extends CI_Controller{
                         'charset' => 'iso-8859-1',
                         'wordwrap' => TRUE
                     );  
-                $message =  'No Rekening               = '.$data['noRekening'].
-                        '<br>Nama Rekening =    '.$data['nameRekening']. 
-                        '<br>Bank =    '.$data['bankName'].                    
-                        '<br>Toppon Coin             = '.$data['coin'];
+                $message =
+                        'Dear Customer, '.$user->userName.
+                        '<br><br>Permintaan Top Up Anda berhasil! Berikut detail Top Up Anda : '.
+                        '<br>No Rekening = '.$data['noRekening'].
+                        '<br>Nama Rekening =  '.$data['nameRekening']. 
+                        '<br>Bank =  '.$data['bankName'].                    
+                        '<br>Toppon Coin = '.$data['coin'].
+                        '<br><br> Silahkan melakukan pembayaran ke rekening di bawah ini dalam waktu 1x24 jam semenjak email ini dikirim : '.
+                        '<br><br><img src="<?php echo base_url(); ?>img/bca-card.png" alt="BCA"> 883 027 6344 a.n. Orawan Phosiri'.
+                        '<br><br> Setelah melakukan pembayaran silahkan lakukan konfirmasi pembayaran Anda dengan login ke member area'.
+                        '<br>http://toppon.co.id/index.php/User#tologin';
 
+                
                 $this->email->initialize($config);
                 $this->email->set_newline("\r\n");
                 $this->email->from('no-reply@toppon.co.id', 'Feedback System'); // nanti diganti dengan email sistem toppon
-                $this->email->to($user->email); // nanti diganti dengan admin yang ngurusin order
+                $this->email->to($user->email); // email user
 
                 $this->email->subject('[TOPPON] TOP UP CONFIRM');
                 $this->email->message($message);

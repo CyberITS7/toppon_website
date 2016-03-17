@@ -155,6 +155,9 @@
                         data: settings.data,
                         type: "POST",
                         dataType: 'json',
+                        cache:false,
+                        contentType: false,
+                        processData: false,
                         beforeSend:function(){
                             $("#load_screen").show();
                         },
