@@ -168,7 +168,7 @@
                         },
                         error: function(xhr, status, error) {
                             //var err = eval("(" + xhr.responseText + ")");
-                            alertify.error('Cannot response server !');
+                            alertify.error('Cannot response server !'); $("#load_screen").hide();
                         }
                     });
                    

@@ -9,6 +9,7 @@ class Deposit extends CI_Controller{
         $this->load->library("pagination");
         $this->load->library('form_validation');
         $this->load->library("Authentication");
+        $this->load->library('email');
 
         $this->load->library('Hash');
         $this->load->model('Deposit_model');
@@ -114,14 +115,20 @@ class Deposit extends CI_Controller{
                             $msg = "Top Up fail, something went wrong when adding transaction data. Please try again !";
                         }
                         else{
-                            $this->db->trans_commit();
-                            $msg = "Top up successfully!";
-                            $status = 'success';
+                            if($this->sendEmailDeposit($data)){
+                                $this->db->trans_commit();
+                                $msg = "";
+                                $status = 'success';
 
+                            }else{
+                            $this->db->trans_rollback();  
+                            $msg = 'Cannot send email';
+                            $status = 'error';
                         }
             }
             echo json_encode(array('status' => $status, 'msg' => $msg));
         }
+    }
 
         function deleteDeposit(){
             $status = "";
@@ -242,8 +249,45 @@ class Deposit extends CI_Controller{
                 echo json_encode(array('status' => $status, 'msg' => $msg));
 
             }
-               
         }
+
+        function sendEmailDeposit($data){
+                $user = $this->User_model->getUserDetailByUsername($this->session->userdata("username"));
+                $config = Array
+                    (
+                        'protocol' => 'mail',
+                        'smtp_host' => 'toppon.co.id',
+                        'smtp_port' => 25,
+                        'smtp_user' => 'no-reply@toppon.co.id',
+                        'smtp_pass' => 'Pass@word1',
+                        'mailtype'  => 'html',
+                        'charset' => 'iso-8859-1',
+                        'wordwrap' => TRUE
+                    );  
+                $message =  'No Rekening               = '.$data['noRekening'].
+                        '<br>Nama Rekening =    '.$data['nameRekening']. 
+                        '<br>Bank =    '.$data['bankName'].                    
+                        '<br>Toppon Coin             = '.$data['coin'];
+
+                $this->email->initialize($config);
+                $this->email->set_newline("\r\n");
+                $this->email->from('no-reply@toppon.co.id', 'Feedback System'); // nanti diganti dengan email sistem toppon
+                $this->email->to($user->email); // nanti diganti dengan admin yang ngurusin order
+
+                $this->email->subject('[TOPPON] TOP UP CONFIRM');
+                $this->email->message($message);
+
+                if($this->email->send())
+                {
+                   return TRUE;
+                }
+
+                else
+                {
+                    return FALSE;
+                }
+
+            }
 
     }
 
