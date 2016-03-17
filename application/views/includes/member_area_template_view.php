@@ -105,7 +105,7 @@
 
                                     </ul>
                                 </li>
-                                <li><a href="<?php echo site_url('Deposit')?>"><i class="fa fa-credit-card"></i> Top Up <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-credit-card"></i> Top Up <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li><a href="<?php echo site_url('Deposit/depositInsertForm')?>">Top Up</a></li>
                                         <li><a href="<?php echo site_url('Deposit')?>">Top Up List</a></li>
