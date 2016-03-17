@@ -150,11 +150,11 @@ class Deposit extends CI_Controller{
             if($update){
                 $this->db->trans_commit();
                 $status = 'success';
-                $msg = "Gift Category has been updated successfully!";
+                $msg = "Top Up List has been updated successfully!";
             }else{
                 $this->db->trans_rollback();
                 $status = 'error';
-                $msg = "Something went wrong when updating Gift Category !";
+                $msg = "Something went wrong when updating Top Up List !";
             }
 
             echo json_encode(array('status' => $status, 'msg' => $msg));
@@ -178,10 +178,18 @@ class Deposit extends CI_Controller{
             $update = $this->TDeposit_model->updateDeposit($data_post,$tDepositID);
 
             if($update){
-                $this->db->trans_commit();
-                $status = 'success';
-                $msg = "Status Updated successfully!";
+                if($this->sendEmailUserConfirmDeposit()){
+                    $this->db->trans_commit();
+                    $status = 'success';
+                    $msg = "Status Updated successfully!";
+                }else
+                {
+                    $this->db->trans_rollback();  
+                    $msg = 'Cannot send email';
+                    $status = 'error';
+                }
             }else{
+
                 $this->db->trans_rollback();
                 $status = 'error';
                 $msg = "Something went wrong when updating Status !";
@@ -265,7 +273,7 @@ class Deposit extends CI_Controller{
                         'wordwrap' => TRUE
                     );  
                 $message =
-                        'Dear Customer, '.$user->userName.
+                        'Kepada Yth. '.$user->name.
                         '<br><br>Permintaan Top Up Anda berhasil! Berikut detail Top Up Anda : '.
                         '<br>No Rekening = '.$data['noRekening'].
                         '<br>Nama Rekening =  '.$data['nameRekening']. 
@@ -275,6 +283,44 @@ class Deposit extends CI_Controller{
                         '<br><br><img src="<?php echo base_url(); ?>img/bca-card.png" alt="BCA"> 883 027 6344 a.n. Orawan Phosiri'.
                         '<br><br> Setelah melakukan pembayaran silahkan lakukan konfirmasi pembayaran Anda dengan login ke member area'.
                         '<br>http://toppon.co.id/index.php/User#tologin';
+
+                
+                $this->email->initialize($config);
+                $this->email->set_newline("\r\n");
+                $this->email->from('no-reply@toppon.co.id', 'Feedback System'); // nanti diganti dengan email sistem toppon
+                $this->email->to($user->email); // email user
+
+                $this->email->subject('[TOPPON] TOP UP CONFIRM');
+                $this->email->message($message);
+
+                if($this->email->send())
+                {
+                   return TRUE;
+                }
+
+                else
+                {
+                    return FALSE;
+                }
+
+            }
+
+             function sendEmailUserConfirmDeposit(){
+                $user = $this->User_model->getUserDetailByUsername($this->session->userdata("username"));
+                $config = Array
+                    (
+                        'protocol' => 'mail',
+                        'smtp_host' => 'toppon.co.id',
+                        'smtp_port' => 25,
+                        'smtp_user' => 'no-reply@toppon.co.id',
+                        'smtp_pass' => 'Pass@word1',
+                        'mailtype'  => 'html',
+                        'charset' => 'iso-8859-1',
+                        'wordwrap' => TRUE
+                    );  
+                $message =
+                        'Kepada Yth. '.$user->name.
+                        '<br><br>Pembayaran Anda telah kami terima! Kami akan segera manambahkan Toppon Coin Anda. ';
 
                 
                 $this->email->initialize($config);
