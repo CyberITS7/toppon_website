@@ -45,10 +45,18 @@ class GamePurchase extends CI_Controller{
         $userID = $this->session->userdata('user_id');
         $account = $this->SAccount_model->getMyAccount($userID);
 
+        // Coin Agent or Member
+        $user_level = $this->session->userdata("level");
+        if($user_level == "member" ){
+            $coin_payment = $data_game->paymentValue;
+        }else{
+            $coin_payment = $data_game->agentValue;
+        }
+
         //Check Data Publisher Game
         if($data_game != null){
             // Check coin for purchasing Game
-            if($data_game->paymentValue > $account->coin){
+            if($coin_payment > $account->coin){
                 $status = 'error';
                 $msg = "Not enough coin to buy this games !";
             }else{
@@ -73,7 +81,8 @@ class GamePurchase extends CI_Controller{
                 //Check when save transaction
                 if($transaction_id != null || $transaction_id!=""){
 
-                    $coin_subtraction = $this->SAccount_model->subtractionCoin($userID, $data_game->paymentValue);
+                    // Substarct Coin
+                    $coin_subtraction = $this->SAccount_model->subtractionCoin($userID,$coin_payment );
                     //Check when save coin subtraction
                     if($coin_subtraction != 1){
                         $status = 'error';
@@ -123,7 +132,7 @@ class GamePurchase extends CI_Controller{
         $vsRMID = '0910403545';
         $vsQID= $qid;
         $vsRC='5003';
-        $vsIPD= '192.168.63.2';
+        $vsIPD= $this->get_real_ip();
         $vsEmailHP= $email;
         $vsProdID = $proId;
         $vsQty='1';

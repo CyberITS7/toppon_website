@@ -27,13 +27,13 @@
     <link href="<?php echo base_url(); ?>css/themes/default.min.css" rel="stylesheet">
 
     <style>
-    .home-logo{
-        width: 44px;
-        border-radius: 100%;
-    }
-    .toppon-coins{
-        width: 22px;        
-    }
+        .home-logo{
+            width: 44px;
+            border-radius: 100%;
+        }
+        .toppon-coins{
+            width: 22px;
+        }
     </style>
     <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>js/alertify.min.js"></script>
@@ -165,7 +165,7 @@
     </div>
 
 
-
+    <?php $this->load->view('success_view');?>
     <?php $this->load->view('loading_screen_view');?>
 
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>

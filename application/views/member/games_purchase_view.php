@@ -273,9 +273,17 @@
                                 dataType: 'json',
                                 success:function(data){
                                     if(data.status != 'error') {
-                                        alertify.success(data.msg);
+                                        //Setting Success MODAL
+                                        $('.success-modal').modal({
+                                            backdrop: 'static',
+                                            keyboard: false,
+                                            show : true
+                                        });
+                                        //$('.success-modal').modal("show");
                                         $("#load_screen").hide();
-                                        location.href = "<?php echo site_url("GamePurchase/index/".$categoryId)?>";
+                                        window.setTimeout( function(){
+                                            location.href = "<?php echo site_url("GamePurchase/index/".$categoryId)?>";
+                                        }, 3000 );
                                     }else{
                                         alertify.error(data.msg);
                                         $("#load_screen").hide();

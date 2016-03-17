@@ -110,6 +110,7 @@ class SGame extends CI_Controller{
                     'nominalID' => $row['nominalID'],
                     'productCode' => $row['productCode'],
                     'paymentValue' => $row['coinVal'],
+                    'agentValue' => $row['agentVal'],
                     'isActive' => 1,
                     "created" => $datetime,
                     "createdBy" => $userID,
@@ -166,6 +167,7 @@ class SGame extends CI_Controller{
                     'nominalID' => $row['nominalID'],
                     'productCode' => $row['productCode'],
                     'paymentValue' => $row['coinVal'],
+                    'agentValue' => $row['agentVal'],
                     "lastUpdated" => $datetime,
                     "lastUpdatedBy" => $userID
                 );
@@ -179,6 +181,7 @@ class SGame extends CI_Controller{
                     'nominalID' => $row['nominalID'],
                     'productCode' => $row['productCode'],
                     'paymentValue' => $row['coinVal'],
+                    'agentValue' => $row['agentVal'],
                     'isActive' => 1,
                     "createdBy" => $userID,
                     "lastUpdated" => $datetime,

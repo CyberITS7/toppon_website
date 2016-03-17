@@ -9,6 +9,15 @@
                 {return false;}
             
         }
+
+        public function isAuthorizeAgent($currentUserLevel)
+        {
+            if($currentUserLevel == 'agent' || $currentUserLevel == 'super_admin' )
+            {return true;}
+            else
+            {return false;}
+
+        }
         
         public function isAuthorizeSuperAdmin($currentUserLevel)
         {

@@ -1,8 +1,15 @@
 <?php
 class SGame_model extends CI_Model{
 
-    function getGameListByPublisher($gameID){
-        $this->db->select('a.sGameID,a.gameID,a.nominalID, b.currency,b.nominalName, a.paymentValue');
+    function getGameListByPublisher($gameID, $isAgent){
+        $this->db->select('a.sGameID,a.gameID,a.nominalID, b.currency,b.nominalName');
+
+        if($isAgent){
+            $this->db->select('a.agentValue as paymentValue');
+        }else{
+            $this->db->select('a.paymentValue as paymentValue');
+        }
+
         $this->db->from('tbl_toppon_s_games a');
         $this->db->join('tbl_toppon_m_nominals b', 'a.nominalID = b.nominalID');
         $this->db->where('a.gameID', $gameID);
@@ -13,7 +20,7 @@ class SGame_model extends CI_Model{
     }
 
     function getGameDetail($id){
-        $this->db->select('sGameID,b.gameName, c.nominalName,e.publisherName, paymentValue, productCode');
+        $this->db->select('sGameID,b.gameName, c.nominalName,e.publisherName, paymentValue, agentValue, productCode');
         $this->db->from('tbl_toppon_s_games a');
         $this->db->join('tbl_toppon_m_games b', 'a.gameID = b.gameID');
         $this->db->join('tbl_toppon_m_nominals c', 'a.nominalID = c.nominalID');
@@ -74,7 +81,7 @@ class SGame_model extends CI_Model{
     }
 
     function getNominalSettingListByGame($gameID){
-        $this->db->select('a.nominalID, b.nominalName, b.currency, a.productCode, a.paymentValue, a.sGameID');
+        $this->db->select('a.nominalID, b.nominalName, b.currency, a.productCode, a.paymentValue,a.agentValue, a.sGameID');
         $this->db->from('tbl_toppon_s_games a');
         $this->db->join('tbl_toppon_m_nominals b', 'a.nominalID = b.nominalID');
         $this->db->where('a.gameID', $gameID);

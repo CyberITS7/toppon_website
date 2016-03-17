@@ -185,8 +185,17 @@ class Game extends CI_Controller{
         echo json_encode($data);
     }
     function getNominalGameList(){
+
         $game_id = $this->input->post('id');
-        $data = $this->SGame_model->getGameListByPublisher($game_id);
+        $data = "";
+
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if($this->authentication->isAuthorizeAgent($user->userLevel)){
+            $data = $this->SGame_model->getGameListByPublisher($game_id, true);
+        }else if($this->authentication->isAuthorizeMember($user->userLevel)){
+            $data = $this->SGame_model->getGameListByPublisher($game_id, false);
+        }
+
         echo json_encode($data);
     }
 
