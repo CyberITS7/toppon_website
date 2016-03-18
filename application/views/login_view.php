@@ -195,8 +195,13 @@
             var error_where = "<?php echo $where_at;?>";
             if(error_server != null && error_server != ""){
                 if(error_where == "login"){
-                    $("#alert-error-login").html(error_server);
-                    $("#alert-error-login").parent(".alert-pesan-error").show();                    
+                    if(error_server != "Password has been reset!"){
+                        $("#alert-error-login").html(error_server);
+                        $("#alert-error-login").parent(".alert-pesan-error").show();
+                    }else{
+                        $("#alert-error-login").html(error_server);
+                        $("#alert-error-login").parent(".alert-pesan-error").removeClass("alert-danger").addClass("alert-success").show();
+                    }
                 }
                 else if(error_where == "register"){
                     $("#alert-error-regis").html(error_server);
