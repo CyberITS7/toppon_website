@@ -291,6 +291,7 @@
                                 },
                                 error: function(xhr, status, error) {
                                     //var err = eval("(" + xhr.responseText + ")");
+                                    $("#load_screen").hide();
                                     alertify.error('Cannot response server !');
                                 }
                             });

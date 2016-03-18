@@ -17,35 +17,35 @@
     <table cellpadding="0" cellspacing="0" border="0" align="center" width="600" class="container">
         <tr>
             <td width="100">&nbsp;</td>
-            <td width="350" align="center" style="padding-top:25px;">
+            <td width="380" align="center" style="padding-top:25px;">
                 <table cellpadding="1" cellspacing="0" border="0" width="350" align="center" class="content-container">
                     <tr>
-                        <td width="250"><b>Tanggal</b></td>
-                        <td>val</td>
+                        <td width="180"><b>Tanggal</b></td>
+                        <td>: <?php echo $data_api['date']?></td>
                     </tr>
                     <tr>
                         <td><b>IP Pembeli</b></td>
-                        <td>val</td>
+                        <td>: <?php echo $data_api['IPD']?></td>
                     </tr>
                     <tr>
                         <td><b>No.Transaksi</b></td>
-                        <td>val</td>
+                        <td>: <?php echo $data_api['QID']?></td>
                     </tr>
                     <tr>
                         <td><b>Nama Barang</b></td>
-                        <td>val</td>
+                        <td>: <?php echo $data_api['ProdID']?></td>
                     </tr>
                     <tr>
                         <td><b>No.Serial</b></td>
-                        <td>val</td>
+                        <td>: <?php echo $data_api['SN']?></td>
                     </tr>
                     <tr>
                         <td><b>Kode Rahasia</b></td>
-                        <td>val</td>
+                        <td>: <?php echo $data_api['SecretCode']?></td>
                     </tr>
                     <tr>
                         <td><b>Harga Toppon Coin</b></td>
-                        <td>val</td>
+                        <td>: <?php echo $data_api['Coin']?> TC</td>
                     </tr>
 
                 </table>
