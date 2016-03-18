@@ -292,38 +292,51 @@ body {
 
 #how-redeem{
     position: relative;
+    padding-bottom: 70px;
+
 }
+
 
 .redeem-item{
     position: absolute;
     width: 15%;
     height: 20%;
 }
+
 .titik-redeem{
-    width: 60%;
+    width: 70%;
     margin: auto;
-    margin-top: 50px;
+   
+}
+#redeem-pusat{
+    bottom: 24%;
+    left: 38%;
+    width: 24%;
 }
 
 #redeem-item-1{
-    top: 16%;
-    left: 19%;
+    bottom: 20%;
+    left: 11%;
+
 }
 #redeem-item-2{
-    top: 24%;
-    left: 40%;
+    top: 20%;
+    left: 15%;
 }
 #redeem-item-3{
-    top: 42%;
-    right: 22%;
+    top: 12%;
+    width: 16%;
+    left: 42%;
 }
 #redeem-item-4{
-    bottom: 10%;
-    right: 39%;
+    top: 20%;
+    right: 14%;
+
 }
 #redeem-item-5{
-    bottom: 15%;
-    left: 22%;
+    bottom: 18%;
+    right: 9%;
+    width: 16%;
 }
 
 #conv-table{
