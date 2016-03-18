@@ -16,7 +16,9 @@ class TestController extends CI_Controller{
     }
 
     function index(){
-        $this->load->view("email/template_view");
+        $data['title'] = "TOPPON - Bukti Pembelian Game";
+        $data['content'] = "email/game_purchase_email_view";
+        $this->load->view("email/template_view",$data);
     }
 }
 ?>

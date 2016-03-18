@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>[SUBJECT]</title>
+    <title><?php echo $title;?></title>
     <style type="text/css">
 
         @media screen and (max-width: 600px) {
@@ -169,7 +169,7 @@
                                     </div>
 
                                     <!--CONTENT EMAIL-->
-                                    <?php $this->load->view("email/game_purchase_email_view");?>
+                                    <?php $this->load->view($content);?>
 
                                     <div class='movableContent'>
                                         <table cellpadding="0" cellspacing="0" border="0" align="center" width="600" class="container">
