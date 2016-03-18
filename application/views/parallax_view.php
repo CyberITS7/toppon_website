@@ -52,7 +52,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#howtouse">How To Use</a></li>
-                <li><a href="#conv-table">Toppon Coin</a></li>
+                <li><a href="#conv-table">Toppon Credit</a></li>
                 <!--
                 <li>
                     <div id="help-button">
@@ -81,19 +81,19 @@
 
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('../img/slider/battleborn_game.jpg');"></div>
+                <div class="fill" style="background-image:url('../img/slider/slide01.jpg');"></div>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('../img/slider/EOS_3.jpg');"></div>
+                <div class="fill" style="background-image:url('../img/slider/slide02.jpg');"></div>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="item">
                 <!-- Set the third background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('../img/slider/ro.jpg');"></div>
+                <div class="fill" style="background-image:url('../img/slider/slide03.jpg');"></div>
                 <div class="carousel-caption">
                 </div>
             </div>
@@ -135,7 +135,9 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-lg btn-info">Sign Up Now!</button>
+        <a href="<?php echo site_url('User');?>#toregister">
+            <button type="button" class="btn btn-lg btn-info">Sign Up Now!</button>
+        </a>
     </div>
 </div>
 <!--END About Us-->
@@ -157,7 +159,7 @@
         </div>
 
         <div class="get-voucher">
-            <a href="#">
+            <a href="<?php echo site_url('User');?>#toregister">
                 <h1>Get Your Voucher Games Now!</h1>
             </a>
         </div>
@@ -172,6 +174,8 @@
         <div class="content-text">
             <h1>HOW TO USE</h1>
         </div>
+
+        <div class="use-wrapper">
 
         <div class="row">
             <div class="col-lg-4 col-md-4 col-xs-12 wow bounceInDown" data-wow-duration="1.0s">
@@ -205,6 +209,8 @@
                 <img src="<?php echo base_url();?>/img/howtouse/howtouse06.png" class ="img-responsive"/>
                 <p>6. Transaction sucess, and Enjoy Your Game</p>
             </div>
+        </div>
+
         </div>
 
     </div>    
@@ -275,46 +281,34 @@
 <section>
 <div id="conv-table" name="conv-table">
     <div class="content-text">
-        <h1>Conversion Table</h1>
+        <h1>Toppon Credit</h1>
     </div>
-    <table class="responstable">
-
-        <tr>
-            <th>No.</th>
-            <th>Toppon Credit</th>
-            <th>Nominal</th>
-            <th>Poin yang didapat</th>
-        </tr>
-
-        <tr>
-            <td>Steve</td>
-            <td>Foo</td>
-            <td>01/01/1978</td>
-            <td>Policyholder</td>
-        </tr>
-
-        <tr>
-            <td>Steffie</td>
-            <td>Foo</td>
-            <td>01/01/1978</td>
-            <td>Spouse</td>
-        </tr>
-
-        <tr>
-            <td>Stan</td>
-            <td>Foo</td>
-            <td>01/01/1994</td>
-            <td>Son</td>
-        </tr>
-
-        <tr>
-            <td>Stella</td>
-            <td>Foo</td>
-            <td>01/01/1992</td>
-            <td>Daughter</td>
-        </tr>
-        
-    </table>
+    <div class="container">
+        <div class="toppon-credit">
+            <img src="<?php echo base_url();?>/img/topponcredit/credit.png" class="img-responsive"/>
+            <div class="content-text"> 
+                    <p>Toppon Credits adalah mata uang online dimana para gamer bisa melakukan</p>
+                    <p>TOP UP untuk setiap pembelian voucher games</p>
+                    <p>Nilai Tukar Toppon Credits untuk setiap 1TC = Rp.100</p>
+                    <p>dan berlaku untuk kelipatannya</p>
+            </div>
+            <div class="row">
+            <div class="about-row-wrapper">
+                <div class="about-items wow bounceInRight" data-wow-duration="1.0s">
+                    <img src="<?php echo base_url();?>/img/topponcredit/credit01.png" class="img-responsive"/>
+                </div>
+                
+                <div class="connect-dot wow bounceInUp" data-wow-delay="1.5s" data-wow-duration="1.7s">
+                    <img src="<?php echo base_url();?>/img/topponcredit/credit02.png" class="img-responsive"/>    
+                </div>
+                
+                <div class="about-items wow bounceInLeft" data-wow-delay="1s" data-wow-duration="1.0s">
+                    <img src="<?php echo base_url();?>/img/topponcredit/credit03.png" class="img-responsive"/>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
 
 </div>
 </section>
@@ -597,7 +591,7 @@
 
     <script>
         $(document).ready(function() {
-            var offset = 250;
+            var offset = 200;
             var duration = 600;
             $(window).scroll(function() {
                 if ($(this).scrollTop() > offset) {
