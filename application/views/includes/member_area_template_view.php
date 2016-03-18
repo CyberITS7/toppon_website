@@ -99,20 +99,32 @@
                                         <li><a href="<?php echo site_url('SPublisher')?>">Publisher</a></li>
                                     </ul>
                                 </li>
+                                <li><a><i class="fa fa-tasks"></i> Transaction <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li><a href="<?php echo site_url('Deposit/depositInsertForm')?>">Top Up</a></li>
+                                        <li><a href="<?php echo site_url('Deposit')?>">Top Up List</a></li>
+                                        <li><a href="<?php echo site_url('Transfer')?>">Transfer</a></li>
+                                        <li><a href="<?php echo site_url('Gift')?>">Gift</a></li>
+                                    </ul>
+                                </li>
                                 <?php } ?>
                                 <li><a><i class="fa fa-gamepad"></i> Game Purchase <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" id="category-game" style="display: none">
 
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-credit-card"></i> Top Up <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li><a href="<?php echo site_url('Deposit/depositInsertForm')?>">Top Up</a></li>
-                                        <li><a href="<?php echo site_url('Deposit')?>">Top Up List</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="<?php echo site_url('Transfer')?>"><i class="fa fa-send-o"></i> Transfer</a></li>
-                                <li><a href="<?php echo site_url('Gift')?>"><i class="fa fa-gift"></i> Gift</a></li>
+                                <?php if($this->session->level != 'super_admin'){ ?>
+                                    <li><a><i class="fa fa-credit-card"></i> Top Up <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu" style="display: none">
+                                            <li><a href="<?php echo site_url('Deposit/depositInsertForm')?>">Top Up</a></li>
+                                            <li><a href="<?php echo site_url('Deposit')?>">Top Up List</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="<?php echo site_url('Transfer')?>"><i class="fa fa-send-o"></i> Transfer</a></li>
+                                    <?php if($this->session->level != 'agent'){ ?>
+                                    <li><a href="<?php echo site_url('Gift')?>"><i class="fa fa-gift"></i> Gift</a></li>
+                                    <?php } ?>
+                                <?php } ?>
                                 <li><a><i class="fa fa-file-text"></i> Report <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li><a href="<?php echo site_url('Report/depositReport')?>">Top Up</a></li>

@@ -37,7 +37,7 @@
             <div class="modal-body">
                 <h1 id="success-modal-title">Congratulation your transaction is successed</h1>
                 <p>Thank you for using Toppon for your games payment solution</p>
-                <p>Your order will be processed, please check your email</p>
+                <p id="success-modal-check-email">Your order will be processed, please check your email</p>
             </div>
             <div class="modal-footer">
                 <h4>Follow Us</h4>

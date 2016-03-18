@@ -13,6 +13,7 @@
 	    $this->load->model('Transfer_model');
 	    $this->load->model('User_model');
 	    $this->load->model('SAccount_model');
+	    $this->load->model('Coin_model');
 		}
 
 		function index(){
@@ -20,6 +21,7 @@
             	redirect(site_url("user/dashboard"));
 	        }
 	        else{
+	        	$data['coin_list']=$this->Coin_model->getCoin();
 	            $data['data_content']="member/transfer_view";
             	$this->load->view('includes/member_area_template_view',$data);
 	        }

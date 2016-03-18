@@ -29,11 +29,11 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <select class="form-control" id="toppon-coin" name="toppon-coin" required="required">
                                 <option value="">Choose option</option>
-                                <option value="10">10 TC</option>
-                                <option value="25">25 TC</option>
-                                <option value="30">30 TC</option>
-                                <option value="50">50 TC</option>
-                                <option value="100">100 TC</option>
+                                <?php foreach ($coin_list as $row) {
+                                    ?>
+                                    <option value="<?php echo $row['coin']; ?>"><?php echo $row['coin']; ?> TC</option>
+                                    <?php
+                                } ?>
                             </select>
                         </div>
                     </div>
@@ -58,6 +58,7 @@
     <script>
     $(document).ready(function(){
         function validate(){
+            alertify.set('notifier','position', 'top-right');
             var error = 0;        
             var username_tujuan = $("#username-tujuan").val();
             var toppon_coin = $("#toppon-coin").val();
@@ -99,22 +100,37 @@
                             password : $("#password").val()
                         };
 
+                        $("#load_screen").show();
                         $.ajax({
                             url: "<?php echo base_url(); ?>" + "index.php/Transfer/doTransfer",
                             data: data_post,
                             type: "POST",
                             dataType: 'json',
                             success:function(data){
-                                if(data.status != 'error') {
-                                    alertify.success(data.msg);
-                                    location.href = "<?php echo site_url("Transfer")?>";
+                                    if(data.status != 'error') {
+                                        $('.success-modal').modal({
+                                        backdrop: 'static',
+                                        keyboard: false,
+                                        show : true
+                                    });
+                                    $("#success-modal-title").html("Congratulation your transfer is success");
+                                    $("#success-modal-check-email").html("Your transfer will be processed");
+                                    $('.success-modal').modal("show");
+                                    $("#load_screen").hide();
+                                    window.setTimeout( function(){
+                                        location.href = "<?php echo site_url("Transfer")?>";
+                                    }, 3000 );
                                 }else{
+                                    alertify.set('notifier','position', 'top-right');
                                     alertify.error(data.msg);
+                                    $("#load_screen").hide();
                                 }
                             },
                             error: function(xhr, status, error) {
                                 //var err = eval("(" + xhr.responseText + ")");
+                                alertify.set('notifier','position', 'top-right');
                                 alertify.error(xhr.responseText);
+                                $("#load_screen").hide();
                             }
                         });
                     }

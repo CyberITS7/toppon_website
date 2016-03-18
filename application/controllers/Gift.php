@@ -20,7 +20,8 @@
 
 		/*Transaction Purposes*/
 		function index($start=1){
-			if(!$this->session->userdata('logged_in')){
+			$user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        	if(!$this->authentication->isAuthorizeMember($user->userLevel)){
             	redirect(site_url("User/dashboard"));
 	        }
 	        else{

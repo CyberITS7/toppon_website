@@ -135,14 +135,27 @@
                             dataType: 'json',
                             success:function(data){
                                 if(data.status != 'error') {
-                                    alertify.success(data.msg);
-                                    location.href = "<?php echo site_url("Gift")?>";
+                                    $('.success-modal').modal({
+                                        backdrop: 'static',
+                                        keyboard: false,
+                                        show : true
+                                    });
+                                    $("#success-modal-title").html("Congratulation your gift claim is success");
+                                    $("#success-modal-check-email").html("Your gift claim will be processed");
+                                    $('.success-modal').modal("show");
+                                    $("#load_screen").hide();
+                                    window.setTimeout( function(){
+                                        location.href = "<?php echo site_url("Gift")?>";
+                                    }, 3000 );
+                                    
                                 }else{
+                                    alertify.set('notifier','position', 'top-right');
                                     alertify.error(data.msg);
                                 }
                             },
                             error: function(xhr, status, error) {
                                 //var err = eval("(" + xhr.responseText + ")");
+                                alertify.set('notifier','position', 'top-right');
                                 alertify.error(xhr.responseText);
                             }
                         });
@@ -150,6 +163,7 @@
                 ).setHeader('Confirm Gift Claim');
             }
             else{
+                alertify.set('notifier','position', 'top-right');
                 alertify.error("Gift Claim fail, insufficient poin !");
             }
         });        
