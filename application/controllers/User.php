@@ -47,6 +47,8 @@
 				redirect($this->loginAndRegister());
 			}
 			else{
+                $this->load->model('GameCategory_model');
+                $data['game_category'] = $this->GameCategory_model->getGameCategoryList(null, null);
                 $data['data_content']="member/dashboard_view";
 				$this->load->view('includes/member_area_template_view',$data);
 			}

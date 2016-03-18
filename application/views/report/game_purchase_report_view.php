@@ -70,6 +70,7 @@
                                 <th>Game </th>
                                 <th>Voucher </th>
                                 <th>Coin </th>
+                                <th>User </th>
                                 <th>Date </th>
                             </tr>
                         </thead>
@@ -78,21 +79,9 @@
                         <?php $x=1; foreach($game_purchase_list as $row) { ?>
                             <?php if($x%2==1) {?>
                                 <tr class="even pointer">
-                                    <td class="a-center ">
-                                        <input type="checkbox" class="tableflat">
-                                    </td>
-                                    <td class=" "><?php echo $row['prefixCode'].$row['tGamePurchaseID']; ?></td>
-                                    <td class=" "><?php echo $row['publisherName']; ?></td>
-                                    <td class=" "><?php echo $row['gameName'] ?></td>
-                                    <td class="a-right a-right "><?php echo $row['currency']." ".number_format($row['nominalName'],0,",","."); ?></td>
-                                    <td class="a-right a-right "><?php echo number_format($row['paymentValue'],0,",","."); ?></td>
-                                    <td class=" ">
-                                        <?php $date = date_create($row['created']);
-                                        echo date_format($date, 'F d, Y \a\t g:ia' ); ?>
-                                    </td>
-                                </tr>
                             <?php }else{ ?>
                                 <tr class="odd pointer">
+                            <?php }//end else?>
                                     <td class="a-center ">
                                         <input type="checkbox" class="tableflat">
                                     </td>
@@ -101,12 +90,13 @@
                                     <td class=" "><?php echo $row['gameName'] ?></td>
                                     <td class="a-right a-right "><?php echo $row['currency']." ".number_format($row['nominalName'],0,",","."); ?></td>
                                     <td class="a-right a-right "><?php echo number_format($row['paymentValue'],0,",","."); ?></td>
+                                    <td class="a-right a-right "><?php echo $row['userLevel']; ?></td>
                                     <td class=" ">
                                         <?php $date = date_create($row['created']);
                                         echo date_format($date, 'F d, Y \a\t g:ia' ); ?>
                                     </td>
                                 </tr>
-                        <?php } $x++; } ?>
+                            <?php  $x++; } //end for?>
                         </tbody>
 
                     </table>

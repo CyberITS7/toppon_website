@@ -44,7 +44,7 @@
                         <?php foreach($publisher as $row){?>
                             <tr>
                                 <td class="td-publisher-name"><?php echo $row['publisherName'];?></td>
-                                <td class="td-publisher-img"><img src="<?php echo base_url();?>img/publisher/<?php echo $row['publisherImage'];?>" width="50" height="50"/></td>
+                                <td class="td-publisher-img"><img src="<?php echo base_url();?>img/publisher/<?php echo $row['publisherImage'];?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target=".publisher-modal"><i class="fa fa-pencil"></i> Edit </a>
                                     <a href="#" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i> Delete </a>

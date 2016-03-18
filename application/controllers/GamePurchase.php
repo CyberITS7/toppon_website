@@ -65,10 +65,12 @@ class GamePurchase extends CI_Controller{
                     'publisherName'=>$data_game->publisherName,
                     'prefixCode'=>$prefixID,
                     'gameName'=>$data_game->gameName,
+                    'currency'=>$data_game->currency,
                     'nominalName'=>$data_game->nominalName,
                     'productCode'=>$data_game->productCode,
                     'paymentValue'=>$data_game->paymentValue,
                     'coin'=>$account->coin,
+                    'userLevel'=>$user_level,
                     'isActive'=>1,
                     "created" => $datetime,
                     "createdBy" => $userID,
@@ -94,13 +96,14 @@ class GamePurchase extends CI_Controller{
                         $email = $account->email;
                         $prodId = $data_game->productCode;
                         $return_code = $this->sendIndomog($generateID,$email,$prodId);
+
                         if($return_code == '000'){
                             $status = 'success';
-                            $msg = "Purchasing success! ";
+                            $msg = "Game Purchase Success !";
                             $this->db->trans_commit();
                         }else{
                             $status = 'error';
-                            $msg = "Purchasing fail, please try again! ";
+                            $msg = "Purchasing fail, please try again!";
                             $this->db->trans_rollback();
                         }
                     }
@@ -309,6 +312,173 @@ class GamePurchase extends CI_Controller{
             $ipaddress = false; # unknown
         }
         return $ipaddress;
+    }
+
+    function testRequest(){
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeMember($user->userLevel)){
+            redirect(site_url("User/dashboard"));
+        }
+        else{
+            $gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
+
+            $vsRMID = '0910403545';
+            $vsQID= 'TOPPON45';
+            $vsRC='5006';
+            $vsIPD= '202.58.180.46';
+            $vsSecret='123456';
+
+            $date = new DateTime();
+            $now = date_format($date,"Ymd\TH:i:s");
+            $gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
+
+            // mid.qid.reqc.ipd.emailhp.prodid.qty.prodaccid.prodbillid.remark.now
+            $data= $vsRMID.$vsQID.$vsRC.$vsIPD.$now;
+            $vsSignature = sha1($data.$vsSecret);
+
+
+//Create xml request
+            $req = '
+            <methodCall>
+            <methodName>Inquiry</methodName>
+                <params>
+                <param>
+            <value>
+                <struct>
+                    <member>
+                        <name>RMID</name>
+                        <value><string>'.$vsRMID.'</string></value>
+                    </member>
+                    <member>
+                        <name>QID</name>
+                        <value><string>'.$vsQID.'</string></value>
+                    </member>
+                    <member>
+                        <name>RC</name>
+                        <value><string>5006</string></value>
+                    </member>
+                    <member>
+                        <name>IPD</name>
+                        <value><string>'.$vsIPD.'</string></value>
+                    </member>
+                    <member>
+                        <name>Now</name>
+                        <value> <datetime.iso8601>'.$now.'</datetime.iso8601> </value>
+                    </member>
+                    <member>
+                        <name>Signature</name>
+                        <value><string>'.$vsSignature.'</string></value>
+                    </member>
+                </struct>
+            </value>
+                </param>
+                </params>
+            </methodCall> ';
+
+            //Send XML request with curl
+
+            $ch = curl_init();
+
+            curl_setopt($ch,CURLOPT_URL,$gateway);
+            curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch,CURLOPT_POST,1);
+            curl_setopt($ch,CURLOPT_POSTFIELDS,$req);
+
+            curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,FALSE);
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+
+            $result = curl_exec($ch); //get the response
+
+            if(curl_errno($ch)) {
+                print "Error: " . curl_error($ch);
+            } else {
+                curl_close($ch);
+            }
+
+            echo htmlentities($result);
+
+        }//else
+    }
+    function test2(){
+        echo "Sending XMLRPC Request with result :<br />";
+        $gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
+
+        $data= "0910403545"."T108000001"."5006"."G001T001"."20141201T17:10:05";
+        $vsSignature = sha1($data."123456");
+
+//Create xml request
+        $req = '
+<methodCall>
+  <methodName>Inquiry</methodName>
+  <params>
+    <param>
+      <value>
+        <struct>
+          <member>
+            <name>RMID</name>
+            <value>
+              <string>0910403545</string>
+            </value>
+          </member>
+          <member>
+            <name>QID</name>
+            <value>
+              <string>T108000001</string>
+            </value>
+          </member>
+          <member>
+            <name>RC</name>
+            <value>
+              <string>5006</string>
+            </value>
+          </member>
+          <member>
+            <name>IPD</name>
+            <value>
+              <string>G001T001</string>
+            </value>
+          </member>
+          <member>
+            <name>Now</name>
+            <value>
+              <datetime.iso8601>20141201T17:10:05</datetime.iso8601>
+            </value>
+          </member>
+          <member>
+            <name>Signature</name>
+            <value>
+              <string>'.$vsSignature.'</string>
+            </value>
+          </member>
+        </struct>
+      </value>
+    </param>
+  </params>
+</methodCall>';
+
+//Send XML request with curl
+
+        $ch = curl_init();
+
+        curl_setopt($ch,CURLOPT_URL,$gateway);
+        curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch,CURLOPT_POST,1);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$req);
+
+        curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,FALSE);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+
+        $result = curl_exec($ch); //get the response
+
+        if(curl_errno($ch)) {
+            print "Error: " . curl_error($ch);
+        } else {
+            curl_close($ch);
+        }
+
+        echo htmlentities($result);
     }
 }
 ?>

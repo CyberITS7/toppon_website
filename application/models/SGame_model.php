@@ -20,7 +20,7 @@ class SGame_model extends CI_Model{
     }
 
     function getGameDetail($id){
-        $this->db->select('sGameID,b.gameName, c.nominalName,e.publisherName, paymentValue, agentValue, productCode');
+        $this->db->select('sGameID,b.gameName, c.nominalName, currency,e.publisherName, paymentValue, agentValue, productCode');
         $this->db->from('tbl_toppon_s_games a');
         $this->db->join('tbl_toppon_m_games b', 'a.gameID = b.gameID');
         $this->db->join('tbl_toppon_m_nominals c', 'a.nominalID = c.nominalID');

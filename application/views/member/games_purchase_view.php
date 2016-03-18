@@ -15,10 +15,10 @@
         width: 100%;
         padding-left: 20px;
     }
-
     .icon-pub{
         float: left;
         width: 100px;
+        margin-right: 10px;
         height: auto;
     }
     .icon-pub img{
@@ -279,7 +279,7 @@
                                             keyboard: false,
                                             show : true
                                         });
-                                        //$('.success-modal').modal("show");
+                                        $('.success-modal').modal("show");
                                         $("#load_screen").hide();
                                         window.setTimeout( function(){
                                             location.href = "<?php echo site_url("GamePurchase/index/".$categoryId)?>";
