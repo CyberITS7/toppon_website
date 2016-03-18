@@ -100,6 +100,7 @@
         }        
 
         $('.btn-edit').click(function(){
+            $(".label-danger").html("");
             // Set Title modal
             $('.modal-title').html('Edit Member Info');            
             //reset form
