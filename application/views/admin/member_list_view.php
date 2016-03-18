@@ -12,6 +12,7 @@
                     <thead>
                     <tr class="headings">
                         <th>Username</th>
+                        <th>Level</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
@@ -23,6 +24,7 @@
                     <?php foreach($members as $row){?>
                         <tr>
                             <td class="td-username"><?php echo $row['userName'];?></td>
+                            <td class="td-level"><?php echo $row['userLevel'];?></td>
                             <td class="td-name"><?php echo $row['name'];?></td>
                             <td class="td-email"><?php echo $row['email'];?></td>
                             <td class="td-phone-number"><?php echo $row['phoneNumber'];?></td>
@@ -58,6 +60,13 @@
                     <div class="form-group">
                         <label for="username" class="control-label">Username: <span class="label label-danger" id="err-username"></span></label>
                         <input type="text" class="form-control" id="username" name="username" data-label="#err-username">
+                    </div>
+                    <div class="form-group">
+                        <label for="level" class="control-label">Level: <span class="label label-danger" id="err-level"></span></label>
+                        <select class="form-control" id="level" name="level" data-label="#err-level">
+                            <option value="member">Member</option>
+                            <option value="agent">Agent</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="name" class="control-label">Name: <span class="label label-danger" id="err-name"></span></label>
@@ -130,6 +139,7 @@
 
             var row = $(this).closest("tr");
             var col_username =  row.find(".td-username").text();
+            var col_level = row.find(".td-level").text();
             var col_name =  row.find(".td-name").text();
             var col_email =  row.find(".td-email").text();
             var col_phone_number =  row.find(".td-phone-number").text();
@@ -138,6 +148,7 @@
             //set data to Modal
             $("#member-id").val(col_id);
             $("#username").val(col_username);
+            $("#level").val(col_level);
             $("#name").val(col_name);
             $("#email").val(col_email);
             $("#phone-number").val(col_phone_number);
@@ -148,6 +159,7 @@
                 var formData = new FormData();
                 formData.append("id", $("#member-id").val());
                 formData.append("username", $("#username").val());
+                formData.append("level", $("#level").val());
                 formData.append("name", $("#name").val());
                 formData.append("email", $("#email").val());
                 formData.append("phone_number", $("#phone-number").val());

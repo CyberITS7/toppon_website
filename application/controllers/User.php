@@ -366,6 +366,7 @@
 
 	        $userID = $this->input->post("id");
 			$username = $this->input->post('username');
+			$level = $this->input->post('level');
 			$name = $this->input->post("name");
 			$email = $this->input->post("email");
 			$phone = $this->input->post("phone_number");			
@@ -387,6 +388,7 @@
         	else{
         		$data_user = array(
 						'username' => $username,
+						'userLevel' => $level,
 						'name' => $name,
 						'email' => $email,
 						'phoneNumber' => $phone,						

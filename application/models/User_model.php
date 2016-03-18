@@ -151,7 +151,7 @@
 	        $this->db->select('*');
 	        $this->db->from('tbl_toppon_m_users');
 	        $this->db->where('isActive', 1);
-	        $this->db->where('userLevel', "member");
+	        $this->db->where('userLevel !=' , "super_admin");
 	        $this->db->order_by('created','asc');
 
 	        if($limit != null || $start!= null){
