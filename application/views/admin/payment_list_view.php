@@ -122,6 +122,7 @@
         }
 
         $('#btn-add').click(function(){
+            $(".label-danger").html("");
             // Set Title modal
             $('.modal-title').html('Add Payment');
             // Show hide button
@@ -132,6 +133,7 @@
         });
 
         $('.btn-edit').click(function(){
+            $(".label-danger").html("");
             // Set Title modal
             $('.modal-title').html('Edit Payment');
             // Show hide button

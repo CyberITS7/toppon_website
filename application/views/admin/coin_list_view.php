@@ -134,6 +134,7 @@
         }
 
         $('#btn-add').click(function(){
+            $(".label-danger").html("");
             // Set Title modal
             $('.modal-title').html('Add Coin');
             // Show hide button
@@ -144,6 +145,7 @@
         });
 
         $('.btn-edit').click(function(){
+            $(".label-danger").html("");
             // Set Title modal
             $('.modal-title').html('Edit Coin');
             // Show hide button
