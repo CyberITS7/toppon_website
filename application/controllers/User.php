@@ -8,6 +8,7 @@
 		$this->load->helper('html');
 	    $this->load->library("pagination");
 	    $this->load->library('form_validation');
+	    $this->load->library('email');
 	    
 	    $this->load->library('Hash');
 	    $this->load->model('User_model');
@@ -63,6 +64,34 @@
                 $data['data_content']="admin/edit_profile_view";
 				$this->load->view('includes/member_area_template_view',$data);
 			}
+		}
+
+		function resetPassword(){
+			$user = $this->input->get('k');
+
+			$i = 0;
+			$flag = false;
+			$userverify = $this->User_model->getMemberList(null, null);
+			$userscount = $this->User_model->getCountMemberList();
+
+			$thisUserID;
+			while ($i != $userscount-1) {
+				if($this->hash->verifyPass($userverify[$i]['userName'], $user)){
+					$flag = true;
+					$thisUserID = $userverify[$i]['userID'];
+
+				}	
+				$i++;
+			}
+			
+			if($flag){
+				$data['data_userID']=$thisUserID;
+				$this->load->view('reset_password_view', $data);
+			}
+			else{
+				$this->load->view('invalid_reset_password_view');
+			}
+
 		}
 
 		function doRegisMember(){
@@ -190,9 +219,39 @@
 	        }
 	        else{
 	        	//kirim email disini
-
+	        	if(!$this->sendEmailForgotPassword($username)){
+	        		show_error($this->email->print_debugger());
+	        	}
+	        	
 	        	$this->loginAndRegister("Please Check Your Email", "forgot"); 
 	        }
+
+		}
+
+		function doResetPassword(){
+			$datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+
+			$userID = $this->input->post("userID");
+			$password = $this->input->post("conf-password-reset-password");
+			$data_user = array(
+				'password' => $this->hash->hashPass($password),
+				'lastUpdated' => $datetime,
+				'lastUpdatedBy' => $userID
+			);
+
+			$this->db->trans_begin();
+			$query = $this->User_model->updateUser($data_user, $userID);
+
+			if ($this->db->trans_status() === FALSE) {
+                // Failed to save Data to DB
+                $this->db->trans_rollback();
+                $this->loginAndRegister('Error while save data!','forgot');
+            }
+            else{
+            	$this->db->trans_commit();
+            	$this->loginAndRegister('Password has been reset!','login');
+            }
+
 
 		}
 
@@ -283,6 +342,48 @@
 
         	echo json_encode(array('status' => $status, 'msg' => $msg));
 		}
+
+		function sendEmailForgotPassword($username){
+			$user = $this->User_model->getUserDetailByUsername($username);
+            $config = Array
+                (
+                    'protocol' => 'mail',
+                    'smtp_host' => 'toppon.co.id',
+                    'smtp_port' => 25,
+                    'smtp_user' => 'no-reply@toppon.co.id',
+                    'smtp_pass' => 'Pass@word1',
+                    'mailtype'  => 'html',
+                    'charset' => 'iso-8859-1',
+                    'wordwrap' => TRUE
+                );
+
+            $data['detail_user'] = $user;
+            $data['hashkey'] = $this->hash->hashPass($user->userName);
+            $data['title'] = "TOPPON - Konfirmasi Reset Password";
+            $data['content']="email/reset_password_view";
+            $message = $this->load->view('email/template_view',$data,true);
+
+            
+            $this->email->initialize($config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('no-reply@toppon.co.id', 'Feedback System'); // nanti diganti dengan email sistem toppon
+            $this->email->to($user->email); // email user
+
+            $this->email->subject('[TOPPON] FORGOT PASSWORD CONFIRMATION');
+            $this->email->message($message);
+
+            if($this->email->send())
+            {
+               return TRUE;
+            }
+
+            else
+            {
+                return FALSE;
+                show_error($this->email->print_debugger());
+            }
+
+        }
 
 		function getUserCoins(){
 			

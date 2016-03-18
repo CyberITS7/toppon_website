@@ -93,7 +93,7 @@
 
         function validate(){
             var err=0;
-
+            
             if(!$('#bank-name').validateRequired()){
                 err++;
             }
@@ -121,6 +121,7 @@
         }
 
         $('#btn-add').click(function(){
+            $(".label-danger").html("");
             // Set Title modal
             $('.modal-title').html('Add Bank');
             // Show hide button
@@ -131,6 +132,7 @@
         });
 
         $('.btn-edit').click(function(){
+            $(".label-danger").html("");
             // Set Title modal
             $('.modal-title').html('Edit Bank');
             // Show hide button

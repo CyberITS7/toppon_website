@@ -102,6 +102,7 @@
  <script>
     $(document).ready(function(){
         function validate(){
+            alertify.set('notifier','position', 'top-right');
             var error = 0;        
             var noRekening = $("#Nomor-Rekening").val();
             var namaRekening = $("#Nama-Rekening").val();
@@ -159,6 +160,7 @@
                                 $('.success-modal').modal("show");
                                 $("#load_screen").hide();
                                 window.setTimeout( function(){
+                                    alertify.set('notifier','position', 'top-right');
                                     location.href = "<?php echo site_url('Deposit/index');?>";
                                 }, 3000 );
                             }else{
@@ -168,6 +170,7 @@
                         },
                         error: function(xhr, status, error) {
                             //var err = eval("(" + xhr.responseText + ")");
+                            alertify.set('notifier','position', 'top-right');
                             alertify.error('Cannot response server !'); $("#load_screen").hide();
                         }
                     });
