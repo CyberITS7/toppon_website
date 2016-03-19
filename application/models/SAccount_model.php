@@ -45,7 +45,7 @@ class SAccount_model extends CI_Model{
     }
 
     function addSAccount($data){
-        $this->db->insert('tbl_toppon_S_accounts',$data);
+        $this->db->insert('tbl_toppon_s_accounts',$data);
         $result=$this->db->insert_id();
         return $result;
     }
