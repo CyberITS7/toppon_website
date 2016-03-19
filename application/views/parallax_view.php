@@ -30,12 +30,14 @@
 </head>
 
 <body>
+
 <section id="home">
     <div id="logo">
         <a href="#">
             <img src="<?=base_url()?>img/toppon.png"/>
         </a>
-     <div class="menu-right">
+
+    <div class="menu-right">
          <a href="<?php echo site_url('User');?>#toregister">
              <button type="button" class="btn btn-lg btn-default">Sign Up</button>
          </a>
@@ -43,11 +45,13 @@
          <a href="<?php echo site_url('User');?>#tologin">
              <button type="button" class="btn btn-lg btn-primary">Login</button>
          </a>
-    </div>   
+    </div>
+  
     </div>
 
 <!-- Fixed navbar -->
-    <div class="menu-navbar">
+
+    <div class="menu-navbar navbar-default navbar-fixed-top">
             <ul class="nav1">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About Us</a></li>
@@ -462,8 +466,9 @@
 <!-- END BUTTON BACK TO TOP HOME -->
  
 
-
- <!-- Script Ajax Conctact Me  -->
+    <!-- JS MENU -->
+    <script src="<?php echo base_url()?>js/classie.js"></script>
+    <script src="<?php echo base_url()?>js/cbpAnimatedHeader.js"></script>
 
 <script>
   $(function() {
@@ -603,7 +608,7 @@
 
 
 <!-- WowJS -->
- <script src="<?=base_url()?>js/wow.min.js"></script>
+ <script src="<?php echo base_url()?>js/wow.min.js"></script>
 
  <script>
         new WOW().init();
@@ -664,7 +669,7 @@
        $('.menu-navbar ul li a').click(function () {
             var url = $(this).attr('href');
             $('html,body').animate({
-                scrollTop: $(url).offset().top
+                scrollTop: $(url).position().top
             }, 1500, 'linear');
             return false;
         });

@@ -112,10 +112,11 @@ body {
 }
 
 .menu-navbar{  
-	height: 70px;
+	height: 60px;
     text-align: center;
     position: relative;
-    background-color: rgb(77,185,247);
+    background-color:transparent;
+
 
 }
 
@@ -171,9 +172,9 @@ body {
 /*about*/
 #about{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
-
+    margin-top: 40px;
+    padding-top: 35px;
     background-repeat: no-repeat;
-	padding-top: 35px;
 	text-align: center;
 	min-height: 700px;
 	width: 100%;
@@ -245,12 +246,12 @@ body {
 /*HOW TO USE */
 #howtouse{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
-    
+    margin-top: 40px;
+    padding-top: 35px;
     background-repeat: no-repeat;
 	text-align: center;
 	min-height: 700px;
 	width: 100%;
-    padding-top: 20px;
 }
 
 #howtouse img{
@@ -297,6 +298,7 @@ body {
 }
 
 #how-redeem{
+    margin-top: 40px;
     position: relative;
     padding-bottom: 70px;
 
@@ -373,8 +375,9 @@ body {
 
 /* TOPPON CREDIT */
 #conv-table{
+    margin-top: 40px; 
+    padding-top: 35px;
     background-color: rgb(225,227,229);
-    padding-top: 10px;
     padding-bottom: 100px;
     text-align: center;
 }
@@ -382,9 +385,6 @@ body {
     padding: 5px;
 }
 
-.toppon-credit{
-
-}
 .toppon-credit img{
     margin:auto;
     padding-bottom: 5px;
@@ -496,4 +496,22 @@ body {
     div.col-clear{
         clear: both;
     }
+}
+@media (min-width:768px){
+
+    .navbar-default{
+        background-color:transparent;
+        -webkit-transition:padding .3s;
+        -moz-transition:padding .3s;
+        transition:padding .3s;
+        border:0
+    }
+    .navbar-default .navbar-brand{font-size:2em;-webkit-transition:all .3s;-moz-transition:all .3s;transition:all .3s}
+    .navbar-default .navbar-nav>.active>a{border-radius:3px}
+    .navbar-default.navbar-shrink{
+        background-color: #22313F;
+        padding:10px 0
+    }
+    .navbar-default.navbar-shrink .navbar-brand{font-size:1.5em}
+
 }
