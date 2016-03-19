@@ -2,9 +2,22 @@
 	class Transfer_model extends CI_Model{
 		function createTransfer($data){        
 	        $this->db->insert('tbl_toppon_t_transfers',$data);
-	        $result=$this->db->affected_rows();
+	        $result=$this->db->insert_id();
 	        return $result;
 	    }
+
+        function getTransferDetailByID($id){
+            $this->db->select('coin, b.username as pengirim, c.username as penerima, a.created ');
+            $this->db->from('tbl_toppon_t_transfers a');
+            $this->db->join('tbl_toppon_m_users b',"a.userPengirim=b.userID");
+            $this->db->join('tbl_toppon_m_users c',"a.userPenerima=c.userID");
+            $this->db->where('a.isActive', 1);
+            $this->db->where('a.tTransferID', $id);
+            $this->db->order_by('a.created','desc');
+
+            $query = $this->db->get();
+            return $query->row();
+        }
 
         //REPORT
         function getTransferList($start, $limit, $userId){
