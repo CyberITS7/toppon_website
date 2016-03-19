@@ -30,12 +30,14 @@
 </head>
 
 <body>
+
 <section id="home">
     <div id="logo">
         <a href="#">
             <img src="<?=base_url()?>img/toppon.png"/>
         </a>
-     <div class="menu-right">
+
+    <div class="menu-right">
          <a href="<?php echo site_url('User');?>#toregister">
              <button type="button" class="btn btn-lg btn-default">Sign Up</button>
          </a>
@@ -43,11 +45,13 @@
          <a href="<?php echo site_url('User');?>#tologin">
              <button type="button" class="btn btn-lg btn-primary">Login</button>
          </a>
-    </div>   
+    </div>
+  
     </div>
 
 <!-- Fixed navbar -->
-    <div class="menu-navbar">
+
+    <div class="menu-navbar navbar-default navbar-fixed-top">
             <ul class="nav1">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About Us</a></li>
@@ -413,7 +417,7 @@
 <div id="footer" name="footer">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-3">
                 <div class="social-media">
                     <h3>Find Us On</h3>
                     <div class="row social-wrapper">
@@ -438,6 +442,59 @@
             </div>
 
             <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <img src="<?php echo base_url();?>/img/voucher/battle.png" class="img-responsive"/>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <img src="<?php echo base_url();?>/img/voucher/wavegame.png" class="img-responsive"/>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <img src="<?php echo base_url();?>/img/voucher/gplay.png" class="img-responsive"/>
+                    </div>
+                    <div class="col-lg-3">
+                        <img src="<?php echo base_url();?>/img/voucher/itunes.png" class="img-responsive"/>
+                    </div>                   
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <img src="<?php echo base_url();?>/img/voucher/playstation.png" class="img-responsive"/>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <img src="<?php echo base_url();?>/img/voucher/mogplay.png" class="img-responsive"/>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <img src="<?php echo base_url();?>/img/voucher/gemscool.png" class="img-responsive"/>
+                    </div>
+                    <div class="col-lg-3">
+                        <img src="<?php echo base_url();?>/img/voucher/garena.png" class="img-responsive"/>
+                    </div>                   
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <img src="<?php echo base_url();?>/img/voucher/fbgamecard.png" class="img-responsive"/>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <img src="<?php echo base_url();?>/img/voucher/lyto.png" class="img-responsive"/>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <img src="<?php echo base_url();?>/img/voucher/steam.png" class="img-responsive"/>
+                    </div>
+                    <div class="col-lg-3">
+                        <img src="<?php echo base_url();?>/img/voucher/ps_psn_cards.png" class="img-responsive"/>
+                    </div>                   
+                </div>
+            </div>
+
+            <div class="col-lg-3">
                 <div class="bank-transfer">
                 <h4>Bank Transfer</h4>
                 <img src="<?php echo base_url();?>/img/bca.png" class="img-responsive"/>
@@ -462,8 +519,9 @@
 <!-- END BUTTON BACK TO TOP HOME -->
  
 
-
- <!-- Script Ajax Conctact Me  -->
+    <!-- JS MENU -->
+    <script src="<?php echo base_url()?>js/classie.js"></script>
+    <script src="<?php echo base_url()?>js/cbpAnimatedHeader.js"></script>
 
 <script>
   $(function() {
@@ -603,7 +661,7 @@
 
 
 <!-- WowJS -->
- <script src="<?=base_url()?>js/wow.min.js"></script>
+ <script src="<?php echo base_url()?>js/wow.min.js"></script>
 
  <script>
         new WOW().init();
@@ -664,7 +722,7 @@
        $('.menu-navbar ul li a').click(function () {
             var url = $(this).attr('href');
             $('html,body').animate({
-                scrollTop: $(url).offset().top
+                scrollTop: $(url).position().top
             }, 1500, 'linear');
             return false;
         });

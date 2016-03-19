@@ -380,7 +380,6 @@
             else
             {
                 return FALSE;
-                show_error($this->email->print_debugger());
             }
 
         }
