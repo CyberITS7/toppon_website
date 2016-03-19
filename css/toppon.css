@@ -77,12 +77,11 @@ body {
 
 #logo{
     padding-left: 15px;
-    padding-top: 10px;
 }
 
 #logo img{
-    width: 300px;
-    height: 120px;
+    width: 260px;
+    height: 90px;
 }
 
 
@@ -104,7 +103,7 @@ body {
 .menu-right{
     float: right;
     padding-right: 60px;
-    padding-top: 40px;
+    padding-top: 20px;
 }
 
 .menu-right a{
@@ -112,7 +111,7 @@ body {
 }
 
 .menu-navbar{  
-	height: 60px;
+	height: 55px;
     text-align: center;
     position: relative;
     background-color:transparent;
@@ -130,12 +129,16 @@ body {
     color: #1D70B7;
     font-weight: bold;
     padding: 0 0 15px 0;
-    font-size: 24px;
+    font-size: 20px;
     font-family: 'Varela Round', sans-serif;
     text-decoration: none;
     border-bottom: 5px solid transparent;
     -webkit-appearance: none !important;
 	outline:none;
+}
+
+.navbar-shrink ul li a{
+    color:#fff;
 }
 .menu-navbar ul li a:hover,.menu-navbar ul li a.active{
 	background:none !important;
@@ -154,18 +157,6 @@ body {
     z-index: 5;
   }
 
-
-/*SLIDER*/
-.slider-1{
-	/*background-image: url(../img/bg/home-bg.jpg);*/
-    background-color: #7f8c8d;
-    background-repeat: no-repeat;
-	padding-top: 40px;
-	text-align: center;
-	min-height: 500px;
-	width: 100%;
-	padding-bottom: 50px;
-}
 
 
 
@@ -275,6 +266,19 @@ body {
     font-size: 27px;
     text-align: right;
 }
+
+
+/*SLIDER*/
+.slider-1{
+    /*background-image: url(../img/bg/home-bg.jpg);*/
+    background-color: #7f8c8d;
+    background-repeat: no-repeat;
+    text-align: center;
+    min-height: 500px;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
 .carousel,
 .item,
 .active {
@@ -285,7 +289,7 @@ body {
     height: 100%;
 }
 .slide-img{
-    height: 80%;
+    min-height:500px;
 }
 .fill {
     width: 100%;
@@ -296,6 +300,7 @@ body {
     background-size: cover;
     -o-background-size: cover;
 }
+
 
 #how-redeem{
     margin-top: 40px;
@@ -514,8 +519,9 @@ body {
     .navbar-default .navbar-brand{font-size:2em;-webkit-transition:all .3s;-moz-transition:all .3s;transition:all .3s}
     .navbar-default .navbar-nav>.active>a{border-radius:3px}
     .navbar-default.navbar-shrink{
-        background-color: #22313F;
-        padding:10px 0
+        background-color: #33CCFF;
+        padding:10px 0;
+        
     }
     .navbar-default.navbar-shrink .navbar-brand{font-size:1.5em}
 
