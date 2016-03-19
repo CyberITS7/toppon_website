@@ -53,7 +53,7 @@
 
     <div class="menu-navbar navbar-default navbar-fixed-top">
             <ul class="nav1">
-                <li><a href="#home">Home</a></li>
+                <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#howtouse">How To Use</a></li>
                 <li><a href="#conv-table">Toppon Credit</a></li>
@@ -126,15 +126,15 @@
         
         <div class="row">
             <div class="about-row-wrapper">
-                <div class="about-items wow bounceInRight" data-wow-duration="1.0s">
+                <div class="about-items wow bounceInLeft" data-wow-duration="1s">
                     <img src="<?php echo base_url();?>/img/desktop.png" class="img-responsive"/>
                 </div>
                 
-                <div class="connect-dot wow bounceInUp" data-wow-delay="1.5s" data-wow-duration="1.7s">
+                <div class="connect-dot wow bounceInLeft" data-wow-delay="1.2s" data-wow-duration="1s">
                     <img src="<?php echo base_url();?>/img/connect_dot.png" class="img-responsive"/>    
                 </div>
                 
-                <div class="about-items wow bounceInLeft" data-wow-delay="1s" data-wow-duration="1.0s">
+                <div class="about-items wow bounceInLeft" data-wow-delay="2s" data-wow-duration="1s">
                     <img src="<?php echo base_url();?>/img/mobile.png" class="img-responsive"/>
                 </div>
             </div>
@@ -316,15 +316,15 @@
 
             <div class="row">
                 <div class="about-row-wrapper">
-                    <div class="credit-items wow bounceInRight" data-wow-duration="1.0s">
+                    <div class="credit-items wow bounceInRight" data-wow-duration="1.5s">
                         <img src="<?php echo base_url();?>/img/topponcredit/credit01.png" class="img-responsive"/>
                     </div>
                     
-                    <div class="credit-items wow bounceInUp" data-wow-delay="1.5s" data-wow-duration="1.7s">
+                    <div class="credit-items wow bounceInRight" data-wow-delay="1.2s" data-wow-duration="1.5s">
                         <img src="<?php echo base_url();?>/img/topponcredit/credit02.png" class="img-responsive"/>    
                     </div>
                     
-                    <div class="credit-items wow bounceInLeft" data-wow-delay="1s" data-wow-duration="1.0s">
+                    <div class="credit-items wow bounceInRight" data-wow-delay="1.8s" data-wow-duration="1.5s">
                         <img src="<?php echo base_url();?>/img/topponcredit/credit03.png" class="img-responsive"/>
                     </div>
                 </div>
@@ -685,6 +685,8 @@
             $("#back_to_top").click(function(event) {
                 event.preventDefault();
                 $("html,body").animate({scrollTop: 0}, 1000, 'easeInOutExpo');
+                $('.menu-navbar ul li a').removeClass("active");
+                $('.menu-navbar ul li a[href="#home"]').addClass("active");
                 return false;
             });
         });
@@ -721,11 +723,14 @@
     $(function() {
        $('.menu-navbar ul li a').click(function () {
             var url = $(this).attr('href');
+            $('.menu-navbar ul li a').removeClass("active");
+            $(this).addClass("active");
             $('html,body').animate({
                 scrollTop: $(url).position().top
             }, 1500, 'linear');
             return false;
         });
+
    });
     </script>
 </body>
