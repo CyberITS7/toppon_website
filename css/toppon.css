@@ -460,6 +460,11 @@ body {
     height: 70px;
     padding: 10px;
 }
+
+/*FOOTER */
+#footer{
+    background-color: #999999;
+}
 .footer-text{
     margin: auto;
     text-align: center;
