@@ -276,6 +276,23 @@
 <!--End How To Redeem-->
 
 
+<!-- Toppon Quote -->
+<section>
+    <div id="quote" name="quote">
+        <div class="container">
+            <div class="quote-text">
+                <div class="quote-left">
+                    <p>" The More You Play</p>
+                </div>
+                <div class="quote-right">
+                    <p>The More You Get Reward"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Quote -->
+
 
 <!-- Conversion Table -->
 <section>
@@ -292,22 +309,28 @@
                     <p>Nilai Tukar Toppon Credits untuk setiap 1TC = Rp.100</p>
                     <p>dan berlaku untuk kelipatannya</p>
             </div>
+
             <div class="row">
-            <div class="about-row-wrapper">
-                <div class="about-items wow bounceInRight" data-wow-duration="1.0s">
-                    <img src="<?php echo base_url();?>/img/topponcredit/credit01.png" class="img-responsive"/>
-                </div>
-                
-                <div class="connect-dot wow bounceInUp" data-wow-delay="1.5s" data-wow-duration="1.7s">
-                    <img src="<?php echo base_url();?>/img/topponcredit/credit02.png" class="img-responsive"/>    
-                </div>
-                
-                <div class="about-items wow bounceInLeft" data-wow-delay="1s" data-wow-duration="1.0s">
-                    <img src="<?php echo base_url();?>/img/topponcredit/credit03.png" class="img-responsive"/>
+                <div class="about-row-wrapper">
+                    <div class="credit-items wow bounceInRight" data-wow-duration="1.0s">
+                        <img src="<?php echo base_url();?>/img/topponcredit/credit01.png" class="img-responsive"/>
+                    </div>
+                    
+                    <div class="credit-items wow bounceInUp" data-wow-delay="1.5s" data-wow-duration="1.7s">
+                        <img src="<?php echo base_url();?>/img/topponcredit/credit02.png" class="img-responsive"/>    
+                    </div>
+                    
+                    <div class="credit-items wow bounceInLeft" data-wow-delay="1s" data-wow-duration="1.0s">
+                        <img src="<?php echo base_url();?>/img/topponcredit/credit03.png" class="img-responsive"/>
+                    </div>
                 </div>
             </div>
+
         </div>
-        </div>
+        
+        <a href="#">
+            <button type="button" class="btn-topup btn btn-lg btn-info">TOP UP</button>
+        </a>
     </div>
 
 </div>
@@ -431,7 +454,7 @@
 <!--End footer -->
 
 <!-- BUTTON BACK TO TOP HOME -->
-<div style = "visibility:show;" id="back_to_top" class="wow pulse animated" data-wow-duration="2s" data-wow-iteration="infinite">
+<div style = "visibility:show;" id="back_to_top">
     <a href="#home"> 
         <img class="img img-circle" src="<?php echo base_url();?>/img/back-to-top.png" height="50px" width="50px" alt="back-to-top">
     </a>
@@ -621,7 +644,7 @@
         })
     </script>
 
-<!--
+
     <script>
         function fixDiv() {
             var topmenu = $('.menu-navbar');
@@ -633,7 +656,8 @@
         $(window).scroll(fixDiv);
             fixDiv();
     </script>
--->
+
+
     <script>
     //scroll
     $(function() {
