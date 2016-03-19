@@ -12,7 +12,6 @@
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>css/toppon.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>css/convtable.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
@@ -29,7 +28,7 @@
 
 </head>
 
-<body>
+<body >
 
 <section id="home">
     <div id="logo">
@@ -37,26 +36,25 @@
             <img src="<?=base_url()?>img/toppon.png"/>
         </a>
 
-    <div class="menu-right">
-         <a href="<?php echo site_url('User');?>#toregister">
-             <button type="button" class="btn btn-lg btn-default">Sign Up</button>
-         </a>
+        <div class="menu-right">
+             <a href="<?php echo site_url('User');?>#toregister">
+                 <button type="button" class="btn btn-lg btn-default">Sign Up</button>
+             </a>
 
-         <a href="<?php echo site_url('User');?>#tologin">
-             <button type="button" class="btn btn-lg btn-primary">Login</button>
-         </a>
-    </div>
-  
+             <a href="<?php echo site_url('User');?>#tologin">
+                 <button type="button" class="btn btn-lg btn-primary">Login</button>
+             </a>
+        </div>
     </div>
 
 <!-- Fixed navbar -->
 
     <div class="menu-navbar navbar-default navbar-fixed-top">
             <ul class="nav1">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#howtouse">How To Use</a></li>
-                <li><a href="#conv-table">Toppon Credit</a></li>
+                <li><a href="#home" class="page-scroll active">Home</a></li>
+                <li><a href="#about" class="page-scroll">About Us</a></li>
+                <li><a href="#howtouse" class="page-scroll">How To Use</a></li>
+                <li><a href="#conv-table" class="page-scroll">Toppon Credit</a></li>
                 <!--
                 <li>
                     <div id="help-button">
@@ -299,7 +297,6 @@
 
 
 <!-- Conversion Table -->
-<section>
 <div id="conv-table" name="conv-table">
     <div class="content-text">
         <h1>Toppon Credit</h1>
@@ -333,12 +330,12 @@
         </div>
         
         <a href="#">
-            <button type="button" class="btn-topup btn btn-lg btn-info">TOP UP</button>
+            <button type="button" class="btn-topup btn btn-lg btn-info">Register Now!</button>
         </a>
     </div>
 
 </div>
-</section>
+
 
 
 
@@ -522,6 +519,7 @@
     <!-- JS MENU -->
     <script src="<?php echo base_url()?>js/classie.js"></script>
     <script src="<?php echo base_url()?>js/cbpAnimatedHeader.js"></script>
+    <script src="<?php echo base_url()?>js/agency.js"></script>
 
 <script>
   $(function() {
