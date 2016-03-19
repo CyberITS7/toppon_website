@@ -363,9 +363,8 @@ body {
     text-align: center;
     letter-spacing: 2px;
     font-size:45px;
-    padding:20px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 70px;
+    padding-right: 70px;
 
 }
 .quote-left{
@@ -380,8 +379,7 @@ body {
 
 /* TOPPON CREDIT */
 #conv-table{
-    margin-top: 40px; 
-    padding-top: 35px;
+    padding-top: 65px;
     background-color: rgb(225,227,229);
     padding-bottom: 100px;
     text-align: center;
