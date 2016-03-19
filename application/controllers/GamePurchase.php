@@ -428,10 +428,12 @@ class GamePurchase extends CI_Controller{
     }
 
     function sendEmailToppon($generateID,$coin_payment,$email){
+        $user = $this->User_model->getUserDetailByUsername($this->session->userdata("username"));
         $data_email = $this->getRequestPurchaseGame($generateID,$coin_payment);
 
         $data['data_api'] = $data_email;
         $data['title'] = "TOPPON - Bukti Pembelian Game";
+        $data['name'] = $user->name;
         $data['content'] = "email/game_purchase_email_view";
         $message = $this->load->view("email/template_view",$data,true);
 

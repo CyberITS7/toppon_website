@@ -1,13 +1,20 @@
-<div class='movableContent'>
+<style>
+    .content-container{
+        color: #555;
+        font-family: Helvetica, Arial, sans-serif;
+        line-height: 160%;
+    }
+</style>
+<div class='movableContent' >
     <table cellpadding="0" cellspacing="0" border="0" align="center" width="600" class="container">
         <tr>
             <td width="50">&nbsp;</td>
             <td width="500" align="center">
                 <div class="contentEditableContainer contentTextEditable">
                     <div class="contentEditable" align='left' >
-                        <p >Kepada Yth [Nama],
+                        <p >Kepada Yth <?php echo $name;?>,
                             <br/>
-                            Transaksi [transaction] Anda berhasil. Berikut detail transaksi Anda</p>
+                            Transaksi Game Purchase Anda berhasil. Berikut detail transaksi Anda</p>
                     </div>
                 </div>
             </td>
@@ -16,7 +23,6 @@
     </table>
     <table cellpadding="0" cellspacing="0" border="0" align="center" width="600" class="container">
         <tr>
-            <td width="100">&nbsp;</td>
             <td width="380" align="center" style="padding-top:25px;">
                 <table cellpadding="1" cellspacing="0" border="0" width="350" align="center" class="content-container">
                     <tr>
@@ -50,7 +56,6 @@
 
                 </table>
             </td>
-            <td width="100">&nbsp;</td>
         </tr>
         <tr>
             <table cellpadding="0" cellspacing="0" border="0" align="center" width="500" height="50">
@@ -63,7 +68,7 @@
                     <td bgcolor="#1D6FB7" align="center" style="border-radius:4px;" width="200" height="50">
                         <div class="contentEditableContainer contentTextEditable">
                             <div class="contentEditable" align='center' >
-                                <a target='_blank' href="http://toppon.co.id/index.php/user/doLoginMember" class='link2'>LOGIN</a>
+                                <a target='_blank' href="http://toppon.co.id/index.php/user/doLoginMember" style="color:#FFF;text-decoration: none;" class='link2'>LOGIN</a>
                             </div>
                         </div>
                     </td>
