@@ -12,6 +12,9 @@
             $this->db->where('a.isActive', 1);
             $this->db->where('a.tGiftID', $id);
             $this->db->order_by('a.created','desc');
+
+            $query = $this->db->get();
+            return $query->row();
         }
 
         //REPORT
