@@ -107,6 +107,7 @@ class Deposit extends CI_Controller{
 
                         $this->db->trans_begin();
                         $query = $this->TDeposit_model->insertDeposit($data);
+                        $topUpDetail = $this->TDeposit_model->getTDepositDetail($query);
 
                         if ($this->db->trans_status() === FALSE) {
                             // Failed to save Data to DB
@@ -115,7 +116,7 @@ class Deposit extends CI_Controller{
                             $msg = "Top Up fail, something went wrong when adding transaction data. Please try again !";
                         }
                         else{
-                            if($this->sendEmailDeposit($data)){
+                            if($this->sendEmailDeposit($this->session->userdata("username"), $topUpDetail)){
                                 $this->db->trans_commit();
                                 $msg = "";
                                 $status = 'success';
@@ -176,9 +177,10 @@ class Deposit extends CI_Controller{
 
             $this->db->trans_begin();
             $update = $this->TDeposit_model->updateDeposit($data_post,$tDepositID);
+            $topUpDetail = $this->TDeposit_model->getTDepositDetail($update);
 
             if($update){
-                if($this->sendEmailUserConfirmDeposit()){
+                 if($this->sendEmailUserConfirmDeposit($this->session->userdata("username"), $topUpDetail)){
                     $this->db->trans_commit();
                     $status = 'success';
                     $msg = "Status Updated successfully!";
@@ -233,115 +235,112 @@ class Deposit extends CI_Controller{
                 $this->db->trans_begin();
                 $update = $this->TDeposit_model->confirmDeposit($data_post,$tDepositID);
 
-                if($update){
+                if ($this->db->trans_status() === FALSE) {
+                            // Failed to save Data to DB
+                            $this->db->trans_rollback();
+                            $status = 'error';
+                            $msg = "Top Up fail, something went wrong when adding transaction data. Please try again !";
+                        }
+                        else{
+                            if($this->sendEmailDeposit($this->session->userdata("username"), $topUpDetail)){
+                                $this->db->trans_commit();
+                                $msg = "";
+                                $status = 'success';
 
-                    $detail = $this->TDeposit_model->getTDepositDetail($tDepositID);
-
-                    $trans = $this->SAccount_model->additionPoinCoin($detail->createdBy, $detail->poin, $detail->coin);
-
-                    if($trans==1){
-                        $this->db->trans_commit();
-                        $status = 'success';
-                        $msg = "Status Updated successfully!";
-                    }else{
-                        $this->db->trans_rollback();
-                        $status = 'error';
-                        $msg = "Something went wrong when adding coin and poin !";    
-                    }
-                }else{
-                    $this->db->trans_rollback();
-                    $status = 'error';
-                    $msg = "Something went wrong when updating Status !".$tDepositID;
-                }
-
+                            }else{
+                            $this->db->trans_rollback();  
+                            $msg = 'Cannot send email';
+                            $status = 'error';
+                        }
+            }
                 echo json_encode(array('status' => $status, 'msg' => $msg));
 
             }
         }
 
-        function sendEmailDeposit($data){
-                $user = $this->User_model->getUserDetailByUsername($this->session->userdata("username"));
-                $config = Array
-                    (
-                        'protocol' => 'mail',
-                        'smtp_host' => 'toppon.co.id',
-                        'smtp_port' => 25,
-                        'smtp_user' => 'no-reply@toppon.co.id',
-                        'smtp_pass' => 'Pass@word1',
-                        'mailtype'  => 'html',
-                        'charset' => 'iso-8859-1',
-                        'wordwrap' => TRUE
-                    );  
-                $message =
-                        'Kepada Yth. '.$user->name.
-                        '<br><br>Permintaan Top Up Anda berhasil! Berikut detail Top Up Anda : '.
-                        '<br>No Rekening = '.$data['noRekening'].
-                        '<br>Nama Rekening =  '.$data['nameRekening']. 
-                        '<br>Bank =  '.$data['bankName'].                    
-                        '<br>Toppon Coin = '.$data['coin'].
-                        '<br><br> Silahkan melakukan pembayaran ke rekening di bawah ini dalam waktu 1x24 jam semenjak email ini dikirim : '.
-                        '<br><br><img src="<?php echo base_url(); ?>img/bca-card.png" alt="BCA"> 883 027 6344 a.n. Orawan Phosiri'.
-                        '<br><br> Setelah melakukan pembayaran silahkan lakukan konfirmasi pembayaran Anda dengan login ke member area'.
-                        '<br>http://toppon.co.id/index.php/User#tologin';
+        function sendEmailDeposit($username, $topUpDetail){
 
-                
-                $this->email->initialize($config);
-                $this->email->set_newline("\r\n");
-                $this->email->from('no-reply@toppon.co.id', 'Feedback System'); // nanti diganti dengan email sistem toppon
-                $this->email->to($user->email); // email user
+            $user = $this->User_model->getUserDetailByUsername($username);
+            $config = Array
+                (
+                    'protocol' => 'mail',
+                    'smtp_host' => 'toppon.co.id',
+                    'smtp_port' => 25,
+                    'smtp_user' => 'no-reply@toppon.co.id',
+                    'smtp_pass' => 'Pass@word1',
+                    'mailtype'  => 'html',
+                    'charset' => 'iso-8859-1',
+                    'wordwrap' => TRUE
+                );
 
-                $this->email->subject('[TOPPON] TOP UP CONFIRM');
-                $this->email->message($message);
+            $data['detail_user'] = $user;
+            $data['detail_topUp'] = $topUpDetail;
+            $data['title'] = "TOPPON - Konfirmasi Top Up";
+            $data['content']="email/deposit_email_view";
+            $message = $this->load->view('email/template_view',$data,true);
 
-                if($this->email->send())
-                {
-                   return TRUE;
-                }
+            
+            $this->email->initialize($config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('no-reply@toppon.co.id', 'Feedback System'); // nanti diganti dengan email sistem toppon
+            $this->email->to($user->email); // email user
 
-                else
-                {
-                    return FALSE;
-                }
+            $this->email->subject('[TOPPON] TOP UP CONFIRMATION');
+            $this->email->message($message);
 
+            if($this->email->send())
+            {
+               return TRUE;
             }
 
-             function sendEmailUserConfirmDeposit(){
-                $user = $this->User_model->getUserDetailByUsername($this->session->userdata("username"));
-                $config = Array
-                    (
-                        'protocol' => 'mail',
-                        'smtp_host' => 'toppon.co.id',
-                        'smtp_port' => 25,
-                        'smtp_user' => 'no-reply@toppon.co.id',
-                        'smtp_pass' => 'Pass@word1',
-                        'mailtype'  => 'html',
-                        'charset' => 'iso-8859-1',
-                        'wordwrap' => TRUE
-                    );  
-                $message =
-                        'Kepada Yth. '.$user->name.
-                        '<br><br>Pembayaran Anda telah kami terima! Kami akan segera manambahkan Toppon Coin Anda. ';
-
-                
-                $this->email->initialize($config);
-                $this->email->set_newline("\r\n");
-                $this->email->from('no-reply@toppon.co.id', 'Feedback System'); // nanti diganti dengan email sistem toppon
-                $this->email->to($user->email); // email user
-
-                $this->email->subject('[TOPPON] TOP UP CONFIRM');
-                $this->email->message($message);
-
-                if($this->email->send())
-                {
-                   return TRUE;
-                }
-
-                else
-                {
-                    return FALSE;
-                }
-
+            else
+            {
+                return FALSE;
             }
+
+        }
+
+        function sendEmailUserConfirmDeposit($username, $topUpDetail){
+
+            $user = $this->User_model->getUserDetailByUsername($username);
+            $config = Array
+                (
+                    'protocol' => 'mail',
+                    'smtp_host' => 'toppon.co.id',
+                    'smtp_port' => 25,
+                    'smtp_user' => 'no-reply@toppon.co.id',
+                    'smtp_pass' => 'Pass@word1',
+                    'mailtype'  => 'html',
+                    'charset' => 'iso-8859-1',
+                    'wordwrap' => TRUE
+                );
+
+            $data['detail_user'] = $user;
+            $data['detail_topUp'] = $topUpDetail;
+            $data['title'] = "TOPPON - Konfirmasi Top Up";
+            $data['content']="email/deposit_confirm_email_view";
+            $message = $this->load->view('email/template_view',$data,true);
+
+            
+            $this->email->initialize($config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('no-reply@toppon.co.id', 'Feedback System'); // nanti diganti dengan email sistem toppon
+            $this->email->to($user->email); // email user
+
+            $this->email->subject('[TOPPON] TOP UP CONFIRMATION');
+            $this->email->message($message);
+
+            if($this->email->send())
+            {
+               return TRUE;
+            }
+
+            else
+            {
+                return FALSE;
+            }
+
+        }
 
     }
 
