@@ -29,7 +29,8 @@ class HomeBackend extends CI_Controller{
         }
     }
 
-    function createHome(){
+
+    function updateHomeImg(){
         $status = "";
         $msg="";
 
@@ -38,122 +39,63 @@ class HomeBackend extends CI_Controller{
             redirect(site_url("User/dashboard"));
         }else {
             $datetime = date('Y-m-d H:i:s', time());
-            $name = $this->input->post('name');
-            $currency = $this->input->post('currency');
-            $userID = $this->session->userdata('user_id');
-            $check_name = $this->Home_model->checkHome($name, $currency);
-
-            if (!$check_name) {
-                $data_post = array(
-                    'homeName' => $name,
-                    'currency' => $currency,
-                    'isActive' => 1,
-                    "created" => $datetime,
-                    "createdBy" => $userID,
-                    "lastUpdated" => $datetime,
-                    "lastUpdatedBy" => $userID
-                );
-
-                $this->db->trans_begin();
-                $id = $this->Home_model->createHome($data_post);
-
-                if ($id != null || $id != "") {
-                    $this->db->trans_commit();
-                    $status = 'success';
-                    $msg = "Home has been create successfully!";
-
-                } else {
-                    $this->db->trans_rollback();
-                    $status = 'error';
-                    $msg = "Cannot Save to Database";
-                }
-
-
-            } else {
-                $status = 'error';
-                $msg = $currency . " " . $name . " already exist";
-            }
-        }
-        echo json_encode(array('status' => $status, 'msg' => $msg));
-    }
-
-    function updateHome(){
-        $status = "";
-        $msg="";
-
-        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
-        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/dashboard"));
-        }else {
-            $datetime = date('Y-m-d H:i:s', time());
-            $name = $this->input->post('name');
-            $currency = $this->input->post('currency');
-            $userID = $this->session->userdata('user_id');
-            $homeID = $this->input->post('id');
-            $check_name = $this->Home_model->checkHomeEdit($name, $currency, $homeID);
-
-            if (!$check_name) {
-                $data_post = array(
-                    'homeName' => $name,
-                    'currency' => $currency,
-                    'isActive' => 1,
-                    "lastUpdated" => $datetime,
-                    "lastUpdatedBy" => $userID
-                );
-
-                $this->db->trans_begin();
-                $update = $this->Home_model->updateHome($data_post, $homeID);
-
-                if ($update) {
-                    $this->db->trans_commit();
-                    $status = 'success';
-                    $msg = "Home has been updated successfully!";
-                } else {
-                    $this->db->trans_rollback();
-                    $status = 'error';
-                    $msg = "Home can't be updated!";
-                }
-            } else {
-                $status = 'error';
-                $msg = $currency . " " . $name . " already exist";
-            }
-        }
-        echo json_encode(array('status' => $status, 'msg' => $msg));
-    }
-
-    function deleteHome(){
-        $status = "";
-        $msg="";
-
-        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
-        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
-            redirect(site_url("User/dashboard"));
-        }else {
-            $datetime = date('Y-m-d H:i:s', time());
-            $homeID = $this->input->post('id');
+            $data_content = $this->input->post('data_column');
             $userID = $this->session->userdata('user_id');
 
-            $data_post = array(
-                'isActive' => 0,
-                "lastUpdated" => $datetime,
-                "lastUpdatedBy" => $userID
-            );
+            $img = $_FILES['img'];
+            $dir = "./img/home";
+            //config upload Image
+            $config['upload_path'] = $dir;
+            $config['allowed_types'] = 'png';
+            $config['max_size'] = 1024 * 2;
+            $config['overwrite'] = 'TRUE';
+            $this->upload->initialize($config);
 
             $this->db->trans_begin();
-            $update = $this->Home_model->updateHome($data_post, $homeID);
+            
+            $data_post = array(
+                    $data_content => $data_content,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
+            $update = $this->Home_model->updateHome($data_post, 1);
 
             if ($update) {
-                $this->db->trans_commit();
-                $status = 'success';
-                $msg = "Home has been delete successfully!";
+                //Upload Image
+                if (!$this->upload->do_upload('img')) {
+                    // Upload Failed
+                    $this->db->trans_rollback();
+                    $status = 'error';
+                    $msg = $this->upload->display_errors('', '');
+                } else {
+                    // Upload Success
+                    $data = $this->upload->data();
+                    $this->db->trans_commit();
+                    $status = 'success';
+                    $msg = "Slider has been updated successfully!";
+                }
             } else {
                 $this->db->trans_rollback();
                 $status = 'error';
-                $msg = "Home can't be delete!";
+                $msg = "Cannot Save to Database";
             }
+                
         }
 
         echo json_encode(array('status' => $status, 'msg' => $msg));
     }
+
+function cek()
+{
+    $data_content = "fghjk";
+
+            $data_post = array(
+                    $data_content => $data_content
+                );
+            print_r ($data_post);
+            echo $data_post[$data_content];
+
+}
+   
 }
 ?>
