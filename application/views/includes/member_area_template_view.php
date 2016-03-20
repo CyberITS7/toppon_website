@@ -90,6 +90,7 @@
                                         <li><a href="<?php echo site_url('Payment')?>">Payment Method</a></li>
                                         <li><a href="<?php echo site_url('Publisher')?>">Publisher</a></li>
                                         <li><a href="<?php echo site_url('User/memberList')?>">Member</a></li>
+                                        <li><a href="<?php echo site_url('Home/homeContentList')?>">Homepage</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-cog"></i> Setting <span class="fa fa-chevron-down"></span></a>
