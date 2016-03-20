@@ -39,50 +39,50 @@
 
                     <tbody>
                             <tr>
-                                <td class="td-home-name"><?php echo $home->slider1;?></td>
-                                <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider1;?>" width="100" class="img-responsive"/></td>
+                                <td class="td-home-name">Slider1</td>
+                                <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider1.".png";?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="slider1" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td-home-name"><?php echo $home->slider2;?></td>
-                                <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider2;?>" width="100" class="img-responsive"/></td>
+                                <td class="td-home-name">Slider2</td>
+                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider2.".png";?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="slider2" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td-home-name"><?php echo $home->slider3;?></td>
-                                <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider3;?>" width="100" class="img-responsive"/></td>
+                                <td class="td-home-name">Slider3</td>
+                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider3.".png";?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="slider3" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td-home-name"><?php echo $home->slider4;?></td>
-                                <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider4;?>" width="100" class="img-responsive"/></td>
+                                <td class="td-home-name">Slider4</td>
+                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider4.".png";?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="slider4" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td-home-name"><?php echo $home->slider5;?></td>
-                                <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider5;?>" width="100" class="img-responsive"/></td>
+                                <td class="td-home-name">Slider5</td>
+                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider5.".png";?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="slider5" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td-home-name"><?php echo $home->parallax1;?></td>
-                                <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->parallax1;?>" width="100" class="img-responsive"/></td>
+                                <td class="td-home-name">Parallax1</td>
+                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->parallax1.".png";?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="parallax1" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td-home-name"><?php echo $home->parallax2;?></td>
-                                <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->parallax2  ;?>" width="100" class="img-responsive"/></td>
+                                <td class="td-home-name">Parallax2</td>
+                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->parallax2.".png";?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="parallax2" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>

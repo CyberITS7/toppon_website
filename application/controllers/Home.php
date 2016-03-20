@@ -109,6 +109,7 @@ class Home extends CI_Controller
             $config['allowed_types'] = 'png';
             $config['max_size'] = 1024 * 2;
             $config['overwrite'] = 'TRUE';
+            $config['file_name'] = $data_content;
             $this->upload->initialize($config);
 
             $this->db->trans_begin();
