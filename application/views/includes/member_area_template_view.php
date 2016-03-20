@@ -85,12 +85,12 @@
                                         <li><a href="<?php echo site_url('Coin')?>">Coin</a></li>
                                         <li><a href="<?php echo site_url('Game')?>">Game</a></li>
                                         <li><a href="<?php echo site_url('GameCategory')?>">Game Category</a></li>
-                                        <li><a href="<?php echo site_url('GiftCategory')?>">Gift Category </a></li>
+                                        <li><a href="<?php echo site_url('GiftCategory')?>">Gift Category </a></li> 
+                                        <li><a href="<?php echo site_url('Home/homeContentList')?>">Homepage</a></li>
                                         <li><a href="<?php echo site_url('Nominal')?>">Nominal</a></li>
                                         <li><a href="<?php echo site_url('Payment')?>">Payment Method</a></li>
                                         <li><a href="<?php echo site_url('Publisher')?>">Publisher</a></li>
                                         <li><a href="<?php echo site_url('User/memberList')?>">Member</a></li>
-                                        <li><a href="<?php echo site_url('Home/homeContentList')?>">Homepage</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-cog"></i> Setting <span class="fa fa-chevron-down"></span></a>
