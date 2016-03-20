@@ -238,9 +238,9 @@
                 formData.append("img", $("#home-img")[0].files[0]);
 
                 $(this).saveData({
-                    url          : "<?php echo site_url('HomeBackend/updateHomeImg')?>",
+                    url          : "<?php echo site_url('Home/updateHomeImg')?>",
                     data         : formData,
-                    locationHref : "<?php echo site_url('HomeBackend')?>"
+                    locationHref : "<?php echo site_url('home/homeContentList')?>"
                 });
             }
         });
