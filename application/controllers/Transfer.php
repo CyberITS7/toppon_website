@@ -47,10 +47,6 @@
 				$status = 'error';
 				$msg = "Transfer fail, password empty !";	
 			}
-			else if($toppon_coin > 100 || $toppon_coin < 10){
-				$status = 'error';
-				$msg = "Transfer fail, coin not valid !";	
-			}
 			else if($userIdFromUsername == "" || $userIdFromUsername == null){
 				$status = 'error';
 				$msg = "Transfer fail, username doesn't exists !";

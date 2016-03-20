@@ -3,8 +3,18 @@
 
 		function createClaimGiftsLog($data){        
             $this->db->insert('tbl_toppon_t_gifts',$data);
-            $result=$this->db->affected_rows();
+            $result=$this->db->insert_id();
             return $result;
+        }
+        function getTGiftDetail($id){
+            $this->db->select('*');
+            $this->db->from('tbl_toppon_t_gifts a');
+            $this->db->where('a.isActive', 1);
+            $this->db->where('a.tGiftID', $id);
+            $this->db->order_by('a.created','desc');
+
+            $query = $this->db->get();
+            return $query->row();
         }
 
         //REPORT

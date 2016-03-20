@@ -8,6 +8,7 @@
 		$this->load->helper('html');
 	    $this->load->library("pagination");
 	    $this->load->library('form_validation');
+	    $this->load->library('email');
 
 	    $this->load->library('upload');
 	    $this->load->model("SGift_model");
@@ -107,23 +108,85 @@
 								$msg = "Gift Claim fail, something went wrong when your friend coin. Please try again !";
 				            }
 				            else{
-				            	$this->db->trans_commit();
-				            	$status = 'success';
-								$msg = "Gift Claim success !";
+				            	$giftDetail = $this->TGift_model->getTGiftDetail($query);
+			            		if(!$this->sendEmailGiftClaim($this->session->userdata("username"), $giftDetail)){
+					            		show_error($this->email->print_debugger());
+					            		$this->db->trans_rollback();
+					            		$status = 'error';
+										$msg = "Gift Claim fail, something went wrong when sending email !";
+					            	}
+					            	else{
+				            			$this->db->trans_commit();
+				            			$status = 'success';
+										$msg = "Gift Claim success !";
+									}
 				            }
 		            	}
 		            	else{
-		            		$this->db->trans_commit();
-			            	$status = 'success';
-							$msg = "Gift Claim success !";
+		            		$giftDetail = $this->TGift_model->getTGiftDetail($query);
+		            		if(!$this->sendEmailGiftClaim($this->session->userdata("username"), $giftDetail)){
+				            		show_error($this->email->print_debugger());
+				            		$this->db->trans_rollback();
+				            		$status = 'error';
+									$msg = "Gift Claim fail, something went wrong when sending email !";
+				            	}
+				            	else{
+			            			$this->db->trans_commit();
+			            			$status = 'success';
+									$msg = "Gift Claim success !";
+								}
+		            		
 		            	}
 
 		            }
 	            }
 				
-			}			
+			}
+						
 			echo json_encode(array('status' => $status, 'msg' => $msg));
 		}
+
+		function sendEmailGiftClaim($username, $giftDetail){
+
+			$user = $this->User_model->getUserDetailByUsername($username);
+            $config = Array
+                (
+                    'protocol' => 'mail',
+                    'smtp_host' => 'toppon.co.id',
+                    'smtp_port' => 25,
+                    'smtp_user' => 'no-reply@toppon.co.id',
+                    'smtp_pass' => 'Pass@word1',
+                    'mailtype'  => 'html',
+                    'charset' => 'iso-8859-1',
+                    'wordwrap' => TRUE
+                );
+
+            $data['detail_user'] = $user;
+            $data['detail_gift_claim'] = $giftDetail;
+            $data['title'] = "TOPPON - Konfirmasi Gift Claim";
+            $data['content']="email/gift_email_view";
+            $message = $this->load->view('email/template_view',$data,true);
+
+            
+            $this->email->initialize($config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('no-reply@toppon.co.id', 'Feedback System'); // nanti diganti dengan email sistem toppon
+            $this->email->to($user->email); // email user
+
+            $this->email->subject('[TOPPON] GIFT CLAIM CONFIRMATION');
+            $this->email->message($message);
+
+            if($this->email->send())
+            {
+               return TRUE;
+            }
+
+            else
+            {
+                return FALSE;
+            }
+
+        }
 		/*Transaction Purposes end here*/
 
 		/*Setting Purposes to Gift Category*/

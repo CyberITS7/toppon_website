@@ -73,10 +73,7 @@
             } else if(password == null || password == ""){
                 alertify.error("Transfer fail, password empty !");
                 error++;
-            } else if(toppon_coin > 100 || toppon_coin < 10){
-                alertify.error("Transfer fail, coin not valid !");
-                error++;
-            }else if(username_tujuan == "<?php echo $this->session->userdata('username') ;?>"){
+            } else if(username_tujuan == "<?php echo $this->session->userdata('username') ;?>"){
                 alertify.error("Transfer fail, cannot transfer to your own account !");
                 error++;
             }
