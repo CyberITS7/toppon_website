@@ -62,9 +62,6 @@
                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                         <thead>
                             <tr class="headings">
-                                <th>
-                                    <input type="checkbox" class="tableflat">
-                                </th>
                                 <th>TransactionID</th>
                                 <th>Publisher </th>
                                 <th>Game </th>
@@ -82,9 +79,6 @@
                             <?php }else{ ?>
                                 <tr class="odd pointer">
                             <?php }//end else?>
-                                    <td class="a-center ">
-                                        <input type="checkbox" class="tableflat">
-                                    </td>
                                     <td class=" "><?php echo $row['prefixCode'].$row['tGamePurchaseID']; ?></td>
                                     <td class=" "><?php echo $row['publisherName']; ?></td>
                                     <td class=" "><?php echo $row['gameName'] ?></td>

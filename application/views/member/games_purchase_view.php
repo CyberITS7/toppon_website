@@ -2,6 +2,10 @@
     .panel-collapse:hover{
         background: #1FA7DF;;
     }
+    .panel-body{
+        background : #1D6FB7;
+        color : #FFF;
+    }
     .panel-body:hover{
         background: #1FA7DF;
         color : #FFF;
@@ -14,6 +18,7 @@
     .panel-body h4{
         width: 100%;
         padding-left: 20px;
+        text-align: center;
     }
     .icon-pub{
         float: left;
@@ -39,6 +44,18 @@
         color:#FFF;
         cursor: pointer;
     }
+    @-webkit-keyframes rotating {
+        from{
+            -webkit-transform: rotate(0deg);
+        }
+        to{
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    .rotating {
+        -webkit-animation: rotating 2s linear infinite;
+    }
 
 </style>
 
@@ -50,10 +67,7 @@
     <div class="title_right">
         <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>
+
             </div>
         </div>
     </div>
@@ -80,7 +94,7 @@
                                     <h4><?php echo $row['publisherName'];?></h4>
                                 </div>
                                 <ul class="nav navbar-right panel_toolbox">
-                                    <li><i class="fa fa-chevron-down"></i></li>
+                                    <li><i class="fa fa-chevron-down spinner"></i></li>
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
@@ -155,19 +169,24 @@
         // Get Game Data
         $('.panel').click(function(){
             var status = $(this).attr("data-status");
+
             if(status == "false") {
                 var panel = $(this).children('a').attr("href");
                 var id = $(this).children('a').attr("data-publisher");
                 var panel_body = $(panel).children('.panel-body');
                 $(this).attr("data-status","true");
+                //Spinner loading
+                var spinner = $(this).find(".spinner");
+                spinner.removeClass("fa-chevron-down");
+                spinner.addClass("fa-refresh rotating");
 
                 var data_post = {
                     id : id
                 };
                 // Get Game List
-                var base_url = "<?php echo base_url();?>";
+                var base_url = "<?php echo site_url('Game/getGameList');?>";
                 $.ajax({
-                    url: base_url+"index.php/Game/getGameList",
+                    url: base_url,
                     data: data_post,
                     type: "POST",
                     dataType: 'json',
@@ -176,8 +195,9 @@
                             var h4 = $("<h4>",
                                 {class: "col-lg-12 game-dt", "data-id":val.gameID,"data-game":val.gameName}).text(val.gameName);
                             h4.appendTo(panel_body);
-                            //alert('a');
                         });
+                        spinner.removeClass("rotating");
+                        spinner.addClass("fa-chevron-down");
                     },
                     error: function(xhr, status, error) {
                         //var err = eval("(" + xhr.responseText + ")");
@@ -197,9 +217,9 @@
                 id : id
             };
             // Get Game List
-            var base_url = "<?php echo base_url();?>";
+            var base_url = "<?php echo site_url('Game/getNominalGameList');?>";
             $.ajax({
-                url: base_url+"index.php/Game/getNominalGameList",
+                url: base_url,
                 data: data_post,
                 type: "POST",
                 dataType: 'json',
@@ -213,6 +233,9 @@
                         td2.appendTo(tr);
                         tr.appendTo("#nominal-tbody");
                         //alert('a');
+                        $('html,body').animate({
+                            scrollTop: 0
+                        }, 300, 'linear');
                     });
                 },
                 error: function(xhr, status, error) {
@@ -262,12 +285,12 @@
                             // ajax mulai disini
                             //Loading screen
                             $("#load_screen").show();
-                            var base_url = "<?php echo base_url();?>";
+                            var base_url = "<?php echo site_url('GamePurchase/buyGames');?>";
                             var data_post = {
                                 id : id
                             };
                             $.ajax({
-                                url: base_url+"index.php/GamePurchase/buyGames",
+                                url: base_url,
                                 data: data_post,
                                 type: "POST",
                                 dataType: 'json',

@@ -62,9 +62,6 @@
                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                         <thead>
                         <tr class="headings">
-                            <th>
-                                <input type="checkbox" class="tableflat">
-                            </th>
                             <th>User Sender</th>
                             <th>User Reciever </th>
                             <th>Coin </th>
@@ -76,9 +73,6 @@
                         <?php $x=1; foreach($transfer_list as $row) { ?>
                             <?php if($x%2==1) {?>
                                 <tr class="even pointer">
-                                    <td class="a-center ">
-                                        <input type="checkbox" class="tableflat">
-                                    </td>
                                     <td class=" "><?php echo $row['pengirim']; ?></td>
                                     <td class=" "><?php echo $row['penerima']; ?></td>
                                     <td class="a-right a-right "><?php echo number_format($row['coin'],0,",","."); ?></td>

@@ -62,9 +62,6 @@
                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                         <thead>
                         <tr class="headings">
-                            <th>
-                                <input type="checkbox" class="tableflat">
-                            </th>
                             <th>Gift Category</th>
                             <th>Gift </th>
                             <th>Gift Description</th>
@@ -78,9 +75,6 @@
                         <?php $x=1; foreach($gift_list as $row) { ?>
                             <?php if($x%2==1) {?>
                                 <tr class="even pointer">
-                                    <td class="a-center ">
-                                        <input type="checkbox" class="tableflat">
-                                    </td>
                                     <td class=" "><?php echo $row['giftCategory']; ?></td>
                                     <td class=" "><?php echo $row['giftName']; ?></td>
                                     <td class=" "><?php echo $row['giftDescription']; ?></td>
