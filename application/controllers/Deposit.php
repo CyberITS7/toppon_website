@@ -235,24 +235,27 @@ class Deposit extends CI_Controller{
                 $this->db->trans_begin();
                 $update = $this->TDeposit_model->confirmDeposit($data_post,$tDepositID);
 
-                if ($this->db->trans_status() === FALSE) {
-                            // Failed to save Data to DB
-                            $this->db->trans_rollback();
-                            $status = 'error';
-                            $msg = "Top Up fail, something went wrong when adding transaction data. Please try again !";
-                        }
-                        else{
-                            if($this->sendEmailDeposit($this->session->userdata("username"), $topUpDetail)){
-                                $this->db->trans_commit();
-                                $msg = "";
-                                $status = 'success';
+                if($update){
 
-                            }else{
-                            $this->db->trans_rollback();  
-                            $msg = 'Cannot send email';
-                            $status = 'error';
-                        }
-            }
+                    $detail = $this->TDeposit_model->getTDepositDetail($tDepositID);
+
+                    $trans = $this->SAccount_model->additionPoinCoin($detail->createdBy, $detail->poin, $detail->coin);
+
+                    if($trans==1){
+                        $this->db->trans_commit();
+                        $status = 'success';
+                        $msg = "Status Updated successfully!";
+                    }else{
+                        $this->db->trans_rollback();
+                        $status = 'error';
+                        $msg = "Something went wrong when adding coin and poin !";    
+                    }
+                }else{
+                    $this->db->trans_rollback();
+                    $status = 'error';
+                    $msg = "Something went wrong when updating Status !".$tDepositID;
+                }
+
                 echo json_encode(array('status' => $status, 'msg' => $msg));
 
             }
