@@ -62,9 +62,6 @@
                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                         <thead>
                         <tr class="headings">
-                            <th>
-                                <input type="checkbox" class="tableflat">
-                            </th>
                             <th>Bank</th>
                             <th>No Rekening </th>
                             <th>Nama Rekening </th>
@@ -80,9 +77,6 @@
                         <?php $x=1; foreach($deposit_list as $row) { ?>
                             <?php if($x%2==1) {?>
                                 <tr class="even pointer">
-                                    <td class="a-center ">
-                                        <input type="checkbox" class="tableflat">
-                                    </td>
                                     <td class=" "><?php echo $row['bankName']; ?></td>
                                     <td class=" "><?php echo $row['noRekening']; ?></td>
                                     <td class=" "><?php echo $row['nameRekening']; ?></td>
