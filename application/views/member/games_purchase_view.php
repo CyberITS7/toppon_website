@@ -1,8 +1,14 @@
 <style>
+    .accordion .panel-heading{
+        padding: 3px;
+    }
     .x_content{
         overflow:hidden;
     }
-
+    .x_content h4 {
+        padding-top: 25px;
+        font-weight: 700;
+    }
     /*Panel Collapse for Game in Publisher*/
     .panel-collapse:hover{
         background: #1FA7DF;;
@@ -35,6 +41,8 @@
     }
     .icon-pub img{
         margin: auto;
+        width: 70px;
+        height: 70px;
     }
     .panel-title{
         position: relative;
@@ -42,7 +50,6 @@
     .panel-title-container .spinner{
         position: absolute;
         right: 20px;
-        top:0;
     }
     .panel_toolbox{
         margin-top:8px;
@@ -51,10 +58,21 @@
         padding: 0px;
         color : #5A738E;
     }
+    /*Nominal Table*/
+    #nominal-tbody tr{
+        background: #EDEDED;
+        color:#1D6FB7;
+        font-weight: 700;
+    }
     #nominal-tbody tr:hover{
-        background: #1FA7DF;
+        background: #1D6FB7;
         color:#FFF;
         cursor: pointer;
+    }
+    #nominal-tbody td{
+        padding: 12px;
+        padding-left: 20px;
+        border-left: 1px solid #fff;
     }
     /*Animation Loading*/
     @-webkit-keyframes rotating {
@@ -139,8 +157,8 @@
                             <div class="panel-title-container">
                                 <div class="panel-title">
                                     <div class="icon-pub"><img src="<?php echo base_url()?>img/publisher/<?php echo $row['publisherImage']; ?>" class="img-responsive"></div>
-                                    <h4><?php echo $row['publisherName'];?></h4>
-                                    <i class="fa fa-chevron-down spinner"></i>
+                                    <h4><?php echo $row['publisherName'];?> <i class="fa fa-chevron-down spinner"></i></h4>
+
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
