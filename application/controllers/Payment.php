@@ -21,22 +21,7 @@ class Payment extends CI_Controller{
             redirect(site_url("User/dashboard"));
         }
         else{
-            //get Publisher List data
-            $num_per_page = 10;
-            $start = ($start - 1)* $num_per_page;
-            $limit = $num_per_page;
-
-            $payment_page = $this->Payment_model->getPaymentList($start, $limit);
-            $count_payment = $this->Payment_model ->getCountPaymentList();
-
-            $config['base_url']= site_url('Payment/index');
-            $config ['total_rows'] = $count_payment;
-            $config ['per_page']=$num_per_page;
-            $config['use_page_numbers']=TRUE;
-            $config['uri_segment']=3;
-
-            $this->pagination->initialize($config);
-            $data['pages'] = $this->pagination->create_links();
+            $payment_page = $this->Payment_model->getPaymentList(null, null);
             $data['payment']= $payment_page;
 
             if ($this->input->post('ajax')){

@@ -399,22 +399,7 @@
 				redirect(site_url("User/loginAndRegister"));	
 			}
 			else{
-				//get Member List data
-		        $num_per_page = 10;
-		        $start = ($start - 1) * $num_per_page;
-		        $limit = $num_per_page;
-
-		        $member_page = $this->User_model->getMemberList($start, $limit);
-		        $count_member = $this->User_model ->getCountMemberList();
-
-		        $config['base_url']= site_url('User/memberList');
-		        $config ['total_rows'] = $count_member;
-		        $config ['per_page']=$num_per_page;
-		        $config['use_page_numbers']=TRUE;
-		        $config['uri_segment']=3;
-
-		        $this->pagination->initialize($config);
-		        $data['pages'] = $this->pagination->create_links();
+		        $member_page = $this->User_model->getMemberList(null, null);
 		        $data['members']= $member_page;
 
 		        if ($this->input->post('ajax')){

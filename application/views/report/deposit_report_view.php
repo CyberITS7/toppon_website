@@ -165,11 +165,6 @@
     </div>
 </div>
 
-
-
-<!-- Datatables -->
-<script src="<?php echo base_url();?>js/jquery.dataTables.js"></script>
-<script src="<?php echo base_url();?>js/dataTables.tableTools.js"></script>
 <!-- daterangepicker -->
 <script type="text/javascript" src="<?php echo base_url();?>js/moment.min2.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/daterangepicker.js"></script>

@@ -8,7 +8,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <table id="example" class="table table-striped responsive-utilities jambo_table">
+                <table id="user-table" class="table table-striped responsive-utilities jambo_table">
                     <thead>
                     <tr class="headings">
                         <th>Username</th>
@@ -36,9 +36,7 @@
                         </tr>
                     <?php }?>
                     </tbody>
-                    <?php echo $pages;?>
                 </table>
-                <?php echo $pages;?>
             </div>
         </div>
     </div>
@@ -92,7 +90,41 @@
 
 <script src="<?php echo base_url(); ?>js/validate_master.js"></script>
 <script>
+    var asInitVals = new Array();
     $(document).ready( function($) {
+        var oTable = $('#user-table').dataTable({
+            "oLanguage": {
+                "sSearch": "Search all columns:"
+            },
+            "aoColumnDefs": [
+                {
+                    'bSortable': false,
+                    'aTargets': [0]
+                } //disables sorting for column one
+            ],
+            'iDisplayLength': 12,
+            "sPaginationType": "full_numbers"
+        });
+        $("tfoot input").keyup(function () {
+            /* Filter on the column based on the index of this element's parent <th> */
+            oTable.fnFilter(this.value, $("tfoot th").index($(this).parent()));
+        });
+        $("tfoot input").each(function (i) {
+            asInitVals[i] = this.value;
+        });
+        $("tfoot input").focus(function () {
+            if (this.className == "search_init") {
+                this.className = "";
+                this.value = "";
+            }
+        });
+        $("tfoot input").blur(function (i) {
+            if (this.value == "") {
+                this.className = "search_init";
+                this.value = asInitVals[$("tfoot input").index(this)];
+            }
+        });
+
         function validate(){
             var err=0;
 

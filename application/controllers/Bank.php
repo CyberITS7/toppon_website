@@ -22,21 +22,7 @@ class Bank extends CI_Controller{
         }
         else{
             //get Publisher List data
-            $num_per_page = 10;
-            $start = ($start - 1)* $num_per_page;
-            $limit = $num_per_page;
-
-            $bank_page = $this->Bank_model->getBankList($start, $limit);
-            $count_bank = $this->Bank_model ->getCountBankList();
-
-            $config['base_url']= site_url('Bank/index');
-            $config ['total_rows'] = $count_bank;
-            $config ['per_page']=$num_per_page;
-            $config['use_page_numbers']=TRUE;
-            $config['uri_segment']=3;
-
-            $this->pagination->initialize($config);
-            $data['pages'] = $this->pagination->create_links();
+            $bank_page = $this->Bank_model->getBankList(null, null);
             $data['bank']= $bank_page;
 
             if ($this->input->post('ajax')){

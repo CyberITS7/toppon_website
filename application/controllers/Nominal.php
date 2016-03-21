@@ -21,22 +21,7 @@ class Nominal extends CI_Controller{
             redirect(site_url("User/dashboard"));
         }
         else{
-            //get Publisher List data
-            $num_per_page = 10;
-            $start = ($start - 1)* $num_per_page;
-            $limit = $num_per_page;
-
-            $nominal_page = $this->Nominal_model->getNominalList($start, $limit);
-            $count_nominal = $this->Nominal_model ->getCountNominalList();
-
-            $config['base_url']= site_url('Nominal/index');
-            $config ['total_rows'] = $count_nominal;
-            $config ['per_page']=$num_per_page;
-            $config['use_page_numbers']=TRUE;
-            $config['uri_segment']=3;
-
-            $this->pagination->initialize($config);
-            $data['pages'] = $this->pagination->create_links();
+            $nominal_page = $this->Nominal_model->getNominalList(null, null);
             $data['nominal']= $nominal_page;
 
             if ($this->input->post('ajax')){

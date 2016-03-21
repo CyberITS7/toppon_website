@@ -20,22 +20,7 @@ class GameCategory extends CI_Controller{
             redirect(site_url("User/dashboard"));
         }
         else{
-            //get Publisher List data
-            $num_per_page = 10;
-            $start = ($start - 1)* $num_per_page;
-            $limit = $num_per_page;
-
-            $game_category_page = $this->GameCategory_model->getGameCategoryList($start, $limit);
-            $count_game_category = $this->GameCategory_model ->getCountGameCategoryList();
-
-            $config['base_url']= site_url('GameCategory/index');
-            $config ['total_rows'] = $count_game_category;
-            $config ['per_page']=$num_per_page;
-            $config['use_page_numbers']=TRUE;
-            $config['uri_segment']=3;
-
-            $this->pagination->initialize($config);
-            $data['pages'] = $this->pagination->create_links();
+            $game_category_page = $this->GameCategory_model->getGameCategoryList(null, null);
             $data['game_category']= $game_category_page;
 
             if ($this->input->post('ajax')){

@@ -191,6 +191,10 @@
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>js/jquery.nicescroll.min.js"></script>
     <script src="<?php echo base_url(); ?>js/custom.js"></script>
+
+    <!-- Datatables -->
+    <script src="<?php echo base_url();?>js/jquery.dataTables.js"></script>
+    <script src="<?php echo base_url();?>js/dataTables.tableTools.js"></script>
    
     <script type="text/javascript">
         $(window).load(function () {
