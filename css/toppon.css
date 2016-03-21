@@ -3,6 +3,18 @@ body {
    font-family:"Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif
 }
 
+hr{
+    display: block;
+    height: 1px;
+    padding: 0;
+    background-image: -webkit-linear-gradient(left,#fff,#ccc,#fff);
+    background-image: -moz-linear-gradient(left,#fff,#ccc,#fff);
+    background-image: -ms-linear-gradient(left,#fff,#ccc,#fff);
+    background-image: -o-linear-gradient(left,#fff,#ccc,#fff);
+    width: 50%;
+    left: 25%;
+    border: none;
+}
 section.parallax {
     height: 600px;
     background-position: 50% 50%;
@@ -111,10 +123,10 @@ section.parallax {
     
 }
     #home .navbar-shrink li a {
-        color: #E4F1FE;
+        color: #fff;
     }
     #home .navbar-shrink li a:hover{
-        color: #446CB3;
+        color: #fff;
     }
 
 .menu-navbar ul li{
@@ -138,6 +150,13 @@ section.parallax {
 }
 
 /*boy*/
+.navbar{
+    margin-bottom: 0;
+}
+.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus{
+    color:#000;
+}
+
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {
     background: none !important;
     border-bottom: 5px solid #000;

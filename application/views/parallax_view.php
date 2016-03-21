@@ -58,6 +58,7 @@
                     <li><a href="#about" class="page-scroll">About Us</a></li>
                     <li><a href="#howtouse" class="page-scroll">How To Use</a></li>
                     <li><a href="#credit-poin" class="page-scroll">Credit & Poin</a></li>
+                    <li><a href="#contact-us" class="page-scroll">Contact Us</a></li>
                 </ul>
             </div>
         </div>
@@ -371,6 +372,7 @@
 <div id="contact" name="contact-us">
     <div class="content-text">
         <h1>CONTACT US</h1>
+        <hr>
     </div>
 
     <div class="row">
