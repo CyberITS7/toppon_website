@@ -128,28 +128,39 @@
 	        $status = "";
 	        $msg="";
 
-	        $datetime = date('Y-m-d H:i:s', time());
-	        $giftCategoryID = $this->input->post('id');
-	        $userID = $this->session->userdata('user_id');
+	        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+	        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+	            redirect(site_url("User/dashboard"));
+	        }else {
+		        $datetime = date('Y-m-d H:i:s', time());
+		        $giftCategoryID = $this->input->post('id');
+		        $userID = $this->session->userdata('user_id');
 
-	        $data_post=array(
-	            'isActive'=>0,
-	            "lastUpdated"=>$datetime,
-	            "lastUpdatedBy"=>$userID
-	        );
+		        $used_setting = $this->GiftCategory_model->checkUsedBySetting($giftCategoryID);
+		        if(!$used_setting){
+			        $data_post=array(
+			            'isActive'=>0,
+			            "lastUpdated"=>$datetime,
+			            "lastUpdatedBy"=>$userID
+			        );
 
-	        $this->db->trans_begin();
-	        $update = $this->GiftCategory_model->updateGiftCategory($data_post,$giftCategoryID);
+			        $this->db->trans_begin();
+			        $update = $this->GiftCategory_model->updateGiftCategory($data_post,$giftCategoryID);
 
-	        if($update){
-	            $this->db->trans_commit();
-	            $status = 'success';
-	            $msg = "Gift Category has been updated successfully!";
-	        }else{
-	            $this->db->trans_rollback();
-	            $status = 'error';
-	            $msg = "Something went wrong when updating Gift Category !";
-	        }
+			        if($update){
+			            $this->db->trans_commit();
+			            $status = 'success';
+			            $msg = "Gift Category has been updated successfully!";
+			        }else{
+			            $this->db->trans_rollback();
+			            $status = 'error';
+			            $msg = "Something went wrong when updating Gift Category !";
+			        }
+		    	}else{
+		    		$status = 'error';
+                	$msg = "This Gift Category still used in Setting Gift!";
+		    	}
+	    	}
 
 	        echo json_encode(array('status' => $status, 'msg' => $msg));
 	    }

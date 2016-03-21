@@ -43,6 +43,20 @@
 	        }
 	    }
 
+	    function checkUsedBySetting($id){
+	        $this->db->select('b.giftCategoryID');
+	        $this->db->from('tbl_toppon_s_gifts b');
+	        $this->db->where('b.giftCategoryID', $id);	        
+	        $this->db->where('b.isActive', 1);
+	        $result = $this->db->count_all_results();
+
+	        if($result == 0){
+	            return false; // This master is not used by any setting
+	        }else{
+	            return true; // This Master is used by setting
+	        }
+	    }
+
 	    function createGiftCategory($data){
 	        $this->db->insert('tbl_toppon_m_gift_categories',$data);
 	        return $this->db->insert_id();
