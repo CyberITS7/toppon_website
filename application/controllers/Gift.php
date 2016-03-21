@@ -197,21 +197,7 @@
 			}
 			else{
 				//get Setting gift data
-	            $num_per_page = 10;
-	            $start = ($start - 1)* $num_per_page;
-	            $limit = $num_per_page;
-
-	            $gift_page = $this->SGift_model->getAdminGiftList($start, $limit);
-            	$count_gift = $this->SGift_model->getCountAdminGiftList();
-
-	            $config['base_url']= site_url('Gift/settingGiftList');
-	            $config ['total_rows'] = $count_gift;
-	            $config ['per_page']=$num_per_page;
-	            $config['use_page_numbers']=TRUE;
-	            $config['uri_segment']=3;
-
-	            $this->pagination->initialize($config);
-	            $data['pages'] = $this->pagination->create_links();
+	            $gift_page = $this->SGift_model->getAdminGiftList(null, null);
 	            $data['gifts']= $gift_page;
 
 	            // for gift category combo

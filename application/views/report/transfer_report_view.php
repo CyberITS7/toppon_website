@@ -1,4 +1,3 @@
-<link href="<?php echo base_url(); ?>css/dataTables.tableTools.css" rel="stylesheet">
 <style>
     .show-calendar{
         z-index: 99999;

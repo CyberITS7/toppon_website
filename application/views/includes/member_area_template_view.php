@@ -21,7 +21,8 @@
     <link href="<?php echo base_url(); ?>css/custom.css" rel="stylesheet">    
     <link href="<?php echo base_url(); ?>css/icheck/flat/green.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>css/floatexamples.css" rel="stylesheet" type="text/css" />
-
+    <!-- Datatable -->
+    <link href="<?php echo base_url(); ?>css/dataTables.tableTools.css" rel="stylesheet">
     <!-- Alertify -->
     <link href="<?php echo base_url(); ?>css/alertify.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>css/themes/default.min.css" rel="stylesheet">

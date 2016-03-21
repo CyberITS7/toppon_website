@@ -24,21 +24,7 @@ class SGameCategory extends CI_Controller{
         }
         else{
             //get Publisher List data
-            $num_per_page = 10;
-            $start = ($start - 1)* $num_per_page;
-            $limit = $num_per_page;
-
-            $setting_category_game_page = $this->SGameCategory_model->getSGameCategoryList($start, $limit);
-            $count_setting_category_game = $this->SGameCategory_model ->getCountSGameCategoryList();
-
-            $config['base_url']= site_url('SGameCategory/index');
-            $config ['total_rows'] = $count_setting_category_game;
-            $config ['per_page']=$num_per_page;
-            $config['use_page_numbers']=TRUE;
-            $config['uri_segment']=3;
-
-            $this->pagination->initialize($config);
-            $data['pages'] = $this->pagination->create_links();
+            $setting_category_game_page = $this->SGameCategory_model->getSGameCategoryList(null, null);
             $data['setting_category_game']= $setting_category_game_page;
 
             if ($this->input->post('ajax')){

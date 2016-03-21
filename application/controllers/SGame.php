@@ -24,21 +24,7 @@ class SGame extends CI_Controller{
         }
         else{
             //get Nominal List data
-            $num_per_page = 10;
-            $start = ($start - 1)* $num_per_page;
-            $limit = $num_per_page;
-
-            $setting_game_page = $this->SGame_model->getSGameList($start, $limit);
-            $count_setting_game = $this->SGame_model ->getCountSGameList();
-
-            $config['base_url']= site_url('SGame/index');
-            $config ['total_rows'] = $count_setting_game;
-            $config ['per_page']=$num_per_page;
-            $config['use_page_numbers']=TRUE;
-            $config['uri_segment']=3;
-
-            $this->pagination->initialize($config);
-            $data['pages'] = $this->pagination->create_links();
+            $setting_game_page = $this->SGame_model->getSGameList(null, null);
             $data['setting_game']= $setting_game_page;
 
             if ($this->input->post('ajax')){
