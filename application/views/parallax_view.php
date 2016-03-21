@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -28,7 +29,7 @@
 
 </head>
 
-<body >
+<body data-spy="scroll" data-offset="0">
 
 <section id="home">
     <div id="logo">
@@ -49,23 +50,18 @@
 
 <!-- Fixed navbar -->
 
-    <div class="menu-navbar navbar-default navbar-fixed-top">
-            <ul class="nav1">
-                <li><a href="#home" class="page-scroll active">Home</a></li>
-                <li><a href="#about" class="page-scroll">About Us</a></li>
-                <li><a href="#howtouse" class="page-scroll">How To Use</a></li>
-                <li><a href="#conv-table" class="page-scroll">Toppon Credit</a></li>
-                <!--
-                <li>
-                    <div id="help-button">
-                    <a href="#">
-                        <img src="<?php echo base_url();?>/img/help.png" class="img-responsive"/>
-                    </a>
-                    </div>
-                </li>
-                -->
-            </ul>
-    </div>
+    <nav class="menu-navbar navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid  col-lg-offset-2 col-lg-8 col-lg-offset-2">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="centered nav navbar-nav">
+                    <li><a href="#home" class="page-scroll active">Home</a></li>
+                    <li><a href="#about" class="page-scroll">About Us</a></li>
+                    <li><a href="#howtouse" class="page-scroll">How To Use</a></li>
+                    <li><a href="#credit-poin" class="page-scroll">Credit & Poin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav> 
 <!--End Fixed Navbar-->
 
 <!-- Full Page Image Background Carousel Header -->
@@ -114,7 +110,8 @@
 </section>
 
 <!--About Us-->
-<div id="about" name="about">
+<section id="about">
+<div class="aboutus" name="about">
     <div class="container">
         <div class="content-text">
             <h1>We Provides All Voucher Games</h1>
@@ -142,11 +139,12 @@
         </a>
     </div>
 </div>
+</section>
 <!--END About Us-->
 
 <!--Why Us?-->
-<section >
-<div id="whyus" class="parallax" name="whyus">
+<section id="whyus" class="parallax" >
+<div class="why" name="whyus">
     <div class="container">
         <div class="content-text-w">
             <div class="col-lg-6">
@@ -170,8 +168,10 @@
 </section>
 <!--END Why Us?-->
 
+
 <!--How to Use-->
-<div id="howtouse" name="howtouse">
+<section id="howtouse">
+<div id="howto" name="howtouse">
     <div class="container">
         <div class="content-text">
             <h1>HOW TO USE</h1>
@@ -217,12 +217,13 @@
 
     </div>    
 </div>
+</section>
 <!--END How to Use-->
 
 
 <!--Layer 5 -->
-<section >
-<div id="access-games" class="parallax" name="access-game">
+<section id="access-games" class="parallax" >
+<div id="access" name="access-game">
     <div class="container">
         <div class="content-text-w">
             <div class="col-lg-3">
@@ -241,9 +242,10 @@
 </section>
 <!--END Layer 5-->
 
+
 <!--How To Redeem-->
-<section>
-<div id="how-redeem">
+<section id="how-redeem">
+<div id="howtoredeem">
     <div class="container">
        <div class="content-text">
             <h1>HOW TO REDEEM</h1>
@@ -279,8 +281,8 @@
 
 
 <!-- Toppon Quote -->
-<section>
-    <div id="quote" name="quote">
+<section id="quote">
+    <div id="topquote" name="quote">
         <div class="container">
             <div class="quote-text">
                 <div class="quote-left">
@@ -296,10 +298,11 @@
 <!-- End Quote -->
 
 
-<!-- Conversion Table -->
+<!-- Toppon Credit & Poin -->
+<section id="credit-poin">
 <div id="conv-table" name="conv-table">
     <div class="content-text">
-        <h1>Toppon Credit</h1>
+        <h1>Toppon Credit & Poin</h1>
     </div>
     <div class="container">
         <div class="toppon-credit">
@@ -329,19 +332,21 @@
 
         </div>
         
-        <a href="#">
+        <a href="<?php echo site_url('User');?>#toregister">
             <button type="button" class="btn-topup btn btn-lg btn-info">Register Now!</button>
         </a>
     </div>
 
 </div>
-
+</section>
+<!-- End Toppon Credit & Poin -->
 
 
 
 
 <!--Contact US-->
-<div id="contact-us" name="contact-us">
+<section id="contact-us">
+<div id="contact" name="contact-us">
     <div class="content-text">
         <h1>CONTACT US</h1>
     </div>
@@ -409,6 +414,10 @@
         </div>
     </div>    
 </div>
+</section>
+<!-- End Contact us -->
+
+
 
 <!-- Footer -->
 <div id="footer" name="footer">
@@ -507,6 +516,7 @@
 
 <!--End footer -->
 
+
 <!-- BUTTON BACK TO TOP HOME -->
 <div style = "visibility:show;" id="back_to_top">
     <a href="#home"> 
@@ -516,10 +526,18 @@
 <!-- END BUTTON BACK TO TOP HOME -->
  
 
-    <!-- JS MENU -->
-    <script src="<?php echo base_url()?>js/classie.js"></script>
-    <script src="<?php echo base_url()?>js/cbpAnimatedHeader.js"></script>
-    <script src="<?php echo base_url()?>js/agency.js"></script>
+<!-- JS MENU -->
+<script src="<?php echo base_url();?>js/jquery.easing.js"></script>
+<script src="<?php echo base_url()?>js/classie.js"></script>
+<script src="<?php echo base_url()?>js/cbpAnimatedHeader.js"></script>
+<script src="<?php echo base_url()?>js/agency.js"></script>
+
+<!-- WowJS -->
+<script src="<?php echo base_url()?>js/wow.min.js"></script>
+
+
+
+
 
 <script>
   $(function() {
@@ -550,7 +568,7 @@
       if (validateContactForm()) {
         $.ajax({
           type : "POST",
-          url : "<?php echo site_url('Home/Send_email_contactus'); ?>",
+          url : "<?php echo site_url('Home/send_email_contactus'); ?>",
           dataType : "json",
           data : {    contactName : contactName,
                       contactEmail : contactEmail,
@@ -658,16 +676,12 @@
 
 
 
-<!-- WowJS -->
- <script src="<?php echo base_url()?>js/wow.min.js"></script>
 
- <script>
+<script>
         new WOW().init();
-</script>   
+</script>
 
  <!-- SCRIPT BACK TO TOP -->
-    <script src="<?php echo base_url();?>js/jquery.easing.js"></script>
-
     <script>
         $(document).ready(function() {
             var offset = 200;
@@ -683,8 +697,6 @@
             $("#back_to_top").click(function(event) {
                 event.preventDefault();
                 $("html,body").animate({scrollTop: 0}, 1000, 'easeInOutExpo');
-                $('.menu-navbar ul li a').removeClass("active");
-                $('.menu-navbar ul li a[href="#home"]').addClass("active");
                 return false;
             });
         });
@@ -706,7 +718,7 @@
     <script>
         function fixDiv() {
             var topmenu = $('.menu-navbar');
-            if ($(window).scrollTop() > 120)
+            if ($(window).scrollTop() > 96)
                 topmenu.addClass("fix-top-menu");
             else
                 topmenu.removeClass("fix-top-menu");
@@ -721,8 +733,6 @@
     $(function() {
        $('.menu-navbar ul li a').click(function () {
             var url = $(this).attr('href');
-            $('.menu-navbar ul li a').removeClass("active");
-            $(this).addClass("active");
             $('html,body').animate({
                 scrollTop: $(url).position().top
             }, 1500, 'linear');
@@ -731,6 +741,49 @@
 
    });
     </script>
+
+
+<!-- CHANGE HEADER CSS WHEN SCROLL -->
+<script>
+    var docElem = document.documentElement,
+        header = document.querySelector( '.menu-navbar' ),
+        didScroll = false,
+        changeHeaderOn = 96;
+
+    function scrollPage() {
+        var sy = scrollY();
+        if ( sy >= changeHeaderOn ) {
+            classie.add( header, 'navbar-shrink' );
+        }
+        else {
+            classie.remove( header, 'navbar-shrink' );
+        }
+        didScroll = false;
+    }
+
+    function scrollY() {
+        return window.pageYOffset || docElem.scrollTop;
+    }
+
+    function init() {
+        window.addEventListener( 'scroll', function( event ) {
+            if( !didScroll ) {
+                didScroll = true;
+                setTimeout( scrollPage, 20 );
+            }
+        }, false );
+    }
+    init();
+</script>
+
+
+
+
+
+
+
+
+
 </body>
 
 </html>
