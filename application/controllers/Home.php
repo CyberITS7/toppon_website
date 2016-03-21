@@ -20,8 +20,8 @@ class Home extends CI_Controller
 
 	function index()
 	{
-
-		$this->load->view('parallax_view.php');
+        $data['data_content'] = $this->Home_model->getHomeList();
+		$this->load->view('parallax_view.php', $data);
 	}
 	
 
@@ -102,11 +102,14 @@ class Home extends CI_Controller
             $data_content = $this->input->post('data_column');
             $userID = $this->session->userdata('user_id');
 
+            $filename = $_FILES['img']['name'];
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            
             $img = $_FILES['img'];
             $dir = "./img/home";
             //config upload Image
             $config['upload_path'] = $dir;
-            $config['allowed_types'] = 'png';
+            $config['allowed_types'] = 'jpg|png';
             $config['max_size'] = 1024 * 2;
             $config['overwrite'] = 'TRUE';
             $config['file_name'] = $data_content;
@@ -115,7 +118,7 @@ class Home extends CI_Controller
             $this->db->trans_begin();
             
             $data_post = array(
-                    $data_content => $data_content,
+                    $data_content => $data_content.".".$ext,
                     "lastUpdated" => $datetime,
                     "lastUpdatedBy" => $userID
                 );
@@ -133,7 +136,7 @@ class Home extends CI_Controller
                     $data = $this->upload->data();
                     $this->db->trans_commit();
                     $status = 'success';
-                    $msg = "Slider has been updated successfully!";
+                    $msg = $data_content." has been updated successfully!";
                 }
             } else {
                 $this->db->trans_rollback();
@@ -143,6 +146,42 @@ class Home extends CI_Controller
                 
         }
 
+        echo json_encode(array('status' => $status, 'msg' => $msg));
+    }
+
+    function updateHomeAbout(){
+        $status = "";
+        $msg="";
+
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/dashboard"));
+        }else {
+            $datetime = date('Y-m-d H:i:s', time());
+            $data_content = $this->input->post('data_column');
+            $userID = $this->session->userdata('user_id');
+
+            $data_post = array(
+                    "aboutUsContent" => $data_content,
+                    "lastUpdated" => $datetime,
+                    "lastUpdatedBy" => $userID
+                );
+
+            $update = $this->Home_model->updateHome($data_post, 1);
+
+            if ($update) {
+                // Upload Success
+                $data = $this->upload->data();
+                $this->db->trans_commit();
+                $status = 'success';
+                $msg = "About Us Content has been updated successfully!";
+            }else{
+                $this->db->trans_rollback();
+                $status = 'error';
+                $msg = "Cannot Save to Database";
+            }
+
+        }
         echo json_encode(array('status' => $status, 'msg' => $msg));
     }
 

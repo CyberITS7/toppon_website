@@ -4,16 +4,7 @@
         </h3>
     </div>
 
-    <div class="title_right">
-        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                                    <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-            </div>
-        </div>
-    </div>
+    
 </div>
 <div class="clearfix"></div>
 
@@ -40,49 +31,49 @@
                     <tbody>
                             <tr>
                                 <td class="td-home-name">Slider1</td>
-                                <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider1.".png";?>" width="100" class="img-responsive"/></td>
+                                <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider1;?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="slider1" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td-home-name">Slider2</td>
-                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider2.".png";?>" width="100" class="img-responsive"/></td>
+                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider2;?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="slider2" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td-home-name">Slider3</td>
-                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider3.".png";?>" width="100" class="img-responsive"/></td>
+                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider3;?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="slider3" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td-home-name">Slider4</td>
-                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider4.".png";?>" width="100" class="img-responsive"/></td>
+                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider4;?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="slider4" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td-home-name">Slider5</td>
-                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider5.".png";?>" width="100" class="img-responsive"/></td>
+                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->slider5;?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="slider5" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td-home-name">Parallax1</td>
-                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->parallax1.".png";?>" width="100" class="img-responsive"/></td>
+                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->parallax1;?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="parallax1" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td-home-name">Parallax2</td>
-                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->parallax2.".png";?>" width="100" class="img-responsive"/></td>
+                                 <td class="td-home-img"><img src="<?php echo base_url();?>img/home/<?php echo $home->parallax2;?>" width="100" class="img-responsive"/></td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs btn-edit" data-column="parallax2" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
@@ -107,7 +98,7 @@
                                 <td class="td-home-name">About Us</td>
                                 <td class="td-home-description"><?php echo $home->aboutUsContent;?></td>
                                 <td>
-                                    <a href="#" class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target=".home-modal"><i class="fa fa-pencil"></i> Edit </a>
+                                    <a href="#" class="btn btn-info btn-xs btn-edit-about" data-toggle="modal" data-target=".about-modal"><i class="fa fa-pencil"></i> Edit </a>
                                 </td>
                             </tr>
                     </tbody>
@@ -132,7 +123,7 @@
                     <input type="hidden" class="form-control" id="home-column">
                     <div class="form-group">
                         <label for="home-name" class="control-label">Content Name : <span class="label label-danger" id="err-name"></span></label>
-                        <input type="text" class="form-control" id="home-name" name="home-name" data-label="#err-name">
+                        <input type="text" class="form-control" id="home-name" name="home-name" data-label="#err-name" disabled="disabled">
                     </div>
                     <div class="form-group">
                         <label for="home-img">Content Image : <span class="label label-danger" id="err-img"></span></label>
@@ -150,31 +141,36 @@
     </div>
 </div>
 
+<!-- MODAL -->
+<div class="modal fade about-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="about-form">
+                    <input type="hidden" class="form-control" id="about-column">
+                    <div class="form-group">
+                        <label for="about-us-desc" class="control-label">About Us : <span class="label label-danger" id="err-about"></span></label>
+                        <textarea name="about-us-desc" id="about-us-desc" class="form-control" data-label="#err-about"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btn-update-about">Update changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="<?php echo base_url(); ?>js/validate_master.js"></script>
 <script>
     $(document).ready( function($) {
-
-        function validate(){
-            var err=0;
-
-            if(!$('#home-name').validateRequired()){
-                err++;
-            }
-
-            if(!$('#home-img').validateRequired()){
-                err++;
-            }else if(!$('#home-img').validateImgType()){
-                err++;
-            }else if(!$('#home-img').validateMaxSize()){
-                err++;
-            }
-
-            if(err!=0){
-                return false;
-            }else{
-                return true;
-            }
-        }
 
         function validateEdit(){
             var err=0;
@@ -190,6 +186,21 @@
                     err++;
                 }
             }
+            if(err!=0){
+                return false;
+            }else{
+                return true;
+            }
+
+        }
+
+        function validateEditAbout(){
+            var err=0;
+
+            if(!$('#about-us-desc').validateRequired()){
+                err++;
+            }
+
             if(err!=0){
                 return false;
             }else{
@@ -230,6 +241,22 @@
             $('#preview-img').attr('src', col_img);
         });
 
+        $('.btn-edit-about').click(function(){
+            $('.label-danger').html('');
+            // Set Title modal
+            $('.modal-title').html('Edit About');
+            // Show hide button
+            $('#btn-update-about').show();
+            //reset form
+            $('#about-form')[0].reset();
+
+            var row = $(this).closest("tr");
+            var col_title =  row.find(".td-home-description").text();
+
+            //set data to Modal
+            $("#about-us-desc").val(col_title);
+        });
+
         $('#btn-update').click(function(){
             if(validateEdit()){
 
@@ -239,6 +266,20 @@
 
                 $(this).saveData({
                     url          : "<?php echo site_url('Home/updateHomeImg')?>",
+                    data         : formData,
+                    locationHref : "<?php echo site_url('home/homeContentList')?>"
+                });
+            }
+        });
+
+        $('#btn-update-about').click(function(){
+            if(validateEditAbout()){
+
+                var formData = new FormData();
+                formData.append("data_column", $("#about-us-desc").val());
+
+                $(this).saveData({
+                    url          : "<?php echo site_url('Home/updateHomeAbout')?>",
                     data         : formData,
                     locationHref : "<?php echo site_url('home/homeContentList')?>"
                 });

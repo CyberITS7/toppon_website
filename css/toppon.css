@@ -302,9 +302,12 @@ section.parallax {
 }
 
 .carousel,
-.item,
-.active {
+.item{
     height: 100%;
+}
+.carousel,
+.item,.carousel-inner.active{
+    height: 700px;
 }
 
 .carousel-inner {

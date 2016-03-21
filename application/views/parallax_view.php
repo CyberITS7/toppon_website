@@ -73,6 +73,8 @@
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
         </ol>
 
         <!-- Wrapper for Slides -->
@@ -80,19 +82,31 @@
 
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('../img/slider/slide01.jpg');"></div>
+                <div class="fill" style="background-image:url('<?php echo base_url()."img/home/".$data_content->slider1; ?>');"></div>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('../img/slider/slide02.jpg');"></div>
+                <div class="fill" style="background-image:url('<?php echo base_url()."img/home/".$data_content->slider2; ?>');"></div>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="item">
                 <!-- Set the third background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('../img/slider/slide03.jpg');"></div>
+                <div class="fill" style="background-image:url('<?php echo base_url()."img/home/".$data_content->slider3; ?>');"></div>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <div class="item">
+                <!-- Set the fourth background image using inline CSS below. -->
+                <div class="fill" style="background-image:url('<?php echo base_url()."img/home/".$data_content->slider4; ?>');"></div>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <div class="item">
+                <!-- Set the fifth background image using inline CSS below. -->
+                <div class="fill" style="background-image:url('<?php echo base_url()."img/home/".$data_content->slider5; ?>');"></div>
                 <div class="carousel-caption">
                 </div>
             </div>
@@ -796,7 +810,7 @@
             });
         });
         $('.carousel').carousel({
-            interval: 3500 //changes the speed
+            interval: 0 //changes the speed
         })
     </script>
 
