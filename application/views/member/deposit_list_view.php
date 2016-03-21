@@ -73,7 +73,7 @@
                                                         <td class="td-status"><?php echo $row['status']; ?></td>
                                                         <td class="a-right a-right "><?php echo $row['coinConversion']; ?></td>
                                                         <td class=" last">
-                                                            <a href="<?php echo site_url('Deposit/depositDetail').'/'.$row['tDepositID'];?>"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-search"></i></button></a>
+                                                            <a href="<?php echo site_url('Deposit/depositDetail').'/'.$row['tDepositID'];?>"><button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Detail for Confirmation"><i class="fa fa-search"></i></button></a>
                                                             <a href="#"><button type="button" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash"></i></button></a>
                                                         </td> 
                                                         <input type="hidden" value="<?php echo $row['tDepositID'];?>" class="item-id"/>  
