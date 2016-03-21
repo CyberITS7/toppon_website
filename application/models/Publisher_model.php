@@ -65,13 +65,13 @@ class Publisher_model extends CI_Model{
 
     function checkUsedBySetting($id){
         $this->db->select('publisherID');
-        $this->db->from('tbl_toppon_s_publishers');
+        $this->db->from('tbl_toppon_s_publishers a');
         $this->db->where('a.publisherID', $id);
         $this->db->where('isActive', 1);
         $result = $this->db->count_all_results();
 
         $this->db->select('publisherID');
-        $this->db->from('tbl_toppon_s_game_categories');
+        $this->db->from('tbl_toppon_s_game_categories a');
         $this->db->where('a.publisherID', $id);
         $this->db->where('isActive', 1);
         $result2 = $this->db->count_all_results();

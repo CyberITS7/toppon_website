@@ -65,6 +65,20 @@ class Nominal_model extends CI_Model{
             return FALSE;
     }
 
+    function checkUsedBySetting($id){
+        $this->db->select('a.nominalID');
+        $this->db->from('tbl_toppon_s_games a');
+        $this->db->where('a.nominalID', $id);
+        $this->db->where('isActive', 1);
+        $result = $this->db->count_all_results();
+
+        if($result == 0){
+            return false; // This master is not used by any setting
+        }else{
+            return true; // This Master is used by setting
+        }
+    }
+
     // Get List Game yang sudah di setting
     function getGameByID($id){
         $this->db->select('sGamesID, a.publisherID, a.nominalID, nominalName, currency, publisherName, paymentValue');

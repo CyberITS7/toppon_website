@@ -64,14 +64,14 @@ class Game_model extends CI_Model{
     }
 
     function checkUsedBySetting($id){
-        $this->db->select('gameID');
-        $this->db->from('tbl_toppon_s_publishers');
+        $this->db->select('a.gameID');
+        $this->db->from('tbl_toppon_s_publishers a');
         $this->db->where('a.gameID', $id);
         $this->db->where('isActive', 1);
         $result = $this->db->count_all_results();
 
         $this->db->select('gameID');
-        $this->db->from('tbl_toppon_s_games');
+        $this->db->from('tbl_toppon_s_games a');
         $this->db->where('a.gameID', $id);
         $this->db->where('isActive', 1);
         $result2 = $this->db->count_all_results();

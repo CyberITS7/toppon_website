@@ -158,17 +158,24 @@ class Nominal extends CI_Controller{
                 "lastUpdatedBy" => $userID
             );
 
-            $this->db->trans_begin();
-            $update = $this->Nominal_model->updateNominal($data_post, $nominalID);
+            //Check Setting
+            $used_setting = $this->Nominal_model->checkUsedBySetting($nominalID);
+            if(!$used_setting) {
+                $this->db->trans_begin();
+                $update = $this->Nominal_model->updateNominal($data_post, $nominalID);
 
-            if ($update) {
-                $this->db->trans_commit();
-                $status = 'success';
-                $msg = "Nominal has been delete successfully!";
-            } else {
-                $this->db->trans_rollback();
+                if ($update) {
+                    $this->db->trans_commit();
+                    $status = 'success';
+                    $msg = "Nominal has been delete successfully!";
+                } else {
+                    $this->db->trans_rollback();
+                    $status = 'error';
+                    $msg = "Nominal can't be delete!";
+                }
+            }else{
                 $status = 'error';
-                $msg = "Nominal can't be delete!";
+                $msg = "This Nominal Category still used in Setting Game !";
             }
         }
 

@@ -173,7 +173,7 @@ class Game extends CI_Controller{
                 }
             }else{
                 $status = 'error';
-                $msg = "This Publisher still used in Setting Publisher OR Setting Game!";
+                $msg = "This Game still used in Setting Publisher OR Setting Game!";
             }
         }
         echo json_encode(array('status' => $status, 'msg' => $msg));

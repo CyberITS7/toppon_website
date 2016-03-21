@@ -44,7 +44,7 @@ class GameCategory_model extends CI_Model{
 
     function checkUsedBySetting($id){
         $this->db->select('gameCategoryID');
-        $this->db->from('tbl_toppon_s_game_categories');
+        $this->db->from('tbl_toppon_s_game_categories a');
         $this->db->where('a.gameCategoryID', $id);
         $this->db->where('isActive', 1);
         $result = $this->db->count_all_results();
