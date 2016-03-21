@@ -24,7 +24,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Home List<small>List of Home Details</small></h2>
+                <h2>Home List<small>List of Homepage Contents Details</small></h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -131,11 +131,11 @@
                 <form id="home-form">
                     <input type="hidden" class="form-control" id="home-column">
                     <div class="form-group">
-                        <label for="home-name" class="control-label">Nama Home : <span class="label label-danger" id="err-name"></span></label>
+                        <label for="home-name" class="control-label">Content Name : <span class="label label-danger" id="err-name"></span></label>
                         <input type="text" class="form-control" id="home-name" name="home-name" data-label="#err-name">
                     </div>
                     <div class="form-group">
-                        <label for="home-img">Gambar : <span class="label label-danger" id="err-img"></span></label>
+                        <label for="home-img">Content Image : <span class="label label-danger" id="err-img"></span></label>
                         <input type="file" id="home-img" name="home-img" data-label="#err-img">
                         <p class="help-block">Max size img 2 Mb</p>
                         <img src="" width="100" height="100" id="preview-img"/>

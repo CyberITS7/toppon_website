@@ -35,9 +35,6 @@
                                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                                         <thead>
                                             <tr class="headings">
-                                                <th>
-                                                    <input type="checkbox" class="tableflat">
-                                                </th>
                                                 <th>Tanggal Transaksi </th>
                                                 <th>No. Rekening </th>
                                                 <th>Nama Rekening </th>
@@ -68,10 +65,6 @@
                                                      }
                                                         $i++;
                                                     ?>
-                                                    
-                                                        <td class="a-center ">
-                                                            <input type="checkbox" class="tableflat">
-                                                        </td>
                                                         <td class="td-tanggal-transaksi"><?php echo $row['created']; ?></td>
                                                         <td class="td-nomor-rekening"><?php echo $row['noRekening']; ?></td>
                                                         <td class="td-nama-rekening"><?php echo $row['nameRekening']; ?></td>
