@@ -462,16 +462,38 @@ section.parallax {
     padding:10px;
 }
 
-.bank-transfer{
+.footer-3{
     float: right;
+    padding-top: 20px;
+    padding-left: 30px;
+
+}
+.bank-transfer{
     width: 120px;
     height: 70px;
-    padding: 10px;
+    
 }
 
 /*FOOTER */
 #footer{
     background-color: #999999;
+}
+.footer-2{
+    border-right: 2px solid black; 
+    border-left: 2px solid black;
+    margin-top: 20px;
+}
+.footer-3 ul li a{
+    text-decoration: none;
+}
+.footer-3 a:active, a:visited{
+    color:#000;
+}
+.footer-3 a:hover{
+    color:#363636;
+}
+.img-footer{
+    width: 100px;
 }
 .footer-text{
     margin: auto;

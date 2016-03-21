@@ -447,60 +447,81 @@
                 </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-7 footer-2">
                 <div class="row">
-                    <div class="col-lg-3">
-                        <img src="<?php echo base_url();?>/img/voucher/battle.png" class="img-responsive"/>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo01.png" class="img-responsive img-footer"/>
                     </div>
 
-                    <div class="col-lg-3">
-                        <img src="<?php echo base_url();?>/img/voucher/wavegame.png" class="img-responsive"/>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo02.png" class="img-responsive img-footer" />
                     </div>
 
-                    <div class="col-lg-3">
-                        <img src="<?php echo base_url();?>/img/voucher/gplay.png" class="img-responsive"/>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo03.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-3">
-                        <img src="<?php echo base_url();?>/img/voucher/itunes.png" class="img-responsive"/>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo04.png" class="img-responsive img-footer" />
+                    </div>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo05.png" class="img-responsive img-footer" />
+                    </div>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo06.png" class="img-responsive img-footer" />
                     </div>                   
                 </div>
 
+
                 <div class="row">
-                    <div class="col-lg-3">
-                        <img src="<?php echo base_url();?>/img/voucher/playstation.png" class="img-responsive"/>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo05.png" class="img-responsive img-footer" />
                     </div>
-
-                    <div class="col-lg-3">
-                        <img src="<?php echo base_url();?>/img/voucher/mogplay.png" class="img-responsive"/>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo06.png" class="img-responsive img-footer" />
                     </div>
-
-                    <div class="col-lg-3">
-                        <img src="<?php echo base_url();?>/img/voucher/gemscool.png" class="img-responsive"/>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo07.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-3">
-                        <img src="<?php echo base_url();?>/img/voucher/garena.png" class="img-responsive"/>
-                    </div>                   
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo08.png" class="img-responsive img-footer" />
+                    </div>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo09.png" class="img-responsive img-footer" />
+                    </div>              
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo10.png" class="img-responsive img-footer" />
+                    </div>                                                     
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-3">
-                        <img src="<?php echo base_url();?>/img/voucher/fbgamecard.png" class="img-responsive"/>
+                   <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo11.png" class="img-responsive img-footer" />
                     </div>
-
-                    <div class="col-lg-3">
-                        <img src="<?php echo base_url();?>/img/voucher/lyto.png" class="img-responsive"/>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo12.png" class="img-responsive img-footer" />
                     </div>
-
-                    <div class="col-lg-3">
-                        <img src="<?php echo base_url();?>/img/voucher/steam.png" class="img-responsive"/>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo13.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-3">
-                        <img src="<?php echo base_url();?>/img/voucher/ps_psn_cards.png" class="img-responsive"/>
-                    </div>                   
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo14.png" class="img-responsive img-footer" />
+                    </div>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo15.png" class="img-responsive img-footer" />
+                    </div>              
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo16.png" class="img-responsive img-footer" />
+                    </div>
                 </div>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-2 footer-3">
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Term & Conditions</a></li>
+                </ul>   
                 <div class="bank-transfer">
                 <h4>Bank Transfer</h4>
                 <img src="<?php echo base_url();?>/img/bca.png" class="img-responsive"/>
@@ -509,7 +530,7 @@
         </div>
 
         <div class="footer-text">
-            ©Toppon 2015 | Partnership   Terms & Condition   Mobile Apps   Blog
+            ©Toppon 2016 | Developed by CyberITS
         </div>  
     </div>
 </div>
