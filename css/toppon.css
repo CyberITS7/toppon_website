@@ -498,6 +498,10 @@ section.parallax {
     height: auto;
     position: relative;
 }
+.sos-text{
+    padding-top: 15px; 
+    padding-left: 20px;
+}
 .footer-2{
     border-right: 2px solid #D8CBCB; 
     border-left: 2px solid #D8CBCB;

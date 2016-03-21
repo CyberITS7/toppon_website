@@ -449,31 +449,59 @@
                 <div class="social-media">
                     <h3>Find Us On</h3>
                     <div class="row social-wrapper">
-                        <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
-                            <a href ="www.facebook.com">
-                                <img src="<?php echo base_url();?>/img/sosmed/fb.png" class="img-responsive"/>
-                            </a>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
+                                    <a href ="www.facebook.com">
+                                        <img src="<?php echo base_url();?>/img/sosmed/fb.png" class="img-responsive"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 sos-text">
+                                    <p>Toppon Ind</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row social-wrapper">
-                        <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
-                            <a href ="www.twitter.com">
-                                <img src="<?php echo base_url();?>/img/sosmed/twitter.png" class="img-responsive"/>
-                            </a>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
+                                    <a href ="www.facebook.com">
+                                        <img src="<?php echo base_url();?>/img/sosmed/twitter.png" class="img-responsive"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 sos-text">
+                                    <p>Toppon_ind</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row social-wrapper">
-                        <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
-                            <a href ="www.instagram.com">
-                                <img src="<?php echo base_url();?>/img/sosmed/ig.png" class="img-responsive"/>
-                            </a>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
+                                    <a href ="www.facebook.com">
+                                        <img src="<?php echo base_url();?>/img/sosmed/ig.png" class="img-responsive"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 sos-text">
+                                    <p>Toppon_id</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row social-wrapper">
-                        <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
-                            <a href ="www.instagram.com">
-                                <img src="<?php echo base_url();?>/img/sosmed/line.png" class="img-responsive"/>
-                            </a>
+                       <div class="row">
+                            <div class="col-lg-3">
+                                <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
+                                    <a href ="www.facebook.com">
+                                        <img src="<?php echo base_url();?>/img/sosmed/line.png" class="img-responsive"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 sos-text">
+                                    <p>@toppon</p>
+                            </div>
                         </div>
                     </div>
                 </div>
