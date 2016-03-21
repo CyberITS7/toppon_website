@@ -166,7 +166,7 @@ section.parallax {
 /*about*/
 #about{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
-    margin-top: 40px;
+
     padding-top: 35px;
     background-repeat: no-repeat;
 	text-align: center;
@@ -240,7 +240,7 @@ section.parallax {
 /*HOW TO USE */
 #howtouse{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
-    margin-top: 40px;
+
     padding-top: 35px;
     background-repeat: no-repeat;
 	text-align: center;
@@ -306,7 +306,7 @@ section.parallax {
 
 
 #how-redeem{
-    margin-top: 40px;
+
     position: relative;
     padding-bottom: 70px;
 
@@ -477,7 +477,7 @@ section.parallax {
     float:left;
     width: 70px;
     height: 70px;
-    padding:10px;
+    padding-left:10px;
 }
 
 .footer-3{
@@ -495,11 +495,16 @@ section.parallax {
 /*FOOTER */
 #footer{
     background-color: #fff;
+    height: auto;
+    position: relative;
+}
+.sos-text{
+    padding-top: 15px; 
+    padding-left: 20px;
 }
 .footer-2{
-    border-right: 2px solid black; 
-    border-left: 2px solid black;
-    margin-top: 20px;
+    border-right: 2px solid #D8CBCB; 
+    border-left: 2px solid #D8CBCB;
 }
 .footer-3 ul li a{
     text-decoration: none;
