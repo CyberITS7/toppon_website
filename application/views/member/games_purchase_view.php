@@ -1,4 +1,9 @@
 <style>
+    .x_content{
+        overflow:hidden;
+    }
+
+    /*Panel Collapse for Game in Publisher*/
     .panel-collapse:hover{
         background: #1FA7DF;;
     }
@@ -6,19 +11,21 @@
         background : #1D6FB7;
         color : #FFF;
     }
-    .panel-body:hover{
-        background: #1FA7DF;
-        color : #FFF;
-        cursor: pointer;
-    }
     .panel-collapse .panel-body{
-        padding-top: 5px;
-        padding-bottom: 5px;
+        padding: 2px;
     }
     .panel-body h4{
         width: 100%;
-        padding-left: 20px;
+        padding: 15px;
+        margin: 0;
+        border-bottom:2px solid #fff;
+        font-size: 14px;
         text-align: center;
+    }
+    .panel-body h4:hover{
+        background: #1FA7DF;
+        color : #FFF;
+        cursor: pointer;
     }
     .icon-pub{
         float: left;
@@ -29,8 +36,13 @@
     .icon-pub img{
         margin: auto;
     }
-    .panel-title-container h4{
-        float: left;
+    .panel-title{
+        position: relative;
+    }
+    .panel-title-container .spinner{
+        position: absolute;
+        right: 20px;
+        top:0;
     }
     .panel_toolbox{
         margin-top:8px;
@@ -44,6 +56,7 @@
         color:#FFF;
         cursor: pointer;
     }
+    /*Animation Loading*/
     @-webkit-keyframes rotating {
         from{
             -webkit-transform: rotate(0deg);
@@ -52,13 +65,48 @@
             -webkit-transform: rotate(360deg);
         }
     }
-
     .rotating {
         -webkit-animation: rotating 2s linear infinite;
     }
 
-</style>
+    /*Paging view*/
+    .swControls{
+        position:relative;
+        bottom: 0;
+    }
 
+    a.swShowPage{
+
+        /* The links that initiate the page slide */
+
+        background-color:#444444;
+        float:left;
+        height:15px;
+        margin:4px 3px;
+        text-indent:-9999px;
+        width:15px;
+        /*border:1px solid #ccc;*/
+
+        /* CSS3 rounded corners */
+
+        -moz-border-radius:7px;
+        -webkit-border-radius:7px;
+        border-radius:7px;
+    }
+
+    a.swShowPage:hover,
+    a.swShowPage.active{
+        background-color:#2993dd;
+
+        /*	CSS3 inner shadow */
+
+        -moz-box-shadow:0 0 7px #1e435d inset;
+        /*-webkit-box-shadow:0 0 7px #1e435d inset;*/
+        box-shadow:0 0 7px #1e435d inset;
+    }
+
+</style>
+<script src="<?php echo base_url(); ?>js/paging_custom.js"></script>
 <div class="page-title">
     <div class="title_left">
         <h3>Voucher Games</h3>
@@ -92,10 +140,8 @@
                                 <div class="panel-title">
                                     <div class="icon-pub"><img src="<?php echo base_url()?>img/publisher/<?php echo $row['publisherImage']; ?>" class="img-responsive"></div>
                                     <h4><?php echo $row['publisherName'];?></h4>
+                                    <i class="fa fa-chevron-down spinner"></i>
                                 </div>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><i class="fa fa-chevron-down spinner"></i></li>
-                                </ul>
                                 <div class="clearfix"></div>
                             </div>
                         </a>
@@ -165,11 +211,12 @@
 
 <script>
     $(document).ready(function(){
+        //Hide loading Screen
         $("#load_screen").hide();
-        // Get Game Data
+        // Get Game Data When Publisher is clicked
         $('.panel').click(function(){
             var status = $(this).attr("data-status");
-
+            //Status for publisher has been clicked
             if(status == "false") {
                 var panel = $(this).children('a').attr("href");
                 var id = $(this).children('a').attr("data-publisher");
@@ -191,6 +238,7 @@
                     type: "POST",
                     dataType: 'json',
                     success:function(data){
+                        // Set Game Data below, publisher clicked
                         $.each( data, function( i, val ) {
                             var h4 = $("<h4>",
                                 {class: "col-lg-12 game-dt", "data-id":val.gameID,"data-game":val.gameName}).text(val.gameName);
@@ -208,6 +256,7 @@
 
         // Get Nominal Data
         $( ".panel-body" ).on( "click", "h4.game-dt", function() {
+            // id game clicked
             var id = $( this ).attr("data-id");
             var data_publisher =  $( this ).closest(".panel-body").attr("data-publisher");
             var data_game =  $( this ).attr("data-game");
@@ -232,11 +281,11 @@
                         td1.appendTo(tr);
                         td2.appendTo(tr);
                         tr.appendTo("#nominal-tbody");
-                        //alert('a');
-                        $('html,body').animate({
-                            scrollTop: 0
-                        }, 300, 'linear');
                     });
+
+                    $('html,body').animate({
+                        scrollTop: $("#nominal-tbody").position().top
+                    }, 300, 'linear');
                 },
                 error: function(xhr, status, error) {
                     //var err = eval("(" + xhr.responseText + ")");
@@ -268,6 +317,7 @@
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
 
+        // Buy Game begin here
         $('#btn-buy').click(function(){
             var id = $(this).attr("data-id");
             var coin = $("#detail-coin").attr("data-value");
@@ -305,7 +355,7 @@
                                         $('.success-modal').modal("show");
                                         $("#load_screen").hide();
                                         window.setTimeout( function(){
-                                            location.href = "<?php echo site_url("GamePurchase/index/".$categoryId)?>";
+                                            location.href = "<?php echo site_url("User/dashboard")?>";
                                         }, 3000 );
                                     }else{
                                         alertify.error(data.msg);

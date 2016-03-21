@@ -73,19 +73,9 @@
                         <?php $x=1; foreach($transfer_list as $row) { ?>
                             <?php if($x%2==1) {?>
                                 <tr class="even pointer">
-                                    <td class=" "><?php echo $row['pengirim']; ?></td>
-                                    <td class=" "><?php echo $row['penerima']; ?></td>
-                                    <td class="a-right a-right "><?php echo number_format($row['coin'],0,",","."); ?></td>
-                                    <td class=" ">
-                                        <?php $date = date_create($row['created']);
-                                        echo date_format($date, 'F d, Y \a\t g:ia' ); ?>
-                                    </td>
-                                </tr>
                             <?php }else{ ?>
                                 <tr class="odd pointer">
-                                    <td class="a-center ">
-                                        <input type="checkbox" class="tableflat">
-                                    </td>
+                            <?php } //end else?>
                                     <td class=" "><?php echo $row['pengirim']; ?></td>
                                     <td class=" "><?php echo $row['penerima']; ?></td>
                                     <td class="a-right a-right "><?php echo number_format($row['coin'],0,",","."); ?></td>
@@ -94,7 +84,7 @@
                                         echo date_format($date, 'F d, Y \a\t g:ia' ); ?>
                                     </td>
                                 </tr>
-                            <?php } $x++; } ?>
+                        <?php $x++; }?>
                         </tbody>
 
                     </table>

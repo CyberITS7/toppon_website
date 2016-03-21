@@ -20,8 +20,7 @@ class GamePurchase extends CI_Controller{
     }
 
     function index($id){
-        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
-        if(!$this->authentication->isAuthorizeMember($user->userLevel) && !$this->authentication->isAuthorizeAgent($user->userLevel)){
+        if(!$this->session->userdata('logged_in')){
             redirect(site_url("User/dashboard"));
         }
         else{
@@ -136,8 +135,7 @@ class GamePurchase extends CI_Controller{
     }
 
     function sendIndomog($qid,$proId){
-        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
-        if(!$this->authentication->isAuthorizeMember($user->userLevel) && !$this->authentication->isAuthorizeAgent($user->userLevel)){
+        if(!$this->session->userdata('logged_in')){
             redirect(site_url("User/dashboard"));
         }
         else{
