@@ -481,6 +481,7 @@
         
 
             <div class="col-lg-7 footer-2">
+                </br>
                 <p>Vouchers Available :</p>
                 <div class="row">
                     <div class="col-lg-2">
