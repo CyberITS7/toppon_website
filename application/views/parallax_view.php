@@ -472,7 +472,7 @@
                     <div class="row social-wrapper">
                         <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
                             <a href ="www.instagram.com">
-                                <img src="<?php echo base_url();?>/img/sosmed/ig.png" class="img-responsive"/>
+                                <img src="<?php echo base_url();?>/img/sosmed/line.png" class="img-responsive"/>
                             </a>
                         </div>
                     </div>
