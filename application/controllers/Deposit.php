@@ -12,7 +12,6 @@ class Deposit extends CI_Controller{
         $this->load->library('email');
 
         $this->load->library('Hash');
-        $this->load->model('Deposit_model');
         $this->load->model('Bank_model');
         $this->load->model('Coin_model');
         $this->load->model('TDeposit_model');

@@ -115,7 +115,7 @@
                                     $('.success-modal').modal("show");
                                     $("#load_screen").hide();
                                     window.setTimeout( function(){
-                                        location.href = "<?php echo site_url("Transfer")?>";
+                                        location.href = "<?php echo site_url("User/dashboard")?>";
                                     }, 3000 );
                                 }else{
                                     alertify.set('notifier','position', 'top-right');

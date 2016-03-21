@@ -92,7 +92,7 @@
                         <input type="text" class="form-control" id="gift-name" name="gift-name" data-label="#err-gift-name">
                     </div>
                     <div class="form-group">
-                        <label for="gift-category" class="control-label">Nama Gift : <span class="label label-danger" id="err-gift-category"></span></label>
+                        <label for="gift-category" class="control-label">Gift Kategori : <span class="label label-danger" id="err-gift-category"></span></label>
                         <select class="form-control" id="gift-category" name="gift-category" data-label="#err-gift-category">
                             <option value="">-=Choose=-</option>
                             <?php foreach ($gift_categories as $row) {
