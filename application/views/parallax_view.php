@@ -306,7 +306,7 @@
     </div>
     <div class="container">
         <div class="toppon-credit">
-            <img src="<?php echo base_url();?>/img/topponcredit/credit.png" class="img-responsive"/>
+            <img src="<?php echo base_url();?>/img/topponcredit/credit.png" class="img-responsive img-size"/>
             <div class="content-text"> 
                     <p>Toppon Credits adalah mata uang online dimana para gamer bisa melakukan</p>
                     <p>TOP UP untuk setiap pembelian voucher games</p>
@@ -314,6 +314,28 @@
                     <p>dan berlaku untuk kelipatannya</p>
             </div>
 
+            <div class="row">
+                <div class="credit-wrapper">
+                    <div class="img-item">
+                        <img src="<?php echo base_url();?>/img/TC.png" class="img-responsive    "/>
+                    </div>
+                    <div class="img-text">
+                        <p>= Toppon Credits (Credits untuk pembelian Vouchers Games)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="credit-wrapper">
+                    <div class="img-item">
+                        <img src="<?php echo base_url();?>/img/TP.png" class="img-responsive    "/>
+                    </div>
+                    <div class="img-text">
+                        <p>= Toppon Poins (Poin Rewards untuk penukaran hadiah)</p>
+                    </div>
+                </div>
+            </div>
+                   
             <div class="row">
                 <div class="about-row-wrapper">
                     <div class="credit-items wow bounceInRight" data-wow-duration="1.5s">
@@ -432,12 +454,22 @@
                                 <img src="<?php echo base_url();?>/img/sosmed/fb.png" class="img-responsive"/>
                             </a>
                         </div>
-
+                    </div>
+                    <div class="row social-wrapper">
                         <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
                             <a href ="www.twitter.com">
                                 <img src="<?php echo base_url();?>/img/sosmed/twitter.png" class="img-responsive"/>
                             </a>
                         </div>
+                    </div>
+                    <div class="row social-wrapper">
+                        <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
+                            <a href ="www.instagram.com">
+                                <img src="<?php echo base_url();?>/img/sosmed/ig.png" class="img-responsive"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row social-wrapper">
                         <div class ="social-item wow pulse" data-wow-iteration="7" data-wow-duration="0.25s">
                             <a href ="www.instagram.com">
                                 <img src="<?php echo base_url();?>/img/sosmed/ig.png" class="img-responsive"/>
@@ -446,8 +478,10 @@
                     </div>
                 </div>
             </div>
+        
 
             <div class="col-lg-7 footer-2">
+                <p>Vouchers Available :</p>
                 <div class="row">
                     <div class="col-lg-2">
                         <img src="<?php echo base_url();?>/img/voucher/logo01.png" class="img-responsive img-footer"/>
@@ -474,12 +508,6 @@
 
                 <div class="row">
                     <div class="col-lg-2">
-                        <img src="<?php echo base_url();?>/img/voucher/logo05.png" class="img-responsive img-footer" />
-                    </div>
-                    <div class="col-lg-2">
-                        <img src="<?php echo base_url();?>/img/voucher/logo06.png" class="img-responsive img-footer" />
-                    </div>
-                    <div class="col-lg-2">
                         <img src="<?php echo base_url();?>/img/voucher/logo07.png" class="img-responsive img-footer" />
                     </div>
                     <div class="col-lg-2">
@@ -487,18 +515,21 @@
                     </div>
                     <div class="col-lg-2">
                         <img src="<?php echo base_url();?>/img/voucher/logo09.png" class="img-responsive img-footer" />
-                    </div>              
+                    </div>
                     <div class="col-lg-2">
                         <img src="<?php echo base_url();?>/img/voucher/logo10.png" class="img-responsive img-footer" />
+                    </div>
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo11.png" class="img-responsive img-footer" />
+                    </div>              
+                    <div class="col-lg-2">
+                        <img src="<?php echo base_url();?>/img/voucher/logo12.png" class="img-responsive img-footer" />
                     </div>                                                     
                 </div>
 
                 <div class="row">
                    <div class="col-lg-2">
-                        <img src="<?php echo base_url();?>/img/voucher/logo11.png" class="img-responsive img-footer" />
-                    </div>
-                    <div class="col-lg-2">
-                        <img src="<?php echo base_url();?>/img/voucher/logo12.png" class="img-responsive img-footer" />
+                        
                     </div>
                     <div class="col-lg-2">
                         <img src="<?php echo base_url();?>/img/voucher/logo13.png" class="img-responsive img-footer" />
@@ -508,9 +539,12 @@
                     </div>
                     <div class="col-lg-2">
                         <img src="<?php echo base_url();?>/img/voucher/logo15.png" class="img-responsive img-footer" />
-                    </div>              
+                    </div>
                     <div class="col-lg-2">
                         <img src="<?php echo base_url();?>/img/voucher/logo16.png" class="img-responsive img-footer" />
+                    </div>              
+                    <div class="col-lg-2">
+                        
                     </div>
                 </div>
             </div>
