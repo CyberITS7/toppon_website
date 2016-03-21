@@ -27,6 +27,16 @@
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
+    <style>
+        #whyus{
+            background-image: url(<?php echo base_url().'img/home/'.$data_content->parallax1; ?>);
+        }
+
+        #access-games{
+            background-image: url(<?php echo base_url().'img/home/'.$data_content->parallax2; ?>);
+        }
+    </style>
+
 </head>
 
 <body data-spy="scroll" data-offset="0">
@@ -131,7 +141,7 @@
         <div class="content-text">
             <h1>We Provides All Voucher Games</h1>
             <h2>Simple and Get Reward</h2>
-            <p>Toppon will help gamers simplify to get voucher games anytime and everywhere with no limits</p>
+            <p><?php echo $data_content->aboutUsContent; ?></p>
         </div>
         
         <div class="row">
