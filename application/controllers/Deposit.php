@@ -34,9 +34,14 @@ class Deposit extends CI_Controller{
             redirect(site_url("User/dashboard"));
         }
         else{
+            $q = $this->TDeposit_model->expireDeposit($this->session->userdata('user_id'));
+            if(!$q){
+                $this->output->enable_profiler(TRUE);
+            }else{
             $data['deposit_list']=$this->TDeposit_model->getListTDeposit($this->session->userdata('user_id'));
             $data['data_content']="member/deposit_list_view";
             $this->load->view('includes/member_area_template_view',$data);
+            }
         }
 
     }

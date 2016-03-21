@@ -69,6 +69,24 @@ class TDeposit_model extends CI_Model{
     
     }
 
+    function expireDeposit($id){
+        $datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+        $data = Array(
+            "status" => "expired",
+            "lastUpdated" => $datetime,
+            "lastUpdatedBy" => $id
+            );
+        $this->db->where('DATE_ADD(created, INTERVAL \'1 0\' DAY_HOUR) <', $datetime);
+        $this->db->where('status', "unpaid");
+        $this->db->where('createdBy', $id);
+        $this->db->update('tbl_toppon_t_deposits',$data);
+
+        if ($this->db->affected_rows() >= 1)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
     //REPORT
     function getTransDepositList($start, $limit, $userId){
         $this->db->select('*');
