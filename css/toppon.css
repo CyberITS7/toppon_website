@@ -27,6 +27,7 @@ section.parallax {
 }
 
 .content-text{
+    font-family: Verdana;
     text-align: center;
     letter-spacing: 2px;
     padding-top: 20px;
@@ -59,6 +60,7 @@ section.parallax {
 }
 
 .content-text-w{
+    font-family: Verdana;
     color: #fff;
     text-align: center;
     letter-spacing: 2px; 
@@ -79,7 +81,7 @@ section.parallax {
     font-weight: 300;
     text-align: center;
     letter-spacing: 2px; 
-    font-size: 18px;
+    font-size: 20px;
     padding-bottom: 20px;   
 }
 
@@ -154,7 +156,7 @@ section.parallax {
     margin-bottom: 0;
 }
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus{
-    color:#000;
+    color:#1D70B7;
 }
 
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {
@@ -162,7 +164,7 @@ section.parallax {
     border-bottom: 5px solid #000;
     -webkit-appearance: none !important;
     padding-bottom: 8px;
-    color: #000;
+    color: #1D70B7;
 }
     #myNavbar ul li a:hover, a:active {
         color: #000;
@@ -353,8 +355,8 @@ section.parallax {
 }
 
 #redeem-item-1{
-    bottom: 20%;
-    left: 11%;
+    bottom: 18%;
+    left: 10%;
 
 }
 #redeem-item-2{

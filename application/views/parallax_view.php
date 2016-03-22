@@ -67,6 +67,7 @@
                     <li><a href="#home" class="page-scroll active">Home</a></li>
                     <li><a href="#about" class="page-scroll">About Us</a></li>
                     <li><a href="#howtouse" class="page-scroll">How To Use</a></li>
+                    <li><a href="#how-redeem" class="page-scroll">How To Redeem</a></li>
                     <li><a href="#credit-poin" class="page-scroll">Credit & Poin</a></li>
                     <li><a href="#contact-us" class="page-scroll">Contact Us</a></li>
                 </ul>
