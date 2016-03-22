@@ -30,7 +30,7 @@
         for(var i=0;i<pagesNumber;i++)
         {
             // Slice a portion of the lis, and wrap it in a swPage div:
-            li.slice(i*resultsPerPage,(i+1)*resultsPerPage).wrapAll('<div class="swPage" />');
+            li.slice(i*resultsPerPage,(i+1)*resultsPerPage).wrapAll('<div class="swPage accordion" id="accordion"/>');
 
             // Adding a link to the swControls div:
             swControls.append('<a href="" class="swShowPage">'+(i+1)+'</a>');

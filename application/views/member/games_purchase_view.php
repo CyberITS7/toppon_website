@@ -158,7 +158,6 @@
                                 <div class="panel-title">
                                     <div class="icon-pub"><img src="<?php echo base_url()?>img/publisher/<?php echo $row['publisherImage']; ?>" class="img-responsive"></div>
                                     <h4><?php echo $row['publisherName'];?> <i class="fa fa-chevron-down spinner"></i></h4>
-
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -293,7 +292,8 @@
                 success:function(data){
                     $.each( data, function( i, val ) {
                         var tr = $("<tr>",{"data-id":val.sGameID,"data-publisher":data_publisher,
-                            "data-game":data_game,"data-nominal":val.nominalName,"data-payment":val.paymentValue});
+                            "data-game":data_game,"data-currency":val.currency,
+                            "data-nominal":val.nominalName,"data-payment":val.paymentValue});
                         var td1 = $("<td>").text(val.currency+" "+numberWithCommas(val.nominalName));
                         var td2 = $("<td>").text(numberWithCommas(val.paymentValue)+" TC");
                         td1.appendTo(tr);
@@ -316,13 +316,14 @@
             var id =  $( this ).attr("data-id");
             var publisher =  $( this ).attr("data-publisher");
             var game =  $( this ).attr("data-game");
+            var currency =  $( this ).attr("data-currency");
             var nominal =  $( this ).attr("data-nominal");
             var payment =  $( this ).attr("data-payment");
 
             // Set Detail Purchasing
             $("#detail-publisher").text(publisher);
             $("#detail-game").text(game);
-            $("#detail-nominal").text(numberWithCommas(nominal));
+            $("#detail-nominal").text(currency+" "+numberWithCommas(nominal));
             $("#detail-coin").text(numberWithCommas(payment)+" TC");
             $("#detail-coin").attr("data-value",payment);
             $("#btn-buy").attr("data-id",id);
