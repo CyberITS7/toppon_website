@@ -188,7 +188,7 @@ section.parallax {
 #about{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
 
-    padding-top: 35px;
+    padding-top: 50px;
     background-repeat: no-repeat;
 	text-align: center;
 	min-height: 700px;
@@ -262,7 +262,7 @@ section.parallax {
 #howtouse{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
 
-    padding-top: 35px;
+    padding-top: 50px;
     background-repeat: no-repeat;
 	text-align: center;
 	min-height: 700px;
@@ -406,7 +406,7 @@ section.parallax {
 
 /* TOPPON CREDIT */
 #conv-table{
-    padding-top: 55px;
+    padding-top: 50px;
     background-color: rgb(225,227,229);
     padding-bottom: 50px;
     text-align: center;

@@ -79,7 +79,7 @@
         <div class="container-fluid  col-lg-offset-2 col-lg-8 col-lg-offset-2">
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="centered nav navbar-nav">
-                    <li><a href="#home" class="page-scroll active">Home</a></li>
+                    <li><a href="#home" class="page-scroll">Home</a></li>
                     <li><a href="#about" class="page-scroll">About Us</a></li>
                     <li><a href="#howtouse" class="page-scroll">How To Use</a></li>
                     <li><a href="#how-redeem" class="page-scroll">How To Redeem</a></li>
@@ -92,7 +92,7 @@
 <!--End Fixed Navbar-->
 
 <!-- Full Page Image Background Carousel Header -->
-    
+
     <header id="myCarousel" class="carousel slide slide-img">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -853,22 +853,6 @@
         $(window).scroll(fixDiv);
             fixDiv();
     </script>
-
-
-    <script>
-    //scroll
-    $(function() {
-       $('.menu-navbar ul li a').click(function () {
-            var url = $(this).attr('href');
-            $('html,body').animate({
-                scrollTop: $(url).position().top
-            }, 1500, 'linear');
-            return false;
-        });
-
-   });
-    </script>
-
 
 <!-- CHANGE HEADER CSS WHEN SCROLL -->
 <script>

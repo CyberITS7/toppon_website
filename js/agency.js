@@ -8,9 +8,17 @@
 $(function() {
     $('a.page-scroll').bind('click', function(event) {
         var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
+        var nav  =  $(".navbar-nav li.active").children("a").text();
+        if(nav == "Home") {
+            $('html, body').stop().animate({
+                scrollTop: $($anchor.attr('href')).offset().top - 55
+            }, 1500, 'easeInOutExpo');
+        }else{
+            $('html, body').stop().animate({
+                scrollTop: $($anchor.attr('href')).offset().top
+            }, 1500, 'easeInOutExpo');
+        }
+
         event.preventDefault();
     });
 });
