@@ -231,7 +231,7 @@
             var label_err = $(this).attr("data-label");
             $(label_err).html("");
 
-            if(input > settings.minLength && input < settings.maxLength){
+            if(input >= settings.minLength && input <= settings.maxLength){
                 bool=true;
             }else{
                 $(label_err).css( 'font-size', '12px').html(message);
