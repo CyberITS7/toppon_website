@@ -497,6 +497,12 @@ section.parallax {
     width: 60%;
 }
 
+
+/*FOOTER */
+
+.social-media h3{
+    margin-top: 40px;
+}
 .social-item{
     float:left;
     width: 70px;
@@ -510,13 +516,13 @@ section.parallax {
     padding-left: 30px;
 
 }
-.bank-transfer{
+.bank-transfer img{
     width: 120px;
     height: 70px;
+
     
 }
 
-/*FOOTER */
 #footer{
     background-color: rgb(207,208,208);
     height: auto;
@@ -529,6 +535,11 @@ section.parallax {
 .footer-2{
     border-right: 2px solid #969696; 
     border-left: 2px solid #969696;
+    margin-top: 20px;
+}
+
+.footer-3{
+    margin-top: 20px;
 }
 .footer-3 ul li a{
     text-decoration: none;

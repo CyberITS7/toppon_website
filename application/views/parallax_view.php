@@ -536,8 +536,7 @@
         
 
             <div class="col-lg-7 footer-2">
-                </br>
-                <p>Vouchers Available :</p>
+                <h3>Vouchers Available :</h3>
                 <div class="row">
                     <div class="col-lg-2">
                         <img src="<?php echo base_url();?>/img/voucher/logo01.png" class="img-responsive img-footer"/>
@@ -612,6 +611,8 @@
                     <li><a href="#">Privacy</a></li>
                     <li><a href="#">Term & Conditions</a></li>
                 </ul>   
+                    </br>
+                <h3>We Accept :</h3>
                 <div class="bank-transfer">
                 <h4>Bank Transfer</h4>
                 <img src="<?php echo base_url();?>/img/bca.png" class="img-responsive"/>
