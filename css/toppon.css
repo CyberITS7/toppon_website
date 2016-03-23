@@ -518,7 +518,7 @@ section.parallax {
 
 /*FOOTER */
 #footer{
-    background-color: #fff;
+    background-color: rgb(207,208,208);
     height: auto;
     position: relative;
 }
@@ -527,8 +527,8 @@ section.parallax {
     padding-left: 20px;
 }
 .footer-2{
-    border-right: 2px solid #D8CBCB; 
-    border-left: 2px solid #D8CBCB;
+    border-right: 2px solid #969696; 
+    border-left: 2px solid #969696;
 }
 .footer-3 ul li a{
     text-decoration: none;
