@@ -293,30 +293,20 @@ section.parallax {
 
 
 /*SLIDER*/
-.slider-1{
-    /*background-image: url(../img/bg/home-bg.jpg);*/
-    background-color: #7f8c8d;
-    background-repeat: no-repeat;
-    text-align: center;
-    min-height: 500px;
-    width: 100%;
-    padding-bottom: 20px;
-}
-
 .carousel,
 .item{
     height: 100%;
 }
 .carousel,
 .item,.carousel-inner.active{
-    height: 500px;
+    height: 530px;
 }
 
 .carousel-inner {
-    height: 500px;
+    height: 530px;
 }
 .slide-img{
-    min-height:500px;
+    height:530px;
 }
 .fill {
     width: 100%;

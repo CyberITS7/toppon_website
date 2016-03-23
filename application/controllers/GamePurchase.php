@@ -140,18 +140,22 @@ class GamePurchase extends CI_Controller{
         }
         else{
             //SET DATA
-            $vsRMID = '0910403545';
+            //$vsRMID = '0910403545';
+            //$vsSecret='123456';
+            $vsRMID = '1603413887';
+            $vsSecret='pOyNeinswa61hv';
             $vsQID= $qid;
             $vsRC='5003';
             $vsIPD= $this->get_real_ip();
-            $vsEmailHP= 'vzheng92@gmail.com';
+            $vsEmailHP= 'admin@toppon.co.id';
             $vsProdID = $proId;
             $vsQty='1';
-            $vsSecret='123456';
+
 
             $date = new DateTime();
             $now = date_format($date,"Ymd\TH:i:s");
-            $gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
+            //$gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
+            $gateway = "https://www.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
 
             // mid.qid.reqc.ipd.emailhp.prodid.qty.prodaccid.prodbillid.remark.now
             $data= $vsRMID.$vsQID.$vsRC.$vsIPD.$vsEmailHP.$vsProdID.$vsQty.$now;
@@ -247,15 +251,19 @@ class GamePurchase extends CI_Controller{
     }
 
     function getRequestPurchaseGame($qid,$coin_payment){
-        $vsRMID = '0910403545';
+        //$vsRMID = '0910403545';
+        //$vsSecret='123456';
+        $vsRMID = '1603413887';
+        $vsSecret='pOyNeinswa61hv';
         $vsQID= $qid;
         $vsRC='5006';
         $vsIPD= $this->get_real_ip();
-        $vsSecret='123456';
+
 
         $date = new DateTime();
         $now = date_format($date,"Ymd\TH:i:s");
-        $gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
+        //$gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
+        $gateway = "https://www.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
 
         // mid.qid.reqc.ipd.emailhp.prodid.qty.prodaccid.prodbillid.remark.now
         $data= $vsRMID.$vsQID.$vsRC.$vsIPD.$now;
@@ -367,15 +375,20 @@ class GamePurchase extends CI_Controller{
     }
 
     function cancelPurchaseGame($qid){
-        $vsRMID = '0910403545';
+
+        //$vsRMID = '0910403545';
+        //$vsSecret='123456';
+        $vsRMID = '1603413887';
+        $vsSecret='pOyNeinswa61hv';
         $vsQID= $qid;
         $vsRC='5007';
         $vsIPD= $this->get_real_ip();
-        $vsSecret='123456';
+
 
         $date = new DateTime();
         $now = date_format($date,"Ymd\TH:i:s");
-        $gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
+        //$gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
+        $gateway = "https://www.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
 
         // mid.qid.reqc.ipd.emailhp.prodid.qty.prodaccid.prodbillid.remark.now
         $data= $vsRMID.$vsQID.$vsRC.$vsIPD.$now;
@@ -508,17 +521,19 @@ class GamePurchase extends CI_Controller{
             redirect(site_url("User/dashboard"));
         }
         else{
-            $gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
 
-            $vsRMID = '0910403545';
-            $vsQID= 'TOPPON45';
+            $vsRMID = '1603413887';
+            $vsSecret='pOyNeinswa61hv';
+//            $vsRMID = '0910403545';
+//            $vsSecret='123456';
+            $vsQID= 'TOPPON1';
             $vsRC='5006';
             $vsIPD= '202.58.180.46';
-            $vsSecret='123456';
+
 
             $date = new DateTime();
             $now = date_format($date,"Ymd\TH:i:s");
-            $gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
+            $gateway = "https://www.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
 
             // mid.qid.reqc.ipd.emailhp.prodid.qty.prodaccid.prodbillid.remark.now
             $data= $vsRMID.$vsQID.$vsRC.$vsIPD.$now;
@@ -588,85 +603,135 @@ class GamePurchase extends CI_Controller{
 
         }//else
     }
+
     function test2(){
-        echo "Sending XMLRPC Request with result :<br />";
-        $gateway = "http://dev.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
-
-        $data= "0910403545"."T108000001"."5006"."G001T001"."20141201T17:10:05";
-        $vsSignature = sha1($data."123456");
-
-//Create xml request
-        $req = '
-<methodCall>
-  <methodName>Inquiry</methodName>
-  <params>
-    <param>
-      <value>
-        <struct>
-          <member>
-            <name>RMID</name>
-            <value>
-              <string>0910403545</string>
-            </value>
-          </member>
-          <member>
-            <name>QID</name>
-            <value>
-              <string>T108000001</string>
-            </value>
-          </member>
-          <member>
-            <name>RC</name>
-            <value>
-              <string>5006</string>
-            </value>
-          </member>
-          <member>
-            <name>IPD</name>
-            <value>
-              <string>G001T001</string>
-            </value>
-          </member>
-          <member>
-            <name>Now</name>
-            <value>
-              <datetime.iso8601>20141201T17:10:05</datetime.iso8601>
-            </value>
-          </member>
-          <member>
-            <name>Signature</name>
-            <value>
-              <string>'.$vsSignature.'</string>
-            </value>
-          </member>
-        </struct>
-      </value>
-    </param>
-  </params>
-</methodCall>';
-
-//Send XML request with curl
-
-        $ch = curl_init();
-
-        curl_setopt($ch,CURLOPT_URL,$gateway);
-        curl_setopt($ch,CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch,CURLOPT_POST,1);
-        curl_setopt($ch,CURLOPT_POSTFIELDS,$req);
-
-        curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,FALSE);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-        curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
-
-        $result = curl_exec($ch); //get the response
-
-        if(curl_errno($ch)) {
-            print "Error: " . curl_error($ch);
-        } else {
-            curl_close($ch);
+        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
+            redirect(site_url("User/dashboard"));
         }
+        else {
+            echo "Sending XMLRPC Request with result :<br />";
 
-        echo htmlentities($result);
+            $vsRMID = '1603413887';
+            $vsSecret = 'pOyNeinswa61hv';
+            $vsQID = 'TOPPON1';
+            $vsRC = '5003';
+            $vsIPD = $this->get_real_ip();
+            $vsEmailHP = 'admin@toppon.co.id';
+            $vsProdID = "lyto v10";
+            $vsQty = '1';
+            $gateway = "https://www.indomog.com/indomog2/new_core/index.php/h2h_rpc/server";
+
+            $date = new DateTime();
+            $now = date_format($date, "Ymd\TH:i:s");
+            $data = $vsRMID . $vsQID . $vsRC . $vsIPD . $vsEmailHP . $vsProdID . $vsQty . $now;
+            $vsSignature = sha1($data . $vsSecret);
+
+            //Create xml request
+            $req = '
+     <methodCall>
+      <methodName>Shop</methodName>
+      <params>
+        <param>
+          <value>
+            <struct>
+              <member>
+                <name>RMID</name>
+                <value>
+                  <string>' . $vsRMID . '</string>
+                </value>
+              </member>
+              <member>
+                <name>QID</name>
+                <value>
+                  <string>' . $vsQID . '</string>
+                </value>
+              </member>
+              <member>
+                <name>RC</name>
+                <value>
+                  <string>5003</string>
+                </value>
+              </member>
+              <member>
+                <name>IPD</name>
+                <value>
+                  <string>' . $vsIPD . '</string>
+                </value>
+              </member>
+              <member>
+                <name>EmailHP</name>
+                <value>
+                  <string>' . $vsEmailHP . '</string>
+                </value>
+              </member>
+              <member>
+                <name>ProdID</name>
+                <value>
+                  <string>' . $vsProdID . '</string>
+                </value>
+              </member>
+              <member>
+                <name>Qty</name>
+                <value>
+                  <string>1</string>
+                </value>
+              </member>
+              <member>
+                <name>ProdAccID</name>
+                <value><string></string></value>
+                </member>
+            <member>
+            <name>ProdBillID</name>
+            <value><string></string></value>
+            </member>
+              <member>
+                <name>Remark</name>
+                <value>
+                  <string></string>
+                </value>
+              </member>
+              <member>
+                <name>Now</name>
+                <value>
+                  <datetime.iso8601>' . $now . '</datetime.iso8601>
+                </value>
+              </member>
+              <member>
+                <name>Signature</name>
+                <value>
+                  <string>' . $vsSignature . '</string>
+                </value>
+              </member>
+            </struct>
+          </value>
+        </param>
+      </params>
+    </methodCall>';
+
+            //Send XML request with curl
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, $gateway);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
+
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+            $result = curl_exec($ch); //get the response
+
+            if (curl_errno($ch)) {
+                print "Error: " . curl_error($ch);
+            } else {
+                curl_close($ch);
+            }
+
+            echo htmlentities($result);
+        }
     }
 }
 ?>
