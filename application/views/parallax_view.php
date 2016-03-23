@@ -35,6 +35,9 @@
         #access-games{
             background-image: url(<?php echo base_url().'img/home/'.$data_content->parallax2; ?>);
         }
+        .get-voucher:hover{
+            background: rgba(52,152,219,0.5);
+        }
     </style>
 
 </head>
@@ -834,7 +837,7 @@
             });
         });
         $('.carousel').carousel({
-            interval: 0 //changes the speed
+            interval: 3500 //changes the speed
         })
     </script>
 

@@ -59,9 +59,9 @@
         top: 86px ;
         right: 0;
         padding: 0;
-        border : 2px solid #fff;
+        border : 2px solid #73879C;
         border-top: none;
-        background: #1D6FB7;
+        background: #fff;
         z-index: 2;
         display: none;
     }
@@ -75,11 +75,11 @@
     #game-category-ul li a{
         width: 100%;
         height: auto;
-        color : #fff;
+        color: #73879C;
         font-weight: bold;
         text-decoration: none;
     }
-    #game-category-ul li:hover{
+    #game-category-ul li:hover, #game-category-ul li a:hover{
         text-decoration: none;
         color: #fff;
         background: #1FA7DF;
@@ -124,7 +124,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Select Game Category<small>List of game categories</small></h2>
+                <h2>Home<small>dashboard</small></h2>
                 <div class="clearfix"></div>
             </div>
             <div class="dashboard-content">
