@@ -1,3 +1,8 @@
+<style>
+    .td-status{
+        padding: 0!important;
+    }
+</style>
 <div class="page-title">
     <div class="title_left">
         <h3>Top Up <a href="<?php echo site_url('Deposit/depositInsertForm')?>"><button type="button" class="btn btn-primary"><i class="fa fa-plus-square"></i>&nbsp Add New</button></a></h3>
@@ -69,11 +74,32 @@
                                                         <td class="td-nomor-rekening"><?php echo $row['noRekening']; ?></td>
                                                         <td class="td-nama-rekening"><?php echo $row['nameRekening']; ?></td>
                                                         <td class="td-nama-bank"><?php echo $row['bankName']; ?></td>
-                                                        <td class="td-coin"><?php echo $row['coin']; ?></td>
-                                                        <td class="td-status"><?php echo $row['status']; ?></td>
-                                                        <td class="a-right a-right "><?php echo $row['coinConversion']; ?></td>
+                                                        <td class="td-coin"><?php echo number_format($row['coin'],0,",","."); ?></td>
+                                                        <td class="td-status">
+                                                            <?php if($row['status'] == 'unpaid'){ ?>
+                                                                <!--UNPAID-->
+                                                                <h4><span class="label label-warning"><?php echo $row['status']; ?></span></h4>
+                                                            <?php }else if($row['status'] == 'pending'){ ?>
+                                                                <!--PENDING-->
+                                                                <h4><span class="label label-info"><?php echo $row['status']; ?></span></h4>
+                                                            <?php }else if($row['status'] == 'paid'){ ?>
+                                                                <!--PAID-->
+                                                                <h4><span class="label label-success"><?php echo $row['status']; ?></span></h4>
+                                                            <?php }else if($row['status'] == 'expired'){ ?>
+                                                                <!--EXPIRE-->
+                                                                <h4><span class="label label-danger"><?php echo $row['status']; ?></span></h4>
+                                                            <?php } ?>
+                                                        </td>
+                                                        <td class="a-right a-right ">Rp <?php echo number_format($row['coinConversion'],0,",","."); ?></td>
                                                         <td class=" last">
-                                                            <a href="<?php echo site_url('Deposit/depositDetail').'/'.$row['tDepositID'];?>"><button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Detail for Confirmation"><i class="fa fa-search"></i></button></a>
+                                                            <?php if($row['status']== 'unpaid'){ ?>
+                                                            <a href="<?php echo site_url('Deposit/depositDetail').'/'.$row['tDepositID'];?>">
+                                                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip"
+                                                                        data-placement="top" title="Detail for Confirmation">
+                                                                    <i class="fa fa-search"></i>
+                                                                </button>
+                                                            </a>
+                                                            <?php } ?>
                                                             <a href="#"><button type="button" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash"></i></button></a>
                                                         </td> 
                                                         <input type="hidden" value="<?php echo $row['tDepositID'];?>" class="item-id"/>  

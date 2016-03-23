@@ -11,7 +11,9 @@
     .daterangepicker select.yearselect{
         color : #34495E;
     }
-
+    .td-status{
+        padding: 0!important;
+    }
 </style>
 <div class="">
     <div class="page-title">
@@ -77,36 +79,36 @@
                         <?php $x=1; foreach($deposit_list as $row) { ?>
                             <?php if($x%2==1) {?>
                                 <tr class="even pointer">
-                                    <td class=" "><?php echo $row['bankName']; ?></td>
-                                    <td class=" "><?php echo $row['noRekening']; ?></td>
-                                    <td class=" "><?php echo $row['nameRekening']; ?></td>
-                                    <td class="a-right a-right "><?php echo number_format($row['coinConversion'],0,",","."); ?></td>
-                                    <td class="a-right a-right "><?php echo number_format($row['coin'],0,",","."); ?></td>
-                                    <td class="a-right a-right "><?php echo number_format($row['poin'],0,",","."); ?></td>
-                                    <td class=" "><?php echo $row['status']; ?></td>
-                                    <td class=" ">
-                                        <?php $date = date_create($row['created']);
-                                        echo date_format($date, 'F d, Y \a\t g:ia' ); ?>
-                                    </td>
-                                </tr>
                             <?php }else{ ?>
                                 <tr class="odd pointer">
-                                    <td class="a-center ">
-                                        <input type="checkbox" class="tableflat">
-                                    </td>
+                            <?php }//end else?>
                                     <td class=" "><?php echo $row['bankName']; ?></td>
                                     <td class=" "><?php echo $row['noRekening']; ?></td>
                                     <td class=" "><?php echo $row['nameRekening']; ?></td>
-                                    <td class="a-right a-right "><?php echo number_format($row['coinConversion'],0,",","."); ?></td>
+                                    <td class="a-right a-right ">Rp <?php echo number_format($row['coinConversion'],0,",","."); ?></td>
                                     <td class="a-right a-right "><?php echo number_format($row['coin'],0,",","."); ?></td>
                                     <td class="a-right a-right "><?php echo number_format($row['poin'],0,",","."); ?></td>
-                                    <td class=" "><?php echo $row['status']; ?></td>
+                                    <td class="td-status">
+                                        <?php if($row['status'] == 'unpaid'){ ?>
+                                            <!--UNPAID-->
+                                            <h4><span class="label label-warning"><?php echo $row['status']; ?></span></h4>
+                                        <?php }else if($row['status'] == 'pending'){ ?>
+                                            <!--PENDING-->
+                                            <h4><span class="label label-info"><?php echo $row['status']; ?></span></h4>
+                                        <?php }else if($row['status'] == 'paid'){ ?>
+                                            <!--PAID-->
+                                            <h4><span class="label label-success"><?php echo $row['status']; ?></span></h4>
+                                        <?php }else if($row['status'] == 'expired'){ ?>
+                                            <!--EXPIRE-->
+                                            <h4><span class="label label-danger"><?php echo $row['status']; ?></span></h4>
+                                        <?php } ?>
+                                    </td>
                                     <td class=" ">
                                         <?php $date = date_create($row['created']);
                                         echo date_format($date, 'F d, Y \a\t g:ia' ); ?>
                                     </td>
                                 </tr>
-                            <?php } $x++; } ?>
+                            <?php $x++; } ?>
                         </tbody>
 
                     </table>
