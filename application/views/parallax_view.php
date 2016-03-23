@@ -216,6 +216,7 @@
     <div class="container">
         <div class="content-text">
             <h1>HOW TO USE</h1>
+            <hr>
         </div>
 
         <div class="use-wrapper">
@@ -290,6 +291,7 @@
     <div class="container">
        <div class="content-text">
             <h1>HOW TO REDEEM</h1>
+            <hr>
         </div>
         <div class="redeem-content">
             <div class="titik-redeem">
@@ -636,7 +638,7 @@
         </div>
 
         <div class="footer-text">
-            ©Toppon 2016 | Developed by CyberITS
+            ©Toppon 2016 | Developed by <a href="https://cyberits.co.id">CYBERITS</a>
         </div>  
     </div>
 </div>

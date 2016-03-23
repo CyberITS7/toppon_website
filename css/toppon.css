@@ -560,6 +560,14 @@ section.parallax {
     margin: auto;
     text-align: center;
 }
+.footer-text a, a:visited{
+    color: #fff;
+    text-decoration: none;
+
+}
+.footer-text a:hover{
+    color:#000;
+}
 
 
 #back_to_top {
