@@ -161,9 +161,8 @@
 			        		$this->db->trans_commit();
 		                	$status = 'success';
 		                	$msg = "user has been created successfully";
+		                	$this->loginAndRegister();
 		            	}
-
-		                redirect($this->dashboard());
 		            }
 	            }
         	}
@@ -408,7 +407,7 @@
 
             $data['detail_user'] = $user;
             $data['title'] = "TOPPON - Selamat Datang";
-            $data['content']="email/after_create_user_view";
+            $data['content']="email/after_create_user_email_view";
             $message = $this->load->view('email/template_view',$data,true);
 
             
