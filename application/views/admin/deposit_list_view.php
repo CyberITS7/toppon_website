@@ -132,7 +132,7 @@
             }
         });
 
-        $('.btn-delete').click(function(){
+        $(document).on( "click", ".btn-delete", function() {
             var row = $(this).closest("tr");
             var col_title =  row.find(".td-tanggal-transaksi").text();
             var col_id =  row.find("input.item-id").val();
@@ -149,7 +149,7 @@
             });
         });
 
-        $('.btn-update').click(function(){
+        $(document).on( "click", ".btn-update", function() {
             var row = $(this).closest("tr");
             var col_id =  row.find("input.item-id").val();
             

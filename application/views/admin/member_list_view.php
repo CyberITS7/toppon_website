@@ -155,9 +155,9 @@
             }else{
                 return true;
             }
-        }        
+        }
 
-        $('.btn-edit').click(function(){
+        $(document).on( "click", ".btn-edit", function() {
             $(".label-danger").html("");
             // Set Title modal
             $('.modal-title').html('Edit Member Info');            
@@ -199,7 +199,7 @@
             }
         });
 
-        $('.btn-delete').click(function(){
+        $(document).on( "click", ".btn-delete", function() {
             var row = $(this).closest("tr");
             var col_username =  row.find(".td-username").text();
             var col_id =  row.find("input.item-id").val();
