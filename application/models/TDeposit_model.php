@@ -26,6 +26,7 @@ class TDeposit_model extends CI_Model{
             $this->db->select('*');
             $this->db->from('tbl_toppon_t_deposits');
             $this->db->where($where);
+            $this->db->where("status !=", 'expired');
             $this->db->order_by('created', 'DESC');               
             $query = $this->db->get();
             
@@ -51,7 +52,7 @@ class TDeposit_model extends CI_Model{
             $this->db->select('*');
             $this->db->from('tbl_toppon_t_deposits');
             $this->db->where("isActive", 1);
-            $this->db->where("status !=", 'unpaid');
+            $this->db->where("status", 'pending');
             $this->db->order_by('created', 'DESC');               
             $query = $this->db->get();
             
