@@ -96,10 +96,10 @@
                                 </li>
                                 <li><a><i class="fa fa-cog"></i> Setting <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="<?php echo site_url('SGame')?>">Game</a></li>
                                         <li><a href="<?php echo site_url('SGameCategory')?>">Game Category</a></li>
-                                        <li><a href="<?php echo site_url('Gift/settingGiftList')?>">Gift</a></li>
                                         <li><a href="<?php echo site_url('SPublisher')?>">Publisher</a></li>
+                                        <li><a href="<?php echo site_url('SGame')?>">Game</a></li>
+                                        <li><a href="<?php echo site_url('Gift/settingGiftList')?>">Gift</a></li>
                                         <li><a href="<?php echo site_url('User/sAccountList')?>">Account</a></li>
                                     </ul>
                                 </li>

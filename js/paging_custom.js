@@ -109,8 +109,24 @@ $(document).ready(function(){
     controls.appendTo('.x_content');
 
     $( window ).resize(function() {
+        setTimeout(function() {
+            setResizeElement();
+        }, 100);
+
+    });
+
+    $("#menu_toggle").click(function() {
+        setTimeout(function() {
+            setResizeElement();
+        }, 100);
+
+    });
+    function setResizeElement(){
         var maxHeight = 0;
         var totalWidth = 0;
+
+        var showPage = $(".swControls a.active").text();
+
         $(".swPage").each(function(){
 
             // Looping through all the newly created pages:
@@ -125,7 +141,9 @@ $(document).ready(function(){
 
             totalWidth+=elem.outerWidth();
 
-            elem.css('float','left').width($(".x_content").width()+5);
+            elem.css({'float':'left','margin-right':'5px'}).width($(".x_content").width()+5);
         });
-    });
+        $(".swSlider").stop().css({'margin-left':-(parseInt(showPage)-1)*$(".x_content").outerWidth()});
+        //alert($(".x_content").outerWidth());
+    }
 });
