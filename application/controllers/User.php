@@ -151,9 +151,17 @@
 		                $this->loginAndRegister('Error while save data!','register');
 		            }
 		            else{
-		            	$this->db->trans_commit();
-		                $status = 'success';
-		                $msg = "user has been created successfully";
+		            	
+
+		            	if(!$this->sendAfterRegistration($username)){
+			        		//show_error($this->email->print_debugger());
+			        		$this->loginAndRegister('There\'s soething wrong when sending email','register');
+			        	}
+			        	else{
+			        		$this->db->trans_commit();
+		                	$status = 'success';
+		                	$msg = "user has been created successfully";
+		            	}
 
 		                redirect($this->dashboard());
 		            }
@@ -382,6 +390,45 @@
                 return FALSE;
             }
 
+        }
+
+        function sendAfterRegistration($username){
+        	$user = $this->User_model->getUserDetailByUsername($username);
+            $config = Array
+                (
+                    'protocol' => 'mail',
+                    'smtp_host' => 'toppon.co.id',
+                    'smtp_port' => 25,
+                    'smtp_user' => 'no-reply@toppon.co.id',
+                    'smtp_pass' => 'Pass@word1',
+                    'mailtype'  => 'html',
+                    'charset' => 'iso-8859-1',
+                    'wordwrap' => TRUE
+                );
+
+            $data['detail_user'] = $user;
+            $data['title'] = "TOPPON - Selamat Datang";
+            $data['content']="email/after_create_user_view";
+            $message = $this->load->view('email/template_view',$data,true);
+
+            
+            $this->email->initialize($config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('no-reply@toppon.co.id', 'Feedback System'); // nanti diganti dengan email sistem toppon
+            $this->email->to($user->email); // email user
+
+            $this->email->subject('[TOPPON] WELCOME');
+            $this->email->message($message);
+
+            if($this->email->send())
+            {
+               return TRUE;
+            }
+
+            else
+            {
+                return FALSE;
+            }
         }
 
 		function getUserCoins(){
