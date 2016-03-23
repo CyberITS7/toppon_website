@@ -157,6 +157,7 @@
         <div class="content-text">
             <h1>We Provides All Voucher Games</h1>
             <h2>Simple and Get Reward</h2>
+            <hr>
             <p><?php echo $data_content->aboutUsContent; ?></p>
         </div>
         
@@ -346,6 +347,7 @@
 <div id="conv-table" name="conv-table">
     <div class="content-text">
         <h1>Toppon Credit & Poin</h1>
+        <hr>
     </div>
     <div class="container">
         <div class="toppon-credit">
