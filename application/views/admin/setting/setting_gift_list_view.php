@@ -261,7 +261,7 @@
             $('#gift-setting-form')[0].reset();
         });
 
-        $('.btn-edit').click(function(){
+        $(document).on( "click", ".btn-edit", function() {
             $('.label-danger').html('');
             // Set Title modal
             $('.modal-title').html('Edit Gift Setting');
@@ -335,7 +335,7 @@
             }
         });
 
-        $('.btn-delete').click(function(){
+        $(document).on( "click", ".btn-delete", function() {
             var row = $(this).closest("tr");
             var col_title =  row.find(".td-gift-name").text();
             var col_id =  row.find("input.item-id").val();
