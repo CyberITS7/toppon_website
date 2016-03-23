@@ -48,13 +48,25 @@
         </a>
 
         <div class="menu-right">
-             <a href="<?php echo site_url('User');?>#toregister">
-                 <button type="button" class="btn btn-lg btn-default">Sign Up</button>
-             </a>
-
-             <a href="<?php echo site_url('User');?>#tologin">
-                 <button type="button" class="btn btn-lg btn-primary">Login</button>
-             </a>
+             
+            
+            <?php  
+            if(!$this->session->userdata("logged_in")){
+                ?>
+                <a href="<?php echo site_url('User');?>#toregister">
+                     <button type="button" class="btn btn-lg btn-default">Sign Up</button>
+                 </a>
+                 <a href="<?php echo site_url('User');?>#tologin">
+                     <button type="button" class="btn btn-lg btn-primary">Login</button>
+                 </a>
+                <?php
+            }else{
+                ?>
+                <a href="<?php echo site_url('User');?>">
+                     <button type="button" class="btn btn-lg btn-primary">Go to Member Area</button>
+                 </a>
+                 <?php
+             }?>
         </div>
     </div>
 
