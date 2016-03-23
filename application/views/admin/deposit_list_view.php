@@ -105,7 +105,7 @@
     var asInitVals = new Array();
     $(document).ready( function($) {
 
-        var oTable = $('#ex').dataTable({
+        var oTable = $('#deposit-table').dataTable({
             "oLanguage": {
                 "sSearch": "Search all columns:"
             },
