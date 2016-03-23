@@ -188,7 +188,7 @@ section.parallax {
 #about{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
 
-    padding-top: 50px;
+    padding-top: 35px;
     background-repeat: no-repeat;
 	text-align: center;
 	min-height: 700px;
@@ -262,7 +262,7 @@ section.parallax {
 #howtouse{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
 
-    padding-top: 50px;
+    padding-top: 35px;
     background-repeat: no-repeat;
 	text-align: center;
 	min-height: 700px;
@@ -309,14 +309,14 @@ section.parallax {
 }
 .carousel,
 .item,.carousel-inner.active{
-    height: 700px;
+    height: 500px;
 }
 
 .carousel-inner {
-    height: 100%;
+    height: 500px;
 }
 .slide-img{
-    min-height:700px;
+    min-height:500px;
 }
 .fill {
     width: 100%;
@@ -332,8 +332,8 @@ section.parallax {
 #how-redeem{
 
     position: relative;
-    padding-bottom: 70px;
-
+    padding-bottom: 100px;
+    padding-top: 50px;
 }
 
 
@@ -344,39 +344,42 @@ section.parallax {
 }
 
 .titik-redeem{
-    width: 70%;
+    width: 50%;
     margin: auto;
-   
+    padding-top: 60px;
 }
 #redeem-pusat{
-    bottom: 24%;
-    left: 38%;
-    width: 24%;
+    bottom: 21%;
+    left: 41%;
+    width: 18%;
 }
 
 #redeem-item-1{
     bottom: 18%;
-    left: 10%;
+    left: 17%;
+    width: 15%;
 
 }
 #redeem-item-2{
-    top: 20%;
-    left: 15%;
+    top: 32%;
+    left: 20%;
+    width: 15%;
 }
 #redeem-item-3{
-    top: 12%;
-    width: 16%;
-    left: 42%;
+    top: 20%;
+    width: 15%;
+    left: 43%;
 }
 #redeem-item-4{
-    top: 20%;
-    right: 14%;
+    top: 37%;
+    right: 19%;
+    width: 15%;
 
 }
 #redeem-item-5{
-    bottom: 18%;
-    right: 9%;
-    width: 16%;
+    bottom: 15%;
+    right: 18%;
+    width: 14%;
 }
 
 /*QUOTE*/
@@ -406,7 +409,7 @@ section.parallax {
 
 /* TOPPON CREDIT */
 #conv-table{
-    padding-top: 50px;
+    padding-top: 55px;
     background-color: rgb(225,227,229);
     padding-bottom: 50px;
     text-align: center;
