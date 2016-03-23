@@ -377,6 +377,7 @@
                                             location.href = "<?php echo site_url("User/dashboard")?>";
                                         }, 3000 );
                                     }else{
+                                        alertify.set('notifier','position', 'top-right');
                                         alertify.error(data.msg);
                                         $("#load_screen").hide();
                                     }
@@ -384,6 +385,7 @@
                                 error: function(xhr, status, error) {
                                     //var err = eval("(" + xhr.responseText + ")");
                                     $("#load_screen").hide();
+                                    alertify.set('notifier','position', 'top-right');
                                     alertify.error('Cannot response server !');
                                 }
                             });

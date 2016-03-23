@@ -1,3 +1,8 @@
+<style>
+    .td-status{
+        padding: 0!important;
+    }
+</style>
 <div class="page-title">
     <div class="title_left">
         <h3>Top Up </h3>
@@ -32,12 +37,9 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <table id="example" class="table table-striped responsive-utilities jambo_table">
+                                    <table id="deposit-table" class="table table-striped responsive-utilities jambo_table">
                                         <thead>
                                             <tr class="headings">
-                                                <th>
-                                                    <input type="checkbox" class="tableflat">
-                                                </th>
                                                 <th>Tanggal Transaksi </th>
                                                 <th>No. Rekening </th>
                                                 <th>Nama Rekening </th>
@@ -68,17 +70,27 @@
                                                      }
                                                         $i++;
                                                     ?>
-                                                    
-                                                        <td class="a-center ">
-                                                            <input type="checkbox" class="tableflat">
-                                                        </td>
                                                         <td class="td-tanggal-transaksi"><?php echo $row['created']; ?></td>
                                                         <td class="td-nomor-rekening"><?php echo $row['noRekening']; ?></td>
                                                         <td class="td-nama-rekening"><?php echo $row['nameRekening']; ?></td>
                                                         <td class="td-nama-bank"><?php echo $row['bankName']; ?></td>
-                                                        <td class="td-coin"><?php echo $row['coin']; ?></td>
-                                                        <td class="td-status"><?php echo $row['status']; ?></td>
-                                                        <td class="a-right a-right "><?php echo $row['coinConversion']; ?></td>
+                                                        <td class="td-coin"><?php echo number_format($row['coin'],0,",","."); ?></td>
+                                                        <td class="a-right a-right ">Rp <?php echo number_format($row['coinConversion'],0,",","."); ?></td>
+                                                        <td class="td-status">
+                                                            <?php if($row['status'] == 'unpaid'){ ?>
+                                                                <!--UNPAID-->
+                                                                <h4><span class="label label-warning"><?php echo $row['status']; ?></span></h4>
+                                                            <?php }else if($row['status'] == 'pending'){ ?>
+                                                                <!--PENDING-->
+                                                                <h4><span class="label label-info"><?php echo $row['status']; ?></span></h4>
+                                                            <?php }else if($row['status'] == 'paid'){ ?>
+                                                                <!--PAID-->
+                                                                <h4><span class="label label-success"><?php echo $row['status']; ?></span></h4>
+                                                            <?php }else if($row['status'] == 'expired'){ ?>
+                                                                <!--EXPIRE-->
+                                                                <h4><span class="label label-danger"><?php echo $row['status']; ?></span></h4>
+                                                            <?php } ?>
+                                                        </td>
                                                         <td class="last">
                                                             <?php if($row['status']!= "paid"){ ?>
                                                             <button type="button" class="btn btn-warning btn-sm btn-update"><i class="fa fa-check"></i></button>
@@ -99,8 +111,35 @@
 
 <script src="<?php echo base_url(); ?>js/validate_master.js"></script>
 <script>
+    var asInitVals = new Array();
     $(document).ready( function($) {
 
+        var oTable = $('#deposit-table').dataTable({
+            "oLanguage": {
+                "sSearch": "Search all columns:"
+            },
+            'iDisplayLength': 12,
+            "sPaginationType": "full_numbers"
+        });
+        $("tfoot input").keyup(function () {
+            /* Filter on the column based on the index of this element's parent <th> */
+            oTable.fnFilter(this.value, $("tfoot th").index($(this).parent()));
+        });
+        $("tfoot input").each(function (i) {
+            asInitVals[i] = this.value;
+        });
+        $("tfoot input").focus(function () {
+            if (this.className == "search_init") {
+                this.className = "";
+                this.value = "";
+            }
+        });
+        $("tfoot input").blur(function (i) {
+            if (this.value == "") {
+                this.className = "search_init";
+                this.value = asInitVals[$("tfoot input").index(this)];
+            }
+        });
 
         $('.btn-delete').click(function(){
             var row = $(this).closest("tr");

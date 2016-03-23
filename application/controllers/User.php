@@ -419,21 +419,7 @@
 			else{
 				//get S Account List data
 				//$this->output->enable_profiler(TRUE);
-		        $num_per_page = 10;
-		        $start = ($start - 1) * $num_per_page;
-		        $limit = $num_per_page;
-
-		        $account_page = $this->SAccount_model->getSAccountList($start, $limit);
-		        $count_account = $this->SAccount_model ->getCountSAccountList();
-
-		        $config['base_url']= site_url('User/sAccountList');
-		        $config ['total_rows'] = $count_account;
-		        $config ['per_page']=$num_per_page;
-		        $config['use_page_numbers']=TRUE;
-		        $config['uri_segment']=3;
-
-		        $this->pagination->initialize($config);
-		        $data['pages'] = $this->pagination->create_links();
+		        $account_page = $this->SAccount_model->getSAccountList(null, null);
 		        $data['accounts']= $account_page;
 
 		        if ($this->input->post('ajax')){

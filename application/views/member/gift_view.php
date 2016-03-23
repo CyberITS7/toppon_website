@@ -127,7 +127,7 @@
                         var data_post = {
                             giftID : giftID
                         };
-
+                        $("#load_screen").show();
                         $.ajax({
                             url: "<?php echo base_url(); ?>" + "index.php/Gift/doClaimGift",
                             data: data_post,
@@ -151,12 +151,14 @@
                                 }else{
                                     alertify.set('notifier','position', 'top-right');
                                     alertify.error(data.msg);
+                                    $("#load_screen").hide();
                                 }
                             },
                             error: function(xhr, status, error) {
                                 //var err = eval("(" + xhr.responseText + ")");
                                 alertify.set('notifier','position', 'top-right');
-                                alertify.error(xhr.responseText);
+                                alertify.error('Cannot response server !');
+                                $("#load_screen").hide();
                             }
                         });
                     }

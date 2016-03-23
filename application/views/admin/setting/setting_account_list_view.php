@@ -8,7 +8,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <table id="example" class="table table-striped responsive-utilities jambo_table">
+                <table id="account-table" class="table table-striped responsive-utilities jambo_table">
                     <thead>
                     <tr class="headings">
                         <th>Username</th>
@@ -22,8 +22,8 @@
                     <?php foreach($accounts as $row){?>
                         <tr>
                             <td class="td-username"><?php echo $row['userName'];?></td>
-                            <td class="td-poin"><?php echo $row['poin'];?></td>
-                            <td class="td-coin"><?php echo $row['coin'];?></td>                            
+                            <td class="td-poin"><?php echo number_format($row['poin'],0,",","."); ?></td>
+                            <td class="td-coin"><?php echo number_format($row['coin'],0,",","."); ?></td>
                             <td>
                                 <a href="#" class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target=".member-modal"><i class="fa fa-pencil"></i> Edit </a>
                             </td>
@@ -31,9 +31,7 @@
                         </tr>
                     <?php }?>
                     </tbody>
-                    <?php echo $pages;?>
                 </table>
-                <?php echo $pages;?>
             </div>
         </div>
     </div>
@@ -76,7 +74,36 @@
 
 <script src="<?php echo base_url(); ?>js/validate_master.js"></script>
 <script>
+    var asInitVals = new Array();
     $(document).ready( function($) {
+
+        var oTable = $('#account-table').dataTable({
+            "oLanguage": {
+                "sSearch": "Search all columns:"
+            },
+            'iDisplayLength': 12,
+            "sPaginationType": "full_numbers"
+        });
+        $("tfoot input").keyup(function () {
+            /* Filter on the column based on the index of this element's parent <th> */
+            oTable.fnFilter(this.value, $("tfoot th").index($(this).parent()));
+        });
+        $("tfoot input").each(function (i) {
+            asInitVals[i] = this.value;
+        });
+        $("tfoot input").focus(function () {
+            if (this.className == "search_init") {
+                this.className = "";
+                this.value = "";
+            }
+        });
+        $("tfoot input").blur(function (i) {
+            if (this.value == "") {
+                this.className = "search_init";
+                this.value = asInitVals[$("tfoot input").index(this)];
+            }
+        });
+
         function validate(){
             var err=0;
 

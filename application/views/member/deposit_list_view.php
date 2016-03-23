@@ -37,7 +37,7 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <table id="example" class="table table-striped responsive-utilities jambo_table">
+                                    <table id="deposit-table" class="table table-striped responsive-utilities jambo_table">
                                         <thead>
                                             <tr class="headings">
                                                 <th>Tanggal Transaksi </th>
@@ -75,6 +75,7 @@
                                                         <td class="td-nama-rekening"><?php echo $row['nameRekening']; ?></td>
                                                         <td class="td-nama-bank"><?php echo $row['bankName']; ?></td>
                                                         <td class="td-coin"><?php echo number_format($row['coin'],0,",","."); ?></td>
+                                                        <td class="a-right a-right ">Rp <?php echo number_format($row['coinConversion'],0,",","."); ?></td>
                                                         <td class="td-status">
                                                             <?php if($row['status'] == 'unpaid'){ ?>
                                                                 <!--UNPAID-->
@@ -90,7 +91,6 @@
                                                                 <h4><span class="label label-danger"><?php echo $row['status']; ?></span></h4>
                                                             <?php } ?>
                                                         </td>
-                                                        <td class="a-right a-right ">Rp <?php echo number_format($row['coinConversion'],0,",","."); ?></td>
                                                         <td class=" last">
                                                             <?php if($row['status']== 'unpaid'){ ?>
                                                             <a href="<?php echo site_url('Deposit/depositDetail').'/'.$row['tDepositID'];?>">
@@ -116,8 +116,35 @@
 
 <script src="<?php echo base_url(); ?>js/validate_master.js"></script>
 <script>
+    var asInitVals = new Array();
     $(document).ready( function($) {
 
+        var oTable = $('#deposit-table').dataTable({
+            "oLanguage": {
+                "sSearch": "Search all columns:"
+            },
+            'iDisplayLength': 12,
+            "sPaginationType": "full_numbers"
+        });
+        $("tfoot input").keyup(function () {
+            /* Filter on the column based on the index of this element's parent <th> */
+            oTable.fnFilter(this.value, $("tfoot th").index($(this).parent()));
+        });
+        $("tfoot input").each(function (i) {
+            asInitVals[i] = this.value;
+        });
+        $("tfoot input").focus(function () {
+            if (this.className == "search_init") {
+                this.className = "";
+                this.value = "";
+            }
+        });
+        $("tfoot input").blur(function (i) {
+            if (this.value == "") {
+                this.className = "search_init";
+                this.value = asInitVals[$("tfoot input").index(this)];
+            }
+        });
 
         $('.btn-delete').click(function(){
             var row = $(this).closest("tr");
