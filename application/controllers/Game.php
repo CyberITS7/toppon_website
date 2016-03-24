@@ -23,22 +23,8 @@ class Game extends CI_Controller{
             redirect(site_url("User/dashboard"));
         }
         else{
-            //get Publisher List data
-            $num_per_page = 10;
-            $start = ($start - 1)* $num_per_page;
-            $limit = $num_per_page;
-
-            $game_page = $this->Game_model->getGameList($start, $limit);
-            $count_game = $this->Game_model ->getCountGameList();
-
-            $config['base_url']= site_url('Game/index');
-            $config ['total_rows'] = $count_game;
-            $config ['per_page']=$num_per_page;
-            $config['use_page_numbers']=TRUE;
-            $config['uri_segment']=3;
-
-            $this->pagination->initialize($config);
-            $data['pages'] = $this->pagination->create_links();
+            //get Publisher List data         
+            $game_page = $this->Game_model->getGameList(null, null);          
             $data['game']= $game_page;
 
             if ($this->input->post('ajax')){
