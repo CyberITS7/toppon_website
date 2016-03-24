@@ -57,7 +57,7 @@
             <table cellpadding="0" cellspacing="0" border="0" align="center" width="500" height="50">
                 <tr>
                     <td width="500">
-                        <p>Silahkan melakukan pembayaran ke Rekening BCA 8830 027 6344 a.n. ORAWAN PHOSIRI dalam waktu 1x24 jam. Sistem akan menghapus permintaan Top Up apabila pembayaran tidak dilakukan dalam waktu 1x24 jam sejak email ini dikirim. Terima Kasih</p>
+                        <p>Silahkan melakukan pembayaran ke Rekening BCA 883 034 7373 a.n. ORAWAN PHOSIRI dalam waktu 1x24 jam. Sistem akan menghapus permintaan Top Up apabila pembayaran tidak dilakukan dalam waktu 1x24 jam sejak email ini dikirim. Terima Kasih</p>
                     </td>
                 <tr/>
                 <tr>

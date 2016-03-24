@@ -83,7 +83,7 @@
             <div class="col-xs-12">
                 <p><b><i>Silahkan transfer sejumlah nominal ke salah satu rekening di bawah ini dalam waktu 1x24 jam : </i></b></p>
                 <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                    <img src="<?php echo base_url(); ?>img/bca-card.png" alt="BCA"> 883 027 6344 a.n. Orawan Phosiri
+                    <img src="<?php echo base_url(); ?>img/bca-card.png" alt="BCA"> 883 034 7373 a.n. Orawan Phosiri
                 </p>
             </div>
             <!-- /.col -->
