@@ -27,10 +27,6 @@
         <div class="title_right">
             <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                                    <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
                 </div>
             </div>
         </div>
@@ -84,7 +80,12 @@
                                     <td class=" "><?php echo $row['gameName'] ?></td>
                                     <td class="a-right a-right "><?php echo $row['currency']." ".number_format($row['nominalName'],0,",","."); ?></td>
                                     <td class="a-right a-right "><?php echo number_format($row['paymentValue'],0,",","."); ?></td>
-                                    <td class="a-right a-right "><?php echo $row['userLevel']; ?></td>
+                                    <td class="a-right a-right ">
+                                        <?php if($this->session->userdata("level")=="super_admin") {
+                                            echo $row['userName']." -";
+                                        }?>
+                                        <?php echo $row['userLevel']; ?>
+                                    </td>
                                     <td class=" ">
                                         <?php $date = date_create($row['created']);
                                         echo date_format($date, 'F d, Y \a\t g:ia' ); ?>

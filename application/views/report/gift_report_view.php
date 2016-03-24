@@ -27,10 +27,6 @@
         <div class="title_right">
             <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                                    <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
                 </div>
             </div>
         </div>
@@ -67,6 +63,9 @@
                             <th>Gift Description</th>
                             <th>Reward </th>
                             <th>Poin </th>
+                            <?php if($this->session->userdata("level")=="super_admin") { ?>
+                                <th>User </th>
+                            <?php }?>
                             <th>Date</th>
                         </tr>
                         </thead>
@@ -83,6 +82,11 @@
                                     <td class=" "><?php echo $row['giftDescription']; ?></td>
                                     <td class="a-right a-right "><?php echo number_format($row['reward'],0,",","."); ?></td>
                                     <td class="a-right a-right "><?php echo number_format($row['poin'],0,",","."); ?></td>
+                                    <?php if($this->session->userdata("level")=="super_admin") { ?>
+                                        <td class="a-right a-right ">
+                                            <?php echo $row['userName'];?>
+                                        </td>
+                                    <?php }?>
                                     <td class=" ">
                                         <?php $date = date_create($row['created']);
                                         echo date_format($date, 'F d, Y \a\t g:ia' ); ?>

@@ -184,11 +184,11 @@
                                                         <div class="contentEditable" align='left' >
                                                             <span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;">TOPPON CUSTOMER SERVICE</span>
                                                             <br/>
-                                                            <span style="font-size:11px;color:#555;font-family:Helvetica, Arial, sans-serif;line-height:200%;">Telp | [CLIENTS.PHONE]</span>
+                                                            <span style="font-size:11px;color:#555;font-family:Helvetica, Arial, sans-serif;line-height:200%;">Telp | +62 812 9025 5465</span>
                                                             <br/>
-                                                            <span style="font-size:11px;color:#555;font-family:Helvetica, Arial, sans-serif;line-height:200%;">Alamat | [CLIENTS.PHONE]</span>
+                                                            <span style="font-size:11px;color:#555;font-family:Helvetica, Arial, sans-serif;line-height:200%;">Alamat | Jl. Kebon Jeruk Raya No. 27 DKI Jakarta - 11530</span>
                                                             <br/>
-                                                            <span style="font-size:11px;color:#555;font-family:Helvetica, Arial, sans-serif;line-height:200%;">Email | [CLIENTS.PHONE]</span>
+                                                            <span style="font-size:11px;color:#555;font-family:Helvetica, Arial, sans-serif;line-height:200%;">Email | cs@toppon.co.id</span>
                                                             <br/>
                                                         </div>
                                                     </div>

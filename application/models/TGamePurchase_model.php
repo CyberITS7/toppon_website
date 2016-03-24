@@ -4,6 +4,7 @@ class TGamePurchase_model extends CI_Model{
     function getTransGamePurchaseList($start, $limit, $userId){
         $this->db->select('*');
         $this->db->from('tbl_toppon_t_game_purchases a');
+        $this->db->join('tbl_toppon_m_users b','a.createdBy = b.userID');
         $this->db->where('a.isActive', 1);
         $this->db->order_by('a.created','desc');
 
@@ -19,6 +20,7 @@ class TGamePurchase_model extends CI_Model{
     }
     function getCountTransGamePurchaseList($userId){
         $this->db->from('tbl_toppon_t_game_purchases a');
+        $this->db->join('tbl_toppon_m_users b','a.createdBy = b.userID');
         $this->db->where('a.isActive', 1);
         $this->db->where('a.createdBy', $userId);
         return $this->db->count_all_results();
@@ -28,6 +30,7 @@ class TGamePurchase_model extends CI_Model{
     function getTransGamePurchaseByPeriode($start, $limit, $userId, $startDate, $endDate){
         $this->db->select('*');
         $this->db->from('tbl_toppon_t_game_purchases a');
+        $this->db->join('tbl_toppon_m_users b','a.createdBy = b.userID');
         $this->db->where('a.isActive', 1);
         $this->db->where('created between "'.$startDate.'" and "'.$endDate.'"');
         $this->db->order_by('a.created','desc');
@@ -47,6 +50,7 @@ class TGamePurchase_model extends CI_Model{
     function getTransGamePurchaseByDate($start, $limit, $userId, $date){
         $this->db->select('*');
         $this->db->from('tbl_toppon_t_game_purchases a');
+        $this->db->join('tbl_toppon_m_users b','a.createdBy = b.userID');
         $this->db->where('a.isActive', 1);
         $this->db->like('created', $date, 'after');
         $this->db->order_by('a.created','desc');
