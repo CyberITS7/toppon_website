@@ -8,6 +8,7 @@ class Coin_model extends CI_Model{
         $this->db->select('coinID, coin, coinConversion, poin');
         $this->db->from('tbl_toppon_m_coins');
         $this->db->where($where);
+        $this->db->order_by('coin','asc');
         $query = $this->db->get();
         return $query->result_array();
     } 
