@@ -150,7 +150,10 @@ section.parallax {
     padding-top: 15px;
 
 }
-
+.menu-center{
+    width: 900px;
+    margin:auto;
+}
 /*boy*/
 .navbar{
     margin-bottom: 0;

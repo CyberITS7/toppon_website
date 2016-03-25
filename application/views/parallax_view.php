@@ -76,7 +76,7 @@
 <!-- Fixed navbar -->
 
     <nav class="menu-navbar navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid  col-lg-offset-2 col-lg-8 col-lg-offset-2">
+        <div class="container-fluid menu-center">
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="centered nav navbar-nav">
                     <li><a href="#home" class="page-scroll">Home</a></li>
