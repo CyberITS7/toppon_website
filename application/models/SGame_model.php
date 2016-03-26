@@ -15,6 +15,7 @@ class SGame_model extends CI_Model{
         $this->db->where('a.gameID', $gameID);
         $this->db->where('a.isActive', 1);
         $this->db->where('b.isActive', 1);
+        $this->db->order_by('b.nominalName','asc');
         $query = $this->db->get();
         return $query->result_array();
     }
