@@ -108,6 +108,9 @@ section.parallax {
 .menu-right a{
     text-decoration: none;  
 }
+.menu-right .btn-default{
+    color:blue;
+}
 
 .menu-navbar{  
 	height: 55px;
