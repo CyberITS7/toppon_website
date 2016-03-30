@@ -4,6 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Welcome to Toppon</title>
 
+
+    <link rel="shortcut icon" href="<?php echo base_url();?>img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo base_url();?>img/favicon.ico" type="image/x-icon">
+
+
     <!-- Reset CSS -->
     <link href="<?php echo base_url(); ?>css/resetcss.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
@@ -64,6 +69,8 @@
                  </a>
                  <?php
              }?>
+
+
         </div>
     </div>
 
