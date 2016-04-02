@@ -2,7 +2,9 @@ html,
 body {
    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif
 }
-
+.clear{
+    clear: both;
+}
 hr{
     display: block;
     height: 1px;
@@ -89,13 +91,25 @@ section.parallax {
     float:right;
 }
 
-#logo{
+#header{
     padding-left: 15px;
+    height: 90px;
+}
+
+#logo{
+    float:left;
+    width: 260px;
 }
 
 #logo img{
     width: 260px;
     height: 90px;
+}
+
+/*mobile nav*/
+
+.mobile-navbar, #sidebar{
+    display: none;
 }
 
 
@@ -442,6 +456,10 @@ section.parallax {
     font-size: 12px;
     margin: 0;
 }
+.credit-row-wrapper{
+    width: 625px;
+    margin: auto;
+}
 .credit-items{
     width: 200px;
     height:200px;
@@ -475,25 +493,22 @@ section.parallax {
 .telepon{
     padding-bottom: 20px;
 }
-.telepon img{
-    width: 30%;
-}
-.no-tlp{
-    right: 15%;
+.contact-icon{
+    width: 50px;
+    float: left;
 }
 
 .mail{
     padding-bottom: 20px;
 }
-.mail img{
-    width: 30%;
-}
-.dest-mail{
-    right: 15%;
+.dest-mail, .no-tlp{
+    margin-left: 70px;
+    margin-top: 10px;
+    font-size: 18px;
 }
 
 .alamat{
-    width: 60%;
+    font-size: 18px;
 }
 
 

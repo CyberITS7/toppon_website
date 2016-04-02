@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Welcome to Toppon</title>
+    <title>Toppon Games Payment Solution</title>
 
 
     <link rel="shortcut icon" href="<?php echo base_url();?>img/favicon.ico" type="image/x-icon">
@@ -17,7 +17,8 @@
     <link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="<?php echo base_url(); ?>css/style_parallax.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>css/style_parallax.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>css/style_mobile.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
@@ -44,11 +45,12 @@
 <body data-spy="scroll" data-offset="0">
 
 <section id="home">
-    <div id="logo">
-        <a href="#">
-            <img src="<?=base_url()?>img/toppon.png"/>
-        </a>
-
+    <div id="header">
+        <div id="logo">
+            <a href="#">
+                <img src="<?=base_url()?>img/toppon.png"/>
+            </a>
+        </div>
         <div class="menu-right">
              
             
@@ -72,8 +74,27 @@
 
 
         </div>
+            <div class="mobile-navbar">
+                <a href="#">
+                <img id="side-menu" src="<?=base_url()?>img/icon-mobile-nav.png" class="img-responsive"/>
+                </a>
+            </div>
     </div>
-
+<div id="sidebar">
+    <div id="sidebar-wrapper" class="sidebar-wrapper">
+        <h2 class = "text-left">Menu</h2>
+        <h2><span class="glyphicon glyphicon-remove" id="sidebar-closed" aria-hidden="true"></span></h2>
+        <div class="clear"></div>
+      <ul>
+        <li><a href="#home" class="page-scroll">Home</a></li>
+        <li><a href="#about" class="page-scroll">About Us</a></li>
+        <li><a href="#howtouse" class="page-scroll">How To Use</a></li>
+        <li><a href="#how-redeem" class="page-scroll">How To Redeem</a></li>
+        <li><a href="#credit-poin" class="page-scroll">Credit & Poin</a></li>
+        <li><a href="#contact-us" class="page-scroll">Contact Us</a></li>
+      </ul>
+    </div>
+</div>
 <!-- Fixed navbar -->
 
     <nav class="menu-navbar navbar navbar-inverse navbar-fixed-top">
@@ -172,13 +193,13 @@
                     <img src="<?php echo base_url();?>/img/connect_dot.png" class="img-responsive"/>    
                 </div>
                 
-                <div class="about-items wow bounceInLeft" data-wow-delay="2s" data-wow-duration="1s">
+                <div class="about-items about-mobile wow bounceInLeft" data-wow-delay="2s" data-wow-duration="1s">
                     <img src="<?php echo base_url();?>/img/mobile.png" class="img-responsive"/>
                 </div>
             </div>
         </div>
         <a href="<?php echo site_url('User');?>#toregister">
-            <button type="button" class="btn btn-lg btn-info">Sign Up Now!</button>
+            <button type="button" class="btn btn-register btn-lg btn-info">Sign Up Now!</button>
         </a>
     </div>
 </div>
@@ -383,7 +404,7 @@
             </div>
                    
             <div class="row">
-                <div class="about-row-wrapper">
+                <div class="credit-row-wrapper">
                     <div class="credit-items wow bounceInRight" data-wow-duration="1.5s">
                         <img src="<?php echo base_url();?>/img/topponcredit/credit01.png" class="img-responsive"/>
                     </div>
@@ -401,7 +422,7 @@
         </div>
         
         <a href="<?php echo site_url('User');?>#toregister">
-            <button type="button" class="btn-topup btn btn-lg btn-info">Register Now!</button>
+            <button type="button" class="btn-register btn-topup btn btn-lg btn-info">Register Now!</button>
         </a>
     </div>
 
@@ -458,20 +479,20 @@
             <div class="contact-detailed">
                 <div class="telepon">
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="contact-icon">
                             <img src="<?php echo base_url();?>/img/phone.png" class="img-responsive">
                         </div>
-                        <div class="col-lg-9 no-tlp wow lightSpeedIn" data-wow-duration="1.5s">
+                        <div class="no-tlp wow lightSpeedIn" data-wow-duration="1.5s">
                             <p>+62-812-9025-5465</p>
                         </div>
                     </div>
                 </div>
                 <div class="mail">
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="contact-icon">
                             <img src="<?php echo base_url();?>/img/mail.png" class="img-responsive">
                         </div>
-                        <div class="col-lg-9 dest-mail wow lightSpeedIn" data-wow-duration="1.5s">
+                        <div class="dest-mail wow lightSpeedIn" data-wow-duration="1.5s">
                             <p>cs@toppon.co.id</p>
                         </div>
                         </div>
@@ -551,6 +572,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="clear"></div>
                 </div>
             </div>
         
@@ -558,69 +580,59 @@
             <div class="col-lg-7 footer-2">
                 <h3>Vouchers Available :</h3>
                 <div class="row">
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo01.png" class="img-responsive img-footer"/>
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo02.png" class="img-responsive img-footer" />
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo03.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo04.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo05.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo06.png" class="img-responsive img-footer" />
                     </div>                   
-                </div>
-
-
-                <div class="row">
-                    <div class="col-lg-2">
+             
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo07.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo08.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo09.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo10.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo11.png" class="img-responsive img-footer" />
                     </div>              
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo12.png" class="img-responsive img-footer" />
                     </div>                                                     
-                </div>
 
-                <div class="row">
-                   <div class="col-lg-2">
-                        
-                    </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo13.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo14.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo15.png" class="img-responsive img-footer" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                         <img src="<?php echo base_url();?>/img/voucher/logo16.png" class="img-responsive img-footer" />
                     </div>              
-                    <div class="col-lg-2">
-                        
-                    </div>
+
                 </div>
             </div>
 
@@ -631,11 +643,11 @@
                     <li><a href="#">Privacy</a></li>
                     <li><a href="#">Term & Conditions</a></li>
                 </ul>   
-                    </br>
-                <h3>We Accept :</h3>
-                <div class="bank-transfer">
-                <h4>Bank Transfer</h4>
-                <img src="<?php echo base_url();?>/img/bca.png" class="img-responsive"/>
+                 <div class="bank-transfer">
+                    <h3>We Accept :</h3>
+                    
+                    <h4>Bank Transfer</h4>
+                    <img src="<?php echo base_url();?>/img/bca.png" class="img-responsive"/>
                 </div>
             </div> 
         </div>
@@ -893,11 +905,21 @@
 </script>
 
 
+<script>
+    $(function() {
+        //Side Bar OPEN
+        $('.mobile-navbar a').click(function(){
+            //$('#sidebar-wrapper').css('visibility','visible');
+            $('#sidebar-wrapper').animate({width: 300}, {duration: 400});
+            return false;
+        });
 
-
-
-
-
+        //Side Bar Closed
+        $('#sidebar-closed, body').click(function(){
+            $('#sidebar-wrapper').animate({width: 0}, {duration: 400});
+        });
+    });
+</script>
 
 
 </body>
