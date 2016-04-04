@@ -75,7 +75,7 @@
 			$userscount = $this->User_model->getCountMemberList();
 
 			$thisUserID;
-			while ($i != $userscount-1) {
+			while ($i != $userscount) {
 				if($this->hash->verifyPass($userverify[$i]['userName'], $user)){
 					$flag = true;
 					$thisUserID = $userverify[$i]['userID'];
@@ -93,6 +93,7 @@
 			}
 
 		}
+
 
 		function doRegisMember(){
 			$datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
@@ -175,6 +176,94 @@
         	}
 		}
 
+		function doRegisAjaxMember(){
+			$status = "";
+            $msg = "";
+			$datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+
+			$username = $this->input->post('username-regis');
+			$name = $this->input->post("name-regis");
+			$email = $this->input->post("email-regis");
+			$phone = $this->input->post("phone-regis");
+			$password = $this->input->post("conf-password-regis");
+
+			$userVerify = $this->User_model->checkUsername($username);
+			$emailVerify = $this->User_model->checkEmail($email);
+			$phoneVerify = $this->User_model->checkPhone($phone);
+
+			if($userVerify == 0 && $emailVerify == 0 && $phoneVerify == 0){
+				$data_regis = array(
+						'username' => $username,
+						'name' => $name,
+						'email' => $email,
+						'phoneNumber' => $phone,
+						'password' => $this->hash->hashPass($password),
+						'userLevel' => "member",
+						'isActive' => '1',
+						'created' => $datetime,
+						'createdBy' => $username,
+						'lastUpdated' => $datetime,
+						'lastUpdatedBy' => $username
+					);
+
+				$this->db->trans_begin();
+				$query = $this->User_model->createUser($data_regis);
+
+				if ($this->db->trans_status() === FALSE) {
+	                // Failed to save Data to DB
+	                $this->db->trans_rollback();
+	                $status = 'error';
+                	$msg = "Something went wrong when saving data";
+	            }
+	            else{
+
+	            	$data_account= array(
+	            		'userID' => $query,
+	            		'poin' => 0,
+	            		'coin' => 0,
+	            		'isActive' => '1',
+						'created' => $datetime,
+						'createdBy' => $username,
+						'lastUpdated' => $datetime,
+						'lastUpdatedBy' => $username
+	            	);
+
+	            	$query2 = $this->SAccount_model->addSAccount($data_account);
+
+	            	if ($this->db->trans_status() === FALSE) {
+		                // Failed to save Data to DB
+		                $this->db->trans_rollback();
+		                $status = 'error';
+                		$msg = "Something went wrong when saving data";
+		            }
+		            else{
+		            	
+
+		            	if(!$this->sendAfterRegistration($username)){
+			        		$status = 'error';
+                			$msg = "Something went wrong when sending email";
+			        	}
+			        	else{
+			        		$this->db->trans_commit();
+		                	$status = 'success';
+		                	$msg = "user has been created successfully";
+		            	}
+		            }
+	            }
+        	}
+        	else if($userVerify == 1){
+        		$status = 'error';
+                $msg = "Username already exists";
+        	}else if($emailVerify == 1){
+        		$status = 'error';
+                $msg = "Email already exists";
+        	}else if($phoneVerify == 1){
+        		$status = 'error';
+                $msg = "Phone Number already exists";
+        	}
+        	echo json_encode(array('status' => $status, 'msg' => $msg));
+		}
+
 		function doLoginMember(){
 			$datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
 
@@ -206,6 +295,47 @@
 	            //echo "username ada tapi password salah"; 
 	         	$this->loginAndRegister("Username / Password wrong", "login");
 	        }
+		}
+
+		function doLoginAjaxMember(){
+			$datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+
+			$username = $this->input->post('username-login');
+			$password = $this->input->post('password-login');
+			$newdata = array(
+                 'logged_in' => FALSE
+				);
+
+			$userVerifier = $this->User_model->checkUsername($username);
+	        $passVerifier = $this->User_model->getPasswordbyUsername($username);
+	        
+	        if($username == "" || $username == null || $password == "" || $password == null){
+	        	$status = 'error';
+                $msg = "Username or Password null";
+	        }
+	        else if(!$userVerifier){
+	            $status = 'error';
+                $msg = "Username or Password wrong";
+	        }
+	        else if($this->hash->verifyPass($password, $passVerifier->password)){
+	            
+	            $newdata = array(
+                   'username'  => $passVerifier->userName,
+                   'user_id'  => $passVerifier->userID,
+                   'level'     => $passVerifier->userLevel,
+                   'logged_in' => TRUE
+               );
+
+	            $status = 'success';
+                $msg = "Login Successfully";
+	        }else{
+	            
+	         	$status = 'error';
+                $msg = "Username or Password wrong";
+	        }
+
+	        echo json_encode(array('status' => $status, 'msg' => $msg, 'userdata' => $newdata));
+	        //echo json_encode('msg' => $msg);
 		}
 
 		function doLogoutMember(){
@@ -365,7 +495,7 @@
                 );
 
             $data['detail_user'] = $user;
-            $data['hashkey'] = $this->hash->hashPass($user->userName);
+            $data['hashkey'] = $this->hash->hashPass($user->username);
             $data['title'] = "TOPPON - Konfirmasi Reset Password";
             $data['content']="email/reset_password_view";
             $message = $this->load->view('email/template_view',$data,true);
