@@ -108,7 +108,7 @@ section.parallax {
 
 /*mobile nav*/
 
-.mobile-navbar, #sidebar{
+.mobile-navbar, #sidebar-wrapper{
     display: none;
 }
 

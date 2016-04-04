@@ -909,8 +909,9 @@
     $(function() {
         //Side Bar OPEN
         $('.mobile-navbar a').click(function(){
+            alert("script");
             //$('#sidebar-wrapper').css('visibility','visible');
-            $('#sidebar-wrapper').animate({width: 300}, {duration: 400});
+            $('#sidebar-wrapper').show().animate({width: 300}, {duration: 400});
             return false;
         });
 
