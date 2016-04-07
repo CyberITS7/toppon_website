@@ -364,6 +364,30 @@
 	        }
 
 		}
+		
+		function doForgotPasswordAjax(){
+			$datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+
+			$username = $this->input->post('username-forgot');
+			$userVerifier = $this->User_model->checkUsername($username);
+
+			if(!$userVerifier){
+	            $status = 'error';
+                $msg = "Username doesn't exists ";
+	        }
+	        else{
+	        	//kirim email disini
+	        	if(!$this->sendEmailForgotPassword($username)){
+	        		$status = 'error';
+                	$msg = "Something went wrong when sending email";
+	        		//show_error($this->email->print_debugger());
+	        	}else{
+	        		$status = 'success';
+                	$msg = "PLease check your email";
+	        	}
+	        }
+	        echo json_encode(array('status' => $status, 'msg' => $msg));
+		}
 
 		function doResetPassword(){
 			$datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
@@ -743,8 +767,8 @@
 		
 		  //Mobile
 		function getUserAccountMobile(){
-			$username = $this->input->post("username");
-			$akunku = $this->SAccount_model->getMyAccountByUsername("admin");
+			$userID = $this->input->post("userID");
+			$akunku = $this->SAccount_model->getMyAccount($userID);
 
             //print_r($akunku);
 			echo json_encode(array('coin' => $akunku->coin, 'poin' => $akunku->poin));
