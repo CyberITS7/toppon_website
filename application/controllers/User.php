@@ -740,5 +740,14 @@
             echo json_encode(array('status' => $status, 'msg' => $msg));
 		}
 		/*Super Admin Section*/
+		
+		  //Mobile
+		function getUserAccountMobile(){
+			$username = $this->input->post("username");
+			$akunku = $this->SAccount_model->getMyAccountByUsername("admin");
+
+            //print_r($akunku);
+			echo json_encode(array('coin' => $akunku->coin, 'poin' => $akunku->poin));
+		}
 	}
 ?>

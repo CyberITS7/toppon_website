@@ -11,6 +11,16 @@ class SAccount_model extends CI_Model{
         return $query->row();
     }
 
+    function getMyAccountByUsername($username){
+        $this->db->select('a.userID, username, coin,poin, userLevel');
+        $this->db->from('tbl_toppon_s_accounts a');
+        $this->db->join('tbl_toppon_m_users b', 'a.userID = b.userID');
+        $this->db->where('b.username', $username);
+        $this->db->where('a.isActive', 1);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
     function subtractionCoin($userID, $payment){
         $this->db->set('coin', 'coin-'.$payment, FALSE);
         $this->db->where('userID',$userID);
