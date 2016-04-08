@@ -97,7 +97,10 @@
                                         <?php }else if($row['status'] == 'expired'){ ?>
                                             <!--EXPIRE-->
                                             <h4><span class="label label-danger"><?php echo $row['status']; ?></span></h4>
-                                        <?php } ?>
+                                         <?php }else if($row['status'] == 'rejected'){ ?>
+											<!--REJECT-->
+											<h4><span class="label label-danger"><?php echo $row['status']; ?></span></h4>
+										<?php } ?>
                                     </td>
                                     <td class=" ">
                                         <?php $date = date_create($row['created']);

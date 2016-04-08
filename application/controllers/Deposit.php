@@ -162,6 +162,36 @@ class Deposit extends CI_Controller{
 
             echo json_encode(array('status' => $status, 'msg' => $msg));
         }
+		
+		function rejectDeposit(){
+			$status = "";
+            $msg="";
+
+            $datetime = date('Y-m-d H:i:s', time());
+            $tDepositID = $this->input->post('id');
+            $userID = $this->session->userdata('user_id');
+
+            $data_post=array(
+                'status'=>'rejected',
+                "lastUpdated"=>$datetime,
+                "lastUpdatedBy"=>$userID
+            );
+
+            $this->db->trans_begin();
+            $update = $this->TDeposit_model->updateDeposit($data_post,$tDepositID);
+
+            if($update){
+                $this->db->trans_commit();
+                $status = 'success';
+                $msg = "Top Up List has been updated successfully!";
+            }else{
+                $this->db->trans_rollback();
+                $status = 'error';
+                $msg = "Something went wrong when updating Top Up List !";
+            }
+
+            echo json_encode(array('status' => $status, 'msg' => $msg));
+		}
 
         function updateStatusPendingDeposit(){
             $status = "";

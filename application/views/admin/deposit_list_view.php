@@ -79,6 +79,9 @@
                                                                 <h4><span class="label label-success"><?php echo $row['status']; ?></span></h4>
                                                             <?php }else if($row['status'] == 'expired'){ ?>
                                                                 <!--EXPIRE-->
+                                                                <h4><span class="label label-danger"><?php echo $row['status']; ?></span></h4>                                                        
+															 <?php }else if($row['status'] == 'rejected'){ ?>
+                                                                <!--REJECT-->
                                                                 <h4><span class="label label-danger"><?php echo $row['status']; ?></span></h4>
                                                             <?php } ?>
                                                         </td>
@@ -86,7 +89,7 @@
                                                             <?php if($row['status']== "pending"){ ?>
                                                             <button type="button" class="btn btn-warning btn-sm btn-update"><i class="fa fa-check"></i></button>
                                                             <?php } ?>
-                                                            <a href="#"><button type="button" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash"></i></button></a>
+                                                            <a href="#"><button type="button" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-remove"></i></button></a>
                                                         </td> 
                                                         <input type="hidden" value="<?php echo $row['tDepositID'];?>" class="item-id"/>
                                                     </tr> 
@@ -143,9 +146,9 @@
             $(this).deleteData({
                 alertMsg     : "Do you want to delete this transaction on <i><b>"+col_title+"</b></i>  ?",
                 alertTitle   : "Delete Confirmation",
-                url          : "<?php echo site_url('Deposit/deleteDeposit')?>",
+                url          : "<?php echo site_url('Deposit/rejectDeposit')?>",
                 data         : formData,
-                locationHref : "<?php echo site_url('Deposit/depositList')?>"
+                locationHref : "<?php echo site_url('Deposit/depositConfirmList')?>"
             });
         });
 

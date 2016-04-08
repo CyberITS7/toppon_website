@@ -80,6 +80,9 @@
                                                             <?php }else if($row['status'] == 'expired'){ ?>
                                                                 <!--EXPIRE-->
                                                                 <h4><span class="label label-danger"><?php echo $row['status']; ?></span></h4>
+                                                             <?php }else if($row['status'] == 'rejected'){ ?>
+                                                                <!--REJECT-->
+                                                                <h4><span class="label label-danger"><?php echo $row['status']; ?></span></h4>
                                                             <?php } ?>
                                                         </td>
                                                         <td class=" last">
@@ -91,7 +94,11 @@
                                                                 </button>
                                                             </a>
                                                             <?php } ?>
-                                                            <a href="#"><button type="button" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash"></i></button></a>
+															<?php if($row['status']== 'pending'){ ?>
+																<button type="button" disabled="disabled" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash"></i></button>
+															<?php }else{?>
+																<button type="button" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash"></i></button>
+															<?php }?>
                                                         </td> 
                                                         <input type="hidden" value="<?php echo $row['tDepositID'];?>" class="item-id"/>  
                                                     </tr> 
