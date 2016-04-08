@@ -519,7 +519,7 @@
                 );
 
             $data['detail_user'] = $user;
-            $data['hashkey'] = $this->hash->hashPass($user->username);
+            $data['hashkey'] = $this->hash->hashPass($user->userName);
             $data['title'] = "TOPPON - Konfirmasi Reset Password";
             $data['content']="email/reset_password_view";
             $message = $this->load->view('email/template_view',$data,true);
