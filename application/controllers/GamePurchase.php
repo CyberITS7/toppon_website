@@ -98,7 +98,9 @@ class GamePurchase extends CI_Controller{
                         $return_code = $this->sendIndomog($generateID,$prodId);
 
                         if($return_code == '000'){
-                            $send_email = $this->sendEmailToppon($generateID,$coin_payment,$email);
+                            $voucher =  $data_game->currency." ".number_format($data_game->nominalName,0,",",".");
+                            $send_email = $this->sendEmailToppon($generateID,$coin_payment,$email,
+                                $data_game->gameName, $voucher);
                             if(!$send_email) {
                                 $this->cancelPurchaseGame($generateID);
                                 $status = 'error';
@@ -438,13 +440,15 @@ class GamePurchase extends CI_Controller{
         return $send_xml;
     }
 
-    function sendEmailToppon($generateID,$coin_payment,$email){
+    function sendEmailToppon($generateID,$coin_payment,$email,$gameName, $voucher){
         $user = $this->User_model->getUserDetailByUsername($this->session->userdata("username"));
         $data_email = $this->getRequestPurchaseGame($generateID,$coin_payment);
 
         $data['data_api'] = $data_email;
         $data['title'] = "TOPPON - Bukti Pembelian Game";
         $data['name'] = $user->name;
+        $data['game_name'] = $gameName;
+        $data['voucher'] = $voucher;
         $data['content'] = "email/game_purchase_email_view";
         $message = $this->load->view("email/template_view",$data,true);
 

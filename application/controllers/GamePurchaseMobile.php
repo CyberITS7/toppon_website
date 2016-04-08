@@ -7,7 +7,8 @@ class GamePurchaseMobile extends CI_Controller{
         $this->load->helper('date');
         $this->load->helper('html');
         $this->load->library("Authentication");
-        $this->load->library("IndomogAPI");
+        $this->load->library("Indomogapi");
+        $this->load->library('email');
 
         $this->load->model('User_model');
         $this->load->model('GameCategory_model');
@@ -44,20 +45,22 @@ class GamePurchaseMobile extends CI_Controller{
         }
         echo json_encode($data);
     }
-
+	
     function buyGame()
     {
         $status = '';
         $msg = "";
         $prefixID = "Test";
         $datetime = date('Y-m-d H:i:s', time());
-        $gameID = $this->input->post('gameID');
-        $data_game = $this->SGame_model->getGameDetail($gameID);
-        $userID = $this->input->post('userID');
+        $settingID = $this->input->post('settingID');
+		$userID = $this->input->post('userID');
+//        $settingID = $param1;
+//		$userID = $param2;
+        $data_game = $this->SGame_model->getGameDetail($settingID);       
         $account = $this->SAccount_model->getMyAccount($userID);
 
         // Coin Agent or Member
-        $user_level = $this->session->userdata("level");
+        $user_level = $account->userLevel;
         if ($user_level == "member") {
             $coin_payment = $data_game->paymentValue;
         } else {
@@ -98,19 +101,21 @@ class GamePurchaseMobile extends CI_Controller{
                     //Check when save coin subtraction
                     if ($coin_subtraction != 1) {
                         $status = 'error';
-                        $msg = "Purchasing fail, please try again!";
+                        $msg = "Purchasing fail, please try again! ".$coin_payment;
                         $this->db->trans_rollback();
                     } else {
                         //SENDING TO INDOMOG API
                         $generateID = $prefixID.$transaction_id;
                         $email = $account->email;
                         $prodId = $data_game->productCode;
-                        $return_code = $this->IndomogAPI->sendIndomog($generateID, $prodId);
+                        $return_code = $this->indomogapi->sendIndomog($generateID, $prodId);
 
                         if ($return_code == '000') {
-                            $send_email = $this->sendEmailToppon($generateID, $coin_payment, $account->name,$email);
+                            $voucher =  $data_game->currency." ".number_format($data_game->nominalName,0,",",".");
+                            $send_email = $this->sendEmailToppon($generateID, $coin_payment, $account->name,$email,
+                                $data_game->gameName, $voucher);
                             if (!$send_email) {
-                                $this->IndomogAPI->cancelPurchaseGame($generateID);
+                                $this->indomogapi->cancelPurchaseGame($generateID);
                                 $status = 'error';
                                 $msg = "Purchasing fail, please try again!";
                                 $this->db->trans_rollback();
@@ -135,14 +140,17 @@ class GamePurchaseMobile extends CI_Controller{
             }
 
         }
+		echo json_encode(array('status' => $status, 'msg' => $msg));
     }
 
-    function sendEmailToppon($generateID,$coin_payment,$name,$email){
-        $data_email = $this->IndomogAPI->getRequestPurchaseGame($generateID,$coin_payment);
+    function sendEmailToppon($generateID,$coin_payment,$name,$email, $gameName, $voucher){
+        $data_email = $this->indomogapi->getRequestPurchaseGame($generateID,$coin_payment);
 
         $data['data_api'] = $data_email;
         $data['title'] = "TOPPON - Bukti Pembelian Game";
         $data['name'] = $name;
+        $data['game_name'] = $gameName;
+        $data['voucher'] = $voucher;
         $data['content'] = "email/game_purchase_email_view";
         $message = $this->load->view("email/template_view",$data,true);
 

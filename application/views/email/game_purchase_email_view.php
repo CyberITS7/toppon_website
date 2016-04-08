@@ -38,8 +38,12 @@
                         <td>: <?php echo $data_api['QID']?></td>
                     </tr>
                     <tr>
-                        <td><b>Nama Barang</b></td>
-                        <td>: <?php echo $data_api['ProdID']?></td>
+                        <td><b>Nama Game</b></td>
+                        <td>: <?php echo $game_name?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Voucher</b></td>
+                        <td>: <?php echo $voucher?></td>
                     </tr>
                     <tr>
                         <td><b>No.Serial</b></td>
