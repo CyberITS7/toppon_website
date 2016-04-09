@@ -92,6 +92,20 @@
         <li><a href="#how-redeem" class="page-scroll">How To Redeem</a></li>
         <li><a href="#credit-poin" class="page-scroll">Credit & Poin</a></li>
         <li><a href="#contact-us" class="page-scroll">Contact Us</a></li>
+         <?php  
+            if(!$this->session->userdata("logged_in")){
+                ?>
+                <li><a href="<?php echo site_url('User');?>#toregister" class="page-scroll">Sign Up</a></li>
+                <li><a href="<?php echo site_url('User');?>#tologin" class="page-scroll">Login</a></li>
+        <?php  
+            }else{
+                ?>
+
+                <li><a href="<?php echo site_url('User');?>" class="page-scroll">Go to Member Area</a></li>
+                
+                <?php
+            }
+        ?>
       </ul>
     </div>
 </div>
@@ -913,7 +927,7 @@
         //Side Bar OPEN
         $('.mobile-navbar a').click(function(){
             //$('#sidebar-wrapper').css('visibility','visible');
-            $('#sidebar-wrapper').show().animate({width: 300}, {duration: 400});
+            $('#sidebar-wrapper').show().animate({width: 255}, {duration: 400});
             return false;
         });
 
