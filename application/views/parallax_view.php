@@ -441,6 +441,7 @@
         <hr>
     </div>
 
+<div class="container">
     <div class="row">
         <div class="col-lg-6">
             <div class="contact-form-container">
@@ -503,6 +504,8 @@
             </div>
         </div>
     </div>    
+</div>
+
 </div>
 </section>
 <!-- End Contact us -->
