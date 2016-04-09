@@ -909,7 +909,6 @@
     $(function() {
         //Side Bar OPEN
         $('.mobile-navbar a').click(function(){
-            alert("script");
             //$('#sidebar-wrapper').css('visibility','visible');
             $('#sidebar-wrapper').show().animate({width: 300}, {duration: 400});
             return false;
@@ -917,7 +916,7 @@
 
         //Side Bar Closed
         $('#sidebar-closed, body').click(function(){
-            $('#sidebar-wrapper').animate({width: 0}, {duration: 400});
+            $('#sidebar-wrapper').animate({width: 0}, {duration: 400}).hide;
         });
     });
 </script>
