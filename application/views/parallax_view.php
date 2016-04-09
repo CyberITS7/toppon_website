@@ -440,66 +440,65 @@
         <h1>CONTACT US</h1>
         <hr>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="contact-form-container">
-                <!--ContactForm-->
-                <h3>Have any question for us?</h3>
-                    <form id="contactForm" name="sentMessage" class="form" novalidate="">
-                    <div class="row">
-                        <div id="success_ajax" class="text-center"> </div>
-                    </div>
-                    <div class="row">
-                        <div id="contactName-group" class="col-xs-12 col-sm-6 col-md-6 form-group">
-                            <input type="text" id="contactName" class="form-control form-custom" placeholder="Name" required="required">
-                            <div id = "show_error_name" class="help-block"></div>
-                        </div>
-                        <div id="contactEmail-group" class="col-xs-12 col-sm-6 col-md-6 form-group">
-                            <input type="email" id="contactEmail" class="form-control form-custom" placeholder="Email" required="required">
-                            <div id = "show_error_email_address" class="help-block"></div>
-                        </div>
-                        <div id="contactSubject-group" class="col-xs-12 col-md-12 form-group">
-                            <input type="text" id="contactSubject" class="form-control form-custom" placeholder="Subject" required="required">
-                            <div id = "show_error_subject" class="help-block"></div>
-                        </div>
-                        <div id="contactMessage-group" class="col-xs-12 col-md-12 form-group">
-                            <textarea name="contactMessage" id="contactMessage" class="form-control form-custom" rows="5" placeholder="Message" required=""></textarea>
-                            <div id = "show_error_contact_message" class="help-block"></div>
-                        </div>
-                    </div>
 
-                    <div id="success"></div>
-                        <button class="btn btn-lg btn-default" type="submit">Send</button>
-                </form>
-                <!-- form -->
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="contact-form-container">
+            <!--ContactForm-->
+            <h3>Have any question for us?</h3>
+                <form id="contactForm" name="sentMessage" class="form" novalidate="">
+                <div class="row">
+                    <div id="success_ajax" class="text-center"> </div>
                 </div>
+                <div class="row">
+                    <div id="contactName-group" class="col-xs-12 col-sm-6 col-md-6 form-group">
+                        <input type="text" id="contactName" class="form-control form-custom" placeholder="Name" required="required">
+                        <div id = "show_error_name" class="help-block"></div>
+                    </div>
+                    <div id="contactEmail-group" class="col-xs-12 col-sm-6 col-md-6 form-group">
+                        <input type="email" id="contactEmail" class="form-control form-custom" placeholder="Email" required="required">
+                        <div id = "show_error_email_address" class="help-block"></div>
+                    </div>
+                    <div id="contactSubject-group" class="col-xs-12 col-md-12 form-group">
+                        <input type="text" id="contactSubject" class="form-control form-custom" placeholder="Subject" required="required">
+                        <div id = "show_error_subject" class="help-block"></div>
+                    </div>
+                    <div id="contactMessage-group" class="col-xs-12 col-md-12 form-group">
+                        <textarea name="contactMessage" id="contactMessage" class="form-control form-custom" rows="5" placeholder="Message" required=""></textarea>
+                        <div id = "show_error_contact_message" class="help-block"></div>
+                    </div>
+                </div>
+
+                <div id="success"></div>
+                    <button class="btn btn-lg btn-default" type="submit">Send</button>
+            </form>
+            <!-- form -->
             </div>
-            <div class="col-lg-6">
-                <div class="contact-detailed">
-                    <div class="telepon">
-                        <div class="row">
-                            <div class="contact-icon">
-                                <img src="<?php echo base_url();?>/img/phone.png" class="img-responsive">
-                            </div>
-                            <div class="no-tlp wow lightSpeedIn" data-wow-duration="1.5s">
-                                <p>+62-812-9025-5465</p>
-                            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="contact-detailed">
+                <div class="telepon">
+                    <div class="row">
+                        <div class="contact-icon">
+                            <img src="<?php echo base_url();?>/img/phone.png" class="img-responsive">
+                        </div>
+                        <div class="no-tlp wow lightSpeedIn" data-wow-duration="1.5s">
+                            <p>+62-812-9025-5465</p>
                         </div>
                     </div>
-                    <div class="mail">
-                        <div class="row">
-                            <div class="contact-icon">
-                                <img src="<?php echo base_url();?>/img/mail.png" class="img-responsive">
-                            </div>
-                            <div class="dest-mail wow lightSpeedIn" data-wow-duration="1.5s">
-                                <p>cs@toppon.co.id</p>
-                            </div>
-                            </div>
-                    </div>
-                    <div class="alamat wow lightSpeedIn" data-wow-duration="1.5s">
-                        <p>Jl. Kebon Jeruk No.27 Kemanggisan, Jakarta Barat</p>
-                    </div>
+                </div>
+                <div class="mail">
+                    <div class="row">
+                        <div class="contact-icon">
+                            <img src="<?php echo base_url();?>/img/mail.png" class="img-responsive">
+                        </div>
+                        <div class="dest-mail wow lightSpeedIn" data-wow-duration="1.5s">
+                            <p>cs@toppon.co.id</p>
+                        </div>
+                        </div>
+                </div>
+                <div class="alamat wow lightSpeedIn" data-wow-duration="1.5s">
+                    <p>Jl. Kebon Jeruk No.27 Kemanggisan, Jakarta Barat</p>
                 </div>
             </div>
         </div>
@@ -910,6 +909,7 @@
     $(function() {
         //Side Bar OPEN
         $('.mobile-navbar a').click(function(){
+            alert("script");
             //$('#sidebar-wrapper').css('visibility','visible');
             $('#sidebar-wrapper').show().animate({width: 300}, {duration: 400});
             return false;
@@ -917,7 +917,7 @@
 
         //Side Bar Closed
         $('#sidebar-closed, body').click(function(){
-            $('#sidebar-wrapper').animate({width: 0}, {duration: 400}).hide();
+            $('#sidebar-wrapper').animate({width: 0}, {duration: 400});
         });
     });
 </script>

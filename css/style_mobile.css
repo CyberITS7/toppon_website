@@ -41,16 +41,11 @@
         position: fixed;
         width: 0;
         right: 0;
-        background: #3498DB;
+        background: #2b2b2b;
     }
     .sidebar-wrapper > h2{
         float: left;
         margin-left: 38px;
-
-    }
-    .text-left{
-        color: #fff;
-        font-weight: 600;
     }
     .sidebar-wrapper span#sidebar-closed{
         cursor: pointer;
@@ -62,14 +57,10 @@
     .sidebar-wrapper > ul > li {
         margin-bottom: 10%;
     }
-    .sidebar-wrapper ul li a, a:hover, a:active, a:visited{
-        color: #fff;
-        text-decoration:none;
-    }
     
     /*WHY US*/
     #whyus{
-        background-position: left 0px top 85px;
+        background-position: left 0px top 50px;
     }
     .whyus-content p{
         font-size: 26px;
@@ -193,7 +184,7 @@
     }
     
     .mobile-navbar{
-        top: 5px;
+        right: 40px;
     }
 
     /*ABOUT*/
