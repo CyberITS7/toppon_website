@@ -112,7 +112,6 @@ section.parallax {
     display: none;
 }
 
-
 .menu-right{
     float: right;
     padding-right: 60px;
@@ -126,12 +125,11 @@ section.parallax {
     color:blue;
 }
 
-.menu-navbar{  
+.menu-navbar{
 	height: 55px;
     position: relative;
     background-color:transparent;
 }
-
 
 #home .navbar-shrink {
     background-color: #3498DB;
@@ -168,7 +166,7 @@ section.parallax {
 
 }
 .menu-center{
-    width: 900px;
+    width: 890px;
     margin:auto;
 }
 /*boy*/
@@ -197,7 +195,7 @@ section.parallax {
     background-color: default;
     top : 0px;
     width : 100%;
-    min-width : 1024px;
+    min-width : 890px;
     z-index: 5;
 }
 
@@ -207,14 +205,15 @@ section.parallax {
 /*about*/
 #about{
 	/*background-image: url(../img/bg/home-bg.jpg);*/
-
     padding-top: 35px;
     background-repeat: no-repeat;
 	text-align: center;
 	min-height: 700px;
 	width: 100%;
 	padding-bottom: 50px;
-
+}
+#about .row{
+    overflow: hidden;
 }
 
 .about-row-wrapper{

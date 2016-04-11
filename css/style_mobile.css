@@ -1,4 +1,4 @@
-@media(max-width: 768px){
+@media(max-width: 870px){
 
     h1{
         font-size: 30px!important;
@@ -174,7 +174,7 @@
     }
 }
 
-@media (max-width: 420px){
+@media (max-width: 600px){
 
     h1{
         font-size: 26px!important;
