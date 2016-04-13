@@ -1,6 +1,6 @@
 html,
 body {
-   font-family:"Helvetica Neue",Helvetica,Arial,sans-serif
+   font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 .clear{
     clear: both;
@@ -29,7 +29,6 @@ section.parallax {
 }
 
 .content-text{
-    font-family: Verdana;
     text-align: center;
     letter-spacing: 2px;
     padding-top: 20px;
@@ -62,7 +61,6 @@ section.parallax {
 }
 
 .content-text-w{
-    font-family: Verdana;
     color: #fff;
     text-align: center;
     letter-spacing: 2px; 
@@ -157,7 +155,6 @@ section.parallax {
     font-weight: bold;
     padding: 0 0 15px 0;
     font-size: 20px;
-    font-family: 'Varela Round', sans-serif;
     text-decoration: none;
     border-bottom: 5px solid transparent;
     -webkit-appearance: none !important;
@@ -397,7 +394,6 @@ section.parallax {
 }
 .quote-text{
     color: #fff;
-    font-family: Trebuchet MS;
     font-weight: bold;
     text-align: center;
     letter-spacing: 2px;
@@ -571,12 +567,13 @@ section.parallax {
     text-align: center;
 }
 .footer-text a, a:visited{
-    color: #fff;
+    color: #000;
     text-decoration: none;
 
 }
 .footer-text a:hover{
-    color:#000;
+     color:#1D70B7;
+     font-weight: 600;  
 }
 
 
