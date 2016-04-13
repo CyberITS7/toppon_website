@@ -56,7 +56,7 @@ section.parallax {
     font-weight: 300;
     text-align: center;
     letter-spacing: 2px; 
-    font-size: 25px;
+    font-size: 20px;
     padding-bottom: 20px;   
 }
 
@@ -413,6 +413,11 @@ section.parallax {
 
 
 /* TOPPON CREDIT */
+.credit-txt{
+    font-size: 20px!important;
+    line-height: 0px;
+    margin: 0;
+}
 #conv-table{
     padding-top: 55px;
     background-color: rgb(225,227,229);
@@ -434,10 +439,10 @@ section.parallax {
 
 }
 .img-text{
-    padding-top: 20px;
+    padding-top: 10px;
     padding-left: 10px;
     float: left;
-    letter-spacing: 1px;
+    font-size: 15px;
 }
 .img-size{
     width: 450px;
@@ -446,11 +451,7 @@ section.parallax {
     margin:auto;
 
 }
-.toppon-credit p{
-    line-height: 0px;
-    font-size: 12px;
-    margin: 0;
-}
+
 .credit-row-wrapper{
     width: 625px;
     margin: auto;

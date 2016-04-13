@@ -381,14 +381,16 @@
 <!-- Toppon Credit & Poin -->
 <section id="credit-poin">
 <div id="conv-table" name="conv-table">
+    
     <div class="content-text">
         <h1>Toppon Credit & Poin</h1>
         <hr>
     </div>
+
     <div class="container">
         <div class="toppon-credit">
             <img src="<?php echo base_url();?>/img/topponcredit/credit.png" class="img-responsive img-size"/>
-            <div class="content-text"> 
+            <div class="content-text credit-txt"> 
                     <p>Toppon Credits adalah mata uang online dimana para gamer bisa melakukan</p>
                     <p>TOP UP untuk setiap pembelian voucher games</p>
                     <p>Nilai Tukar Toppon Credits untuk setiap 1TC = Rp.100</p>
@@ -438,6 +440,7 @@
         <a href="<?php echo site_url('User');?>#toregister">
             <button type="button" class="btn-register btn-topup btn btn-lg btn-info">Register Now!</button>
         </a>
+
     </div>
 
 </div>
