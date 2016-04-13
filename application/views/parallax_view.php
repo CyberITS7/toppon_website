@@ -276,17 +276,17 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-4 wow bounceInUp" data-wow-duration="1.0s">
+            <div class="col-lg-4 col-md-4 wow bounceInDown" data-wow-duration="1.0s">
                 <img src="<?php echo base_url();?>/img/howtouse/howtouse04.png" class ="img-responsive"/>
                 <p>4. Confirm Your Payment</p>
             </div>
             
-            <div class="col-lg-4 col-md-4 wow bounceInUp" data-wow-duration="1.0s">
+            <div class="col-lg-4 col-md-4 wow bounceInDown" data-wow-duration="1.0s">
                 <img src="<?php echo base_url();?>/img/howtouse/howtouse05.png" class ="img-responsive"/>
                 <p>5. Choose Your Games and nominal</p>
             </div>
             
-            <div class="col-lg-4 col-md-4 wow bounceInUp" data-wow-duration="1.0s">
+            <div class="col-lg-4 col-md-4 wow bounceInDown" data-wow-duration="1.0s">
                 <img src="<?php echo base_url();?>/img/howtouse/howtouse06.png" class ="img-responsive"/>
                 <p>6. Transaction sucess, and Enjoy Your Game</p>
             </div>
@@ -341,13 +341,13 @@
             <div class="redeem-item wow rollIn" data-wow-duration="1.0s" data-wow-delay="1.2s" id="redeem-item-1">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem1.png" class="img-responsive"/>
             </div>
-            <div class="redeem-item wow bounceInUp" data-wow-duration="1.0s" data-wow-delay="1.5s" id="redeem-item-2">
+            <div class="redeem-item wow rollIn" data-wow-duration="1.0s" data-wow-delay="1.5s" id="redeem-item-2">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem2.png" data-wow-delay="1s" class="img-responsive"/>
             </div>
-            <div class="redeem-item wow lightSpeedIn" data-wow-duration="1.0s" data-wow-delay="1.8s" id="redeem-item-3">
+            <div class="redeem-item wow rollIn" data-wow-duration="1.0s" data-wow-delay="1.8s" id="redeem-item-3">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem3.png" class="img-responsive"/>
             </div>
-            <div class="redeem-item wow bounceInRight" data-wow-duration="1.0s" data-wow-delay="2s" id="redeem-item-4">
+            <div class="redeem-item wow rollIn" data-wow-duration="1.0s" data-wow-delay="2s" id="redeem-item-4">
                 <img src="<?php echo base_url();?>/img/howtoredeem/redeem4.png" class="img-responsive"/>
             </div>
             <div class="redeem-item wow rollIn" data-wow-duration="1.0s" data-wow-delay="2.2s" id="redeem-item-5">
@@ -419,15 +419,15 @@
                    
             <div class="row">
                 <div class="credit-row-wrapper">
-                    <div class="credit-items wow bounceInRight" data-wow-duration="1.5s">
+                    <div class="credit-items wow bounceInLeft" data-wow-duration="1.5s">
                         <img src="<?php echo base_url();?>/img/topponcredit/credit01.png" class="img-responsive"/>
                     </div>
                     
-                    <div class="credit-items wow bounceInRight" data-wow-delay="1.2s" data-wow-duration="1.5s">
+                    <div class="credit-items wow bounceInLeft" data-wow-delay="1.2s" data-wow-duration="1.5s">
                         <img src="<?php echo base_url();?>/img/topponcredit/credit02.png" class="img-responsive"/>    
                     </div>
                     
-                    <div class="credit-items wow bounceInRight" data-wow-delay="1.8s" data-wow-duration="1.5s">
+                    <div class="credit-items wow bounceInLeft" data-wow-delay="1.8s" data-wow-duration="1.5s">
                         <img src="<?php echo base_url();?>/img/topponcredit/credit03.png" class="img-responsive"/>
                     </div>
                 </div>
