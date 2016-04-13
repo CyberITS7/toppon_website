@@ -1,11 +1,16 @@
 @media(max-width: 870px){
 
     h1{
-        font-size: 30px!important;
+        font-size: 28px!important;
     }
     h2{
-        font-size: 26px!important;
+        font-size: 24px!important;
     }
+
+    p{
+        font-size: 18px!important;
+    }
+
     #header{
         position: fixed;
         width: 100%;
@@ -177,12 +182,14 @@
 @media (max-width: 600px){
 
     h1{
-        font-size: 26px!important;
+        font-size: 24px!important;
     }
     h2{
-        font-size: 22px!important;
+        font-size: 20px!important;
     }
-
+    p{
+        font-size: 14px!important;
+    }
     #header{
         height: 65px;
     }
