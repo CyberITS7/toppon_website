@@ -66,6 +66,28 @@
 			}
 		}
 
+		function getUserDetailAjax(){
+			$username = $this->input->post('username');
+
+			if($username == null || $username == ""){
+				//balikin kosongan
+				$username = "";
+				$name = "";
+				$emailAddress = "";
+				$phone = "";
+			}
+			else{
+				$detail = $this->User_model->getUserDetailByUsername($username);
+
+				$name = $detail->name;
+				$emailAddress = $detail->email;
+				$phone = $detail->phoneNumber;
+			}
+
+			echo json_encode(array('username' => $username, 'name' => $name, 'email' => $emailAddress, 'phone' => $phone));
+
+		}
+
 		function resetPassword(){
 			$user = $this->input->get('k');
 
@@ -498,6 +520,61 @@
 		            	$this->db->trans_commit();
 		            	$status = 'success';
                 		$msg = "Successfully update your profile";
+		            }
+        	}
+
+        	echo json_encode(array('status' => $status, 'msg' => $msg));
+		}
+
+		function doUpdateUserProfileAjax(){
+			$status = "";
+	        $msg="";
+
+	        $datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+
+	        $user_id = $this->input->post('user-id-edit');
+			$username = $this->input->post('username-edit');
+			$name = $this->input->post("name-edit");
+			$email = $this->input->post("email-edit");
+			$phone = $this->input->post("phone-edit");
+
+			$userVerify = $this->User_model->checkUsernameExceptSelf($username, $user_id);
+			$emailVerify = $this->User_model->checkEmailExceptSelf($email, $user_id);
+			$phoneVerify = $this->User_model->checkPhoneExceptSelf($phone, $user_id);
+
+			if($userVerify == 1){
+				$status = 'error';
+                $msg = "Username already exists";
+        	}else if($emailVerify == 1){
+        		$status = 'error';
+                $msg = "Email already exists";
+        	}else if($phoneVerify == 1){
+        		$status = 'error';
+                $msg = "Phone already exists";
+        	}
+        	else{
+        		$data_user = array(
+						'username' => $username,
+						'name' => $name,
+						'email' => $email,
+						'phoneNumber' => $phone,						
+						'lastUpdated' => $datetime,
+						'lastUpdatedBy' => $user_id
+					);
+
+					$this->db->trans_begin();
+					$query = $this->User_model->updateUser($data_user, $user_id);
+
+					if ($this->db->trans_status() === FALSE) {
+		                // Failed to save Data to DB
+		                $this->db->trans_rollback();
+		                $status = 'error';
+                		$msg = "Something went wrong when updating profile";
+		            }
+		            else{
+		            	$this->db->trans_commit();
+		            	$status = 'success';
+                		$msg = "Successfully update your profile. Please Re-Login with your New Settings";
 		            }
         	}
 
