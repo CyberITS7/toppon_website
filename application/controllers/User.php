@@ -581,6 +581,47 @@
         	echo json_encode(array('status' => $status, 'msg' => $msg));
 		}
 
+		function doChangePasswordAjax(){
+			$status = "";
+	        $msg="";
+
+	        $datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
+	        $user_id = $this->input->post('user-id-edit');
+	        $username = $this->input->post('username-edit');
+			$oldPassword = $this->input->post("old-password");
+			$newPassword = $this->input->post("new-password");
+
+			$passVerifier = $this->User_model->getPasswordbyUsername($username);
+
+    		if(!$this->hash->verifyPass($oldPassword, $passVerifier->password)){
+    			$status = 'error';
+            	$msg = "Old Password doesn't match";
+    		}else{
+    			$data_user = array(
+					'password' => $this->hash->hashPass($newPassword),
+					'lastUpdated' => $datetime,
+					'lastUpdatedBy' => $this->session->userdata("user_id")
+				);
+
+				$this->db->trans_begin();
+				$query = $this->User_model->updateUser($data_user, $user_id);
+
+				if ($this->db->trans_status() === FALSE) {
+	                // Failed to save Data to DB
+	                $this->db->trans_rollback();
+	                $status = 'error';
+            		$msg = "Something went wrong when updating profile";
+	            }
+	            else{
+	            	$this->db->trans_commit();
+	            	$status = 'success';
+            		$msg = "Successfully change your password. Please Re-Login with your New Settings";
+	            }
+    		}
+
+        	echo json_encode(array('status' => $status, 'msg' => $msg));
+		}
+
 		function sendEmailForgotPassword($username){
 			$user = $this->User_model->getUserDetailByUsername($username);
             $config = Array
