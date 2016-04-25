@@ -126,8 +126,7 @@ class TDeposit_model extends CI_Model{
             $this->db->where('created between "'.$startDate.'" and "'.$endDate.'"');
         }
 
-        $query = $this->db->get();
-        return $query->result_array();
+       return $this->db->count_all_results();
     }
 
     //Search by Periode

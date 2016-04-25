@@ -227,11 +227,11 @@
             if(search == "periode"){
                 var start_date = $('#search-periode').data('daterangepicker').startDate;
                 var end_date = $('#search-periode').data('daterangepicker').endDate;
-                location.href = "<?php echo site_url('Report/gamePurchaseReportSearchByPeriode')?>/"
+                location.href = "<?php echo site_url('Report/giftReportSearchByPeriode')?>/"
                 +start_date.format('YYYY-MM-DD')+"/"+end_date.format('YYYY-MM-DD');
             }else if(search == "date"){
                 var date = $('#search-date').data('daterangepicker').endDate;
-                location.href = "<?php echo site_url('Report/gamePurchaseReportSearchByDate')?>/"+date.format('YYYY-MM-DD');
+                location.href = "<?php echo site_url('Report/giftReportSearchByDate')?>/"+date.format('YYYY-MM-DD');
             }
         });
 

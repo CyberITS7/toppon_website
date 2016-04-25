@@ -41,7 +41,7 @@
         }
 		
 		function getCountTransferList($userId, $date, $startDate, $endDate){
-			$this->db->select('tTransferID, coin, b.username as pengirim, c.username as penerima, a.created ');
+			$this->db->select('*');
             $this->db->from('tbl_toppon_t_transfers a');
             $this->db->where('a.isActive', 1);
             $this->db->order_by('a.created','desc');
@@ -86,7 +86,7 @@
 
         //Search by Date
         function getTransferByDate($start, $limit, $userId, $date){
-            $$this->db->select('tTransferID, coin, b.username as pengirim, c.username as penerima, a.created ');
+            $this->db->select('tTransferID, coin, b.username as pengirim, c.username as penerima, a.created ');
             $this->db->from('tbl_toppon_t_transfers a');
             $this->db->join('tbl_toppon_m_users b',"a.userPengirim=b.userID");
             $this->db->join('tbl_toppon_m_users c',"a.userPenerima=c.userID");

@@ -206,6 +206,7 @@ class ReportMobile extends CI_Controller{
         }
     }
 	
+	// GIFT ALL
     function getGiftReport($start=1){
 
         $userID = $this->input->post('userID');
@@ -215,10 +216,57 @@ class ReportMobile extends CI_Controller{
 
         if($userID!=null){
             $gift_page = $this->TGift_model->getTransGiftList($start,$limit,$userID);
-            echo json_encode($gift_page);
+			$count_gift = $this->TGift_model->getCountTransGiftList($userID,null,null,null);
+			$pages = ceil($count_gift/$num_per_page);
+			
+			echo json_encode(array('count' => $pages, 'data' => $gift_page));
         }else{
             echo json_encode("empty");
         }
     }
+	
+	// GIFT PERIODE
+	function getGiftReportSearchByPeriode($start=1){
+        $userID = $this->input->post('userID');
+		$startDate = $this->input->post('startDate');
+		$endDate = $this->input->post('endDate');
+        $num_per_page = 10;
+        $start = ($start - 1)* $num_per_page;
+        $limit = $num_per_page;
+		
+		if($userID!=null){
+			//END DATE + 1
+            $endDate = strtotime ( '1 day' , strtotime ( $endDate ) ) ;
+            $endDate = date ( 'Y-m-d' , $endDate );
+			
+            $gift_page = $this->TGift_model->getTransGiftByPeriode($start, $limit, $userID,$startDate, $endDate);
+			$count_gift = $this->TGift_model->getCountTransGiftList($userID,null,$startDate, $endDate);
+			$pages = ceil($count_gift/$num_per_page);
+			
+			echo json_encode(array('count' => $pages, 'data' => $gift_page));
+        }else{
+            echo json_encode("empty");
+        }
+    }
+	
+	//GIFT DATE
+    function getGiftReportSearchByDate($start=1){
+        $userID = $this->input->post('userID');
+		$date = $this->input->post('date');
+        $num_per_page = 10;
+        $start = ($start - 1)* $num_per_page;
+        $limit = $num_per_page;
+		
+		if($userID!=null){
+            $gift_page = $this->TGift_model->getTransGiftByDate($start, $limit, $userID,$date);
+			$count_gift = $this->TGift_model->getCountTransGiftList($userID,$date,null,null);
+			$pages = ceil($count_gift/$num_per_page);
+			
+			echo json_encode(array('count' => $pages, 'data' => $gift_page));
+        }else{
+            echo json_encode("empty");
+        }
+    }
+
 }
 ?>

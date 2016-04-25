@@ -240,7 +240,7 @@ class Report extends CI_Controller{
             //END DATE + 1
             $endDate = strtotime ( '1 day' , strtotime ( $endDate ) ) ;
             $endDate = date ( 'Y-m-d' , $endDate );
-            $data['gift_list'] = $this->Transfer_model->getTransferByPeriode(null, null,null,$startDate, $endDate);
+            $data['transfer_list'] = $this->Transfer_model->getTransferByPeriode(null, null,null,$startDate, $endDate);
             $data['data_content'] = "report/transfer_report_view";
             $this->load->view('includes/member_area_template_view', $data);
         }else if($this->session->userdata('logged_in')){
@@ -249,7 +249,7 @@ class Report extends CI_Controller{
             //END DATE + 1
             $endDate = strtotime ( '1 day' , strtotime ( $endDate ) ) ;
             $endDate = date ( 'Y-m-d' , $endDate );
-            $data['gift_list'] = $this->Transfer_model->getTransferByPeriode(null, null,$userID,$startDate, $endDate);
+            $data['transfer_list'] = $this->Transfer_model->getTransferByPeriode(null, null,$userID,$startDate, $endDate);
             $data['data_content'] = "report/transfer_report_view";
             $this->load->view('includes/member_area_template_view', $data);
 
@@ -262,13 +262,13 @@ class Report extends CI_Controller{
         if($this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
             //get Games List data
             $userID = $this->session->userdata('user_id');
-            $data['gift_list'] = $this->Transfer_model->getTransferByDate(null, null, null, $date);
+            $data['transfer_list'] = $this->Transfer_model->getTransferByDate(null, null, null, $date);
             $data['data_content'] = "report/transfer_report_view";
             $this->load->view('includes/member_area_template_view', $data);
         }else if($this->session->userdata('logged_in')){
             //get Games List data
             $userID = $this->session->userdata('user_id');
-            $data['gift_list'] = $this->Transfer_model->getTransferByDate(null, null, $userID, $date);
+            $data['transfer_list'] = $this->Transfer_model->getTransferByDate(null, null, $userID, $date);
             $data['data_content'] = "report/transfer_report_view";
             $this->load->view('includes/member_area_template_view', $data);
 
