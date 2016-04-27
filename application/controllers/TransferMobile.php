@@ -18,7 +18,13 @@
 		}
 
 		function coinListAjax(){
-        	$coin_list = $this->Coin_model->getCoin();
+			$userID = $this->input->post('userID');
+			if($userID!=null){
+        		$coin_list = $this->Coin_model->getCoin();
+        	}
+        	else{
+        		$coin_list = "empty";
+        	}
 
         	echo json_encode($coin_list);
 		}

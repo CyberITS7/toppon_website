@@ -20,7 +20,14 @@
 		}
 
 		function giftListAjax(){
-        	$gift_list = $this->SGift_model->getGiftList(null, null);
+			$userID = $this->input->post('userID');
+
+			if($userID!=null){
+        		$gift_list = $this->SGift_model->getGiftList(null, null);
+        	}
+        	else{
+        		$gift_list="empty";
+        	}
 
         	echo json_encode($gift_list);
 		}
