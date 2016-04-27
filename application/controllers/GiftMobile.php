@@ -19,17 +19,25 @@
 		    $this->load->model("GiftCategory_model");
 		}
 
-		function giftListAjax(){
+		function giftListAjax($start=1){
 			$userID = $this->input->post('userID');
 
+			$num_per_page = 10;
+        	$start = ($start - 1)* $num_per_page;
+        	$limit = $num_per_page;
+
 			if($userID!=null){
-        		$gift_list = $this->SGift_model->getGiftList(null, null);
+        		$gift_list = $this->SGift_model->getGiftList($start, $limit);
+        		$count_gift = $this->SGift_model->getCountGiftList();
+        		$pages = ceil($count_gift/$num_per_page);
+        		echo json_encode(array('count' => $pages, 'data' => $gift_list));
         	}
         	else{
         		$gift_list="empty";
+        		echo json_encode($gift_list);
         	}
 
-        	echo json_encode($gift_list);
+        	
 		}
 	}
 ?>
