@@ -96,7 +96,7 @@
 			$userverify = $this->User_model->getMemberList(null, null);
 			$userscount = $this->User_model->getCountMemberList();
 
-			$thisUserID;
+			$thisUserID ="";
 			while ($i != $userscount) {
 				if($this->hash->verifyPass($userverify[$i]['userName'], $user)){
 					$flag = true;
@@ -885,11 +885,14 @@
 		
 		  //Mobile
 		function getUserAccountMobile(){
+            $this->load->model('Home_model');
+
 			$userID = $this->input->post("userID");
 			$akunku = $this->SAccount_model->getMyAccount($userID);
+            $home_page = $this->Home_model->getHomeList();
 
             //print_r($akunku);
-			echo json_encode(array('coin' => $akunku->coin, 'poin' => $akunku->poin));
+			echo json_encode(array('coin' => $akunku->coin, 'poin' => $akunku->poin, 'ads'=>$home_page->ads1));
 		}
 	}
 ?>
