@@ -89,7 +89,7 @@ class TDeposit_model extends CI_Model{
     }
 
     //REPORT
-    function getTransDepositList($start, $limit, $userId){
+    function getTransDepositList($start, $limit, $userId, $status){
         $this->db->select('*');
         $this->db->from('tbl_toppon_t_deposits a');
         $this->db->where('a.isActive', 1);
@@ -98,7 +98,9 @@ class TDeposit_model extends CI_Model{
         if($userId != null){
             $this->db->where('a.createdBy', $userId);
         }
-
+        if($status != null){
+            $this->db->where("status",$status);
+        }
         if($limit != null || $start!= null){
             $this->db->limit($limit,$start);
         }
@@ -108,7 +110,7 @@ class TDeposit_model extends CI_Model{
     }
 	
 	//COUNT
-	function getCountTransDepositList($userId, $date, $startDate, $endDate){
+	function getCountTransDepositList($userId, $date, $startDate, $endDate, $status){
         $this->db->select('*');
         $this->db->from('tbl_toppon_t_deposits a');
         $this->db->where('a.isActive', 1);
@@ -117,11 +119,12 @@ class TDeposit_model extends CI_Model{
         if($userId != null){
             $this->db->where('a.createdBy', $userId);
         }
-		
+        if($status != null){
+            $this->db->where("status",$status);
+        }
 		if($date!=null){
 			 $this->db->like('created', $date, 'after');
 		}
-
         if($startDate != null && $endDate!= null){
             $this->db->where('created between "'.$startDate.'" and "'.$endDate.'"');
         }
@@ -130,7 +133,7 @@ class TDeposit_model extends CI_Model{
     }
 
     //Search by Periode
-    function getTransDepositByPeriode($start, $limit, $userId, $startDate, $endDate){
+    function getTransDepositByPeriode($start, $limit, $userId, $startDate, $endDate,$status){
         $this->db->select('*');
         $this->db->from('tbl_toppon_t_deposits a');
         $this->db->where('a.isActive', 1);
@@ -139,6 +142,9 @@ class TDeposit_model extends CI_Model{
 
         if($userId != null){
             $this->db->where('a.createdBy', $userId);
+        }
+        if($status != null){
+            $this->db->where("status",$status);
         }
         if($limit != null || $start!= null){
             $this->db->limit($limit,$start);
@@ -149,7 +155,7 @@ class TDeposit_model extends CI_Model{
     }
 
     //Search by Date
-    function getTransDepositByDate($start, $limit, $userId, $date){
+    function getTransDepositByDate($start, $limit, $userId, $date,$status){
         $this->db->select('*');
         $this->db->from('tbl_toppon_t_deposits a');
         $this->db->where('a.isActive', 1);
@@ -158,6 +164,9 @@ class TDeposit_model extends CI_Model{
 
         if($userId != null){
             $this->db->where('a.createdBy', $userId);
+        }
+        if($status != null){
+            $this->db->where("status",$status);
         }
         if($limit != null || $start!= null){
             $this->db->limit($limit,$start);

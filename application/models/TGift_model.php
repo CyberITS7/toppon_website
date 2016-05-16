@@ -18,7 +18,7 @@
         }
 
         //REPORT
-        function getTransGiftList($start, $limit, $userId){
+        function getTransGiftList($start, $limit, $userId, $searchText){
             $this->db->select('tGiftID, giftID, giftName, giftCategory, giftDescription, reward, poin, a.created, b.userName');
             $this->db->from('tbl_toppon_t_gifts a');
             $this->db->join('tbl_toppon_m_users b','a.createdBy = b.userID');
@@ -28,6 +28,9 @@
             if($userId != null){
                 $this->db->where('a.createdBy', $userId);
             }
+			if($searchText !=null){
+				$this->db->like('a.giftName', $searchText);
+			}
 			
             if($limit != null || $start!= null){
                 $this->db->limit($limit,$start);
@@ -38,7 +41,7 @@
         }
 		
 		//COUNT
-		function getCountTransGiftList($userId, $date, $startDate, $endDate){
+		function getCountTransGiftList($userId, $date, $startDate, $endDate, $searchText){
             $this->db->select('tGiftID, giftID, giftName, giftCategory, giftDescription, reward, poin, a.created, b.userName');
             $this->db->from('tbl_toppon_t_gifts a');
             $this->db->join('tbl_toppon_m_users b','a.createdBy = b.userID');
@@ -48,6 +51,9 @@
             if($userId != null){
                 $this->db->where('a.createdBy', $userId);
             }
+			if($searchText !=null){
+				$this->db->like('a.giftName', $searchText);
+			}
 			if($date!=null){
 				 $this->db->like('a.created', $date, 'after');
 			}
@@ -59,7 +65,7 @@
         }
 
         //Search by Periode
-        function getTransGiftByPeriode($start, $limit, $userId, $startDate, $endDate){
+        function getTransGiftByPeriode($start, $limit, $userId, $startDate, $endDate, $searchText){
             $this->db->select('tGiftID, giftID, giftName, giftCategory, giftDescription, reward, poin, a.created, b.userName');
             $this->db->from('tbl_toppon_t_gifts a');
             $this->db->join('tbl_toppon_m_users b','a.createdBy = b.userID');
@@ -70,6 +76,9 @@
             if($userId != null){
                 $this->db->where('a.createdBy', $userId);
             }
+			if($searchText !=null){
+				$this->db->like('a.giftName', $searchText);
+			}
             if($limit != null || $start!= null){
                 $this->db->limit($limit,$start);
             }
@@ -79,7 +88,7 @@
         }
 
         //Search by Date
-        function getTransGiftByDate($start, $limit, $userId, $date){
+        function getTransGiftByDate($start, $limit, $userId, $date,$searchText){
             $this->db->select('tGiftID, giftID, giftName, giftCategory, giftDescription, reward, poin, a.created, b.userName');
             $this->db->from('tbl_toppon_t_gifts a');
             $this->db->join('tbl_toppon_m_users b','a.createdBy = b.userID');
@@ -90,6 +99,9 @@
             if($userId != null){
                 $this->db->where('a.createdBy', $userId);
             }
+			if($searchText !=null){
+				$this->db->like('a.giftName', $searchText);
+			}
             if($limit != null || $start!= null){
                 $this->db->limit($limit,$start);
             }

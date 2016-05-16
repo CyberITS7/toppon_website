@@ -43,7 +43,7 @@
                 </div>
                 <div class="x_content">
                     <div class="well well-sm">
-                        <a href="<?php echo site_url('Report/gamePurchaseReport')?>">
+                        <a href="<?php echo site_url('Report/giftReport')?>">
                             <button type="submit" class="btn btn-default btn-sm">
                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>All
                             </button>

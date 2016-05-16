@@ -19,38 +19,49 @@
             return $query->row();
         }
 
-        //REPORT
-        function getTransferList($start, $limit, $userId){
+        //Transfer REPORT
+        function getTransferList($start, $limit, $userId, $pengirim){
             $this->db->select('tTransferID, coin, b.username as pengirim, c.username as penerima, a.created ');
             $this->db->from('tbl_toppon_t_transfers a');
             $this->db->join('tbl_toppon_m_users b',"a.userPengirim=b.userID");
-            $this->db->join('tbl_toppon_m_users c',"a.userPenerima=c.userID");
-            $this->db->where('a.isActive', 1);
+            $this->db->join('tbl_toppon_m_users c',"a.userPenerima=c.userID");           
             $this->db->order_by('a.created','desc');
 
             if($userId != null){
-                $this->db->where('a.userPengirim', $userId);
-                $this->db->or_where('a.userPenerima', $userId);
+				$this->db->group_start();
+					$this->db->where('a.userPengirim', $userId);
+					$this->db->or_where('a.userPenerima', $userId);
+				$this->db->group_end();            
             }
+			if($pengirim != null){
+                $this->db->like('b.username', $pengirim);               
+            }	
             if($limit != null || $start!= null){
                 $this->db->limit($limit,$start);
             }
+			$this->db->where('a.isActive', 1);
 
             $query = $this->db->get();
             return $query->result_array();
         }
 		
-		function getCountTransferList($userId, $date, $startDate, $endDate){
+		function getCountTransferList($userId, $date, $startDate, $endDate, $pengirim){
 			$this->db->select('*');
             $this->db->from('tbl_toppon_t_transfers a');
+			$this->db->join('tbl_toppon_m_users b',"a.userPengirim=b.userID");
+            $this->db->join('tbl_toppon_m_users c',"a.userPenerima=c.userID");
             $this->db->where('a.isActive', 1);
             $this->db->order_by('a.created','desc');
 
             if($userId != null){
-                $this->db->where('a.userPengirim', $userId);
-                $this->db->or_where('a.userPenerima', $userId);
+				$this->db->group_start();
+					$this->db->where('a.userPengirim', $userId);
+					$this->db->or_where('a.userPenerima', $userId);
+				$this->db->group_end();            
             }
-			
+			if($pengirim != null){
+                $this->db->like('b.username', $pengirim);               
+            }
 			//By Date
 			if($date != null){
 				 $this->db->like('a.created', $date, 'after');
@@ -63,8 +74,8 @@
             return $this->db->count_all_results();
 		}
 
-        //Search by Periode
-        function getTransferByPeriode($start, $limit, $userId, $startDate, $endDate){
+        //Transfer REPORT Search by Periode
+        function getTransferByPeriode($start, $limit, $userId, $startDate, $endDate, $pengirim){
             $this->db->select('tTransferID, coin, b.username as pengirim, c.username as penerima, a.created ');
             $this->db->from('tbl_toppon_t_transfers a');
             $this->db->join('tbl_toppon_m_users b',"a.userPengirim=b.userID");
@@ -73,8 +84,13 @@
             $this->db->order_by('a.created','desc');
 
             if($userId != null){
-                $this->db->where('a.userPengirim', $userId);
-                $this->db->or_where('a.userPenerima', $userId);
+				$this->db->group_start();
+					$this->db->where('a.userPengirim', $userId);
+					$this->db->or_where('a.userPenerima', $userId);
+				$this->db->group_end();            
+            }
+			if($pengirim != null){
+                $this->db->like('b.username', $pengirim);               
             }
             if($limit != null || $start!= null){
                 $this->db->limit($limit,$start);
@@ -84,8 +100,8 @@
             return $query->result_array();
         }
 
-        //Search by Date
-        function getTransferByDate($start, $limit, $userId, $date){
+        //Transfer REPORT Search by Date
+        function getTransferByDate($start, $limit, $userId, $date, $pengirim){
             $this->db->select('tTransferID, coin, b.username as pengirim, c.username as penerima, a.created ');
             $this->db->from('tbl_toppon_t_transfers a');
             $this->db->join('tbl_toppon_m_users b',"a.userPengirim=b.userID");
@@ -94,8 +110,13 @@
             $this->db->order_by('a.created','desc');
 
             if($userId != null){
-                $this->db->where('a.userPengirim', $userId);
-                $this->db->or_where('a.userPenerima', $userId);
+				$this->db->group_start();
+					$this->db->where('a.userPengirim', $userId);
+					$this->db->or_where('a.userPenerima', $userId);
+				$this->db->group_end();            
+            }
+			if($pengirim != null){
+                $this->db->like('b.username', $pengirim);               
             }
             if($limit != null || $start!= null){
                 $this->db->limit($limit,$start);
