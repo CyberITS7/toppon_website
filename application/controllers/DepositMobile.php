@@ -1,5 +1,5 @@
 <?php
-class Deposit extends CI_Controller{
+class DepositMobile extends CI_Controller{
     function __construct(){
         parent::__construct();
 
@@ -24,22 +24,24 @@ class Deposit extends CI_Controller{
             $userID = $this->input->post('userID');
             if($userID!=null){
                 $coin_list = $this->Coin_model->getCoin();
+                $bank_list = $this->Bank_model->getBankName();
+                echo json_encode(array('dataCoin' => $coin_list, 'dataBank' => $bank_list));
             }
             else{
                 $coin_list = "empty";
+                 echo json_encode($coin_list);
             }
-
-            echo json_encode($coin_list);
+            
         }
 
     function depositList(){
-        if(!$this->session->userdata('logged_in')){
+        if(!$this->input>post('logged_in')){
             redirect(site_url("User/dashboard"));
         }
         else{
-            $this->TDeposit_model->expireDeposit($this->session->userdata('user_id'));
+            $this->TDeposit_model->expireDeposit($this->input>post('userID'));
             
-            $data['deposit_list']=$this->TDeposit_model->getListTDeposit($this->session->userdata('user_id'));
+            $data['deposit_list']=$this->TDeposit_model->getListTDeposit($this->input>post('userID'));
             $data['data_content']="member/deposit_list_view";
             $this->load->view('includes/member_area_template_view',$data);
             
@@ -48,7 +50,7 @@ class Deposit extends CI_Controller{
     }
 
     function depositInsertForm() {
-        if(!$this->session->userdata('logged_in')){
+        if(!$this->input>post('logged_in')){
             redirect(site_url("User/dashboard"));
         }
         else{
@@ -60,7 +62,7 @@ class Deposit extends CI_Controller{
     }
 
     function depositDetail($id) {
-        if(!$this->session->userdata('logged_in')){
+        if(!$this->input>post('logged_in')){
             redirect(site_url("User/dashboard"));
         }
         else{
@@ -73,14 +75,17 @@ class Deposit extends CI_Controller{
     function topUpDeposit() {
             $datetime = date('Y-m-d H:i:s', time()); //ambil waktu saat fungsi di panggil
 
+            $username = $this->input->post("username");
+            $userID = $this->input->post("userID");
             $noRekening = $this->input->post("postNoRekening");
             $namaRekening = $this->input->post("postNamaRekening");
             $namaBank = $this->input->post("postNamaBank");
-            $topponCoin = $this->input->post("postTopponCoin");
+            $topponCoinID = $this->input->post("postTopponCoinID");
+            //$topponCoin = $this->input->post("postCoinConversion");
 
             //Ambil data Coin dan Bank yang Asli
-            $data_bank = $this->Bank_model->getBankByID($namaBank);
-            $data_coin = $this->Coin_model->getCoinByID($topponCoin);
+            //$data_bank = $this->Bank_model->getBankByID($namaBank);
+            $data_coin = $this->Coin_model->getCoinByID($topponCoinID);
 
             if($noRekening == null || $noRekening == ""){
                 $status = 'error';
@@ -95,7 +100,7 @@ class Deposit extends CI_Controller{
                 $data = array(
                         'noRekening' => $noRekening,
                         'nameRekening' => $namaRekening,
-                        'bankName' => $data_bank->bankName,
+                        'bankName' => $namaBank,
                         'coin' => $data_coin->coin,
                         'coinConversion' => $data_coin->coinConversion,
                         'isVisible' => 1,
@@ -104,9 +109,9 @@ class Deposit extends CI_Controller{
                         'kodeUnik' => '111',
                         'status' => 'unpaid',
                         'created' => $datetime,
-                        'createdBy' => $this->session->userdata('user_id'),
+                        'createdBy' => $userID,
                         'lastUpdated' => $datetime,
-                        'lastUpdatedBy' => $this->session->userdata('user_id')
+                        'lastUpdatedBy' => $userID
 
                     );
 
@@ -121,7 +126,7 @@ class Deposit extends CI_Controller{
                             $msg = "Top Up fail, something went wrong when adding transaction data. Please try again !";
                         }
                         else{
-                            if($this->sendEmailDeposit($this->session->userdata("username"), $topUpDetail)){
+                            if($this->sendEmailDeposit($username, $topUpDetail)){
                                 $this->db->trans_commit();
                                 $msg = "";
                                 $status = 'success';
@@ -142,7 +147,7 @@ class Deposit extends CI_Controller{
 
             $datetime = date('Y-m-d H:i:s', time());
             $tDepositID = $this->input->post('id');
-            $userID = $this->session->userdata('user_id');
+            $userID = $this->input>post('userID');
 
             $data_post=array(
                 'isVisible'=>0,
@@ -172,7 +177,7 @@ class Deposit extends CI_Controller{
 
             $datetime = date('Y-m-d H:i:s', time());
             $tDepositID = $this->input->post('id');
-            $userID = $this->session->userdata('user_id');
+            $userID = $this->input>post('userID');
 
             $data_post=array(
                 'status'=>'rejected',
@@ -202,7 +207,7 @@ class Deposit extends CI_Controller{
 
             $datetime = date('Y-m-d H:i:s', time());
             $tDepositID = $this->input->post('id');
-            $userID = $this->session->userdata('user_id');
+            $userID = $this->input->post('userID');
 
             $data_post=array(
                 'status'=>'pending',
@@ -215,7 +220,7 @@ class Deposit extends CI_Controller{
             $topUpDetail = $this->TDeposit_model->getTDepositDetail($update);
 
             if($update){
-                 if($this->sendEmailUserConfirmDeposit($this->session->userdata("username"), $topUpDetail)){
+                 if($this->sendEmailUserConfirmDeposit($this->input>post("username"), $topUpDetail)){
                     $this->db->trans_commit();
                     $status = 'success';
                     $msg = "Status Updated successfully!";
@@ -236,12 +241,12 @@ class Deposit extends CI_Controller{
         }
 
         function depositConfirmList(){
-        $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+        $user = $this->User_model->getUserLevelbyUsername($this->input>post("username"));
         if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
             redirect(site_url("User/dashboard"));
         }
         else{
-            $data['deposit_list']=$this->TDeposit_model->getListTDepositConfirm($this->session->userdata('user_id'));
+            $data['deposit_list']=$this->TDeposit_model->getListTDepositConfirm($this->input>post('userID'));
             $data['data_content']="admin/deposit_list_view";
             $this->load->view('includes/member_area_template_view',$data);
             }
@@ -249,7 +254,7 @@ class Deposit extends CI_Controller{
         }
 
         function depositConfirm(){
-         $user = $this->User_model->getUserLevelbyUsername($this->session->userdata("username"));
+         $user = $this->User_model->getUserLevelbyUsername($this->input>post("username"));
             if(!$this->authentication->isAuthorizeSuperAdmin($user->userLevel)){
                 redirect(site_url("User/dashboard"));
             }
@@ -259,7 +264,7 @@ class Deposit extends CI_Controller{
 
                 $datetime = date('Y-m-d H:i:s', time());
                 $tDepositID = $this->input->post('id');
-                $userID = $this->session->userdata('user_id');
+                $userID = $this->input>post('userID');
 
                 $data_post=array(
                     'status'=>'paid',

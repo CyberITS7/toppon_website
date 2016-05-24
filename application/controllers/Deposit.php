@@ -209,7 +209,7 @@ class Deposit extends CI_Controller{
 
             $this->db->trans_begin();
             $update = $this->TDeposit_model->updateDeposit($data_post,$tDepositID);
-            $topUpDetail = $this->TDeposit_model->getTDepositDetail($update);
+            $topUpDetail = $this->TDeposit_model->getTDepositDetail($tDepositID);
 
             if($update){
                  if($this->sendEmailUserConfirmDeposit($this->session->userdata("username"), $topUpDetail)){
