@@ -34,20 +34,23 @@ class DepositMobile extends CI_Controller{
             
         }
 
-    function depositList(){
-        if(!$this->input>post('logged_in')){
-            redirect(site_url("User/dashboard"));
-        }
-        else{
-            $this->TDeposit_model->expireDeposit($this->input>post('userID'));
-            
-            $data['deposit_list']=$this->TDeposit_model->getListTDeposit($this->input>post('userID'));
-            $data['data_content']="member/deposit_list_view";
-            $this->load->view('includes/member_area_template_view',$data);
-            
-        }
+    function depositListAjax(){
+        function giftListAjax($start=1){
+            $userID = $this->input->post('userID');
 
-    }
+            $num_per_page = 10;
+            $start = ($start - 1)* $num_per_page;
+            $limit = $num_per_page;
+
+            if($userID!=null){
+                $topUp_list = $this->TDeposit_model->getListTDeposit($this->session->userdata('user_id'));
+                echo json_encode(array('dataTopUp' => $topUp_list);
+            }
+            else{
+                $topUp_list="empty";
+                echo json_encode($topUp_list);
+            }
+        }
 
     function depositInsertForm() {
         if(!$this->input>post('logged_in')){
