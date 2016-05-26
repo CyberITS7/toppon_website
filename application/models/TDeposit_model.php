@@ -32,6 +32,23 @@ class TDeposit_model extends CI_Model{
             
             return $query->result_array();
     }
+	
+	function getListTDepositMobile($userID) {
+        $where=array(      
+                'isActive'=>1,
+                'isVisible'=>1,
+                'createdBy'=>$userID
+            );
+            
+            $this->db->select('*');
+            $this->db->from('tbl_toppon_t_deposits');
+            $this->db->where($where);
+            $this->db->where("status =", 'unpaid');
+            $this->db->order_by('created', 'DESC');               
+            $query = $this->db->get();
+            
+            return $query->result_array();
+    }
 
     function getTDepositDetail($id){
         $where=array(      

@@ -21,36 +21,30 @@ class DepositMobile extends CI_Controller{
     }
 
    function coinListAjax(){
-            $userID = $this->input->post('userID');
-            if($userID!=null){
-                $coin_list = $this->Coin_model->getCoin();
-                $bank_list = $this->Bank_model->getBankName();
-                echo json_encode(array('dataCoin' => $coin_list, 'dataBank' => $bank_list));
-            }
-            else{
-                $coin_list = "empty";
-                 echo json_encode($coin_list);
-            }
-            
-        }
+		$userID = $this->input->post('userID');
+		if($userID!=null){
+			$coin_list = $this->Coin_model->getCoin();
+			$bank_list = $this->Bank_model->getBankName();
+			echo json_encode(array('dataCoin' => $coin_list, 'dataBank' => $bank_list));
+		}
+		else{
+			$coin_list = "empty";
+			 echo json_encode($coin_list);
+		}        
+    }
 
     function depositListAjax(){
-        function giftListAjax($start=1){
-            $userID = $this->input->post('userID');
+		$userID = $this->input->post('userID');
 
-            $num_per_page = 10;
-            $start = ($start - 1)* $num_per_page;
-            $limit = $num_per_page;
-
-            if($userID!=null){
-                $topUp_list = $this->TDeposit_model->getListTDeposit($this->session->userdata('user_id'));
-                echo json_encode(array('dataTopUp' => $topUp_list);
-            }
-            else{
-                $topUp_list="empty";
-                echo json_encode($topUp_list);
-            }
-        }
+		if($userID!= null){
+			$topUp_list = $this->TDeposit_model->getListTDepositMobile($userID);
+			echo json_encode(array('dataTopUp' => $topUp_list));
+		}
+		else{
+			$topUp_list="empty";
+			echo json_encode($topUp_list);
+		}
+    }
 
     function depositInsertForm() {
         if(!$this->input>post('logged_in')){
@@ -205,42 +199,48 @@ class DepositMobile extends CI_Controller{
 		}
 
         function updateStatusPendingDeposit(){
-            $status = "";
-            $msg="";
-
+            $status = "error";
+            $msg="error";
+			
             $datetime = date('Y-m-d H:i:s', time());
             $tDepositID = $this->input->post('id');
             $userID = $this->input->post('userID');
+			$username = $this->input->post('username');
+			
+			if($userID != null || $userID!=""){
+				$data_post=array(
+					'status'=>'pending',
+					"lastUpdated"=>$datetime,
+					"lastUpdatedBy"=>$userID
+				);
 
-            $data_post=array(
-                'status'=>'pending',
-                "lastUpdated"=>$datetime,
-                "lastUpdatedBy"=>$userID
-            );
+				$this->db->trans_begin();
+				$update = $this->TDeposit_model->updateDeposit($data_post,$tDepositID);
+				$topUpDetail = $this->TDeposit_model->getTDepositDetail($tDepositID);
 
-            $this->db->trans_begin();
-            $update = $this->TDeposit_model->updateDeposit($data_post,$tDepositID);
-            $topUpDetail = $this->TDeposit_model->getTDepositDetail($update);
+				if($update){
+					 if($this->sendEmailUserConfirmDeposit($username, $topUpDetail)){
+						$this->db->trans_commit();
+						$status = 'success';
+						$msg = "Status Updated successfully!";
+					}else
+					{
+						$this->db->trans_rollback();  
+						$msg = 'Cannot send email';
+						$status = 'error';
+					}
+				}else{
 
-            if($update){
-                 if($this->sendEmailUserConfirmDeposit($this->input>post("username"), $topUpDetail)){
-                    $this->db->trans_commit();
-                    $status = 'success';
-                    $msg = "Status Updated successfully!";
-                }else
-                {
-                    $this->db->trans_rollback();  
-                    $msg = 'Cannot send email';
-                    $status = 'error';
-                }
-            }else{
+					$this->db->trans_rollback();
+					$status = 'error';
+					$msg = "Something went wrong when updating Status !";
+				}
 
-                $this->db->trans_rollback();
-                $status = 'error';
-                $msg = "Something went wrong when updating Status !";
-            }
-
-            echo json_encode(array('status' => $status, 'msg' => $msg));
+				echo json_encode(array('status' => $status, 'msg' => $msg));
+			}else{
+				echo json_encode(array('status' => $status, 'msg' => $msg));
+			}
+            
         }
 
         function depositConfirmList(){
