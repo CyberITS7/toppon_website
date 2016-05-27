@@ -53,7 +53,7 @@
                         </button>
                         <button type="submit" class="btn btn-default btn-sm" id="btn-search-periode">
                             <i class="glyphicon glyphicon-calendar fa fa-calendar">
-                            </i> Periode</button>
+                            </i> Period</button>
                     </div>
                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                         <thead>
@@ -112,7 +112,7 @@
                 <div class="modal-body">
                     <form id="search-form">
                         <div class="form-group" id="by-periode">
-                            <label for="search-periode" class="control-label">Search between Periode : </label>
+                            <label for="search-periode" class="control-label">Search between Period : </label>
                             <fieldset>
                                 <div class="control-group">
                                     <div class="controls">
@@ -209,12 +209,14 @@
         $('#btn-search-periode').click(function(){
             $('#by-periode').show();
             $('#by-date').hide();
+			$('#modal-title').text("Search by Period");
             $('.search-date-modal').modal('show');
             $('#btn-search').attr("data-search","periode");
         });
         $('#btn-search-date').click(function(){
             $('#by-date').show();
             $('#by-periode').hide();
+			$('#modal-title').text("Search by Date");
             $('.search-date-modal').modal('show');
             $('#btn-search').attr("data-search","date");
         });
